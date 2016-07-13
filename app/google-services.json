@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "30637231339",
+    "firebase_url": "https://siso-cb153.firebaseio.com",
+    "project_id": "siso-cb153",
+    "storage_bucket": "siso-cb153.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30637231339:android:82942c19d48f6b33",
+        "android_client_info": {
+          "package_name": "net.gringrid.siso"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30637231339-4gpq8burjcer6jruk0je1vejm4ajau0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQs_50ADzxNmRG7ULU4ClGIPrVlEHJ4YI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
