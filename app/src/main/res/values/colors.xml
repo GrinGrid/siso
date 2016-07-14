@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorPink">#FFF66175</color>
+    <color name="colorGray">#FFEBEBEB</color>
+    <color name="colorTextPink">#FFD6435C</color>
+    <color name="color333333">#FF333333</color>
+    <color name="color666666">#FF666666</color>
+    <color name="color999999">#FF999999</color>
+    <color name="colorWhite">#FFFFFFFF</color>
 </resources>
