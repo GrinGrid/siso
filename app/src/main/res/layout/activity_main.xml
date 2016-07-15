@@ -9,177 +9,185 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <net.gringrid.siso.views.ActionBar
-        android:id="@+id/id_action_bar"
+    <!-- 상단 고정 영역 -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="140"
-        app:text="무료 회원가입(1/2)"
-        >
-    </net.gringrid.siso.views.ActionBar>
+        android:layout_weight="168"
+        android:orientation="vertical"
+        android:weightSum="168">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="14">
+        <net.gringrid.siso.views.ActionBar
+            android:id="@+id/id_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="140"
+            app:text="무료 회원가입(1/2)"
+            >
+        </net.gringrid.siso.views.ActionBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="28"
+            android:background="@drawable/icon_navigation_bottom_shadow">
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
+    <!-- 상단 고정 영역 끝 -->
+
+    <!-- 스크롤 영역 -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="140"
-        android:background="@color/colorGray"
-        >
-        <TextView
+        android:layout_weight="1612">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:textSize="14sp"
-            android:text="가이드 문구 혹은 이미지 영역"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="144"
-        android:weightSum="1080"
-        android:orientation="horizontal">
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
-        </View>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="200"
-            android:gravity="center_vertical"
-            android:textSize="12sp"
-            android:text="회원유형"/>
+            android:weightSum="1612"
+            android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="144"
-            android:gravity="center"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_radio_on"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="140"
+                android:background="@color/colorGray"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="가이드 문구 혹은 이미지 영역"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="144"
+                android:weightSum="1080"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60">
+                </View>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="200"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:text="회원유형"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="144"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_radio_on"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="부모회원"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60">
+                </View>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="144"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_radio_off"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="300"
+                    android:text="시터회원"/>
+            </LinearLayout>
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_email"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="230"
+                app:label="이메일"
+                app:input="필수"
+                app:guide="아이디 및 비밀번호 찾기에 이용되니 신중하게 입력해주시기 바랍니다"
+                >
+            </net.gringrid.siso.views.SisoEditText>
+
+
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_passwd"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="230"
+                app:label="비밀번호"
+                app:input="필수"
+                >
+            </net.gringrid.siso.views.SisoEditText>
+
+
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_passwd_cfm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="230"
+                app:label="비밀번호 확인"
+                app:input="필수"
+                >
+            </net.gringrid.siso.views.SisoEditText>
+
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_birth"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="230"
+                app:label="생년월일"
+                app:input="필수"
+                >
+            </net.gringrid.siso.views.SisoEditText>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:text="부모회원"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
-        </View>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="144"
-            android:gravity="center"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_radio_off"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:layout_weight="300"
-            android:text="시터회원"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="14"
-        android:background="@color/colorGray">
-    </View>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50">
-    </View>
+    </ScrollView>
+    <!-- 스크롤 영역 끝 -->
+
+    <!-- 하단 고정 영역 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="70"
-        android:gravity="bottom"
-        android:weightSum="1080"
-        >
+        android:layout_weight="180"
+        android:orientation="vertical"
+        android:weightSum="180">
         <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35">
         </View>
-
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:textColor="@color/colorTextPink"
-            android:text="이메일"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="30">
-    </View>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="70"
-        android:gravity="bottom"
-        android:weightSum="1080"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_pink_big_normal"
+            android:layout_weight="120"
+            android:text="다음"
+            />
         <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
-        </View>
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="960"
-            android:textSize="15sp"
-            android:hint="필수"
-            android:background="@drawable/edit_text_normal"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25">
         </View>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="70"
-        android:gravity="bottom"
-        android:weightSum="1080"
-        >
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:layout_weight="1020"
-            android:textColor="@color/color666666"
-            android:gravity="right"
-            android:text="아이디 및 비밀번호 찾기에 이용되니 신중하게 입력해주시기 바랍니다"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="60">
-        </View>
-    </LinearLayout>
-
-
-
-
-
-
+    <!-- 하단 고정 영역 끝 -->
 </LinearLayout>

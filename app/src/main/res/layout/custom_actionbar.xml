@@ -23,7 +23,8 @@
             android:id="@+id/id_tv_text"
             android:layout_width="match_parent"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:textColor="@color/colorPink"
             android:layout_height="match_parent" />
     </LinearLayout>

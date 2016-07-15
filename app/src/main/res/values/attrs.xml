@@ -5,4 +5,9 @@
         <attr name="text" format="reference|string"></attr>
         <attr name="right_image" format="reference|integer"></attr>
     </declare-styleable>
+    <declare-styleable name="SisoEditText">
+        <attr name="label" format="reference|string"></attr>
+        <attr name="input" format="reference|string"></attr>
+        <attr name="guide" format="reference|string"></attr>
+    </declare-styleable>
 </resources>
