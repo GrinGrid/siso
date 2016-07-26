@@ -5,9 +5,17 @@
         <attr name="text" format="reference|string"></attr>
         <attr name="right_image" format="reference|integer"></attr>
     </declare-styleable>
+
     <declare-styleable name="SisoEditText">
         <attr name="label" format="reference|string"></attr>
         <attr name="input" format="reference|string"></attr>
         <attr name="guide" format="reference|string"></attr>
+        <attr name="labelColor" format="reference"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="SisoCheckBox">
+        <attr name="checkboxLabel" format="reference|string"></attr>
+        <attr name="isChecked" format="boolean"></attr>
+        <attr name="isDisabled" format="boolean"></attr>
     </declare-styleable>
 </resources>

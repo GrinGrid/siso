@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SISO</string>
+    <string name="title_activity_member_join_two">MemberJoinTwoActivity</string>
 </resources>

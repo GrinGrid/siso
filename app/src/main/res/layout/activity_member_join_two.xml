@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="net.gringrid.siso.MainActivity"
+    android:weightSum="1960"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <!-- 상단 고정 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="168"
+        android:orientation="vertical"
+        android:weightSum="168">
+
+        <net.gringrid.siso.views.ActionBar
+            android:id="@+id/id_action_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="140"
+            app:text="무료 회원가입(2/2)"
+            >
+        </net.gringrid.siso.views.ActionBar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="28"
+            android:background="@drawable/icon_navigation_bottom_shadow">
+        </LinearLayout>
+
+    </LinearLayout>
+    <!-- 상단 고정 영역 끝 -->
+
+    <!-- 스크롤 영역 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1612"
+        android:isScrollContainer="false"
+        >
+
+        <!-- 스크롤 chlid layout 시작 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1612"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/colorGray"
+                >
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="가이드 문구 혹은 이미지 영역"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1328"
+                android:weightSum="1080"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="960"
+                    android:orientation="vertical"
+                    >
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="휴대폰 번호"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+
+                    <!-- 인증번호 받기 시작 -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/btn_white_normal"
+                        android:layout_weight="120"
+                        android:gravity="center"
+                        android:textColor="@color/colorTextPink"
+                        android:text="인증번호 받기"
+                        />
+                    <!-- 인증번호 받기 끝 -->
+
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="인증번호"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <net.gringrid.siso.views.SisoEditText
+                            android:id="@+id/id_et_passwd"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_weight="1"
+                            app:label="주소"
+                            app:input="필수"
+                            >
+                        </net.gringrid.siso.views.SisoEditText>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btn_pink_small_normal"
+                            android:text="우편번호 찾기"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorWhite"
+                            android:layout_gravity="bottom"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginBottom="7dp"
+                            />
+
+
+                    </LinearLayout>
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_passwd_cfm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <net.gringrid.siso.views.SisoCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:isChecked="true"
+                        app:checkboxLabel="전체동의">
+                    </net.gringrid.siso.views.SisoCheckBox>
+
+                    <net.gringrid.siso.views.SisoCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:checkboxLabel="서비스 이용약관(필수)">
+                    </net.gringrid.siso.views.SisoCheckBox>
+
+                    <net.gringrid.siso.views.SisoCheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:checkboxLabel="개인정보취급방침 동의(필수)">
+                    </net.gringrid.siso.views.SisoCheckBox>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60">
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!-- 스크롤 chlid layout 끝 -->
+    </ScrollView>
+    <!-- 스크롤 영역 끝 -->
+
+    <!-- 하단 고정 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="180"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:weightSum="180">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="35">
+        </View>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_pink_big_normal"
+            android:layout_weight="120"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:text="다음"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="25">
+        </View>
+    </LinearLayout>
+    <!-- 하단 고정 영역 끝 -->
+
+</LinearLayout>

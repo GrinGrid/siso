@@ -10,4 +10,6 @@
     <color name="color666666">#FF666666</color>
     <color name="color999999">#FF999999</color>
     <color name="colorWhite">#FFFFFFFF</color>
+    <color name="colorBlack">#FF000000</color>
+    <color name="colorEBEBEB">#FFEBEBEB</color>
 </resources>

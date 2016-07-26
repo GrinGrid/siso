@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/id_ll_checkbox"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/iv_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_checkbox_off"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/id_tv_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="13sp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/colorTextPink"
+        android:text="시터회원"
+        android:layout_gravity="center_vertical"
+        />
+
+</LinearLayout>

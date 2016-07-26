@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -40,7 +41,11 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1612">
+        android:layout_weight="1612"
+        android:isScrollContainer="false"
+        >
+
+        <!-- 스크롤 chlid layout 시작 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,8 +54,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="140"
+                android:layout_height="35dp"
                 android:background="@color/colorGray"
                 >
                 <TextView
@@ -60,17 +64,17 @@
                     android:textSize="14sp"
                     android:text="가이드 문구 혹은 이미지 영역"/>
             </LinearLayout>
+
+            <!-- 회원유형 시작 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="144"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:paddingLeft="20dp"
                 android:weightSum="1080"
                 android:orientation="horizontal">
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="60">
-                </View>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -117,50 +121,161 @@
                     android:gravity="center_vertical"
                     android:layout_weight="300"
                     android:text="시터회원"/>
+
             </LinearLayout>
-            <net.gringrid.siso.views.SisoEditText
-                android:id="@+id/id_et_email"
+            <!-- 회원유형 끝 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorEBEBEB">
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="230"
-                app:label="이메일"
-                app:input="필수"
-                app:guide="아이디 및 비밀번호 찾기에 이용되니 신중하게 입력해주시기 바랍니다"
-                >
-            </net.gringrid.siso.views.SisoEditText>
+                android:layout_weight="1328"
+                android:weightSum="1080"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60">
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="960"
+                    android:orientation="vertical"
+                    >
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="이메일"
+                        app:input="필수"
+                        app:guide="아이디 및 비밀번호 찾기에 이용되니 신중하게 입력해주시기 바랍니다"
+                        app:labelColor="@color/colorTextPink"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="이름"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_passwd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="비밀번호"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_passwd_cfm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="비밀번호 확인"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+
+                    <net.gringrid.siso.views.SisoEditText
+                        android:id="@+id/id_et_birth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        app:label="생년월일"
+                        app:input="필수"
+                        >
+                    </net.gringrid.siso.views.SisoEditText>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="60">
+                </LinearLayout>
+
+            </LinearLayout>
 
 
-            <net.gringrid.siso.views.SisoEditText
-                android:id="@+id/id_et_passwd"
+            <!-- 성별 시작 -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="230"
-                app:label="비밀번호"
-                app:input="필수"
-                >
-            </net.gringrid.siso.views.SisoEditText>
+                android:layout_weight="144"
+                android:weightSum="1080"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60">
+                </View>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="200"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:text="성별"/>
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="144"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_radio_on"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="여성"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60">
+                </View>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="144"
+                    android:gravity="center"
+                    >
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/icon_radio_off"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:layout_weight="300"
+                    android:text="남성"/>
 
-            <net.gringrid.siso.views.SisoEditText
-                android:id="@+id/id_et_passwd_cfm"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="230"
-                app:label="비밀번호 확인"
-                app:input="필수"
-                >
-            </net.gringrid.siso.views.SisoEditText>
+            </LinearLayout>
+            <!-- 성별 끝 -->
 
-            <net.gringrid.siso.views.SisoEditText
-                android:id="@+id/id_et_birth"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="230"
-                app:label="생년월일"
-                app:input="필수"
-                >
-            </net.gringrid.siso.views.SisoEditText>
         </LinearLayout>
+        <!-- 스크롤 chlid layout 끝 -->
     </ScrollView>
     <!-- 스크롤 영역 끝 -->
 
@@ -170,6 +285,8 @@
         android:layout_height="0dp"
         android:layout_weight="180"
         android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:weightSum="180">
         <View
             android:layout_width="match_parent"
@@ -177,10 +294,13 @@
             android:layout_weight="35">
         </View>
         <TextView
+            android:id="@+id/id_tv_next_btn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/btn_pink_big_normal"
             android:layout_weight="120"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
             android:text="다음"
             />
         <View
@@ -190,4 +310,5 @@
         </View>
     </LinearLayout>
     <!-- 하단 고정 영역 끝 -->
+
 </LinearLayout>

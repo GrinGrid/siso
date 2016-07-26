@@ -66,10 +66,14 @@ public class SisoEditText extends LinearLayout{
         String labelStr = typedArray.getString(R.styleable.SisoEditText_label);
         String inputStr = typedArray.getString(R.styleable.SisoEditText_input);
         String guideStr = typedArray.getString(R.styleable.SisoEditText_guide);
+        int labelColor = typedArray.getColor(R.styleable.SisoEditText_labelColor, R.color.color666666);
+
 
         id_tv_label.setText(labelStr);
         id_et_input.setText(inputStr);
         id_tv_guide.setText(guideStr);
+        id_tv_label.setTextColor(labelColor);
+
         typedArray.recycle();
     }
 
