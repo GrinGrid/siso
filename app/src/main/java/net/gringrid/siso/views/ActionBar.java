@@ -3,6 +3,7 @@ package net.gringrid.siso.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,9 +17,18 @@ import net.gringrid.siso.R;
  */
 public class ActionBar extends LinearLayout {
 
+    String TAG = "jiho";
+
     ImageView   id_iv_left_image;
     TextView    id_tv_text;
     ImageView   id_iv_right_image;
+    int         mLeftButtonMode;
+    final int   LEFT_BUTTON_MENU        = 0;
+    final int   LEFT_BUTTON_PREVIOUS    = 1;
+
+    public interface OnLeftButtonClicked{
+       public void OnClicked();
+    }
 
     public ActionBar(Context context){
         super(context);
@@ -66,6 +76,23 @@ public class ActionBar extends LinearLayout {
 
         int leftImageResID = typedArray.getResourceId(R.styleable.ActionBar_left_image, R.drawable.icon_navigation_menu);
         id_iv_left_image.setImageResource(leftImageResID);
+        
+        if(leftImageResID == R.drawable.icon_navigation_menu ){
+            mLeftButtonMode = LEFT_BUTTON_MENU;
+        }else if(leftImageResID == R.drawable.icon_navigation_previous){
+            mLeftButtonMode = LEFT_BUTTON_PREVIOUS;
+        }
+        
+        id_iv_left_image.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mLeftButtonMode == LEFT_BUTTON_MENU){
+                    menuClicked();
+                }else if (mLeftButtonMode == LEFT_BUTTON_PREVIOUS){
+                    previousClicked();
+                }
+            }
+        });
 
         String textStr = typedArray.getString(R.styleable.ActionBar_text);
         id_tv_text.setText(textStr);
@@ -74,6 +101,15 @@ public class ActionBar extends LinearLayout {
         id_iv_right_image.setImageResource(rightImageResID);
 
         typedArray.recycle();
+    }
+
+    private void previousClicked() {
+
+    }
+
+    private void menuClicked() {
+
+        Log.d(TAG, "menuClicked: Menu clicked");
     }
 
     void setLeftImage(int resID){

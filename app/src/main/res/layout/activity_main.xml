@@ -27,12 +27,12 @@
             >
         </net.gringrid.siso.views.ActionBar>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="28"
-            android:background="@drawable/icon_navigation_bottom_shadow">
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="28"-->
+            <!--android:background="@drawable/icon_navigation_bottom_shadow">-->
+        <!--</LinearLayout>-->
 
     </LinearLayout>
     <!-- 상단 고정 영역 끝 -->
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:textSize="14sp"
-                    android:text="가이드 문구 혹은 이미지 영역"/>
+                    android:text="가이드 문구 혹은 이미지 영역이다"/>
             </LinearLayout>
 
             <!-- 회원유형 시작 -->

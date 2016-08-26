@@ -18,4 +18,8 @@
         <attr name="isChecked" format="boolean"></attr>
         <attr name="isDisabled" format="boolean"></attr>
     </declare-styleable>
+    <declare-styleable name="SisoInputProgress">
+        <attr name="total_stage" format="reference|integer"></attr>
+        <attr name="current_stage" format="reference|integer"></attr>
+    </declare-styleable>
 </resources>

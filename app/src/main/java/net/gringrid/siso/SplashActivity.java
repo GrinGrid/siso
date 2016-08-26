@@ -27,7 +27,8 @@ public class SplashActivity extends Activity {
         iv_logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, BaseActivity.class);
+                intent.putExtra("menu", BaseActivity.MENU_SIGN_UP);
                 startActivity(intent);
             }
         });

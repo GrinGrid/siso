@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_my_info"
+            android:icon="@drawable/icon_menu_message"
+            android:title="개인정보수정" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/icon_menu_message"
+            android:title="쪽지함" />
+        <item
+            android:id="@+id/nav_input_parent"
+            android:icon="@drawable/icon_menu_message"
+            android:title="구인정보 입력" />
+        <item
+            android:id="@+id/nav_input_sitter"
+            android:icon="@drawable/icon_menu_message"
+            android:title="구직정보 입력" />
+        <item
+            android:id="@+id/nav_parent_list"
+            android:icon="@drawable/icon_menu_message"
+            android:title="구인자 목록 보기" />
+        <item
+            android:id="@+id/nav_sitter_list"
+            android:icon="@drawable/icon_menu_message"
+            android:title="시터 목록 보기" />
+        <item
+            android:id="@+id/nav_suggestion"
+            android:icon="@drawable/icon_menu_message"
+            android:title="신고센터" />
+        <item
+            android:id="@+id/nav_guide"
+            android:icon="@drawable/icon_menu_message"
+            android:title="서비스소개" />
+        <item
+            android:id="@+id/nav_sign_up"
+            android:icon="@drawable/icon_menu_siso"
+            android:title="회원가입" />
+        <item
+            android:id="@+id/nav_log_in"
+            android:icon="@drawable/icon_menu_siso"
+            android:title="로그인" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/icon_menu_siso"
+            android:title="로그아웃" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/icon_menu_sitterlist"
+            android:title="친구에게 공유하기" />
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>

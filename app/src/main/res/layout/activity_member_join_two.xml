@@ -23,6 +23,7 @@
             android:layout_height="0dp"
             android:layout_weight="140"
             app:text="무료 회원가입(2/2)"
+            app:left_image="@drawable/icon_navigation_previous"
             >
         </net.gringrid.siso.views.ActionBar>
 
@@ -206,6 +207,7 @@
             android:layout_weight="35">
         </View>
         <TextView
+            android:id="@+id/id_tv_next_btn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@drawable/btn_pink_big_normal"
