@@ -11,6 +11,7 @@
         <attr name="input" format="reference|string"></attr>
         <attr name="guide" format="reference|string"></attr>
         <attr name="labelColor" format="reference"></attr>
+        <attr name="input_type" format="string"></attr>
     </declare-styleable>
 
     <declare-styleable name="SisoCheckBox">

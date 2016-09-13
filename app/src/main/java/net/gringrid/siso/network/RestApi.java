@@ -1,7 +1,7 @@
 package net.gringrid.siso.network;
 
 
-import net.gringrid.siso.models.Member;
+import net.gringrid.siso.models.Personal;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class RestApi {
 
     public interface MemberService{
        @GET("member/join")
-        Call<List<Member>> listRepos(@Path("user") String user);
+        Call<List<Personal>> listRepos(@Path("user") String user);
     }
 
     public static RestApi getInstance(){
@@ -33,6 +33,6 @@ public class RestApi {
                 .baseUrl("http://siso4u.net/api")
                 .build();
         MemberService service = retrofit.create(MemberService.class);
-        Call<List<Member>> repos = service.listRepos("");
+        Call<List<Personal>> repos = service.listRepos("");
     }
 }

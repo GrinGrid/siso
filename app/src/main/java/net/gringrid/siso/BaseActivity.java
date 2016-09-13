@@ -1,8 +1,11 @@
 package net.gringrid.siso;
 
-import android.app.ActionBar;
-import android.content.Intent;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,13 +14,23 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
-public class BaseActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+import net.gringrid.siso.fragments.LoginFragment;
+import net.gringrid.siso.fragments.Member1Fragment;
+import net.gringrid.siso.models.Personal;
+import net.gringrid.siso.models.User;
+import net.gringrid.siso.util.SharedData;
+
+import org.w3c.dom.Text;
+
+public class BaseActivity extends RootActivity
+        implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener {
 
     final String TAG = "jiho";
 
@@ -38,9 +51,11 @@ public class BaseActivity extends AppCompatActivity
     final int DRAWER_MODE_HAMBURGER = 0;
     final int DRAWER_MODE_BACK = 1;
 
+
     Toolbar mToolbar;
     DrawerLayout mDrawer;
     ActionBarDrawerToggle mActionBarDrawerToggle;
+    NavigationView mNavigationView;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -56,56 +71,31 @@ public class BaseActivity extends AppCompatActivity
         mDrawer.addDrawerListener(mActionBarDrawerToggle);
 
         mActionBarDrawerToggle.syncState();
-//        mActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
-//        mActionBarDrawerToggle.setHomeAsUpIndicator(getDrawerToggleDelegate().getThemeUpIndicator());
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
 
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        mFragmentManager = getSupportFragmentManager();
-        mFragmentManager.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener(){
-
-            @Override
-            public void onBackStackChanged() {
-
-                Log.d(TAG, "onCreate: getSupportActionBar().getDisplayOptions()"+getSupportActionBar().getDisplayOptions());
-                getSupportActionBar().setHomeButtonEnabled(true);
-                getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-                Log.d(TAG, "onBackStackChanged:mActionBarDrawerToggle.isDrawerIndicatorEnabled()  "+mActionBarDrawerToggle.isDrawerIndicatorEnabled() );
-
-                if ( mFragmentManager.getBackStackEntryCount() == 1 ){
-//                    getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_USE_LOGO | android.support.v7.app.ActionBar.DISPLAY_SHOW_HOME| android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE, android.support.v7.app.ActionBar.DISPLAY_SHOW_HOME);
-//                    getSupportActionBar().setHomeButtonEnabled(false);
-//                    getSupportActionBar().setDisplayShowHomeEnabled(true);
-//                    mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                }else{
-//                    getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_HOME_AS_UP| android.support.v7.app.ActionBar.DISPLAY_SHOW_TITLE, android.support.v7.app.ActionBar.DISPLAY_HOME_AS_UP);
-
-                    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-                }
-            }
-        });
-        Log.d(TAG, "onCreate: getSupportActionBar().getDisplayOptions()"+getSupportActionBar().getDisplayOptions());
-
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setHomeButtonEnabled(true);
 
-//        getSupportFragmentManager().addOnBackStackChangedListener(this);
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentManager.addOnBackStackChangedListener(this);
+        // ToolBar의 왼쪽 아이콘 버튼이 Hamburg 버튼이면
         mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
 
                 int fragmentCount = mFragmentManager.getBackStackEntryCount();
-                Log.d(TAG, "onClick: fragmentCount "+fragmentCount);
+                Log.d(TAG, "onClick: onclick fragment count : "+fragmentCount);
                 if ( fragmentCount > 1 ){
                     onBackPressed();
                 }else{
+
+                    mNavigationView.getMenu().clear();
+//                    mNavigationView.inflateMenu(R.menu.menu_parent);
+//                    mNavigationView.inflateMenu(R.menu.menu_sitter);
+                    mNavigationView.inflateMenu(getMenuId());
+
                     int drawerLockMode = mDrawer.getDrawerLockMode(GravityCompat.START);
                     if (mDrawer.isDrawerVisible(GravityCompat.START)
                             && (drawerLockMode != DrawerLayout.LOCK_MODE_LOCKED_OPEN)) {
@@ -120,17 +110,60 @@ public class BaseActivity extends AppCompatActivity
         // 요청 메뉴로 이동
         callMenu(getIntent().getIntExtra(MENU, MENU_SIGN_UP));
     }
-    
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "BaseActivity onResume: ");
+        super.onResume();
+    }
+
+    /**
+     * 로그인 여부와 부모/시터에 따라 메뉴구성을 달리 한다
+     * @return
+     */
+    private int getMenuId() {
+        String sessionKey = SharedData.getInstance(this).getGlobalDataString(SharedData.SESSION_KEY);
+        int userType = 0;
+        int menuId = 0;
+
+        Personal personal = SharedData.getInstance(this).getUserLoginData();
+        if ( personal != null ) {
+            Log.d(TAG, "getMenuId: member is not null");
+            userType = personal.userType;
+        }
+
+        if (TextUtils.isEmpty(sessionKey)) {
+            Log.d(TAG, "getMenuId: logout");
+            menuId = R.menu.menu_logout;
+        }else if ( userType == User.USER_TYPE_SITTER ){
+            menuId = R.menu.menu_sitter;
+            Log.d(TAG, "getMenuId: sitter ");
+        }else if ( userType == User.USER_TYPE_PARENT){
+            menuId = R.menu.menu_parent;
+            Log.d(TAG, "getMenuId: paretn");
+        }else{
+            menuId = R.menu.menu_logout;
+
+            Log.d(TAG, "getMenuId: default");
+        }
+
+        return menuId;
+    }
+
 
     @Override
     public void onBackPressed() {
-        Log.d(TAG, "onBackPressed: baseactivity"); 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        int backStackCount = mFragmentManager.getBackStackEntryCount();
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if ( mFragmentManager.getBackStackEntryCount() > 1 ) {
                 mFragmentManager.popBackStack();
+                String fragmentName = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount()-2).getName();
+                setTitle(fragmentName);
+
             }else{
                 super.onBackPressed();
             }
@@ -174,6 +207,7 @@ public class BaseActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
         Log.d(TAG, "onNavigationItemSelected: ");
         // Handle navigation view item clicks here.
         int id = item.getItemId();
@@ -188,29 +222,118 @@ public class BaseActivity extends AppCompatActivity
      * @param menuId
      */
     private void callMenu(int menuId){
-        // 모든 stack을 비운다
-        mFragmentManager.popBackStack(MENU, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-
         switch (menuId){
             case MENU_SIGN_UP:
                 Member1Fragment member1Fragment = new Member1Fragment();
-                setFragment(member1Fragment, MENU, 0);
+                setCleanUpFragment(member1Fragment, R.string.member_title);
+                break;
+
+            case MENU_LOG_IN:
+                LoginFragment loginFragment = new LoginFragment();
+                setCleanUpFragment(loginFragment, R.string.login_title);
+                break;
+
+            case MENU_LOG_OUT:
+                SharedData.getInstance(this).insertGlobalData(SharedData.SESSION_KEY, "");
+                SharedData.getInstance(this).insertGlobalData(SharedData.PERSONAL, null);
+                LoginFragment fragment = new LoginFragment();
+                setCleanUpFragment(fragment, R.string.login_title);
+
                 break;
         }
     }
 
-    public void setFragment(Fragment fragment, String title, int drawer){
-        Log.d(TAG, "setFragment: call");
+
+    /**
+     * Content로 사용될 fragment를 호출한다
+     * @param fragment
+     */
+    public void setFragment(Fragment fragment, int titleId){
+        hideSoftKeyboard();
+        setTitle(getString(titleId));
         mFragmentManager.beginTransaction().add(R.id.id_rl_for_fragment, fragment)
-                .addToBackStack(title)
+                .addToBackStack(getString(titleId))
                 .commit();
-
-
-//        manager.beginTransaction().replace(R.id.id_rl_for_fragment, fragment).commit();
-        getSupportActionBar().setTitle(title);
-        Log.d(TAG, "setFragment: mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
-
     }
-    
-    
+
+    /**
+     * Content로 사용될 fragment를 호출한다
+     * @param fragment
+     */
+    public void setCleanUpFragment(Fragment fragment, int titleId){
+        Log.d(TAG, "after mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
+        mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        Log.d(TAG, "before mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
+
+        hideSoftKeyboard();
+        setTitle(getString(titleId));
+
+        // 모든 stack을 비운다
+        mFragmentManager.beginTransaction().replace(R.id.id_rl_for_fragment, fragment)
+                .addToBackStack(getString(titleId))
+                .commit();
+    }
+
+    /**
+     * softkeyboard가 열려 있을경우 감춘다.
+     */
+    private void hideSoftKeyboard() {
+        View view = this.getCurrentFocus();
+        if ( view != null ){
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    /**
+     * 상단 Toolbar 의 왼쪽 아이콘 컨트롤
+     * 햄버거 <-> 뒤로가기 화살표 toggle
+     */
+    @Override
+    public void onBackStackChanged() {
+        if ( mFragmentManager.getBackStackEntryCount() == 1 ){
+            mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        }else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            mActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+//    Dialog loadingDialog = null;
+    public void showProgress2(){
+//        if (mHandler==null){
+//            mHandler = new Handler(Looper.getMainLooper());
+//        }
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog = new Dialog(BaseActivity.this);
+                loadingDialog.setTitle("Loading data..");
+                loadingDialog.setContentView(R.layout.loading);
+                loadingDialog.show();
+
+            }
+        });
+//        mHandler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                loadingDialog = new Dialog(BaseActivity.this);
+//                loadingDialog.setTitle("Loading data..");
+//                loadingDialog.setContentView(R.layout.loading);
+//                loadingDialog.show();
+//
+//            }
+//        });
+    }
+
+//    public void hideProgress(){
+//
+//        mHandler.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                loadingDialog.dismiss();
+//            }
+//        });
+//    }
 }

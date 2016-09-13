@@ -15,4 +15,23 @@
     <string name="member_1_guide_text">[가이드-1] 몇개의 단계를\n거쳐 3분안에 새 계정을\n만들 수 있습니다.\n 서비스별로 최적화된\n맞춤 정보를 알려드립니다</string>
     <string name="member_1_select_type">이용하실 서비스를 선택해주세요.</string>
     <string name="title_activity_member">MemberActivity</string>
+    <!-- Guide Text -->
+    <string name="member_2_passwd_info"> 비밀번호에는 최소 6자 이상의 문자, 숫자 및 기호가\n 포함되어야 합니다. </string>
+    <string name="member_5_terms_info">아래 가입완료 버튼을 누르면 시소 이용 약관에 동의하고\n 개인정보보호 정책을 읽고 이해하신 것으로 간주됩니다.\n 시소에서 구인/구직 현황관리를 하실 수 있으며\n 알림 메시지를 받을 수 있으며\n 언제든지 수신을 거부할 수 있습니다.</string>
+    <string name="member_title">무료 회원가입</string>
+    <string name="login_title">로그인</string>
+    <string name="find_email_title">이메일 찾기</string>
+    <string name="find_password_title">비밀번호 찾기</string>
+    <string name="sitter_title">시터정보 등록하기</string>
+    <string name="parent_title">부모님정보 등록하기</string>
+
+    <!-- Siso edittext input type -->
+    <string name="input_type_number">number</string>
+    <string name="input_type_email">email</string>
+    <string name="input_type_phone">phone</string>
+
+    <string name="login_find_email">이메일 찾기</string>
+    <string name="login_find_password">비밀번호 찾기</string>
+    <string name="title_activity_root">RootActivity</string>
+
 </resources>

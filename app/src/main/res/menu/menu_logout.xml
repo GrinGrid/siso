@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_sign_up"
+            android:icon="@drawable/icon_menu_regist"
+            android:title="회원가입" />
+        <item
+            android:id="@+id/nav_log_in"
+            android:icon="@drawable/icon_menu_login"
+            android:title="로그인" />
+        <item
+            android:id="@+id/nav_guide"
+            android:icon="@drawable/icon_menu_siso"
+            android:title="서비스소개" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/icon_menu_share"
+            android:title="친구에게 공유하기" />
+    </group>
+
+</menu>

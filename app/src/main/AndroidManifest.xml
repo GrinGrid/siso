@@ -23,7 +23,8 @@
         <activity
             android:name=".BaseActivity"
             android:label="@string/title_activity_base"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
             android:name=".MemberActivity"
             android:label="@string/title_activity_member"
@@ -33,6 +34,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="net.gringrid.siso.BaseActivity" />
         </activity>
+        <activity android:name=".Popup" />
+        <activity
+            android:name=".RootActivity"
+            android:label="@string/title_activity_root"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

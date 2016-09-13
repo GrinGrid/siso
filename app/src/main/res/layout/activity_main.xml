@@ -297,12 +297,13 @@
             android:id="@+id/id_tv_next_btn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/btn_pink_big_normal"
+            android:background="@drawable/btn_pink_normal"
             android:layout_weight="120"
             android:gravity="center"
             android:textColor="@color/colorWhite"
             android:text="다음"
             />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"

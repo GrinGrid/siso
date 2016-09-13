@@ -136,7 +136,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/btn_pink_small_normal"
+                            android:background="@drawable/btn_pink_normal"
                             android:text="우편번호 찾기"
                             android:textSize="12sp"
                             android:textColor="@color/colorWhite"
@@ -210,7 +210,7 @@
             android:id="@+id/id_tv_next_btn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@drawable/btn_pink_big_normal"
+            android:background="@drawable/btn_pink_normal"
             android:layout_weight="120"
             android:gravity="center"
             android:textColor="@color/colorWhite"

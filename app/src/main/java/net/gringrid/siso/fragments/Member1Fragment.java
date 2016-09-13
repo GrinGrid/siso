@@ -1,4 +1,4 @@
-package net.gringrid.siso;
+package net.gringrid.siso.fragments;
 
 
 import android.os.Bundle;
@@ -13,6 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+
+import net.gringrid.siso.BaseActivity;
+import net.gringrid.siso.R;
+import net.gringrid.siso.models.Personal;
+import net.gringrid.siso.models.User;
+import net.gringrid.siso.util.SharedData;
 
 
 /**
@@ -20,10 +27,13 @@ import android.widget.LinearLayout;
  */
 public class Member1Fragment extends Fragment implements View.OnClickListener {
 
-
     private static final String TAG = "jiho";
     LinearLayout ll_parent;
     LinearLayout ll_sitter;
+    Personal mPersonal;
+    Gson mGson;
+
+
 
     public Member1Fragment() {
         // Required empty public constructor
@@ -31,7 +41,17 @@ public class Member1Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
+
+        String memberStr = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.PERSONAL);
+        mGson = new Gson();
+        if ( memberStr != null ){
+            mPersonal = mGson.fromJson(memberStr, Personal.class);
+            Log.d(TAG, "onCreate: Fragment1 member str is null");
+        }else{
+            mPersonal = new Personal();
+            Log.d(TAG, "onCreate: Fragment1 member str is not null");
+        }
+
         super.onCreate(savedInstanceState);
     }
 
@@ -60,13 +80,16 @@ public class Member1Fragment extends Fragment implements View.OnClickListener {
 
         switch (v.getId()){
             case  R.id.ll_parent:
-                ((BaseActivity)getActivity()).setFragment(fragment, "무료 회원가입", 0);
+                ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
+                mPersonal.userType = User.USER_TYPE_PARENT;
                 break;
             case  R.id.ll_sitter:
-                ((BaseActivity)getActivity()).setFragment(fragment, "무료 회원가입", 0);
+                ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
+                mPersonal.userType = User.USER_TYPE_SITTER;
                 break;
-
         }
+        SharedData.getInstance(getContext()).insertGlobalData(SharedData.PERSONAL, mGson.toJson(mPersonal));
+
     }
 
     @Override
@@ -78,7 +101,6 @@ public class Member1Fragment extends Fragment implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "fragments onOptionsItemSelected: ");
         return super.onOptionsItemSelected(item);
-
     }
 
 }

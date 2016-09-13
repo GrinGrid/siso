@@ -10,24 +10,38 @@
     <TextView
         android:id="@+id/id_tv_label"
         android:layout_width="match_parent"
-        android:textColor="@color/colorTextPink"
+        android:textColor="@color/colorContentTextPink"
         android:layout_height="0dp"
         android:layout_weight="70"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:text="이메일"
         />
 
-    <EditText
-        android:id="@+id/id_et_input"
+    <FrameLayout
+        android:id="@+id/id_fl_edit_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="110"
-        android:textSize="15sp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:hint="필수"
-        android:background="@drawable/edit_text_normal"/>
-
+        android:background="@drawable/edit_text_normal"
+        >
+        <EditText
+            android:id="@+id/id_et_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="17sp"
+            android:textColor="@color/colorTextGray"
+            android:background="@android:color/transparent"
+            />
+        <TextView
+            android:id="@+id/id_tv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/icon_cancel"
+            />
+    </FrameLayout>
     <TextView
         android:id="@+id/id_tv_guide"
         android:layout_width="match_parent"

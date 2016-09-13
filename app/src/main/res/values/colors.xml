@@ -12,6 +12,7 @@
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorEBEBEB">#FFEBEBEB</color>
+    <color name="colorTextGray">#FF787878</color>
     <color name="colorToolbarTitle">#FFF66175</color>
     <color name="colorContentTextPink">#FFE5577F</color>
 
