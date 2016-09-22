@@ -26,14 +26,14 @@ public class Personal{
     public String lng; //longitude;
     // 경도
     public String lat; //latitude;
-    // 사용자종류(부모, 시터)
+    // 사용자구분(부모, 시터)
     public int userType;
     // 가입일
     public String regDate;
     // 마지막 로그인 일시
     public String lastLogin;
     // 푸시아이디
-    public String  pushId;
+    public String pushId;
 
     public String  sessionKey;
 

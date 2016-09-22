@@ -32,4 +32,7 @@ public interface SisoClient {
 
     @POST("user/findEmail")
     Call<Personal> findEmail(@Body Personal personal);
+
+    @POST("user/findPassword")
+    Call<Personal> findPassword(@Body Personal personal);
 }

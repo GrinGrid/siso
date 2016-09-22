@@ -190,7 +190,7 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
                 if (response.isSuccessful()){
                     if(response.isSuccessful()){
                         SharedData.getInstance(getContext()).setUserLoginData(response.body().personalInfo);
-                        Log.d(TAG, "onResponse: success body : "+response.body().toString() );
+                        Log.d(TAG, "onResponse: success body : "+response.body().personalInfo.email );
                     }
                     Log.d(TAG, "onResponse session-key : "+response.headers().get(SharedData.SESSION_KEY));
                     SharedData.getInstance(getContext()).insertGlobalData(SharedData.SESSION_KEY, response.headers().get(SharedData.SESSION_KEY));

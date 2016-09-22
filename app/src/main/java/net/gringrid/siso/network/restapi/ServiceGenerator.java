@@ -54,6 +54,8 @@ public class ServiceGenerator {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
+                Request.Builder requestBuilder = original.newBuilder();
+
                 rootActivity.showProgress();
 
                 Log.d(TAG, "intercept: request");
@@ -61,8 +63,10 @@ public class ServiceGenerator {
                     Log.d(TAG, "intercept: request is not null");
                 }
 
-                Request.Builder requestBuilder = original.newBuilder()
-                        .header(SharedData.SESSION_KEY, SharedData.getSessionKey());
+                if ( !TextUtils.isEmpty(SharedData.getSessionKey())){
+                    requestBuilder.header(SharedData.SESSION_KEY, SharedData.getSessionKey());
+                }
+
                 Request request = requestBuilder.build();
                 return chain.proceed(request);
             }

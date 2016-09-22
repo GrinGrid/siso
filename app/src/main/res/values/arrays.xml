@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 자녀수 -->
+    <string-array name="picker_children_num">
+        <item>0명</item>
+        <item>1명</item>
+        <item>2명</item>
+        <item>3명</item>
+        <item>4명</item>
+        <item>5명</item>
+    </string-array>
+
+    <!-- 시터경력 -->
+    <string-array name="picker_work_year">
+        <item>경력없음</item>
+        <item>0~1년</item>
+        <item>1~2년</item>
+        <item>2~3년</item>
+        <item>3~4년</item>
+        <item>4~5년</item>
+        <item>5~6년</item>
+        <item>6~7년</item>
+        <item>7~8년</item>
+        <item>8~9년</item>
+        <item>9~10년</item>
+        <item>10년이상</item>
+    </string-array>
+
+    <!-- 출퇴근 가능 거리-->
+    <string-array name="picker_commute_distance">
+        <item>상관없음</item>
+        <item>걸어서10분거리\n(1km 이내)</item>
+        <item>1~2년</item>
+        <item>2~3년</item>
+        <item>3~4년</item>
+        <item>4~5년</item>
+        <item>5~6년</item>
+        <item>6~7년</item>
+        <item>7~8년</item>
+        <item>8~9년</item>
+        <item>9~10년</item>
+        <item>10년이상</item>
+    </string-array>
+</resources>

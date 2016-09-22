@@ -9,9 +9,11 @@
     <color name="color333333">#FF333333</color>
     <color name="color666666">#FF666666</color>
     <color name="color999999">#FF999999</color>
+    <color name="colorA1A1A1">#FFA1A1A1</color>
     <color name="colorWhite">#FFFFFFFF</color>
     <color name="colorBlack">#FF000000</color>
     <color name="colorEBEBEB">#FFEBEBEB</color>
+    <color name="color7A7A7A">#7A7A7A</color>
     <color name="colorTextGray">#FF787878</color>
     <color name="colorToolbarTitle">#FFF66175</color>
     <color name="colorContentTextPink">#FFE5577F</color>

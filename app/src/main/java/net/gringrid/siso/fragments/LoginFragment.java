@@ -98,7 +98,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case  R.id.id_tv_login_btn:
                 if ( SharedData.DEBUG_MODE ){
-                    id_et_email.setInput("nisclan10@hotmail.com");
+                    id_et_email.setInput("nisclan1474433758492@hotmail.com");
                     id_et_passwd.setInput("tjswndqkqh");
                 }
                 executeLogin();

@@ -13,6 +13,6 @@ public interface  SitterAPI {
         public int count;
     }
 
-    @GET("sitter/count/from/{email}")
+    @GET("sitter/count/{email}")
     Call<Sitter> getCountInCircleBoundary(@Path("email") String email);
 }

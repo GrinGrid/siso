@@ -15,10 +15,26 @@
     </declare-styleable>
 
     <declare-styleable name="SisoCheckBox">
-        <attr name="checkboxLabel" format="reference|string"></attr>
+        <attr name="checkboxTitle" format="reference|string"></attr>
+        <attr name="checkboxTitleComment" format="reference|string"></attr>
         <attr name="isChecked" format="boolean"></attr>
         <attr name="isDisabled" format="boolean"></attr>
     </declare-styleable>
+
+    <declare-styleable name="SisoToggleButton">
+        <attr name="toggleLabel" format="reference|string"></attr>
+        <attr name="toggle_normal" format="integer"></attr>
+        <attr name="toggle_selected" format="integer"></attr>
+        <attr name="isSelected" format="boolean"></attr>
+        <attr name="isAddClickListener" format="boolean"></attr>
+
+    </declare-styleable>
+
+    <declare-styleable name="SisoPicker">
+        <attr name="data_list" format="integer"></attr>
+        <attr name="default_idx" format="integer"></attr>
+    </declare-styleable>
+
     <declare-styleable name="SisoInputProgress">
         <attr name="total_stage" format="reference|integer"></attr>
         <attr name="current_stage" format="reference|integer"></attr>

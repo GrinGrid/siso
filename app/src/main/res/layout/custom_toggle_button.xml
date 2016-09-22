@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/id_ll_toggle"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/id_iv_toggle_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/toggle_icon_woman_normal"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/id_tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="13sp"
+        android:textColor="@color/colorTextPink"
+        android:layout_marginTop="3dp"
+        android:text="여성입니다"
+        android:layout_gravity="center"
+        android:gravity="center"
+        />
+
+</LinearLayout>

@@ -20,7 +20,8 @@ public class SisoCheckBox extends LinearLayout{
 
     LinearLayout id_ll_checkbox;
     ImageView   iv_checkbox;
-    TextView    id_tv_label;
+    TextView    id_tv_title;
+    TextView    id_tv_title_comment;
     boolean     mIsChecked;
 
     public SisoCheckBox(Context context){
@@ -48,7 +49,8 @@ public class SisoCheckBox extends LinearLayout{
         addView(v);
 
         id_ll_checkbox = (LinearLayout)findViewById(R.id.id_ll_checkbox);
-        id_tv_label = (TextView)findViewById(R.id.id_tv_label);
+        id_tv_title = (TextView)findViewById(R.id.id_tv_title);
+        id_tv_title_comment = (TextView)findViewById(R.id.id_tv_title_comment);
         iv_checkbox = (ImageView) findViewById(R.id.iv_checkbox);
 
         id_ll_checkbox.setOnClickListener(new OnClickListener() {
@@ -72,7 +74,8 @@ public class SisoCheckBox extends LinearLayout{
 
     private void setTypeArray(TypedArray typedArray) {
 
-        String labelStr = typedArray.getString(R.styleable.SisoCheckBox_checkboxLabel);
+        String title = typedArray.getString(R.styleable.SisoCheckBox_checkboxTitle);
+        String titleComment = typedArray.getString(R.styleable.SisoCheckBox_checkboxTitleComment);
         boolean isChecked = typedArray.getBoolean(R.styleable.SisoCheckBox_isChecked, false);
         boolean isDisabled = typedArray.getBoolean(R.styleable.SisoCheckBox_isDisabled, false);
 
@@ -84,7 +87,8 @@ public class SisoCheckBox extends LinearLayout{
             iv_checkbox.setImageResource(R.drawable.icon_checkbox_disable);
         }
 
-        id_tv_label.setText(labelStr);
+        id_tv_title.setText(title);
+        id_tv_title_comment.setText(titleComment);
 //        id_tv_label.setTextColor(labelColor);
 
         typedArray.recycle();
@@ -93,17 +97,13 @@ public class SisoCheckBox extends LinearLayout{
     private void toggleCheck(){
         if (mIsChecked){
             iv_checkbox.setImageResource(R.drawable.icon_checkbox_off);
-            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.color666666));
+//            id_tv_title.setTextColor(ContextCompat.getColor(getContext(), R.color.color666666));
         }else{
             iv_checkbox.setImageResource(R.drawable.icon_checkbox_on);
-            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
+//            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.colorBlack));
         }
 
         mIsChecked = !mIsChecked;
 
-    }
-
-    void setLabel(String str){
-        id_tv_label.setText(str);
     }
 }

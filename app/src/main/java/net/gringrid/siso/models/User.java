@@ -23,4 +23,12 @@ public class User {
 
     @SerializedName("parent_info")
     public Parent parentInfo;
+
+    @Override
+    public String toString() {
+        String str = "personal_info : "+personalInfo.toString()+
+                "sitter_info : "+sitterInfo.toString()+
+                "parent_info : "+parentInfo.toString();
+        return str;
+    }
 }

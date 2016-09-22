@@ -23,6 +23,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import net.gringrid.siso.fragments.LoginFragment;
 import net.gringrid.siso.fragments.Member1Fragment;
+import net.gringrid.siso.fragments.Sitter1Fragment;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
@@ -143,7 +144,6 @@ public class BaseActivity extends RootActivity
             Log.d(TAG, "getMenuId: paretn");
         }else{
             menuId = R.menu.menu_logout;
-
             Log.d(TAG, "getMenuId: default");
         }
 
@@ -226,6 +226,11 @@ public class BaseActivity extends RootActivity
             case MENU_SIGN_UP:
                 Member1Fragment member1Fragment = new Member1Fragment();
                 setCleanUpFragment(member1Fragment, R.string.member_title);
+                break;
+
+            case MENU_INPUT_SITTER:
+                Sitter1Fragment sitter1Fragment = new Sitter1Fragment();
+                setCleanUpFragment(sitter1Fragment, R.string.sitter_basic_title);
                 break;
 
             case MENU_LOG_IN:

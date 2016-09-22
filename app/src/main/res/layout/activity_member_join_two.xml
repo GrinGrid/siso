@@ -161,21 +161,21 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:isChecked="true"
-                        app:checkboxLabel="전체동의">
+                        app:checkboxTitle="전체동의">
                     </net.gringrid.siso.views.SisoCheckBox>
 
                     <net.gringrid.siso.views.SisoCheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        app:checkboxLabel="서비스 이용약관(필수)">
+                        app:checkboxTitle="서비스 이용약관(필수)">
                     </net.gringrid.siso.views.SisoCheckBox>
 
                     <net.gringrid.siso.views.SisoCheckBox
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        app:checkboxLabel="개인정보취급방침 동의(필수)">
+                        app:checkboxTitle="개인정보취급방침 동의(필수)">
                     </net.gringrid.siso.views.SisoCheckBox>
                 </LinearLayout>
 

@@ -15,7 +15,9 @@ import net.gringrid.siso.models.Personal;
  */
 public class SharedData {
     public static final boolean DEBUG_MODE = true;
-    public static final String PERSONAL = "personal_obj";
+    public static final String PERSONAL = "personal_info";
+    public static final String SITTER = "sitter_info";
+
     public static final String SESSION_KEY = "Session-Key";
     private static final String TAG = "jiho";
 
