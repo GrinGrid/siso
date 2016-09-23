@@ -17,6 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -172,7 +173,8 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
                 }
                 Log.d(TAG, "onClick: call Member : "+mPersonal.toString());
 
-
+                mPersonal.pushId = FirebaseInstanceId.getInstance().getToken();
+                // TODO input 체크
                 executeSignUp();
                 break;
         }

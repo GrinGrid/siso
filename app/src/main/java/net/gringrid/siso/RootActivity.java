@@ -14,6 +14,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
+
 public class RootActivity extends AppCompatActivity {
 
     private static final String TAG = "jiho";
@@ -24,6 +27,14 @@ public class RootActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        // TODO FCM TEST
+
+        Log.d(TAG, "RootActivity onCreate: FireBase");
+        Log.d(TAG, "RootActivity onCreate: FireBase");
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "onCreate: RootActivity token : "+token);
     }
 
     @Override

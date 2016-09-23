@@ -14,15 +14,13 @@
         android:src="@drawable/picker_btn_minus"/>
     <TextView
         android:id="@+id/id_tv_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="48dp"
         android:textSize="16sp"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:background="@drawable/picker_text_bg"
-        android:text="여성입니다"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:text="걸어서10분거리\n(1km이내)"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
         android:gravity="center"
