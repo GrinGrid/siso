@@ -19,6 +19,11 @@
         <attr name="checkboxTitleComment" format="reference|string"></attr>
         <attr name="isChecked" format="boolean"></attr>
         <attr name="isDisabled" format="boolean"></attr>
+        <attr name="isSetClickListener" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="SisoRadioMaxWidth">
+        <attr name="radioTitle" format="reference|string"></attr>
     </declare-styleable>
 
     <declare-styleable name="SisoToggleButton">

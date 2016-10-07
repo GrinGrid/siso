@@ -76,7 +76,7 @@ public class Member6Fragment extends Fragment implements View.OnClickListener{
                 }
                 Fragment fragment;
                 int titleId;
-                if ( personal.userType == User.USER_TYPE_SITTER ){
+                if ( personal.user_type == User.USER_TYPE_SITTER ){
                     fragment = new Sitter1Fragment();
                     titleId = R.string.sitter_title;
 

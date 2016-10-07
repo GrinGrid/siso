@@ -10,6 +10,7 @@ import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -27,12 +28,17 @@ public interface SisoClient {
     @POST("user")
     Call<User> signUp(@Body User user);
 
+    @PUT("user")
+    Call<User> modify(@Body User user);
+
     @POST("user/login")
-    Call<Personal> login(@Body Personal personal);
+    Call<User> login(@Body Personal personal);
 
     @POST("user/findEmail")
     Call<Personal> findEmail(@Body Personal personal);
 
     @POST("user/findPassword")
     Call<Personal> findPassword(@Body Personal personal);
+
+
 }

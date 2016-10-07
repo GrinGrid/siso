@@ -19,6 +19,7 @@ import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoToggleButton;
 
 /**
+ * 구직정보입력 > 기본정보 > 아이돌봄 특기
  * A simple {@link Fragment} subclass.
  */
 public class Sitter4Fragment extends Fragment implements View.OnClickListener {
@@ -45,14 +46,7 @@ public class Sitter4Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        String sitterStr = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.SITTER);
-
-        mGson = new Gson();
-        if ( sitterStr != null ){
-            mSitter = mGson.fromJson(sitterStr, Sitter.class);
-        }else{
-            mSitter = new Sitter();
-        }
+        mSitter = SharedData.getInstance(getContext()).getSitterData();
         super.onCreate(savedInstanceState);
     }
 
@@ -116,7 +110,7 @@ public class Sitter4Fragment extends Fragment implements View.OnClickListener {
 
         mSitter.skill = skillStr;
         Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
-        SharedData.getInstance(getContext()).insertGlobalData(SharedData.SITTER, mGson.toJson(mSitter));
+        SharedData.getInstance(getContext()).setObjectData(SharedData.SITTER, mSitter);
     }
 
 }

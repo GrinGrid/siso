@@ -52,7 +52,7 @@ public class Member2Fragment extends Fragment implements View.OnClickListener {
         }else{
             mPersonal = new Personal();
         }
-        Log.d(TAG, "onCreate: Personal.getUserType : "+mPersonal.userType);
+        Log.d(TAG, "onCreate: Personal.getUserType : "+mPersonal.user_type);
 
         super.onCreate(savedInstanceState);
     }
@@ -148,7 +148,7 @@ public class Member2Fragment extends Fragment implements View.OnClickListener {
                     return;
                 }
                 mPersonal.name = id_et_name.getText().toString();
-                mPersonal.birthDate = Integer.parseInt(id_et_birth.getText().toString());
+                mPersonal.birth_date = Integer.parseInt(id_et_birth.getText().toString());
                 SharedData.getInstance(getContext()).insertGlobalData(SharedData.PERSONAL, mGson.toJson(mPersonal));
                 ((BaseActivity) getActivity()).setFragment(fragment, R.string.member_title);
                 break;

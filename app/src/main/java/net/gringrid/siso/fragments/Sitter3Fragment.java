@@ -21,13 +21,13 @@ import net.gringrid.siso.views.SisoToggleButton;
 
 
 /**
+ * 구직정보입력 > 기본정보 > 시터경력, 근무기간 설정
  * A simple {@link Fragment} subclass.
  */
 public class Sitter3Fragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "jiho";
     Sitter mSitter;
-    Gson mGson;
 
     private TextView id_tv_next_btn;
     int mRadioTerm[] = new int[]{R.id.id_tg_btn_now, R.id.id_tg_btn_day};
@@ -41,14 +41,7 @@ public class Sitter3Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        String sitterStr = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.SITTER);
-
-        mGson = new Gson();
-        if ( sitterStr != null ){
-            mSitter = mGson.fromJson(sitterStr, Sitter.class);
-        }else{
-            mSitter = new Sitter();
-        }
+        mSitter = SharedData.getInstance(getContext()).getSitterData();
         super.onCreate(savedInstanceState);
     }
 
@@ -69,6 +62,7 @@ public class Sitter3Fragment extends Fragment implements View.OnClickListener {
         id_tg_btn_day.setOnClickListener(this);
         id_pk_experience = (SisoPicker)getView().findViewById(R.id.id_pk_experience);
 
+        loadData();
         super.onResume();
     }
 
@@ -101,23 +95,6 @@ public class Sitter3Fragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void saveData() {
-        int work_year = id_pk_experience.getCurrentIndex();
-        mSitter.work_year = work_year;
-        int schedule = getRadioValue(mRadioTerm);
-        if ( schedule == 0 ){
-            mSitter.mon = "1111111";
-            mSitter.tue = "1111111";
-            mSitter.wed = "1111111";
-            mSitter.thu = "1111111";
-            mSitter.fri = "1111111";
-            mSitter.sat = "1111111";
-            mSitter.sun = "1111111";
-        }
-        Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
-        SharedData.getInstance(getContext()).insertGlobalData(SharedData.SITTER, mGson.toJson(mSitter));
-    }
-
     private int getRadioValue(int[] radioList){
         for(int i=0; i<radioList.length; i++){
             if (((SisoToggleButton) getView().findViewById(radioList[i])).isChecked()) {
@@ -136,4 +113,23 @@ public class Sitter3Fragment extends Fragment implements View.OnClickListener {
             }
         }
     }
+
+    private void loadData() {
+        id_pk_experience.setIndex(mSitter.work_year);
+
+        // TODO 근무기간 선택
+    }
+
+    private void saveData() {
+        int work_year = id_pk_experience.getCurrentIndex();
+        mSitter.work_year = work_year;
+        int schedule = getRadioValue(mRadioTerm);
+        if ( schedule == 0 ){
+            mSitter.term_from = "17000101";
+            mSitter.term_to = "30000101";
+        }
+        Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
+        SharedData.getInstance(getContext()).setObjectData(SharedData.SITTER, mSitter);
+    }
+
 }

@@ -22,11 +22,23 @@ import java.util.ArrayList;
 public class SisoPicker extends LinearLayout implements View.OnClickListener{
 
     private static final String TAG = "jiho";
+    private static final int CLICK_ACTION_PLUS = 0;
+    private static final int CLICK_ACTION_MINUS = 1;
+
     ImageView   id_iv_minus;
     ImageView   id_iv_plus;
     TextView    id_tv_text;
     String[]    mDataList;
     int         mCurrentIdx;
+    OnClickPlusMinusListener mlistener;
+
+    public interface OnClickPlusMinusListener{
+        void onClickPlusMinus(View view, int CLICK_ACTION);
+    }
+
+    public void setOnClickPlusMinusListener(OnClickPlusMinusListener listener){
+        mlistener = listener;
+    }
 
     public SisoPicker(Context context){
         super(context);
@@ -87,14 +99,17 @@ public class SisoPicker extends LinearLayout implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Log.d(TAG, "onClick: sisopicker");
         switch (v.getId()){
             case R.id.id_iv_minus:
                 performMinus();
+                if(mlistener != null)
+                    mlistener.onClickPlusMinus(SisoPicker.this, CLICK_ACTION_MINUS);
                 break;
 
             case R.id.id_iv_plus:
                 performPlus();
+                if(mlistener != null)
+                    mlistener.onClickPlusMinus(SisoPicker.this, CLICK_ACTION_PLUS);
                 break;
         }
     }
@@ -116,6 +131,12 @@ public class SisoPicker extends LinearLayout implements View.OnClickListener{
 
     public int getCurrentIndex(){
        return mCurrentIdx;
+    }
+
+    public void setIndex(int idx){
+        if(mDataList==null) return;
+        mCurrentIdx = idx;
+        setText();
     }
 
     public String getCurrentText(){

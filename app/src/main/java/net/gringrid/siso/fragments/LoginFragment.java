@@ -21,6 +21,7 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.Personal;
+import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.APIError;
 import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
@@ -98,7 +99,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case  R.id.id_tv_login_btn:
                 if ( SharedData.DEBUG_MODE ){
-                    id_et_email.setInput("nisclan1474433758492@hotmail.com");
+                    id_et_email.setInput("nisclan1475742432860@hotmail.com");
                     id_et_passwd.setInput("tjswndqkqh");
                 }
                 executeLogin();
@@ -121,13 +122,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         Personal personal = new Personal();
         personal.email = id_et_email.getText().toString();
         personal.passwd = id_et_passwd.getText().toString();
-        Call<Personal> call = client.login(personal);
-        call.enqueue(new Callback<Personal>() {
+        Call<User> call = client.login(personal);
+        call.enqueue(new Callback<User>() {
             @Override
-            public void onResponse(Call<Personal> call, Response<Personal> response) {
+            public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()){
                     Log.d(TAG, "onResponse: login : "+response.body().toString());
                     Log.d(TAG, "onResponse session-key : "+response.headers().get(SharedData.SESSION_KEY));
+                    SharedData.getInstance(getContext()).setObjectData(SharedData.USER, response.body());
                     SharedData.getInstance(getContext()).insertGlobalData(SharedData.SESSION_KEY, response.headers().get(SharedData.SESSION_KEY));
                 }else{
                     APIError error = ErrorUtils.parseError(response);
@@ -138,7 +140,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
             }
 
             @Override
-            public void onFailure(Call<Personal> call, Throwable t) {
+            public void onFailure(Call<User> call, Throwable t) {
                 Log.d(TAG, "onFailure: "+t.getMessage());
             }
         });

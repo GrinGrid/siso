@@ -13,7 +13,7 @@ public class Personal{
     // 성명
     public String  name;
     // 생년월일
-    public int     birthDate;
+    public int     birth_date;
     // 전화번호
     public String  phone;
     // 주소1
@@ -21,28 +21,28 @@ public class Personal{
     // 주소2
     public String  addr2;
     // 우편번호
-    public String postNo;
+    public String post_no;
     // 위도
     public String lng; //longitude;
     // 경도
     public String lat; //latitude;
     // 사용자구분(부모, 시터)
-    public int userType;
+    public int user_type;
     // 가입일
-    public String regDate;
+    public String reg_date;
     // 마지막 로그인 일시
-    public String lastLogin;
+    public String last_login;
     // 푸시아이디
-    public String pushId;
+    public String push_id;
 
-    public String  sessionKey;
+    public String sessionKey;
 
     @Override
     public String toString() {
         String str = "Email:"+email+", PASSWD:"+passwd+", NAME:"+name+", BIRTH_DATE:"+
-                birthDate+", PHONE:"+phone+", ADDR1:"+addr1+", ADDR2:"+addr2+", POST_NO:"+
-                postNo+", LONGITUDE:"+lng+", LATITUDE:"+lat+", USER_TYPE:"+
-                userType+", REG_DATE:"+regDate+", LAST_LOGIN:"+lastLogin+", PUSH_ID:"+pushId;
+                birth_date+", PHONE:"+phone+", ADDR1:"+addr1+", ADDR2:"+addr2+", POST_NO:"+
+                post_no+", LONGITUDE:"+lng+", LATITUDE:"+lat+", USER_TYPE:"+
+                user_type+", REG_DATE:"+reg_date+", LAST_LOGIN:"+last_login+", PUSH_ID:"+push_id;
         return str;
     }
 

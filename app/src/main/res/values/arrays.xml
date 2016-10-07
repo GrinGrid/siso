@@ -28,17 +28,65 @@
 
     <!-- 출퇴근 가능 거리-->
     <string-array name="picker_commute_distance">
-        <item>상관없음</item>
-        <item>걸어서10분거리\n(1km 이내)</item>
-        <item>1~2년</item>
-        <item>2~3년</item>
-        <item>3~4년</item>
-        <item>4~5년</item>
-        <item>5~6년</item>
-        <item>6~7년</item>
-        <item>7~8년</item>
-        <item>8~9년</item>
-        <item>9~10년</item>
-        <item>10년이상</item>
+        <item >상관없음</item>
+        <item>걸어서 10분거리\n(1km 이내)</item>
+        <item>자동차로 5분 거리\n(3km 이내)</item>
+        <item>자동차로 10분 거리\n(6km 이내)</item>
+        <item>자동차로 30분 거리\n(18km 이내)</item>
+        <item>자동차로 1시간 거리\n(36km 이내)</item>
+        <item>자동차로 2시간 거리\n(72km 이내)</item>
     </string-array>
+    <string-array name="picker_commute_distance_value">
+        <item>0</item>
+        <item>1</item>
+        <item>3</item>
+        <item>6</item>
+        <item>18</item>
+        <item>36</item>
+        <item>72</item>
+    </string-array>
+
+    <!-- 출퇴근 가능 거리-->
+    <string-array name="picker_salary">
+        <item>협의</item>
+        <item>6,000원</item>
+        <item>7,000원</item>
+        <item>8,000원</item>
+        <item>9,000원</item>
+        <item>10,000원</item>
+        <item>12,000원</item>
+        <item>15,000원</item>
+    </string-array>
+    <integer-array name="picker_salary_value">
+        <item>0</item>
+        <item>6000</item>
+        <item>7000</item>
+        <item>8000</item>
+        <item>9000</item>
+        <item>10000</item>
+        <item>12000</item>
+        <item>15000</item>
+    </integer-array>
+    <string-array name="picker_salary_month">
+        <item>협의</item>
+        <item>160만원</item>
+        <item>170만원</item>
+        <item>180만원</item>
+        <item>190만원</item>
+        <item>200만원</item>
+        <item>210만원</item>
+        <item>220만원</item>
+        <item>230만원</item>
+    </string-array>
+    <integer-array name="picker_salary_month_value">
+        <item>0</item>
+        <item>1600000</item>
+        <item>1700000</item>
+        <item>1800000</item>
+        <item>1900000</item>
+        <item>2000000</item>
+        <item>2100000</item>
+        <item>2200000</item>
+        <item>2300000</item>
+    </integer-array>
 </resources>

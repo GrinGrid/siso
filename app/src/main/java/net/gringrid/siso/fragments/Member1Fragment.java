@@ -81,11 +81,11 @@ public class Member1Fragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case  R.id.ll_parent:
                 ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
-                mPersonal.userType = User.USER_TYPE_PARENT;
+                mPersonal.user_type = User.USER_TYPE_PARENT;
                 break;
             case  R.id.ll_sitter:
                 ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
-                mPersonal.userType = User.USER_TYPE_SITTER;
+                mPersonal.user_type = User.USER_TYPE_SITTER;
                 break;
         }
         SharedData.getInstance(getContext()).insertGlobalData(SharedData.PERSONAL, mGson.toJson(mPersonal));

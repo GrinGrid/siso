@@ -45,6 +45,13 @@
                 style="@style/SisoJobTitleComment"
                 />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_global"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"/>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -53,15 +60,15 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:gravity="center">
+
                 <ToggleButton
                     android:id="@+id/id_tg_nat_kor"
                     android:layout_width="0dp"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textOn="@string/sitter8_tg_nat_kor"
                     android:textOff="@string/sitter8_tg_nat_kor"
-                    android:textColor="@color/tg_text_color"
-                    android:background="@drawable/tg_btn"
+                    style="@style/ToggleBtnStyle"
                     />
                 <ToggleButton
                     android:id="@+id/id_tg_nat_chi_kor"
@@ -70,19 +77,18 @@
                     android:layout_weight="1"
                     android:textOn="@string/sitter8_tg_nat_chi_kor"
                     android:textOff="@string/sitter8_tg_nat_chi_kor"
-                    android:textColor="@color/tg_text_color"
+                    style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/tg_btn"/>
+                    />
                 <ToggleButton
                     android:id="@+id/id_tg_nat_write"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_write"
-                    android:textOff="@string/sitter8_tg_nat_write"
-                    android:textColor="@color/tg_text_color"
+                    android:textOn="@string/sitter8_tg_write"
+                    android:textOff="@string/sitter8_tg_write"
+                    style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/tg_btn"
                     />
             </LinearLayout>
 
@@ -132,31 +138,29 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_kor"
-                    android:textOff="@string/sitter8_tg_nat_kor"
-                    android:textColor="@color/tg_text_color"
-                    android:background="@drawable/tg_btn"
+                    android:textOn="@string/sitter8_tg_rlg_none"
+                    android:textOff="@string/sitter8_tg_rlg_none"
+                    style="@style/ToggleBtnStyle"
                     />
                 <ToggleButton
                     android:id="@+id/id_tg_rlg_1"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_chi_kor"
-                    android:textOff="@string/sitter8_tg_nat_chi_kor"
-                    android:textColor="@color/tg_text_color"
+                    android:textOn="@string/sitter8_tg_rlg_gi"
+                    android:textOff="@string/sitter8_tg_rlg_gi"
+                    style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/tg_btn"/>
+                    />
                 <ToggleButton
                     android:id="@+id/id_tg_rlg_2"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_write"
-                    android:textOff="@string/sitter8_tg_nat_write"
-                    android:textColor="@color/tg_text_color"
+                    android:textOn="@string/sitter8_tg_rlg_bul"
+                    android:textOff="@string/sitter8_tg_rlg_bul"
+                    style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/tg_btn"
                     />
             </LinearLayout>
             <LinearLayout
@@ -172,21 +176,20 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_kor"
-                    android:textOff="@string/sitter8_tg_nat_kor"
-                    android:textColor="@color/tg_text_color"
-                    android:background="@drawable/tg_btn"
+                    android:textOn="@string/sitter8_tg_rlg_choen"
+                    android:textOff="@string/sitter8_tg_rlg_choen"
+                    style="@style/ToggleBtnStyle"
                     />
                 <ToggleButton
                     android:id="@+id/id_tg_rlg_4"
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter8_tg_nat_chi_kor"
-                    android:textOff="@string/sitter8_tg_nat_chi_kor"
-                    android:textColor="@color/tg_text_color"
+                    android:textOn="@string/sitter8_tg_write"
+                    android:textOff="@string/sitter8_tg_write"
+                    style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/tg_btn"/>
+                    />
             </LinearLayout>
             <net.gringrid.siso.views.SisoEditText
                 android:id="@+id/id_et_rlg"

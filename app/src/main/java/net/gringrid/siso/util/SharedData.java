@@ -9,6 +9,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 import net.gringrid.siso.models.Personal;
+import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.User;
 
 /**
  * Created by choijiho on 16. 8. 29..
@@ -17,6 +19,7 @@ public class SharedData {
     public static final boolean DEBUG_MODE = true;
     public static final String PERSONAL = "personal_info";
     public static final String SITTER = "sitter_info";
+    public static final String USER = "user";
 
     public static final String SESSION_KEY = "Session-Key";
     private static final String TAG = "jiho";
@@ -68,6 +71,39 @@ public class SharedData {
             personal = gson.fromJson(userJsonData, Personal.class);
         }
         return personal;
+    }
+
+    public Sitter getSitterData(){
+        Gson gson = new Gson();
+        String sitterJsonData = getGlobalDataString(SITTER);
+        Sitter sitter;
+        Log.d(TAG, "getSitterData: "+sitterJsonData);
+        if (!TextUtils.isEmpty(sitterJsonData)){
+            sitter = gson.fromJson(sitterJsonData, Sitter.class);
+        }else{
+            sitter = new Sitter();
+        }
+        return sitter;
+    }
+
+    public User getUserData(){
+        Gson gson = new Gson();
+        String userJsonData = getGlobalDataString(USER);
+        User user;
+        Log.d(TAG, "getSitterData: "+userJsonData);
+        if (!TextUtils.isEmpty(userJsonData)){
+            user = gson.fromJson(userJsonData, User.class);
+        }else{
+            user = new User();
+        }
+        return user;
+    }
+
+    public void setObjectData(String key, Object obj){
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(obj);
+        Log.d(TAG, "setObjectData : "+jsonData);
+        insertGlobalData(key, jsonData);
     }
 
     public void setGlobalData(String _key, String _val)

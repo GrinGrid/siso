@@ -4,6 +4,7 @@ package net.gringrid.siso.models;
  * Created by choijiho on 16. 9. 13..
  */
 public class Sitter {
+
     public static final String SKILL_CARE = "CARE";
     public static final String SKILL_BABY = "BABY";
     public static final String SKILL_OUTDOOR = "OUTDOOR";
@@ -15,9 +16,8 @@ public class Sitter {
     public static final String SKILL_MUSIC_PHYSICAL = "MUSIC_PHYSICAL";
     public static final String SKILL_DELIMITER = ",";
 
-
     // 성별
-    public int gender;
+    public int gender = Integer.MAX_VALUE;
     // 아들수
     public int sons;
     // 딸 수
@@ -31,9 +31,9 @@ public class Sitter {
     // 보육특기
     public String skill;
     // 출퇴근유형
-    public String commute_type;
+    public int commute_type = Integer.MAX_VALUE;
     // 희망거리
-    public String distance_limit;
+    public int distance_limit;
     // 월요일 근무시간
     public String mon;
     // 화요일 근무시간
@@ -49,15 +49,15 @@ public class Sitter {
     // 일요일 근무시간
     public String sun;
     // 시급
-    public String salary;
+    public int salary;
     // 애완동물 유무
-    public String env_pet;
+    public int env_pet;
     // CCTV 유무
-    public String env_cctv;
+    public int env_cctv;
     // 다른어른 유무
-    public String evn_adult;
+    public int env_adult;
     // 희망보육성별
-    public String baby_gender;
+    public int baby_gender = Integer.MAX_VALUE;
     // 희망보육연령
     public String baby_age;
     // 종교
@@ -65,7 +65,7 @@ public class Sitter {
     // 국적
     public String nat;
     // 비자만료일
-    public String visa_exp;
+    public int visa_exp;
     // 자기소개한줄
     public String brief;
     // 자기소개(200자이내)
@@ -96,10 +96,10 @@ public class Sitter {
         "fri : "+fri+", "+
         "sat : "+sat+", "+
         "sun : "+sun+", "+
-        "salary : "+salary+", "+
+        "salary: "+salary+", "+
         "env_pet : "+env_pet+", "+
         "env_cctv : "+env_cctv+", "+
-        "evn_adult : "+evn_adult+", "+
+        "evn_adult : "+env_adult+", "+
         "baby_gender : "+baby_gender+", "+
         "baby_age : "+baby_age+", "+
         "religion : "+religion+", "+

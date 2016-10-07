@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +28,16 @@ public class SisoToggleButton extends LinearLayout{
     Drawable    mNormalImgRes;
     private boolean mIsChecked;
     private boolean mIsAddClickListener;
+
+    OnToggleChangedListener mlistener;
+
+    public interface OnToggleChangedListener{
+        void onChanged(View view);
+    }
+
+    public void setOnToggleChangedListener(OnToggleChangedListener listener){
+        mlistener = listener;
+    }
 
     public SisoToggleButton(Context context){
         super(context);
@@ -95,7 +106,10 @@ public class SisoToggleButton extends LinearLayout{
         boolean isChecked = typedArray.getBoolean(R.styleable.SisoToggleButton_isSelected, false);
         setChecked(isChecked);
 
-        id_tv_label.setText(labelStr);
+        if(!TextUtils.isEmpty(labelStr)){
+            id_tv_label.setVisibility(View.VISIBLE);
+            id_tv_label.setText(labelStr);
+        }
 
         typedArray.recycle();
     }
@@ -115,6 +129,9 @@ public class SisoToggleButton extends LinearLayout{
         }
 
         mIsChecked = !mIsChecked;
+        if(mlistener!=null){
+            mlistener.onChanged(SisoToggleButton.this);
+        }
     }
 
     public boolean isChecked(){

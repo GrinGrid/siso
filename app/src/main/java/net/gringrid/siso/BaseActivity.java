@@ -127,12 +127,13 @@ public class BaseActivity extends RootActivity
         int userType = 0;
         int menuId = 0;
 
-        Personal personal = SharedData.getInstance(this).getUserLoginData();
+        User user = SharedData.getInstance(this).getUserData();
+//        Personal personal = SharedData.getInstance(this).getUserLoginData();
+        Personal personal = user.personalInfo;
         if ( personal != null ) {
             Log.d(TAG, "getMenuId: member is not null");
-            userType = personal.userType;
+            userType = personal.user_type;
         }
-
         if (TextUtils.isEmpty(sessionKey)) {
             Log.d(TAG, "getMenuId: logout");
             menuId = R.menu.menu_logout;

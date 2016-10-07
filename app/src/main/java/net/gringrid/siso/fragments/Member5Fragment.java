@@ -173,7 +173,7 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
                 }
                 Log.d(TAG, "onClick: call Member : "+mPersonal.toString());
 
-                mPersonal.pushId = FirebaseInstanceId.getInstance().getToken();
+                mPersonal.push_id = FirebaseInstanceId.getInstance().getToken();
                 // TODO input 체크
                 executeSignUp();
                 break;
@@ -227,7 +227,7 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
                 Log.d(TAG, "onActivityResult: latitude : "+data.getStringExtra(User.DATA_LATITUDE));
                 Log.d(TAG, "onActivityResult: longitude : "+data.getStringExtra(User.DATA_LONGITUDE));
 
-                mPersonal.postNo = data.getStringExtra(User.DATA_POST_NO);
+                mPersonal.post_no = data.getStringExtra(User.DATA_POST_NO);
                 mPersonal.addr1 = data.getStringExtra(User.DATA_ADDR);
 
                 mPersonal.lat = data.getStringExtra(User.DATA_LATITUDE);

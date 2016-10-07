@@ -16,6 +16,7 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoPicker;
 import net.gringrid.siso.views.SisoToggleButton;
@@ -27,7 +28,6 @@ import net.gringrid.siso.views.SisoToggleButton;
 public class Sitter2Fragment extends Fragment implements View.OnClickListener {
 
     Sitter mSitter;
-    Gson mGson;
 
     SisoToggleButton id_tg_btn_woman;
     SisoToggleButton id_tg_btn_man;
@@ -44,14 +44,7 @@ public class Sitter2Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        String sitterStr = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.SITTER);
-
-        mGson = new Gson();
-        if ( sitterStr != null ){
-            mSitter = mGson.fromJson(sitterStr, Sitter.class);
-        }else{
-            mSitter = new Sitter();
-        }
+        mSitter = SharedData.getInstance(getContext()).getSitterData();
         super.onCreate(savedInstanceState);
     }
 
@@ -73,8 +66,10 @@ public class Sitter2Fragment extends Fragment implements View.OnClickListener {
 
         id_pk_daughter = (SisoPicker)getView().findViewById(R.id.id_pk_daughter);
         id_pk_son = (SisoPicker) getView().findViewById(R.id.id_pk_son);
+        loadData();
         super.onResume();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -82,16 +77,8 @@ public class Sitter2Fragment extends Fragment implements View.OnClickListener {
         switch (v.getId()){
             case R.id.id_tv_next_btn:
                 // TODO 입력항목 체크
-                int gender = getRadioValue(mRadioGender);
-                int daughterNum = id_pk_daughter.getCurrentIndex();
-                int sonNum = id_pk_son.getCurrentIndex();
+                saveData();
 
-                mSitter.gender = gender;
-                mSitter.daughters = daughterNum;
-                mSitter.sons = sonNum;
-                Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
-
-                SharedData.getInstance(getContext()).insertGlobalData(SharedData.SITTER, mGson.toJson(mSitter));
                 Sitter3Fragment fragment = new Sitter3Fragment();
                 ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
                 break;
@@ -103,6 +90,7 @@ public class Sitter2Fragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
+
 
     private int getRadioValue(int[] radioList){
         for(int i=0; i<radioList.length; i++){
@@ -121,5 +109,28 @@ public class Sitter2Fragment extends Fragment implements View.OnClickListener {
                 ((SisoToggleButton)getView().findViewById(src)).setChecked(false);
             }
         }
+    }
+
+    private void saveData() {
+        int gender = getRadioValue(mRadioGender);
+        int daughterNum = id_pk_daughter.getCurrentIndex();
+        int sonNum = id_pk_son.getCurrentIndex();
+
+        mSitter.gender = gender;
+        mSitter.daughters = daughterNum;
+        mSitter.sons = sonNum;
+        Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
+        SharedData.getInstance(getContext()).setObjectData(SharedData.SITTER, mSitter);
+    }
+
+    private void loadData() {
+        if(mSitter.gender == User.GENDER_WOMAN){
+            id_tg_btn_woman.setChecked(true);
+        }else if(mSitter.gender == User.GENDER_MAN){
+            id_tg_btn_man.setChecked(true);
+        }
+
+        id_pk_daughter.setIndex(mSitter.daughters);
+        id_pk_son.setIndex(mSitter.sons);
     }
 }

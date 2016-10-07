@@ -2,20 +2,43 @@ package net.gringrid.siso.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
+import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.User;
+import net.gringrid.siso.network.restapi.APIError;
+import net.gringrid.siso.network.restapi.ErrorUtils;
+import net.gringrid.siso.network.restapi.ServiceGenerator;
+import net.gringrid.siso.network.restapi.SisoClient;
+import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoEditText;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 /**
+ * 구직정보입력 > 희망 근무조건 > 국적, 종교
  * A simple {@link Fragment} subclass.
  */
 public class Sitter8Fragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = "jiho";
+    Sitter mSitter;
+    private TextView id_tv_next_btn;
     private ToggleButton id_tg_nat_kor;
     private ToggleButton id_tg_nat_chi_kor;
     private ToggleButton id_tg_nat_write;
@@ -45,6 +68,11 @@ public class Sitter8Fragment extends Fragment implements View.OnClickListener {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        mSitter = SharedData.getInstance(getContext()).getSitterData();
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +83,9 @@ public class Sitter8Fragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onResume() {
+        id_tv_next_btn = (TextView) getView().findViewById(R.id.id_tv_next_btn);
+        id_tv_next_btn.setOnClickListener(this);
+
         id_tg_nat_kor = (ToggleButton)getView().findViewById(R.id.id_tg_nat_kor);
         id_tg_nat_chi_kor = (ToggleButton)getView().findViewById(R.id.id_tg_nat_chi_kor);
         id_tg_nat_write = (ToggleButton)getView().findViewById(R.id.id_tg_nat_write);
@@ -82,10 +113,13 @@ public class Sitter8Fragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int viewId = v.getId();
         switch (viewId){
-//            case R.id.id_tv_next_btn:
-//                Sitter3Fragment fragment = new Sitter3Fragment();
-//                ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
-//                break;
+            case R.id.id_tv_next_btn:
+                // TODO 입력값 체크
+                saveData();
+                executeSave();
+                Sitter1Fragment fragment = new Sitter1Fragment();
+                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_title);
+                break;
 
             // 국적 Radio 선택
             case R.id.id_tg_nat_kor:
@@ -113,6 +147,56 @@ public class Sitter8Fragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void saveData() {
+        int natRadio = getRadioValue(mRadioNat);
+        int rlgRadio = getRadioValue(mRadioRlg);
+        if(natRadio!=2){
+            mSitter.nat = String.valueOf(natRadio);
+        }else{
+            mSitter.nat = id_et_nat.getText().toString();
+        }
+        if(natRadio!=4){
+            mSitter.religion = String.valueOf(rlgRadio);
+        }else{
+            mSitter.religion= id_et_rlg.getText().toString();
+        }
+        Log.d(TAG, "onClick: mSitter : "+mSitter.toString());
+        SharedData.getInstance(getContext()).setObjectData(SharedData.SITTER, mSitter);
+    }
+
+    private void executeSave() {
+        SisoClient client = ServiceGenerator.getInstance(getActivity()).createService(SisoClient.class);
+        User user = new User();
+        user.personalInfo = SharedData.getInstance(getContext()).getPersonal();
+        user.sitterInfo = mSitter;
+        Call<User> call = client.modify(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    if(response.isSuccessful()){
+//                        Log.d(TAG, "onResponse: success body : "+response.body().toString());
+                        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                        Log.d(TAG, "onResponse: "+gson.toJson(response.body()));
+                        Log.d(TAG, "original Sitter : "+gson.toJson(mSitter));
+
+                    }
+
+                }else{
+                    APIError error = ErrorUtils.parseError(response);
+                    String msgCode = error.msgCode();
+                    String msgText = error.msgText();
+                    Toast.makeText(getContext(), "["+msgCode+"] "+msgText, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
     private void selectRadio(int[] radioList, int selectItem) {
         for(int src:radioList){
             if(src == selectItem){
@@ -121,5 +205,14 @@ public class Sitter8Fragment extends Fragment implements View.OnClickListener {
                 ((ToggleButton)getView().findViewById(src)).setChecked(false);
             }
         }
+    }
+
+    private int getRadioValue(int[] radioList){
+        for(int i=0; i<radioList.length; i++){
+            if( ((ToggleButton)getView().findViewById(radioList[i])).isChecked() ){
+                return i;
+            }
+        }
+        return 0;
     }
 }

@@ -23,6 +23,7 @@ public class SisoCheckBox extends LinearLayout{
     TextView    id_tv_title;
     TextView    id_tv_title_comment;
     boolean     mIsChecked;
+    boolean     mIsAddClickListener;
 
     public SisoCheckBox(Context context){
         super(context);
@@ -53,12 +54,14 @@ public class SisoCheckBox extends LinearLayout{
         id_tv_title_comment = (TextView)findViewById(R.id.id_tv_title_comment);
         iv_checkbox = (ImageView) findViewById(R.id.iv_checkbox);
 
-        id_ll_checkbox.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleCheck();
-            }
-        });
+        if(mIsAddClickListener){
+            id_ll_checkbox.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    toggleCheck();
+                }
+            });
+        }
     }
 
 
@@ -78,6 +81,7 @@ public class SisoCheckBox extends LinearLayout{
         String titleComment = typedArray.getString(R.styleable.SisoCheckBox_checkboxTitleComment);
         boolean isChecked = typedArray.getBoolean(R.styleable.SisoCheckBox_isChecked, false);
         boolean isDisabled = typedArray.getBoolean(R.styleable.SisoCheckBox_isDisabled, false);
+        mIsAddClickListener = typedArray.getBoolean(R.styleable.SisoCheckBox_isSetClickListener, true);
 
         if (isChecked){
             iv_checkbox.setImageResource(R.drawable.icon_checkbox_on);
@@ -104,6 +108,10 @@ public class SisoCheckBox extends LinearLayout{
         }
 
         mIsChecked = !mIsChecked;
+    }
 
+    public void setCheck(boolean isCheck){
+        mIsChecked = !isCheck;
+        toggleCheck();
     }
 }

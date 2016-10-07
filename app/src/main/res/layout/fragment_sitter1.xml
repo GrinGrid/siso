@@ -55,16 +55,15 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 >
-
                 <net.gringrid.siso.views.SisoCheckBox
                     android:id="@+id/id_cb_basic"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:checkboxTitle="@string/sitter1_stage1_title"
                     app:checkboxTitleComment="@string/sitter1_stage1_title_comment"
+                    app:isSetClickListener="false"
                     android:layout_marginTop="20dp"
                     >
-
                 </net.gringrid.siso.views.SisoCheckBox>
                 <net.gringrid.siso.views.SisoCheckBox
                     android:id="@+id/id_cb_work_env"
@@ -72,9 +71,9 @@
                     android:layout_height="wrap_content"
                     app:checkboxTitle="@string/sitter1_stage2_title"
                     app:checkboxTitleComment="@string/sitter1_stage2_title_comment"
+                    app:isSetClickListener="false"
                     android:layout_marginTop="20dp"
                     >
-
                 </net.gringrid.siso.views.SisoCheckBox>
                 <net.gringrid.siso.views.SisoCheckBox
                     android:id="@+id/id_cb_introduce"
@@ -82,9 +81,19 @@
                     android:layout_height="wrap_content"
                     app:checkboxTitle="@string/sitter1_stage3_title"
                     app:checkboxTitleComment="@string/sitter1_stage3_title_comment"
+                    app:isSetClickListener="false"
                     android:layout_marginTop="20dp"
                     >
-
+                </net.gringrid.siso.views.SisoCheckBox>
+                <net.gringrid.siso.views.SisoCheckBox
+                    android:id="@+id/id_cb_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:checkboxTitle="@string/sitter1_stage4_title"
+                    app:checkboxTitleComment="@string/sitter1_stage4_title_comment"
+                    app:isSetClickListener="false"
+                    android:layout_marginTop="20dp"
+                    >
                 </net.gringrid.siso.views.SisoCheckBox>
 
             </LinearLayout>

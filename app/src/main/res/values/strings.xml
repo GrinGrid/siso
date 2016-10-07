@@ -25,16 +25,42 @@
     <string name="sitter_title">시터정보 등록하기</string>
     <string name="parent_title">부모님정보 등록하기</string>
     <string name="sitter_basic_title">기본정보</string>
-    <string name="sitter_hope_title">희망 근무 조건</string>
+    <string name="sitter_wish_title">희망 근무 조건</string>
     <string name="sitter_introduce_title">자기소개하기</string>
+    <string name="sitter_photo_title">프로필 사진등록</string>
 
     <!-- Siso Editbox -->
     <string name="required">필수</string>
 
-
     <!-- Siso Button -->
     <string name="btn_next">다음</string>
     <string name="btn_confirm">확인</string>
+
+    <!-- Timetable -->
+    <string name="section">구분</string>
+    <string name="mon">월</string>
+    <string name="tue">화</string>
+    <string name="wed">수</string>
+    <string name="thu">목</string>
+    <string name="fri">금</string>
+    <string name="sat">토</string>
+    <string name="sun">일</string>
+    <string name="time1">6~9AM</string>
+    <string name="time2">9~12AM</string>
+    <string name="time3">12~3PM</string>
+    <string name="time4">3~6PM</string>
+    <string name="time5">6~9PM</string>
+    <string name="time6">9~12AM</string>
+    <string name="time7">12~6AM</string>
+
+    <!-- Calulator -->
+    <string name="salary_day">평균일당 : </string>
+    <string name="salary_month">월급 : </string>
+    <string name="salary_week">주급 : </string>
+    <string name="salary_week_divide">/ 7</string>
+    <string name="salary_hour">시간 * </string>
+    <string name="salary_21_day">* 21일(월평균일수)</string>
+    <string name="equal">=</string>
 
 
     <!-- Siso edittext input type -->
@@ -51,9 +77,11 @@
     <string name="sitter1_stage1_title">시터 기본 정보</string>
     <string name="sitter1_stage2_title">희망 근무조건</string>
     <string name="sitter1_stage3_title">자기소개하기</string>
+    <string name="sitter1_stage4_title">프로필 사진 등록</string>
     <string name="sitter1_stage1_title_comment">시터가 되기 위한 기본정보를 입력해주세요</string>
     <string name="sitter1_stage2_title_comment">희망근무조건 서브타이틀</string>
     <string name="sitter1_stage3_title_comment">시터로서의 매력을 어필해보세요</string>
+    <string name="sitter1_stage4_title_comment">시터가 되기 위한 기본정보를 입력해주세요</string>
     <string name="sitter2_gender">성별을 입력해주세요</string>
     <string name="sitter2_tg_gender_woman">여성입니다</string>
     <string name="sitter2_tg_gender_man">남성입니다</string>
@@ -68,8 +96,11 @@
     <string name="sitter3_term_comment">시터 및 아이돌봄 경력이 있으면 입력해주세요</string>
     <string name="sitter3_tg_term_now">즉시 가능합니다</string>
     <string name="sitter3_tg_term_day">특정기간에만\n근무할 수 있어요</string>
-    <string name="sitter3_1_calendar">달력</string>
-    <string name="sitter3_1_calendar_comment">시터 및 아이돌봄 경력이 있으면 입력해주세요</string>
+    <string name="sitter3_sub1_calendar">근무 가능 시작일과 종료일을 선택해주세요</string>
+    <string name="sitter3_sub1_from">시작일</string>
+    <string name="sitter3_sub1_to">종료일</string>
+    <string name="sitter3_sub1_from_noproblem">시작일 상관없음</string>
+    <string name="sitter3_sub1_to_noproblem">종료일 상관없음</string>
     <string name="sitter4_skill">아이돌봄 특기</string>
     <string name="sitter4_skill_comment">아이돌봄 특기 블라블라</string>
     <string name="sitter4_tg_skill_care">아이돌봄을\n잘해요</string>
@@ -88,9 +119,18 @@
     <string name="sitter5_tg_myhome">재택형\n(시터집에서 돌봄)</string>
     <string name="sitter5_distance">출퇴근 가능 거리를 선택하세요</string>
     <string name="sitter5_distance_comment">출퇴근 가능 거리 블라블라</string>
-    <string name="sitter6_work_schedule">근무 가능한 시간을 터치해주세요</string>
-    <string name="sitter6_salary">희망 시급을 설정해주세요</string>
-    <string name="sitter6_salary_comment">수익을 미리 알아볼 수 있습니다/면접후 결정/면접비요청</string>
+    <string name="sitter5_sub1_schedule">근무 가능한 시간을 터치해주세요</string>
+    <string name="sitter5_sub1_salary">희망 시급을 설정해주세요</string>
+    <string name="sitter5_sub1_salary_comment">수익을 미리 알아볼 수 있습니다/면접후 결정/면접비요청</string>
+    <string name="sitter5_sub1_calculator">예상 수익 자동 계산기</string>
+    <string name="sitter5_sub1_calculator_comment">근무일과 희망시급을 기준으로 한달 수익을\n자동으로 계산해줍니다.</string>
+    <string name="sitter5_sub1_calculator_alert">예상 수익은 실제 수익이 아니며 참고용입니다</string>
+    <string name="sitter5_sub2_weekend">주말 근무도 가능한가요?</string>
+    <string name="sitter5_sub2_weekend_comment">주말 근무도 가능한가요</string>
+    <string name="sitter5_sub2_tg_week">주중만 가능해요</string>
+    <string name="sitter5_sub2_tg_weekend">주말도 가능해요</string>
+    <string name="sitter5_sub2_salary">희망 월급여를 설정해주세요</string>
+    <string name="sitter5_sub2_salary_comment">수익을 미리 알아볼 수 있습니다/면접후 결정/면접비요청</string>
     <string name="sitter6_env">출퇴근 방법을 정해주세요</string>
     <string name="sitter6_env_comment">출퇴근 방법 블라블라</string>
     <string name="sitter6_tg_env_pet">애완동물이\n있어도 괜찮아요</string>
@@ -111,11 +151,35 @@
     <string name="sitter8_religion_comment">종교를 선택해주세요 블라</string>
     <string name="sitter8_nationality">국적을 입력해주세요</string>
     <string name="sitter8_nationality_comment">국적을 입력해주세요 블라블라</string>
+    <string name="sitter8_tg_write">직접입력</string>
     <string name="sitter8_tg_nat_kor">대한민국</string>
     <string name="sitter8_tg_nat_chi_kor">중국동포</string>
-    <string name="sitter8_tg_nat_write">직접입력</string>
     <string name="sitter8_et_nat_visa">비자만료일을 입력하세요</string>
+    <string name="sitter8_tg_rlg_none">종교없음</string>
+    <string name="sitter8_tg_rlg_gi">기독교</string>
+    <string name="sitter8_tg_rlg_bul">불교</string>
+    <string name="sitter8_tg_rlg_choen">천주교</string>
     <string name="sitter8_et_rlg_write">종교를 입력하세요</string>
     <string name="sitter9_brief">나를 한줄로 표현해보세요!(20자 이내)</string>
+    <string name="sitter9_brief_sample">예)유치원교사 10년 출신시터예요 ~</string>
     <string name="sitter9_introduce">시터로서의 매력을 어필해보세요(100자 이내)</string>
+    <string name="sitter9_introduce_sample">자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다 자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다</string>
+    <string name="sitter10_edu_title">학력을 입력해주세요</string>
+    <string name="sitter10_edu_title_comment">학력 블라블라</string>
+    <string name="sitter10_et_university_name">학교명을 입력해주세요</string>
+    <string name="sitter10_et_university_dipartment">학과을 입력해주세요</string>
+    <string name="sitter10_license_title">자격증을 입력해주세요</string>
+    <string name="sitter10_license_title_comment">자격증 블라블라</string>
+    <string name="sitter10_et_license">자격증을 입력해주세요</string>
+    <string name="sitter10_tg_edu_none">비공개</string>
+    <string name="sitter10_tg_edu_elementary">초등학교 졸업</string>
+    <string name="sitter10_tg_edu_middle">중학교 졸업</string>
+    <string name="sitter10_tg_edu_high">고등학교 졸업</string>
+    <string name="sitter10_tg_edu_university_in_school">대학교 재학</string>
+    <string name="sitter10_tg_edu_university">대학교 졸업</string>
+    <string name="sitter11_photo_title">좋은 인상을 심어주세요</string>
+    <string name="sitter11_photo_title_comment">좋은 인상은 심어줘야 제맛입니다</string>
+    <string name="sitter11_radio1">사진 찍기</string>
+    <string name="sitter11_radio2">내 폰 갤러리에서 가져오기</string>
+    <string name="sitter11_radio3">다음에 등록할게요</string>
 </resources>
