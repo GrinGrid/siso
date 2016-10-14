@@ -13,6 +13,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,14 +26,31 @@ import com.isseiaoki.simplecropview.CropImageView;
 import com.isseiaoki.simplecropview.callback.CropCallback;
 import com.isseiaoki.simplecropview.callback.LoadCallback;
 import com.isseiaoki.simplecropview.callback.SaveCallback;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
 
 import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
+import net.gringrid.siso.models.Image;
 import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.User;
+import net.gringrid.siso.network.restapi.ServiceGenerator;
+import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.util.SharedData;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * 구직정보입력 > 프로필사진 등록 > 프로필 사진 등록
@@ -49,6 +67,7 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
     private static final int PIC_PIC_CROP = 2;
     private static final int ACTION_REQUEST_GALLERY = 3;
     Sitter mSitter;
+    User mUser;
     private TextView id_tv_next_btn;
 
     private LinearLayout id_ll_radio1;
@@ -79,6 +98,7 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mSitter = SharedData.getInstance(getContext()).getSitterData();
+        mUser = SharedData.getInstance(getContext()).getUserData();
         super.onCreate(savedInstanceState);
     }
 
@@ -112,6 +132,13 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
 //        id_icv = (ImageCropView) getView().findViewById(R.id.id_icv);
 //        id_icv.setGridInnerMode(ImageCropView.GRID_ON);
 //        id_icv.setGridOuterMode(ImageCropView.GRID_ON);
+        if(mUser.imageInfo!=null) {
+            Log.d(TAG, "onResume: profile image url : "+mUser.imageInfo.prf_img_url);
+            Picasso.with(getContext()).load(mUser.imageInfo.prf_img_url).networkPolicy(NetworkPolicy.NO_CACHE).into(id_civ);
+        }else{
+            Log.d(TAG, "onResume: profile image url  is null : ");
+        }
+
 
         super.onResume();
     }
@@ -136,8 +163,9 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
                 // TODO 입력값 체크
 //                saveData();
                 // TODO 사진전송 request
-                Sitter11_sub1Fragment fragment = new Sitter11_sub1Fragment();
-                ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_introduce_title);
+                uploadImage();
+//                Sitter11_sub1Fragment fragment = new Sitter11_sub1Fragment();
+//                ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_introduce_title);
                 break;
         }
     }
@@ -182,6 +210,50 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
         SharedData.getInstance(getContext()).setObjectData(SharedData.SITTER, mSitter);
     }
 
+    private void uploadImage(){
+        SisoClient client = ServiceGenerator.getInstance(getActivity()).createService(SisoClient.class);
+//        File file = new File(mOutputFileUri.getPath());
+        File file = new File(getRealPathFromURI(mUri));
+
+        String descriptionString = "hello, this is description speaking";
+        String emailString = "nisclan1475742432860@hotmail.com";
+        String gubunString = "prf";
+
+        Log.d(TAG, "uploadImage: filename : "+file.getName());
+        Log.d(TAG, "uploadImage: filepath : "+file.getPath());
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), descriptionString);
+        RequestBody email = RequestBody.create(MediaType.parse("multipart/form-data"), emailString);
+        RequestBody gubun = RequestBody.create(MediaType.parse("multipart/form-data"), gubunString);
+        Call<Image> call = client.uploadImg(description, email, gubun, body);
+        call.enqueue(new Callback<Image>() {
+            @Override
+            public void onResponse(Call<Image> call, Response<Image> response) {
+                Log.d(TAG, "onResponse: "+response.message());
+                if(response.body()!=null){
+                    Log.d(TAG, "onResponse: profile :"+response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Image> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+
+    }
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+
+        CursorLoader cursorLoader = new CursorLoader(getContext(), contentUri, proj, null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
     private void takePicture(){
         final String dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+"/siso/";
 
@@ -222,28 +294,29 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
         }else{
             Log.d(TAG, "onActivityResult: result code RESULT_OK");
         }
-        if(null == data){
-            Log.d(TAG, "onActivityResult: data is null : "+data.toString());
-        }else{
-            Log.d(TAG, "onActivityResult: data is not null");
-        }
+//        if(null == data){
+//            Log.d(TAG, "onActivityResult: data is null : "+data.toString());
+//        }else{
+//            Log.d(TAG, "onActivityResult: data is not null");
+//        }
         switch (requestCode){
             case ACTION_REQUEST_GALLERY:
                 Log.d(TAG, "onActivityResult:ACTIONREQEUSTGALLERY ");
+                // TODO 사진을 선택하지 않은 경우
                 mUri = data.getData();
-                id_civ.startLoad(mUri, new LoadCallback() {
-                    @Override
-                    public void onSuccess() {
-                        Log.d(TAG, "startLoad onSuccess: ");
-
-                    }
-
-                    @Override
-                    public void onError() {
-                        Log.d(TAG, "startLoad onError: ");
-
-                    }
-                });
+//                id_civ.startLoad(mUri, new LoadCallback() {
+//                    @Override
+//                    public void onSuccess() {
+//                        Log.d(TAG, "startLoad onSuccess: ");
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//                        Log.d(TAG, "startLoad onError: ");
+//
+//                    }
+//                });
 
 
 //                String[] filePathColumn = {MediaStore.Images.Media.DATA};
@@ -268,14 +341,16 @@ public class Sitter11Fragment extends Fragment implements View.OnClickListener {
             case ACT_TAKE_PIC:
                 if(resultCode == Activity.RESULT_OK && requestCode == ACT_TAKE_PIC){
                     Log.d(TAG, "onActivityResult: ok");
-                    Log.d(TAG, "takePicture: before : "+mNewFile.length());
+                    id_civ.setImageURI(mOutputFileUri);
+
+//                    Log.d(TAG, "takePicture: before : "+mNewFile.length());
 
 //                    Uri uri = data.getData();
 //                    String filePath = BitmapLoadUtils.getPathFromUri(getActivity(), uri);
 //                    Uri filePathUri = Uri.parse(filePath);
 
 
-                    mOutputFileUri = data.getData();
+//                    mOutputFileUri = data.getData();
 //                    id_icv.setImageFilePath(mOutputFileUri.toString());
 //                    id_icv.setAspectRatio(1,1);
                     try {

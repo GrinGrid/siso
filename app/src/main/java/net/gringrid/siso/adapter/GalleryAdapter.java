@@ -60,6 +60,7 @@ public class GalleryAdapter extends BaseAdapter{
         ViewHolder holder;
 
         if(convertView == null){
+            Log.d(TAG, "getView: convertView is null");
             holder = new ViewHolder();
             convertView = new ImageView(mContext);
 

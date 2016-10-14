@@ -24,10 +24,12 @@ import com.google.gson.GsonBuilder;
 
 import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.Popup;
+import net.gringrid.siso.PopupAddr;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.APIError;
+import net.gringrid.siso.network.restapi.AddrAPI;
 import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.MemberAPI;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
@@ -42,6 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -162,7 +165,10 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.id_tv_post_search_btn:
-                Intent intent = new Intent(getActivity(), Popup.class);
+//                Intent intent = new Intent(getActivity(), Popup.class);
+//                startActivityForResult(intent, 0);
+//                searchJuso();
+                Intent intent = new Intent(getActivity(), PopupAddr.class);
                 startActivityForResult(intent, 0);
                 break;
 
@@ -180,6 +186,39 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    private void searchJuso() {
+        AddrAPI.AddrInput input = new AddrAPI.AddrInput();
+        input.confmKey = "U01TX0FVVEgyMDE2MTAxMDE0MjI1MTE1NjQx";
+        input.keyword = "덕소로73";
+        input.currentPage = 1;
+        input.countPerPage = 10;
+        String url = "http://www.juso.go.kr/";
+
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(url)
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .build();
+
+        AddrAPI api = retrofit.create(AddrAPI.class);
+        Call<AddrAPI.AddrOutput> call = api.getAddr(input.currentPage, input.countPerPage, input.keyword, input.confmKey);
+//        Call<AddrAPI.AddrOutput> call = api.getAddr(input);
+        call.enqueue(new Callback<AddrAPI.AddrOutput>() {
+            @Override
+            public void onResponse(Call<AddrAPI.AddrOutput> call, Response<AddrAPI.AddrOutput> response) {
+                Log.d(TAG, "onResponse: ADDR onResponse : "+response.body().toString());
+                AddrAPI.AddrOutput output = response.body();
+
+//                Log.d(TAG, "onResponse: size : "+output.juso.size());
+            }
+
+            @Override
+            public void onFailure(Call<AddrAPI.AddrOutput> call, Throwable t) {
+                Log.d(TAG, "onFailure: ADDR onResponse : :"+t.getMessage());
+            }
+        });
+    }
+
 
     private void executeSignUp() {
         SisoClient client = ServiceGenerator.getInstance(getActivity()).createService(SisoClient.class);
@@ -193,9 +232,12 @@ public class Member5Fragment extends Fragment implements View.OnClickListener{
                     if(response.isSuccessful()){
                         SharedData.getInstance(getContext()).setUserLoginData(response.body().personalInfo);
                         Log.d(TAG, "onResponse: success body : "+response.body().personalInfo.email );
+
                     }
                     Log.d(TAG, "onResponse session-key : "+response.headers().get(SharedData.SESSION_KEY));
                     SharedData.getInstance(getContext()).insertGlobalData(SharedData.SESSION_KEY, response.headers().get(SharedData.SESSION_KEY));
+                    SharedData.getInstance(getContext()).setObjectData(SharedData.USER, response.body());
+
                     Log.d(TAG, "onResponse message : "+response.code());
                     Log.d(TAG, "onResponse message : "+response.message());
                     Member6Fragment fragment = new Member6Fragment();

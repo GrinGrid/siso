@@ -81,7 +81,7 @@ public class Member6Fragment extends Fragment implements View.OnClickListener{
                     titleId = R.string.sitter_title;
 
                 }else{
-                    fragment = new Parent1Fragment();
+                    fragment = new Parent01IndexFragment();
                     titleId = R.string.parent_title;
                 }
 

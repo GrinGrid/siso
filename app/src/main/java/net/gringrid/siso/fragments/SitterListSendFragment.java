@@ -12,10 +12,10 @@ import net.gringrid.siso.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Parent1Fragment extends Fragment {
+public class SitterListSendFragment extends Fragment {
 
 
-    public Parent1Fragment() {
+    public SitterListSendFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class Parent1Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_parent1, container, false);
+        return inflater.inflate(R.layout.fragment_sitter_list_send, container, false);
     }
 
 }

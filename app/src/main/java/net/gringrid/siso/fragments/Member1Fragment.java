@@ -19,7 +19,14 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
+import net.gringrid.siso.network.restapi.AddrAPI;
 import net.gringrid.siso.util.SharedData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 
 /**

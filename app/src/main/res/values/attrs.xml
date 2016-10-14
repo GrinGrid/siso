@@ -44,4 +44,8 @@
         <attr name="total_stage" format="reference|integer"></attr>
         <attr name="current_stage" format="reference|integer"></attr>
     </declare-styleable>
+
+    <declare-styleable name="SisoAddChild">
+        <attr name="child_icon" format="reference"></attr>
+    </declare-styleable>
 </resources>

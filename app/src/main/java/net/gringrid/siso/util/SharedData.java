@@ -90,7 +90,6 @@ public class SharedData {
         Gson gson = new Gson();
         String userJsonData = getGlobalDataString(USER);
         User user;
-        Log.d(TAG, "getSitterData: "+userJsonData);
         if (!TextUtils.isEmpty(userJsonData)){
             user = gson.fromJson(userJsonData, User.class);
         }else{

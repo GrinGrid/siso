@@ -152,7 +152,6 @@ public class Member2Fragment extends Fragment implements View.OnClickListener {
                 SharedData.getInstance(getContext()).insertGlobalData(SharedData.PERSONAL, mGson.toJson(mPersonal));
                 ((BaseActivity) getActivity()).setFragment(fragment, R.string.member_title);
                 break;
-
         }
     }
 

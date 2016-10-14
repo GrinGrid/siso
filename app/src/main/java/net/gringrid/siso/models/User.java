@@ -31,6 +31,9 @@ public class User {
     @SerializedName("sys_info")
     public System sysInfo;
 
+    @SerializedName("image_info")
+    public Image imageInfo;
+
     @Override
     public String toString() {
         String str = "";
@@ -45,6 +48,9 @@ public class User {
         }
         if(sysInfo!=null){
             str+="sys_info : "+sysInfo.toString();
+        }
+        if(imageInfo!=null){
+            str+="image_info : "+imageInfo.toString();
         }
 
         return str;

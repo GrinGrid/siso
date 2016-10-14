@@ -124,6 +124,7 @@ public class Member3Fragment extends Fragment implements View.OnClickListener {
                     Date now = new Date();
                     now.getTime();
                     id_et_email.setInput("nisclan"+now.getTime()+"@hotmail.com");
+//                    id_et_email.setInput("nisclan@hotmail.com");
                     id_et_passwd.setInput("tjswndqkqh");
                 }
                 checkUserEmail();

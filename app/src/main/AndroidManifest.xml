@@ -56,6 +56,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <activity
+            android:name=".PopupAddr"
+            android:theme="@style/Theme.AppCompat.Dialog" />
     </application>
 
 </manifest>

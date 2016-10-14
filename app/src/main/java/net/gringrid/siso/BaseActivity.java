@@ -20,10 +20,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.gringrid.siso.fragments.LoginFragment;
 import net.gringrid.siso.fragments.Member1Fragment;
+import net.gringrid.siso.fragments.Parent01IndexFragment;
 import net.gringrid.siso.fragments.Sitter1Fragment;
+import net.gringrid.siso.fragments.SitterListFragment;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
@@ -57,6 +61,8 @@ public class BaseActivity extends RootActivity
     DrawerLayout mDrawer;
     ActionBarDrawerToggle mActionBarDrawerToggle;
     NavigationView mNavigationView;
+    TextView id_toolbar_title;
+    ImageView id_toolbar_logo;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -75,6 +81,9 @@ public class BaseActivity extends RootActivity
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        id_toolbar_title = (TextView)mToolbar.findViewById(R.id.id_toolbar_title);
+        id_toolbar_logo = (ImageView)mToolbar.findViewById(R.id.id_toolbar_logo);
 
 //        getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -163,6 +172,7 @@ public class BaseActivity extends RootActivity
             if ( mFragmentManager.getBackStackEntryCount() > 1 ) {
                 mFragmentManager.popBackStack();
                 String fragmentName = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount()-2).getName();
+
                 setTitle(fragmentName);
 
             }else{
@@ -234,6 +244,21 @@ public class BaseActivity extends RootActivity
                 setCleanUpFragment(sitter1Fragment, R.string.sitter_basic_title);
                 break;
 
+            case MENU_INPUT_PARENT:
+                Parent01IndexFragment parent01IndexFragment = new Parent01IndexFragment();
+                setCleanUpFragment(parent01IndexFragment, R.string.parent_title);
+                break;
+
+            case MENU_SITTER_LIST:
+                SitterListFragment sitterListFragment  = new SitterListFragment();
+                setCleanUpFragment(sitterListFragment, R.string.sitter_title);
+                break;
+
+            case MENU_PARENT_LIST:
+                SitterListFragment sitterListFragment2  = new SitterListFragment();
+                setCleanUpFragment(sitterListFragment2, R.string.sitter_title);
+                break;
+
             case MENU_LOG_IN:
                 LoginFragment loginFragment = new LoginFragment();
                 setCleanUpFragment(loginFragment, R.string.login_title);
@@ -244,7 +269,6 @@ public class BaseActivity extends RootActivity
                 SharedData.getInstance(this).insertGlobalData(SharedData.PERSONAL, null);
                 LoginFragment fragment = new LoginFragment();
                 setCleanUpFragment(fragment, R.string.login_title);
-
                 break;
         }
     }
@@ -256,7 +280,9 @@ public class BaseActivity extends RootActivity
      */
     public void setFragment(Fragment fragment, int titleId){
         hideSoftKeyboard();
-        setTitle(getString(titleId));
+        id_toolbar_title.setText(titleId);
+//        setTitle(getString(titleId));
+//        mToolbar.setLogo(R.drawable.icon_navigation_logo);
         mFragmentManager.beginTransaction().add(R.id.id_rl_for_fragment, fragment)
                 .addToBackStack(getString(titleId))
                 .commit();
@@ -272,7 +298,12 @@ public class BaseActivity extends RootActivity
         Log.d(TAG, "before mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
 
         hideSoftKeyboard();
-        setTitle(getString(titleId));
+        id_toolbar_title.setText(titleId);
+//        setTitle(getString(titleId));
+//        ImageView logo = ((ImageView)findViewById(R.id.id_toolbar_logo));
+//        logo.setVisibility(View.VISIBLE);
+//        logo.setImageResource(R.drawable.icon_navigation_logo);
+//        mToolbar.setLogo(R.drawable.icon_navigation_logo);
 
         // 모든 stack을 비운다
         mFragmentManager.beginTransaction().replace(R.id.id_rl_for_fragment, fragment)
