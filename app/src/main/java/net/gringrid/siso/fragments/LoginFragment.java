@@ -45,9 +45,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     TextView id_tv_login_btn;
     TextView id_tv_find_email;
     TextView id_tv_find_password;
-    Personal mPersonal;
     Gson mGson;
 
+    User mUser;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -55,16 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG, "login fragment onCreate: ");
-        String personalStr = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.PERSONAL);
-        mGson = new Gson();
-        if ( personalStr != null ){
-            mPersonal = mGson.fromJson(personalStr, Personal.class);
-            Log.d(TAG, "onCreate: Fragment1 personal str is null");
-        }else{
-            mPersonal = new Personal();
-            Log.d(TAG, "onCreate: Fragment1 personal str is not null");
-        }
+        mUser = SharedData.getInstance(getContext()).getUserData();
 
         super.onCreate(savedInstanceState);
     }

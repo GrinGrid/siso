@@ -1,6 +1,7 @@
 package net.gringrid.siso.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class AddrAdapter extends BaseAdapter{
             holder = new ViewHolder();
             holder.id_tv_num = (TextView)convertView.findViewById(R.id.id_tv_num);
             holder.id_tv_addr = (TextView)convertView.findViewById(R.id.id_tv_addr);
+            holder.id_tv_addr_jibun = (TextView)convertView.findViewById(R.id.id_tv_addr_jibun);
             holder.id_tv_post_no = (TextView)convertView.findViewById(R.id.id_tv_post_no);
 
             convertView.setTag(holder);
@@ -67,12 +69,20 @@ public class AddrAdapter extends BaseAdapter{
         }
 
         holder.id_tv_addr.setText(mListJuso.get(position).roadAddr);
+        holder.id_tv_addr_jibun.setText(mListJuso.get(position).jibunAddr);
+        holder.id_tv_post_no.setText(mListJuso.get(position).zipNo);
+        if (position%2==0){
+            convertView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorEBEBEB));
+        }else{
+            convertView.setBackgroundColor(ContextCompat.getColor(mContext,R.color.colorWhite));
+        }
         return convertView;
     }
 
     class ViewHolder{
         TextView id_tv_num;
         TextView id_tv_addr;
+        TextView id_tv_addr_jibun;
         TextView id_tv_post_no;
     }
 }

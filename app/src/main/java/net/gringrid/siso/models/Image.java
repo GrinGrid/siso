@@ -1,5 +1,8 @@
 package net.gringrid.siso.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Created by choijiho on 16. 9. 13..
  */
@@ -12,7 +15,7 @@ public class Image {
 
     @Override
     public String toString() {
-        String str = "profile:"+prf_img_url+", id image : "+id_img_url;
-        return str;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

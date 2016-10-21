@@ -9,5 +9,6 @@
 
 
     <dimen name="fragment_vertical_top_margin">10dp</dimen>
+    <dimen name="fragment_vertical_bottom_margin">10dp</dimen>
     <dimen name="fragment_vertical_left_margin">30dp</dimen>
 </resources>

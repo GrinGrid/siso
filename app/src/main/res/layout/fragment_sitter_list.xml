@@ -14,7 +14,8 @@
         style="@style/ListTabLayout"
         app:tabTextAppearance="@style/ListTabTextAppearance"
         app:tabSelectedTextColor="@color/colorContentTextPink"
-        android:background="@drawable/line_30"
+        android:background="@drawable/line_white_30"
+        app:tabGravity="fill"
         >
     </android.support.design.widget.TabLayout>
 

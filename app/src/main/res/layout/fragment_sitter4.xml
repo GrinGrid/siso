@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".fragments.Sitter4Fragment">
+    tools:context=".fragments.Sitter04SkillFragment">
     <ScrollView
         android:id="@+id/id_sv"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@android:color/white"
-            tools:context=".fragments.Sitter2Fragment">
+            tools:context=".fragments.Sitter02GenderFragment">
 
             <net.gringrid.siso.views.SisoInputProgress
                 android:layout_width="match_parent"

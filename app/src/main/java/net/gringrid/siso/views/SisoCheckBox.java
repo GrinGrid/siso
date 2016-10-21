@@ -110,6 +110,10 @@ public class SisoCheckBox extends LinearLayout{
         mIsChecked = !mIsChecked;
     }
 
+    public boolean isChecked(){
+        return mIsChecked;
+    }
+
     public void setCheck(boolean isCheck){
         mIsChecked = !isCheck;
         toggleCheck();

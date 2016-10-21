@@ -38,7 +38,7 @@ public class Parent01IndexFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        mSitter = SharedData.getInstance(getContext()).getSitterData();
+        mSitter = SharedData.getInstance(getContext()).getUserData().sitterInfo;
         Log.d(TAG, "onCreate: fragment1");
         super.onCreate(savedInstanceState);
     }
@@ -96,19 +96,19 @@ public class Parent01IndexFragment extends Fragment implements View.OnClickListe
 
             case R.id.id_cb_basic:
                 Log.d(TAG, "onClick: id_cb_basic");
-                Sitter2Fragment sitter2Fragment = new Sitter2Fragment();
-                ((BaseActivity) getActivity()).setFragment(sitter2Fragment, R.string.sitter_basic_title);
+                Sitter02GenderFragment sitter02GenderFragment = new Sitter02GenderFragment();
+                ((BaseActivity) getActivity()).setFragment(sitter02GenderFragment, R.string.sitter_basic_title);
                 break;
 
 
             case R.id.id_cb_sitter:
-                Sitter9Fragment sitter9Fragment = new Sitter9Fragment();
-                ((BaseActivity) getActivity()).setFragment(sitter9Fragment, R.string.sitter_introduce_title);
+                Sitter09IntroductionFragment sitter09IntroductionFragment = new Sitter09IntroductionFragment();
+                ((BaseActivity) getActivity()).setFragment(sitter09IntroductionFragment, R.string.sitter_introduce_title);
                 break;
 
             case R.id.id_cb_etc:
-                Sitter11Fragment sitter11Fragment = new Sitter11Fragment();
-                ((BaseActivity) getActivity()).setFragment(sitter11Fragment, R.string.sitter_photo_title);
+                Sitter11PhotoFragment sitter11PhotoFragment = new Sitter11PhotoFragment();
+                ((BaseActivity) getActivity()).setFragment(sitter11PhotoFragment, R.string.sitter_photo_title);
                 break;
         }
     }
@@ -125,8 +125,8 @@ public class Parent01IndexFragment extends Fragment implements View.OnClickListe
         // 희망시급
         // 희망월급
 
-        if(mSitter.gender == Integer.MAX_VALUE) return false;
-        if(mSitter.commute_type == Integer.MAX_VALUE) return false;
+        if(TextUtils.isEmpty(mSitter.gender)) return false;
+        if(TextUtils.isEmpty(mSitter.commute_type)) return false;
         if(TextUtils.isEmpty(mSitter.term_from)) return false;
         if(TextUtils.isEmpty(mSitter.term_to)) return false;
         if(TextUtils.isEmpty(mSitter.mon)) return false;

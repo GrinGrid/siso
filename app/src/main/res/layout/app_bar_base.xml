@@ -18,21 +18,40 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:theme="@style/SisoTheme"
-            app:titleTextAppearance="@style/SisoToolbarTitleText"
             >
-            <TextView
-                android:id="@+id/id_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/SisoToolbarTitleText"
-                />
-            <ImageView
-                android:id="@+id/id_toolbar_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:visibility="gone"
-                />
+            <!--app:titleTextAppearance="@style/SisoToolbarTitleText"-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                <TextView
+                    android:id="@+id/id_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/SisoToolbarTitleText"
+                    android:layout_gravity="left|center_vertical"
+                    android:text="무료 회원가입"
+                    />
+                <ImageView
+                    android:id="@+id/id_toolbar_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_navigation_logo"
+                    android:layout_marginRight="30dp"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/id_toolbar_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@drawable/nv_ic_talk"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"
+                    />
+
+            </FrameLayout>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".fragments.Sitter7Fragment">
+    tools:context=".fragments.Sitter07BabyInfoFragment">
     <ScrollView
         android:id="@+id/id_sv"
         android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center">
                 <net.gringrid.siso.views.SisoToggleButton
-                    android:id="@+id/id_tg_btn_age_1"
+                    android:id="@+id/id_tg_btn_age_0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -62,7 +62,7 @@
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
                 <net.gringrid.siso.views.SisoToggleButton
-                    android:id="@+id/id_tg_btn_age_2"
+                    android:id="@+id/id_tg_btn_age_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -72,7 +72,7 @@
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
                 <net.gringrid.siso.views.SisoToggleButton
-                    android:id="@+id/id_tg_btn_age_3"
+                    android:id="@+id/id_tg_btn_age_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -90,7 +90,7 @@
                 android:layout_marginBottom="20dp"
                 android:gravity="center">
                 <net.gringrid.siso.views.SisoToggleButton
-                    android:id="@+id/id_tg_btn_age_4"
+                    android:id="@+id/id_tg_btn_age_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:toggle_normal="@drawable/tg_ic_kids_normal"
@@ -99,7 +99,7 @@
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
                 <net.gringrid.siso.views.SisoToggleButton
-                    android:id="@+id/id_tg_btn_age_5"
+                    android:id="@+id/id_tg_btn_age_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"

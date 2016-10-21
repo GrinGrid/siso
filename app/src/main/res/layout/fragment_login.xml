@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@android:color/white"
-        tools:context=".fragments.Member1Fragment">
+        tools:context=".fragments.Member01UserTypeFragment">
 
 
         <LinearLayout

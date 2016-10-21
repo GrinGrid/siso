@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.adapter.SitterListSisoAdapter;
 import net.gringrid.siso.models.SitterList;
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SitterListSIsoFragment extends Fragment {
+public class SitterListSIsoFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private SitterListSisoAdapter mAdapter;
     private List<SitterList> mList;
@@ -57,6 +59,13 @@ public class SitterListSIsoFragment extends Fragment {
         mAdapter = new SitterListSisoAdapter(getContext(), mList);
         id_lv = (ListView)getView().findViewById(R.id.id_lv);
         id_lv.setAdapter(mAdapter);
+        id_lv.setOnItemClickListener(this);
         super.onResume();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        SitterDetailFragment fragment = new SitterDetailFragment();
+        ((BaseActivity) getActivity()).setFragment(fragment, Integer.MIN_VALUE);
     }
 }

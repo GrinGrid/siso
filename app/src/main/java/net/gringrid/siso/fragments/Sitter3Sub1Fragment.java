@@ -14,6 +14,7 @@ import android.widget.ToggleButton;
 
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
 
 
@@ -26,7 +27,7 @@ public class Sitter3Sub1Fragment extends Fragment implements View.OnClickListene
 
 
     private static final String TAG = "jiho";
-    Sitter mSitter;
+    User mUser;
 
     private TextView id_tv_next_btn;
     private CalendarView id_cv;
@@ -40,7 +41,7 @@ public class Sitter3Sub1Fragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        mSitter = SharedData.getInstance(getContext()).getSitterData();
+        mUser = SharedData.getInstance(getContext()).getUserData();
         super.onCreate(savedInstanceState);
     }
 

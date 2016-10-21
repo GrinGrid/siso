@@ -57,7 +57,6 @@ public class RootActivity extends AppCompatActivity {
                 loadingDialog.setTitle("Loading data..");
                 loadingDialog.setContentView(R.layout.loading);
                 loadingDialog.show();
-
             }
         });
     }

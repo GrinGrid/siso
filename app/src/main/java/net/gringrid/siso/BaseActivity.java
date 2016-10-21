@@ -2,7 +2,6 @@ package net.gringrid.siso;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
@@ -24,15 +22,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.gringrid.siso.fragments.LoginFragment;
-import net.gringrid.siso.fragments.Member1Fragment;
+import net.gringrid.siso.fragments.Member01UserTypeFragment;
 import net.gringrid.siso.fragments.Parent01IndexFragment;
-import net.gringrid.siso.fragments.Sitter1Fragment;
+import net.gringrid.siso.fragments.Sitter01IndexFragment;
 import net.gringrid.siso.fragments.SitterListFragment;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
-
-import org.w3c.dom.Text;
 
 public class BaseActivity extends RootActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener {
@@ -56,6 +52,8 @@ public class BaseActivity extends RootActivity
     final int DRAWER_MODE_HAMBURGER = 0;
     final int DRAWER_MODE_BACK = 1;
 
+    public static final int TITLE_NONE = Integer.MAX_VALUE;
+    public static final int ACTIONBAR_HIDE = Integer.MIN_VALUE;
 
     Toolbar mToolbar;
     DrawerLayout mDrawer;
@@ -63,6 +61,7 @@ public class BaseActivity extends RootActivity
     NavigationView mNavigationView;
     TextView id_toolbar_title;
     ImageView id_toolbar_logo;
+    ImageView id_toolbar_memo;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -84,11 +83,15 @@ public class BaseActivity extends RootActivity
 
         id_toolbar_title = (TextView)mToolbar.findViewById(R.id.id_toolbar_title);
         id_toolbar_logo = (ImageView)mToolbar.findViewById(R.id.id_toolbar_logo);
+        id_toolbar_memo = (ImageView)mToolbar.findViewById(R.id.id_toolbar_memo);
 
 //        getSupportActionBar().setHomeButtonEnabled(true);
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.addOnBackStackChangedListener(this);
+
+        // custom title, logo 를 사용하기 위해 기본적은 title은 사용하지 않는다
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         // ToolBar의 왼쪽 아이콘 버튼이 Hamburg 버튼이면
         mToolbar.setNavigationOnClickListener(new View.OnClickListener(){
 
@@ -133,10 +136,11 @@ public class BaseActivity extends RootActivity
      */
     private int getMenuId() {
         String sessionKey = SharedData.getInstance(this).getGlobalDataString(SharedData.SESSION_KEY);
-        int userType = 0;
+        String userType=null;
         int menuId = 0;
 
         User user = SharedData.getInstance(this).getUserData();
+        Log.d(TAG, "getMenuId: getMenuId user : "+user.toString());
 //        Personal personal = SharedData.getInstance(this).getUserLoginData();
         Personal personal = user.personalInfo;
         if ( personal != null ) {
@@ -146,10 +150,10 @@ public class BaseActivity extends RootActivity
         if (TextUtils.isEmpty(sessionKey)) {
             Log.d(TAG, "getMenuId: logout");
             menuId = R.menu.menu_logout;
-        }else if ( userType == User.USER_TYPE_SITTER ){
+        }else if (userType.equals(User.USER_TYPE_SITTER)){
             menuId = R.menu.menu_sitter;
             Log.d(TAG, "getMenuId: sitter ");
-        }else if ( userType == User.USER_TYPE_PARENT){
+        }else if (userType.equals(User.USER_TYPE_PARENT)){
             menuId = R.menu.menu_parent;
             Log.d(TAG, "getMenuId: paretn");
         }else{
@@ -172,8 +176,10 @@ public class BaseActivity extends RootActivity
             if ( mFragmentManager.getBackStackEntryCount() > 1 ) {
                 mFragmentManager.popBackStack();
                 String fragmentName = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount()-2).getName();
+                setToolbarTitle(Integer.parseInt(fragmentName));
 
-                setTitle(fragmentName);
+
+//                setTitle(fragmentName);
 
             }else{
                 super.onBackPressed();
@@ -235,13 +241,13 @@ public class BaseActivity extends RootActivity
     private void callMenu(int menuId){
         switch (menuId){
             case MENU_SIGN_UP:
-                Member1Fragment member1Fragment = new Member1Fragment();
-                setCleanUpFragment(member1Fragment, R.string.member_title);
+                Member01UserTypeFragment member01UserTypeFragment = new Member01UserTypeFragment();
+                setCleanUpFragment(member01UserTypeFragment, R.string.member_title);
                 break;
 
             case MENU_INPUT_SITTER:
-                Sitter1Fragment sitter1Fragment = new Sitter1Fragment();
-                setCleanUpFragment(sitter1Fragment, R.string.sitter_basic_title);
+                Sitter01IndexFragment sitter01IndexFragment = new Sitter01IndexFragment();
+                setCleanUpFragment(sitter01IndexFragment, R.string.sitter_basic_title);
                 break;
 
             case MENU_INPUT_PARENT:
@@ -251,12 +257,12 @@ public class BaseActivity extends RootActivity
 
             case MENU_SITTER_LIST:
                 SitterListFragment sitterListFragment  = new SitterListFragment();
-                setCleanUpFragment(sitterListFragment, R.string.sitter_title);
+                setCleanUpFragment(sitterListFragment, TITLE_NONE);
                 break;
 
             case MENU_PARENT_LIST:
                 SitterListFragment sitterListFragment2  = new SitterListFragment();
-                setCleanUpFragment(sitterListFragment2, R.string.sitter_title);
+                setCleanUpFragment(sitterListFragment2, TITLE_NONE);
                 break;
 
             case MENU_LOG_IN:
@@ -266,7 +272,7 @@ public class BaseActivity extends RootActivity
 
             case MENU_LOG_OUT:
                 SharedData.getInstance(this).insertGlobalData(SharedData.SESSION_KEY, "");
-                SharedData.getInstance(this).insertGlobalData(SharedData.PERSONAL, null);
+                SharedData.getInstance(this).insertGlobalData(SharedData.USER, null);
                 LoginFragment fragment = new LoginFragment();
                 setCleanUpFragment(fragment, R.string.login_title);
                 break;
@@ -274,18 +280,41 @@ public class BaseActivity extends RootActivity
     }
 
 
+
+    public void setToolbarTitle(String title){
+        id_toolbar_title.setText(title);
+    }
+
+    public void setToolbarTitle(int id){
+        id_toolbar_title.setVisibility(View.GONE);
+        id_toolbar_logo.setVisibility(View.GONE);
+        id_toolbar_memo.setVisibility(View.GONE);
+        mToolbar.setVisibility(View.VISIBLE);
+
+        if(id==TITLE_NONE) {
+            id_toolbar_logo.setVisibility(View.VISIBLE);
+            id_toolbar_memo.setVisibility(View.VISIBLE);
+            // TODO memo count
+        }else if (id==Integer.MIN_VALUE){
+            mToolbar.setVisibility(View.GONE);
+
+        }else{
+            id_toolbar_title.setVisibility(View.VISIBLE);
+            id_toolbar_title.setText(id);
+        }
+    }
+
     /**
      * Content로 사용될 fragment를 호출한다
      * @param fragment
      */
     public void setFragment(Fragment fragment, int titleId){
         hideSoftKeyboard();
-        id_toolbar_title.setText(titleId);
-//        setTitle(getString(titleId));
-//        mToolbar.setLogo(R.drawable.icon_navigation_logo);
         mFragmentManager.beginTransaction().add(R.id.id_rl_for_fragment, fragment)
-                .addToBackStack(getString(titleId))
+                .addToBackStack(String.valueOf(titleId))
+//                .addToBackStack(getString(titleId))
                 .commit();
+        setToolbarTitle(titleId);
     }
 
     /**
@@ -298,17 +327,13 @@ public class BaseActivity extends RootActivity
         Log.d(TAG, "before mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
 
         hideSoftKeyboard();
-        id_toolbar_title.setText(titleId);
-//        setTitle(getString(titleId));
-//        ImageView logo = ((ImageView)findViewById(R.id.id_toolbar_logo));
-//        logo.setVisibility(View.VISIBLE);
-//        logo.setImageResource(R.drawable.icon_navigation_logo);
-//        mToolbar.setLogo(R.drawable.icon_navigation_logo);
 
         // 모든 stack을 비운다
         mFragmentManager.beginTransaction().replace(R.id.id_rl_for_fragment, fragment)
-                .addToBackStack(getString(titleId))
+                .addToBackStack(String.valueOf(titleId))
+//                .addToBackStack(getString(titleId))
                 .commit();
+        setToolbarTitle(titleId);
     }
 
     /**

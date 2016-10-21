@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.gringrid.siso.fragments.Member2Fragment;
+import net.gringrid.siso.fragments.Member02NameBirthFragment;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -32,7 +32,7 @@ public class MemberActivityFragment extends Fragment {
         id_tv_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Member2Fragment member1Fragment = new Member2Fragment();
+                Member02NameBirthFragment member1Fragment = new Member02NameBirthFragment();
                 FragmentManager manager = getFragmentManager();
                 manager.beginTransaction().replace(R.id.fragment, member1Fragment).addToBackStack(null).commit();
             }

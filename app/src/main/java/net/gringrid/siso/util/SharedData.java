@@ -17,8 +17,8 @@ import net.gringrid.siso.models.User;
  */
 public class SharedData {
     public static final boolean DEBUG_MODE = true;
-    public static final String PERSONAL = "personal_info";
-    public static final String SITTER = "sitter_info";
+//    public static final String PERSONAL = "personal_info";
+//    public static final String SITTER = "sitter_info";
     public static final String USER = "user";
 
     public static final String SESSION_KEY = "Session-Key";
@@ -51,41 +51,6 @@ public class SharedData {
        return getInstance(mContext).getGlobalDataString(SESSION_KEY);
     }
 
-    public static Personal getPersonal(){
-        return getInstance(mContext).getUserLoginData();
-    }
-
-
-    public void setUserLoginData(Personal personal){
-        Gson gson = new Gson();
-        String userJsonData = gson.toJson(personal);
-        Log.d(TAG, "setUserLoginData: MEMBER : "+userJsonData);
-        insertGlobalData(PERSONAL, userJsonData);
-    }
-
-    public Personal getUserLoginData(){
-        Gson gson = new Gson();
-        String userJsonData = getGlobalDataString(PERSONAL);
-        Personal personal = null;
-        if (!TextUtils.isEmpty(userJsonData)){
-            personal = gson.fromJson(userJsonData, Personal.class);
-        }
-        return personal;
-    }
-
-    public Sitter getSitterData(){
-        Gson gson = new Gson();
-        String sitterJsonData = getGlobalDataString(SITTER);
-        Sitter sitter;
-        Log.d(TAG, "getSitterData: "+sitterJsonData);
-        if (!TextUtils.isEmpty(sitterJsonData)){
-            sitter = gson.fromJson(sitterJsonData, Sitter.class);
-        }else{
-            sitter = new Sitter();
-        }
-        return sitter;
-    }
-
     public User getUserData(){
         Gson gson = new Gson();
         String userJsonData = getGlobalDataString(USER);
@@ -101,7 +66,6 @@ public class SharedData {
     public void setObjectData(String key, Object obj){
         Gson gson = new Gson();
         String jsonData = gson.toJson(obj);
-        Log.d(TAG, "setObjectData : "+jsonData);
         insertGlobalData(key, jsonData);
     }
 

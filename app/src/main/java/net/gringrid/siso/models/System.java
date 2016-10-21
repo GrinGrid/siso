@@ -1,5 +1,7 @@
 package net.gringrid.siso.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -15,7 +17,7 @@ public class System {
 
     @Override
     public String toString() {
-        String str = "STATUS :"+sys_status+", REG_DATE:"+sys_reg_date+", LAST_LOGIN:"+sys_last_login;
-        return str;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

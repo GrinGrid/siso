@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import net.gringrid.siso.network.restapi.AddrAPI;
  */
 public class SitterListFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
+    private static final String TAG = "jiho";
     private static int NUM_ITEMS = 4;
     private static final int TAB_O_SISO = 0;
     private static final int TAB_1_FAVOTITE = 1;
@@ -71,17 +73,22 @@ public class SitterListFragment extends Fragment implements TabLayout.OnTabSelec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_sitter_list, container, false);
     }
 
     @Override
     public void onResume() {
+        Log.d(TAG, "onResume: ");
         id_vp = (ViewPager)getView().findViewById(R.id.id_vp);
         id_tl = (TabLayout) getView().findViewById(R.id.id_tl);
 
-        mFragmentPagerAdapter = new SitterListPagerAdapter(getFragmentManager());
+        // 아래와 같이 getFragmentManager()로 Adapter를 생성하면 두번째 호출부터 비정상적으로 loading됨
+        // mFragmentPagerAdapter = new SitterListPagerAdapter(getFragmentManager());
+        mFragmentPagerAdapter = new SitterListPagerAdapter(getChildFragmentManager());
         id_vp.setAdapter(mFragmentPagerAdapter);
+        id_vp.setCurrentItem(TAB_O_SISO);
 
         id_tl.setupWithViewPager(id_vp);
         id_tl.setOnTabSelectedListener(this);

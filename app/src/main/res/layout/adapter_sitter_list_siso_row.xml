@@ -7,59 +7,118 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="#00000000"
-    android:padding="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
     >
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_weight="3"
+        android:layout_marginRight="5dp"
+        >
+
         <ImageView
             android:id="@+id/id_iv_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_girl"
+            android:src="@drawable/ic_list_photoframe"
+            android:layout_gravity="center"
             />
-    </LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/ic_list_favorites_checked"/>
+    </FrameLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="7"
         android:orientation="vertical">
         <TextView
             android:id="@+id/id_tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이연자 시터(45세)"
+            style="@style/ListName"
             />
         <TextView
             android:id="@+id/id_tv_brief"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="전직 유치원 교사!  아이들과 잘 놀아요!아이들과 잘 놀아요!"
-            />
-        <TextView
-            android:id="@+id/id_tv_addr1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="경기도 > 의왕시 > 내손동 0.4km"
+            android:layout_marginTop="3dp"
+            style="@style/ListBreif"
             />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/id_tv_addr1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="경기도 > 의왕시 > 내손동 0.4km"
+                style="@style/ListAddr"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_list_location"
+                android:layout_marginLeft="5dp"
+                />
+            <TextView
+                android:id="@+id/id_tv_addr1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.4km"
+                style="@style/ListAddr"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="5dp"
             >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_list_pay"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="시급8천원"/>
+                android:text="시급8천원"
+                style="@style/ListEtc"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_list_review"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="리뷰1건"/>
+                android:text="리뷰1건"
+                style="@style/ListEtc"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_list_workstyle"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="출퇴근형"/>
+                android:text="출퇴근형"
+                style="@style/ListEtc"
+                />
 
         </LinearLayout>
 
