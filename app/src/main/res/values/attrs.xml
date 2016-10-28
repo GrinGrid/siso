@@ -48,4 +48,8 @@
     <declare-styleable name="SisoAddChild">
         <attr name="child_icon" format="reference"></attr>
     </declare-styleable>
+
+    <declare-styleable name="SisoTimeTable">
+        <attr name="readonly" format="boolean"></attr>
+    </declare-styleable>
 </resources>

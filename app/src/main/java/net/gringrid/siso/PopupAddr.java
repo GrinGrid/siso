@@ -1,5 +1,6 @@
 package net.gringrid.siso;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -45,14 +47,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 
-public class PopupAddr extends AppCompatActivity implements Callback<Personal>, View.OnClickListener, AdapterView.OnItemClickListener {
+public class PopupAddr extends Activity implements Callback<Personal>, View.OnClickListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "jiho";
     private static final String DAUM_API_KEY = "20e6ba46a8a6e8c276c479edb01e473c";
     public static final String DAUM_ADDR_URL = "http://www.siso4u.net/addr.html";
 
     private EditText id_et_search;
-    private Button id_bt_search;
+    private TextView id_tv_search;
     private ArrayList<AddrAPI.AddrOutput> mAddrList;
     private ListView id_lv;
     private AddrAdapter mAdapter;
@@ -63,17 +65,17 @@ public class PopupAddr extends AppCompatActivity implements Callback<Personal>, 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_popup_addr);
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         id_et_search = (EditText)findViewById(R.id.id_et_search);
-        id_bt_search = (Button)findViewById(R.id.id_bt_search);
+        id_tv_search = (TextView)findViewById(R.id.id_tv_search);
         id_lv = (ListView)findViewById(R.id.id_lv);
 
-        id_bt_search.setOnClickListener(this);
+        id_tv_search.setOnClickListener(this);
         id_lv.setOnItemClickListener(this);
     }
 
@@ -113,7 +115,7 @@ public class PopupAddr extends AppCompatActivity implements Callback<Personal>, 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.id_bt_search:
+            case R.id.id_tv_search:
                 searchJuso();
                 hideSoftKeyboard();
                 break;

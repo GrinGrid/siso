@@ -2,7 +2,9 @@ package net.gringrid.siso.util;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.WindowManager;
 
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.User;
@@ -119,5 +121,12 @@ public class SisoUtil {
             }
         }
         return result;
+    }
+
+    public static int getScreenWidth(Context context){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
     }
 }

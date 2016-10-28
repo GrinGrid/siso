@@ -60,7 +60,7 @@
         <item>72</item>
     </string-array>
 
-    <!-- 출퇴근 가능 거리-->
+    <!-- 시급 -->
     <string-array name="picker_salary">
         <item>협의</item>
         <item>6,000원</item>
@@ -82,6 +82,7 @@
         <item>15000</item>
     </string-array>
 
+    <!-- 월급 -->
     <string-array name="picker_salary_month">
         <item>협의</item>
         <item>160만원</item>

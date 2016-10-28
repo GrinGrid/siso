@@ -23,7 +23,7 @@ import net.gringrid.siso.views.SisoEditText;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 성명, 생년월일
  */
 public class Member02NameBirthFragment extends Fragment implements View.OnClickListener {
 

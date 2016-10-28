@@ -29,6 +29,13 @@ dependencies {
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
+
+    // Firebase 는 v24에서 돌아가지 않는다
+    compile('com.theartofdev.edmodo:android-image-cropper:2.3.+') {
+        exclude module: 'support-v4';
+        exclude module: 'appcompat-v7';
+    }
+
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.google.code.gson:gson:2.6.2'
@@ -39,6 +46,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.isseiaoki:simplecropview:1.1.4'
     compile 'net.danlew:android.joda:2.9.4.2'
+    compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

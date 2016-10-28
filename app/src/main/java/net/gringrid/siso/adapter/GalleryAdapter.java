@@ -1,8 +1,10 @@
 package net.gringrid.siso.adapter;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +13,20 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+
 import net.gringrid.siso.R;
 import net.gringrid.siso.fragments.Sitter11SelectPhotoFragment;
+import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.util.SisoUtil;
+
 import java.util.ArrayList;
 
 /**
  * Created by choijiho on 16. 10. 4..
  */
-public class GalleryAdapter extends BaseAdapter{
+public class GalleryAdapter extends BaseAdapter implements View.OnClickListener {
 
 
     private static final String TAG = "jiho";
@@ -27,28 +35,34 @@ public class GalleryAdapter extends BaseAdapter{
     private int mImageWidth;
     LinearLayout.LayoutParams mLp;
     Context mContext;
-    ArrayList<Sitter11SelectPhotoFragment.PhotoData> mPhotoList;
+    Sitter11SelectPhotoFragment mFragment;
 
-    public GalleryAdapter(Context mContext, ArrayList<Sitter11SelectPhotoFragment.PhotoData> list) {
+    ArrayList<Sitter11SelectPhotoFragment.PhotoData> mPhotoList;
+    int mTotalSize;
+
+    ImageLoader mImageLoader;
+
+    public GalleryAdapter(Context mContext, ArrayList<Sitter11SelectPhotoFragment.PhotoData> list, Fragment fragment) {
         this.mContext = mContext;
         this.mPhotoList = list;
+        this.mTotalSize = mPhotoList.size();
+        this.mFragment = (Sitter11SelectPhotoFragment)fragment;
 
         mInflater = LayoutInflater.from(mContext);
 
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager wm = (WindowManager)mContext.getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-        Log.d(TAG, "GalleryAdapter: screenwidth : "+screenWidth);
-        mImageWidth = screenWidth / 3;
+        int screenWidth = SisoUtil.getScreenWidth(mContext);
+        int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, mContext.getResources().getDisplayMetrics());
+        mImageWidth = (screenWidth - margin*8) / 3;
         mLp = new LinearLayout.LayoutParams(mImageWidth, mImageWidth);
-        Log.d(TAG, "GalleryAdapter: mImageWidth : "+mImageWidth);
+        mLp.setMargins(margin,0,margin,0);
+        mImageLoader = ImageLoader.getInstance();
+        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
     }
 
     @Override
     public int getCount() {
-        return mPhotoList.size();
+//        Log.d(TAG, "getCount: "+(int)Math.ceil(mPhotoList.size()/3.0));
+        return (int)Math.ceil(mPhotoList.size()/3.0);
     }
 
     @Override
@@ -60,7 +74,6 @@ public class GalleryAdapter extends BaseAdapter{
     public long getItemId(int position) {
         return position;
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -76,13 +89,38 @@ public class GalleryAdapter extends BaseAdapter{
             holder.id_iv_0.setLayoutParams(mLp);
             holder.id_iv_1.setLayoutParams(mLp);
             holder.id_iv_2.setLayoutParams(mLp);
+
+            holder.id_iv_0.setOnClickListener(this);
+            holder.id_iv_1.setOnClickListener(this);
+            holder.id_iv_2.setOnClickListener(this);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
-        holder.id_iv_0.setImageURI(mPhotoList.get(position++).thumbNail);
-        holder.id_iv_1.setImageURI(mPhotoList.get(position++).thumbNail);
-        holder.id_iv_2.setImageURI(mPhotoList.get(position).thumbNail);
+
+        int imgIndex = position * 3;
+
+
+
+        mImageLoader.displayImage(mPhotoList.get(imgIndex).thumbNail, holder.id_iv_0);
+//        holder.id_iv_0.setImageURI(mPhotoList.get(imgIndex).thumbNail);
+        holder.id_iv_0.setTag(imgIndex++);
+
+        if(imgIndex < mTotalSize) {
+            mImageLoader.displayImage(mPhotoList.get(imgIndex).thumbNail, holder.id_iv_1);
+//            holder.id_iv_1.setImageURI(mPhotoList.get(imgIndex).thumbNail);
+            holder.id_iv_1.setTag(imgIndex++);
+        }else {
+            holder.id_iv_1.setImageURI(null);
+        }
+
+        if(imgIndex < mTotalSize){
+            mImageLoader.displayImage(mPhotoList.get(imgIndex).thumbNail, holder.id_iv_2);
+//            holder.id_iv_2.setImageURI(mPhotoList.get(imgIndex).thumbNail);
+            holder.id_iv_2.setTag(imgIndex);
+        } else{
+            holder.id_iv_2.setImageURI(null);
+        }
 
 //        final int finalPosition = position;
 //        holder.imageView.setOnClickListener(new View.OnClickListener() {
@@ -95,36 +133,13 @@ public class GalleryAdapter extends BaseAdapter{
 //        holder.imageView.setImageURI(mPhotoList.get(position).thumbNail);
 
         return convertView;
-//        ViewHolder holder;
-//
-//        if(convertView == null){
-//            Log.d(TAG, "getView: convertView is null");
-//            holder = new ViewHolder();
-//            convertView = new ImageView(mContext);
-//
-//
-//            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(mImageWidth, mImageWidth);
-//            lp.setMargins(0,0,0,0);
-//            holder.imageView = (ImageView)convertView;
-//            holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-//            holder.imageView.setAdjustViewBounds(false);
-////            holder.imageView.setLayoutParams(new GridView.LayoutParams(mImageWidth,mImageWidth));
-//            holder.imageView.setLayoutParams(lp);
-////            holder.imageView.setPadding(2,2,2,2);
-//            holder.imageView.setTag(holder);
-//        }else{
-//            holder = (ViewHolder)convertView.getTag();
-//        }
-//
-//        final int finalPosition = position;
-//        holder.imageView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: position "+finalPosition);
-//                Log.d(TAG, "onClick: mPhotoList.get(finalPosition).imageId : "+mPhotoList.get(finalPosition).imageId);
-//            }
-//        });
-//        holder.imageView.setImageURI(mPhotoList.get(position).thumbNail);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        mFragment.selectPhoto(mPhotoList.get((int)v.getTag()).imageId);
+//        Log.d(TAG, "onClick: tag "+mPhotoList.get((int)v.getTag()).imageId);
     }
 
     class ViewHolder{

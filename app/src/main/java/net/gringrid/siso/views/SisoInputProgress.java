@@ -73,9 +73,9 @@ public class SisoInputProgress extends LinearLayout{
 
             imageView.setLayoutParams(lp);
             if (i==current_stage){
-                imageView.setImageResource(R.drawable.icon_process_on);
+                imageView.setImageResource(R.drawable.ic_process_checked);
             }else{
-                imageView.setImageResource(R.drawable.icon_process_off);
+                imageView.setImageResource(R.drawable.ic_process);
             }
             ll_container.addView(imageView);
         }

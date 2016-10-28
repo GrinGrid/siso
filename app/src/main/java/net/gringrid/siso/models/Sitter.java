@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
  */
 public class Sitter {
 
-
     // 성별
     public String gender;
     // 아들수

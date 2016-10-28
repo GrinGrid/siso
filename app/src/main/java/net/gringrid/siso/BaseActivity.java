@@ -19,16 +19,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import net.gringrid.siso.fragments.LoginFragment;
 import net.gringrid.siso.fragments.Member01UserTypeFragment;
 import net.gringrid.siso.fragments.Parent01IndexFragment;
 import net.gringrid.siso.fragments.Sitter01IndexFragment;
+import net.gringrid.siso.fragments.Sitter11PhotoFragment;
 import net.gringrid.siso.fragments.SitterListFragment;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
+
+import java.util.List;
 
 public class BaseActivity extends RootActivity
         implements NavigationView.OnNavigationItemSelectedListener, FragmentManager.OnBackStackChangedListener {
@@ -170,11 +174,15 @@ public class BaseActivity extends RootActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         int backStackCount = mFragmentManager.getBackStackEntryCount();
 
+        Log.d(TAG, "onBackPressed: backStackCount : "+backStackCount);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             if ( mFragmentManager.getBackStackEntryCount() > 1 ) {
                 mFragmentManager.popBackStack();
+                for(Fragment fragment : mFragmentManager.getFragments()){
+                    if(fragment!=null) fragment.onResume();
+                }
                 String fragmentName = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount()-2).getName();
                 setToolbarTitle(Integer.parseInt(fragmentName));
 
@@ -310,6 +318,7 @@ public class BaseActivity extends RootActivity
      */
     public void setFragment(Fragment fragment, int titleId){
         hideSoftKeyboard();
+
         mFragmentManager.beginTransaction().add(R.id.id_rl_for_fragment, fragment)
                 .addToBackStack(String.valueOf(titleId))
 //                .addToBackStack(getString(titleId))
@@ -353,6 +362,11 @@ public class BaseActivity extends RootActivity
      */
     @Override
     public void onBackStackChanged() {
+        Log.d(TAG, "onBackStackChanged: size : "+mFragmentManager.getFragments().size());
+        List<Fragment> fragmentList = mFragmentManager.getFragments();
+        if(fragmentList!=null && fragmentList.size()>0 && fragmentList.get(fragmentList.size()-1) instanceof Sitter11PhotoFragment ){
+            Log.d(TAG, "onBackStackChanged: Sitter11PhotoFragment ");
+        }
         if ( mFragmentManager.getBackStackEntryCount() == 1 ){
             mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         }else {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorBtnGreen">#FF5BB5BD</color>
+    <color name="colorBtnPink">#FFF66175</color>
     <color name="colorPrimary">#FFFFFFFF</color>
     <color name="colorPrimaryDark">#FFF66175</color>
     <color name="colorAccent">#FF4081</color>

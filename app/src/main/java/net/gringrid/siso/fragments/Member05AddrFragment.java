@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -37,7 +38,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 주소
  */
 public class Member05AddrFragment extends Fragment implements View.OnClickListener{
 
@@ -248,6 +249,9 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
                 mUser.personalInfo.lat = data.getStringExtra(User.DATA_LATITUDE);
                 mUser.personalInfo.lng = data.getStringExtra(User.DATA_LONGITUDE);
                 SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
+
+                ScrollView id_sv = (ScrollView)getView().findViewById(R.id.id_sv);
+                id_sv.fullScroll(ScrollView.FOCUS_DOWN);
 
                 break;
         }

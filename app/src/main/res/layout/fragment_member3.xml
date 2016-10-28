@@ -117,7 +117,7 @@
                 android:id="@+id/id_tv_next_btn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/btn_pink_normal"
+                android:background="@drawable/round_btn_pink"
                 android:gravity="center"
                 android:textColor="@color/colorWhite"
                 android:text="다음"

@@ -17,12 +17,12 @@ import net.gringrid.siso.models.User;
  */
 public class SharedData {
     public static final boolean DEBUG_MODE = true;
-//    public static final String PERSONAL = "personal_info";
-//    public static final String SITTER = "sitter_info";
     public static final String USER = "user";
 
     public static final String SESSION_KEY = "Session-Key";
     private static final String TAG = "jiho";
+
+    public static final String SELECTED_PHOTO_ID = "SELECTED_PHOTO_ID";
 
     private static SharedData instance;
     private static Context mContext;

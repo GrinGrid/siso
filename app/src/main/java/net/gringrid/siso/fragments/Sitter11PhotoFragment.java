@@ -2,17 +2,24 @@ package net.gringrid.siso.fragments;
 
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,11 +28,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.isseiaoki.simplecropview.CropImageView;
-import com.isseiaoki.simplecropview.callback.CropCallback;
-import com.isseiaoki.simplecropview.callback.SaveCallback;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
@@ -34,6 +39,10 @@ import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
 import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.util.SharedData;
+import net.gringrid.siso.util.SisoUtil;
+import net.gringrid.siso.views.SisoToggleButton;
+
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,26 +71,34 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
     User mUser;
     private TextView id_tv_next_btn;
 
-    private LinearLayout id_ll_radio1;
-    private LinearLayout id_ll_radio2;
-    private LinearLayout id_ll_radio3;
-    private TextView id_tv_radio1;
-    private TextView id_tv_radio2;
-    private TextView id_tv_radio3;
-    private ImageView id_iv_radio1;
-    private ImageView id_iv_radio2;
-    private ImageView id_iv_radio3;
+//    private LinearLayout id_ll_radio1;
+//    private LinearLayout id_ll_radio2;
+//    private LinearLayout id_ll_radio3;
+//    private TextView id_tv_radio1;
+//    private TextView id_tv_radio2;
+//    private TextView id_tv_radio3;
+//    private ImageView id_iv_radio1;
+//    private ImageView id_iv_radio2;
+//    private ImageView id_iv_radio3;
+
     int mRadio[] = new int[]{
-            R.id.id_ll_radio1,
-            R.id.id_ll_radio2,
-            R.id.id_ll_radio3
+            R.id.id_tg_btn_take_photo,
+            R.id.id_tg_btn_select_photo,
+            R.id.id_tg_btn_later_upload
     };
+
     private File mNewFile;
     private ImageView id_iv_profile;
+//    private CropImageView id_civ;
     private CropImageView id_civ;
+    private LinearLayout id_ll_photo;
 
     private Uri mOutputFileUri;
     private Uri mUri;
+
+    private SisoToggleButton id_tg_btn_take_photo;
+    private SisoToggleButton id_tg_btn_select_photo;
+    private SisoToggleButton id_tg_btn_laterupload_photo;
 
     public Sitter11PhotoFragment() {
         // Required empty public constructor
@@ -89,64 +106,186 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ");
         mUser = SharedData.getInstance(getContext()).getUserData();
+        SharedData.getInstance(getContext()).insertGlobalData(SharedData.SELECTED_PHOTO_ID, null);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sitter11, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_sitter11, container, false);
 
-    @Override
-    public void onResume() {
-        id_tv_next_btn = (TextView) getView().findViewById(R.id.id_tv_next_btn);
+
+        id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
 
-        id_ll_radio1 = (LinearLayout) getView().findViewById(R.id.id_ll_radio1);
-        id_ll_radio2 = (LinearLayout) getView().findViewById(R.id.id_ll_radio2);
-        id_ll_radio3 = (LinearLayout) getView().findViewById(R.id.id_ll_radio3);
-        id_tv_radio1 = (TextView) getView().findViewById(R.id.id_tv_radio1);
-        id_tv_radio2 = (TextView) getView().findViewById(R.id.id_tv_radio2);
-        id_tv_radio3 = (TextView) getView().findViewById(R.id.id_tv_radio3);
-        id_iv_radio1 = (ImageView) getView().findViewById(R.id.id_iv_radio1);
-        id_iv_radio2 = (ImageView) getView().findViewById(R.id.id_iv_radio2);
-        id_iv_radio3 = (ImageView) getView().findViewById(R.id.id_iv_radio3);
+        id_tg_btn_take_photo = (SisoToggleButton)view.findViewById(R.id.id_tg_btn_take_photo);
+        id_tg_btn_select_photo = (SisoToggleButton)view.findViewById(R.id.id_tg_btn_select_photo);
+        id_tg_btn_laterupload_photo = (SisoToggleButton)view.findViewById(R.id.id_tg_btn_later_upload);
 
-        id_ll_radio1.setOnClickListener(this);
-        id_ll_radio2.setOnClickListener(this);
-        id_ll_radio3.setOnClickListener(this);
+        id_tg_btn_take_photo.setOnClickListener(this);
+        id_tg_btn_select_photo.setOnClickListener(this);
+        id_tg_btn_laterupload_photo.setOnClickListener(this);
+
+        id_ll_photo = (LinearLayout)view.findViewById(R.id.id_ll_photo);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, SisoUtil.getScreenWidth(getContext()));
+        id_ll_photo.setLayoutParams(lp);
 //        id_iv_profile = (ImageView)getView().findViewById(R.id.id_iv_profile);
-        id_civ = (CropImageView) getView().findViewById(R.id.id_civ);
+        id_civ = (CropImageView) view.findViewById(R.id.id_civ);
+        id_civ.setAspectRatio(1,1);
+        id_civ.setFixedAspectRatio(true);
+        id_civ.setScaleType(CropImageView.ScaleType.FIT_CENTER);
 //        id_icv = (ImageCropView) getView().findViewById(R.id.id_icv);
 //        id_icv.setGridInnerMode(ImageCropView.GRID_ON);
 //        id_icv.setGridOuterMode(ImageCropView.GRID_ON);
         if(mUser.imageInfo!=null) {
             Log.d(TAG, "onResume: profile image url : "+mUser.imageInfo.prf_img_url);
-            Picasso.with(getContext()).load(mUser.imageInfo.prf_img_url).networkPolicy(NetworkPolicy.NO_CACHE).into(id_civ);
+//            Picasso.with(getContext()).load(mUser.imageInfo.prf_img_url).networkPolicy(NetworkPolicy.NO_CACHE).into(id_civ);
         }else{
             Log.d(TAG, "onResume: profile image url  is null : ");
         }
 
+//        id_civ.setImageUriAsync(Uri.parse("content://media/external/images/media/87795"));
+
+        // TODO Thumbnail 없는 사진을 background에서 생성하자
+        ThumbnailFactory factory = new ThumbnailFactory();
+        factory.execute("");
+        return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        Log.d(TAG, "Sitter11PhotoFragment onResume: ");
+
+        String selectedPhotoId = SharedData.getInstance(getContext()).getGlobalDataString(SharedData.SELECTED_PHOTO_ID);
+        if(!TextUtils.isEmpty(selectedPhotoId)){
+            Log.d(TAG, "onResume: selected photo id : "+selectedPhotoId);
+            setSelectedPhoto(selectedPhotoId);
+        }
 
         super.onResume();
+    }
+
+
+//    private void setCropPhoto(){
+//        final Uri saveUri = null;
+//        id_civ.startCrop(
+//                saveUri,
+//                new CropCallback() {
+//                    @Override
+//                    public void onSuccess(Bitmap cropped) {
+//                        Log.d(TAG, "CropCallback onSuccess: ");
+//                        id_civ.setImageBitmap(cropped);
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//                },
+//                new SaveCallback() {
+//                    @Override
+//                    public void onSuccess(Uri outputUri) {
+//                        Log.d(TAG, "SaveCallback onSuccess: ");
+//                        id_civ.setImageURI(saveUri);
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//                }
+//        );
+//    }
+
+    private void setSelectedPhoto(String selectedPhotoId) {
+        Uri imageUri=
+                ContentUris
+                        .withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,Long.parseLong(selectedPhotoId));
+//                                cursor.getInt(cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)));
+
+        Log.d(TAG, "setSelectedPhoto: imageUri : "+imageUri);
+        id_civ.setImageUriAsync(imageUri);
+
+//        id_civ.setCropMode(CropImageView.CropMode.SQUARE);
+//        id_civ.startLoad(imageUri,
+//                new LoadCallback(){
+//
+//                    @Override
+//                    public void onSuccess() {
+//                        Log.d(TAG, "onSuccess: height : "+id_civ.getHeight());
+//                        Log.d(TAG, "onSuccess: width : "+id_civ.getWidth());
+//
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//
+//                    }
+//                });
+//        id_civ.setImageURI(imageUri);
+//        Bitmap new_image = BitmapFactory.decodeFile(imageUri.toString());
+//        id_civ.setImageBitmap(new_image);
+//        SharedData.getInstance(getContext()).insertGlobalData(SharedData.SELECTED_PHOTO_ID, null);
+
+
+
+//        String[] projection = {
+//                MediaStore.Images.Media.DATA,
+//                MediaStore.Images.Media._ID
+//        };
+//
+//        ContentResolver resolver = getContext().getContentResolver();
+//        Cursor imageCursor = resolver.query(
+//                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+//                projection,
+//                MediaStore.Images.Media._ID+ "=?",
+//                new String[]{selectedPhotoId},
+//                null
+//        );
+//        int dataColumnIndex;
+//        int idColumnIndex;
+//        String imageId = null;
+//        String imageThumbnail = null;
+//
+//        dataColumnIndex = imageCursor.getColumnIndex(projection[0]);
+//        idColumnIndex = imageCursor.getColumnIndex(projection[1]);
+//
+//        if(imageCursor.moveToFirst()){
+//            imageThumbnail = imageCursor.getString(dataColumnIndex);
+//            imageId = imageCursor.getString(idColumnIndex);
+//        }
+//        Log.d(TAG, "setSelectedPhoto: imageThubname : "+imageThumbnail);
+//        Log.d(TAG, "setSelectedPhoto: imageId : "+imageId);
+//        id_civ.setImageURI(Uri.parse(imageThumbnail));
+//
+//
+//        imageCursor.close();
+//        id_civ.setImageURI(imageUri);
+//        Log.d(TAG, "setSelectedPhoto: width : "+id_civ.getWidth());
+//        Log.d(TAG, "setSelectedPhoto: height : "+id_civ.getHeight());
+
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.id_ll_radio1:
-                selectRadio(1);
+            case R.id.id_tg_btn_take_photo:
+                selectRadio(R.id.id_tg_btn_take_photo);
                 takePicture();
                 break;
-            case R.id.id_ll_radio2:
-                selectRadio(2);
+            case R.id.id_tg_btn_select_photo:
+                selectRadio(R.id.id_tg_btn_select_photo);
                 pickFromGallery();
                 break;
-            case R.id.id_ll_radio3:
-                selectRadio(3);
+            case R.id.id_tg_btn_later_upload:
+                selectRadio(R.id.id_tg_btn_later_upload);
 //                insertLater();
                 break;
             case R.id.id_tv_next_btn:
@@ -155,44 +294,52 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
                 saveData();
                 // TODO 사진전송 request
 //                uploadImage();
-                Sitter01IndexFragment fragment = new Sitter01IndexFragment();
-                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_introduce_title);
+                setCropPhoto();
+//                Sitter01IndexFragment fragment = new Sitter01IndexFragment();
+//                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_introduce_title);
 //                ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_introduce_title);
                 break;
         }
     }
 
+    private void setCropPhoto() {
+
+        Bitmap cropped = id_civ.getCroppedImage();
+        id_civ.setImageBitmap(cropped);
+//        id_civ.getCroppedImageAsync();
+    }
+
     private void insertLater() {
         Log.d(TAG, "insertLater: ");
-        id_civ.startCrop(
-                mUri,
-                new CropCallback() {
-                    @Override
-                    public void onSuccess(Bitmap cropped) {
-                        id_civ.setImageBitmap(cropped);
-                        Log.d(TAG, "onSuccess: cropcallback");
-                    }
-
-                    @Override
-                    public void onError() {
-                        Log.d(TAG, "onerror cropcallback");
-                    }
-                },
-
-                new SaveCallback() {
-
-                    @Override
-                    public void onSuccess(Uri outputUri) {
-                        id_civ.setImageURI(outputUri);
-                        Log.d(TAG, "onerror savecallback");
-                    }
-
-                    @Override
-                    public void onError() {
-                        Log.d(TAG, "onerror savecallback");
-                    }
-                }
-        );
+//        id_civ.startCrop(
+//                mUri,
+//                new CropCallback() {
+//                    @Override
+//                    public void onSuccess(Bitmap cropped) {
+//                        id_civ.setImageBitmap(cropped);
+//                        Log.d(TAG, "onSuccess: cropcallback");
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//                        Log.d(TAG, "onerror cropcallback");
+//                    }
+//                },
+//
+//                new SaveCallback() {
+//
+//                    @Override
+//                    public void onSuccess(Uri outputUri) {
+//                        id_civ.setImageURI(outputUri);
+//                        Log.d(TAG, "onerror savecallback");
+//                    }
+//
+//                    @Override
+//                    public void onError() {
+//                        Log.d(TAG, "onerror savecallback");
+//                    }
+//                }
+//        );
     }
 
 
@@ -297,6 +444,7 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
                 Log.d(TAG, "onActivityResult:ACTIONREQEUSTGALLERY ");
                 // TODO 사진을 선택하지 않은 경우
                 mUri = data.getData();
+                id_civ.setImageUriAsync(mUri);
 //                id_civ.startLoad(mUri, new LoadCallback() {
 //                    @Override
 //                    public void onSuccess() {
@@ -334,7 +482,7 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
             case ACT_TAKE_PIC:
                 if(resultCode == Activity.RESULT_OK && requestCode == ACT_TAKE_PIC){
                     Log.d(TAG, "onActivityResult: ok");
-                    id_civ.setImageURI(mOutputFileUri);
+                    id_civ.setImageUriAsync(mOutputFileUri);
 
 //                    Log.d(TAG, "takePicture: before : "+mNewFile.length());
 
@@ -393,26 +541,74 @@ public class Sitter11PhotoFragment extends Fragment implements View.OnClickListe
 //        startActivityForResult(cropIntent, PIC_PIC_CROP);
     }
 
-    private void resetRadio(){
-        id_tv_radio1.setTextColor(ContextCompat.getColor(getContext(), R.color.color787878));
-        id_tv_radio2.setTextColor(ContextCompat.getColor(getContext(), R.color.color787878));
-        id_tv_radio3.setTextColor(ContextCompat.getColor(getContext(), R.color.color787878));
-        id_iv_radio1.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.icon_radio_off));
-        id_iv_radio2.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.icon_radio_off));
-        id_iv_radio3.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.icon_radio_off));
+    private int getRadioValue(int[] radioList){
+        for(int i=0; i<radioList.length; i++){
+            if (((SisoToggleButton) getView().findViewById(radioList[i])).isChecked()) {
+                return i;
+            }
+        }
+        return 0;
     }
 
-    private void selectRadio(int idx) {
-        resetRadio();
+    private void selectRadio(int selectItem) {
+        for(int src:mRadio){
+            if(src == selectItem){
+                ((SisoToggleButton)getView().findViewById(src)).setChecked(true);
+            }else{
+                ((SisoToggleButton)getView().findViewById(src)).setChecked(false);
+            }
+        }
+    }
 
-        String packageName = getActivity().getPackageName();
-        int textViewId = getResources().getIdentifier("id_tv_radio"+idx, "id", packageName);
-        int imgViewId = getResources().getIdentifier("id_iv_radio"+idx, "id", packageName);
-        TextView text = (TextView)getView().findViewById(textViewId);
-        ImageView img = (ImageView) getView().findViewById(imgViewId);
+    /**
+     * Thumbnail 이미지가 없을경우 Thumbnail 이미지를 background에서 만든다
+     */
+    private class ThumbnailFactory extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String[] projection = { MediaStore.Images.Media.DATA, MediaStore.Images.Media._ID };
+            ContentResolver resolver = getContext().getContentResolver();
 
-        text.setTextColor(ContextCompat.getColor(getContext(), R.color.colorContentTextPink));
-        img.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.icon_radio_on));
+            Cursor imageCursor = resolver.query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    projection,
+                    null,
+                    null,
+                    null
+            );
+
+            imageCursor.moveToFirst();
+
+            String imageId;
+            int idColumnIndex;
+            idColumnIndex = imageCursor.getColumnIndex(projection[1]);
+            Cursor thumbnailCursor = null;
+            String[] thumbnailProjection = { MediaStore.Images.Thumbnails.DATA };
+
+            if(imageCursor.moveToFirst()){
+                do {
+                    imageId = imageCursor.getString(idColumnIndex);
+                    thumbnailCursor = resolver.query(
+                            MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
+                            projection,
+                            MediaStore.Images.Thumbnails.IMAGE_ID + "=?",
+                            new String[]{imageId},
+                            null //MediaStore.Images.Thumbnails.MICRO_KIND
+                    );
+                    if(thumbnailCursor==null){
+                        Log.d(TAG, "getThumnailPhoto: thumbnailCursor NULLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+                    }else if(thumbnailCursor.moveToFirst()){
+                        Log.d(TAG, "createThumbnail: Thumbnail EXISTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                    }else{
+                        MediaStore.Images.Thumbnails.getThumbnail(resolver, Long.parseLong(imageId), MediaStore.Images.Thumbnails.MINI_KIND, null);
+                        Log.d(TAG, "getThumnailPhoto: thumbnail EMPTYYYYYYYYYYYYYYYYYYYYYYYYYYYY ");
+                    }
+                }while (imageCursor.moveToNext());
+            }
+            imageCursor.close();
+            thumbnailCursor.close();
+            return "";
+        }
     }
 
 }

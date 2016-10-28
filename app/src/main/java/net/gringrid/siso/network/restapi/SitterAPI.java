@@ -1,5 +1,7 @@
 package net.gringrid.siso.network.restapi;
 
+import net.gringrid.siso.models.SitterList;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -15,4 +17,7 @@ public interface  SitterAPI {
 
     @GET("sitter/count/{email}")
     Call<Sitter> getCountInCircleBoundary(@Path("email") String email);
+
+    @GET("sitter/list/{email}")
+    Call<SitterList> getListSiso(@Path("email") String email);
 }

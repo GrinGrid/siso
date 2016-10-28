@@ -32,7 +32,7 @@ import retrofit2.Response;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 이메일, 비밀번호
  */
 public class Member03EmailFragment extends Fragment implements View.OnClickListener {
 

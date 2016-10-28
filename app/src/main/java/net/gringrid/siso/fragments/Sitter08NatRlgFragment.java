@@ -31,7 +31,6 @@ import retrofit2.Response;
 
 /**
  * 구직정보입력 > 희망 근무조건 > 국적, 종교
- * A simple {@link Fragment} subclass.
  */
 public class Sitter08NatRlgFragment extends Fragment implements View.OnClickListener {
 
@@ -41,12 +40,12 @@ public class Sitter08NatRlgFragment extends Fragment implements View.OnClickList
     private ToggleButton id_tg_nat_kor;
     private ToggleButton id_tg_nat_chi_kor;
     private ToggleButton id_tg_nat_write;
+    private SisoEditText id_et_nat;
     private ToggleButton id_tg_rlg_0;
     private ToggleButton id_tg_rlg_1;
     private ToggleButton id_tg_rlg_2;
     private ToggleButton id_tg_rlg_3;
     private ToggleButton id_tg_rlg_4;
-    private SisoEditText id_et_nat;
     private SisoEditText id_et_rlg;
 
     int mRadioNat[] = new int[]{
@@ -77,7 +76,7 @@ public class Sitter08NatRlgFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sitter8, container, false);
+        return inflater.inflate(R.layout.fragment_sitter08_nat_rlg, container, false);
     }
 
     @Override

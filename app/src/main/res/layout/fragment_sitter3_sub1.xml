@@ -32,87 +32,120 @@
                 app:current_stage="1">
             </net.gringrid.siso.views.SisoInputProgress>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sitter3_sub1_calendar"
-                style="@style/SisoJobTitle"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
                 android:layout_marginRight="10dp"
-                >
-                <RelativeLayout
+                android:layout_marginLeft="10dp">
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginRight="10dp"
-                    >
-                    <ToggleButton
-                        android:id="@+id/id_tg_from"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/id_tv_start"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textOn="@string/sitter3_sub1_from"
-                        android:textOff="@string/sitter3_sub1_from"
-                        android:stateListAnimator="@null"
-                        style="@style/ToggleBtnGrayStyle"
+                        android:text="@string/sitter3_sub1_calendar_start"
+                        style="@style/SisoJobTitle"
+                        android:textSize="16sp"
                         />
-
-                </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ToggleButton
+                            android:id="@+id/id_tg_start_0"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="4"
+                            android:textOn="@string/sitter3_sub1_no_matter"
+                            android:textOff="@string/sitter3_sub1_no_matter"
+                            style="@style/ToggleBtnStyle"
+                            android:textSize="12sp"
+                            />
+                        <ToggleButton
+                            android:id="@+id/id_tg_start_1"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="6"
+                            android:textOn="@string/sitter3_sub1_start"
+                            android:textOff="@string/sitter3_sub1_start"
+                            style="@style/ToggleBtnStyle"
+                            android:textSize="12sp"
+                            android:layout_marginLeft="5dp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="6dp"
                     android:text="~"/>
-
-                <ToggleButton
-                    android:id="@+id/id_tg_to"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textOn="@string/sitter3_sub1_to"
-                    android:textOff="@string/sitter3_sub1_to"
-                    android:stateListAnimator="@null"
-                    style="@style/ToggleBtnGrayStyle"
-                    android:layout_marginLeft="10dp"
-                    />
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/id_tv_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sitter3_sub1_calendar_end"
+                        style="@style/SisoJobTitle"
+                        android:textSize="16sp"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ToggleButton
+                            android:id="@+id/id_tg_end_0"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="4"
+                            android:textOn="@string/sitter3_sub1_no_matter"
+                            android:textOff="@string/sitter3_sub1_no_matter"
+                            style="@style/ToggleBtnStyle"
+                            android:textSize="12sp"
+                            />
+                        <ToggleButton
+                            android:id="@+id/id_tg_end_1"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="6"
+                            android:textOn="@string/sitter3_sub1_end"
+                            android:textOff="@string/sitter3_sub1_end"
+                            style="@style/ToggleBtnStyle"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="12sp"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-            <LinearLayout
+
+            <FrameLayout
+                android:id="@+id/id_fl_cv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 android:background="@drawable/box_white"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:orientation="vertical"
+                android:visibility="gone"
                 >
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:layout_marginTop="10dp"
-                    android:layout_gravity="right">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/icon_timetable_selected"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="시작일 상관없음"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-
-                        />
-                </LinearLayout>
                 <CalendarView
                     android:id="@+id/id_cv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     >
                 </CalendarView>
-            </LinearLayout>
+            </FrameLayout>
 
         </LinearLayout>
     </ScrollView>

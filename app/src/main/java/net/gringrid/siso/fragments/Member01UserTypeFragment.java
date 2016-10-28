@@ -20,7 +20,7 @@ import net.gringrid.siso.util.SharedData;
 
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 시터/부모 선택
  */
 public class Member01UserTypeFragment extends Fragment implements View.OnClickListener {
 

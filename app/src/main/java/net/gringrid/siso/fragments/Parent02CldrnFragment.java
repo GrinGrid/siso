@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.views.SisoAddChild;
 import net.gringrid.siso.views.SisoToggleButton;
@@ -15,11 +17,12 @@ import net.gringrid.siso.views.SisoToggleButton;
 import java.util.HashMap;
 
 
+
 /**
  * 구인정보입력 > 아이정보
  * A simple {@link Fragment} subclass.
  */
-public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.OnToggleChangedListener, SisoAddChild.OnChildFormRemoveListener {
+public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.OnToggleChangedListener, SisoAddChild.OnChildFormRemoveListener, View.OnClickListener {
 
     private static final String TAG = "jiho";
     private static final int BOY = 0;
@@ -33,6 +36,8 @@ public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.
     LinearLayout id_ll_newborn;
     LinearLayout id_ll_child_title;
     LinearLayout id_ll_newborn_title;
+    private TextView id_tv_next_btn;
+
 
     int mChildAddCount;
 
@@ -63,6 +68,9 @@ public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.
         id_tg_btn_boy.setOnToggleChangedListener(this);
         id_tg_btn_girl.setOnToggleChangedListener(this);
         id_tg_btn_newborn.setOnToggleChangedListener(this);
+
+        id_tv_next_btn = (TextView)getView().findViewById(R.id.id_tv_next_btn);
+        id_tv_next_btn.setOnClickListener(this);
         super.onResume();
     }
 
@@ -115,5 +123,20 @@ public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.
             id_ll_newborn_title.setVisibility(View.GONE);
         }
         mHashMap.remove(index);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.id_tv_next_btn:
+                // TODO 입력항목 체크
+//                saveData();
+//                executeSave();
+                Parent03AgeFragment fragment = new Parent03AgeFragment();
+                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_basic_title);
+                break;
+
+        }
     }
 }

@@ -1,5 +1,8 @@
 package net.gringrid.siso.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Created by choijiho on 16. 9. 13..
  */
@@ -27,7 +30,7 @@ public class SitterList {
 
     @Override
     public String toString() {
-        String str = "name : "+name+", birth : "+birth+", gender : "+gender+", isCare : "+isCare+", isExpect : "+isExpect;
-        return str;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

@@ -17,7 +17,7 @@ import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoEditText;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 부모 > 직업
  */
 public class Member04JobFragment extends Fragment implements View.OnClickListener {
 

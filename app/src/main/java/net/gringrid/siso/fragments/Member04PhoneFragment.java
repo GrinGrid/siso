@@ -29,7 +29,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 회원가입 > 전화번호
  */
 public class Member04PhoneFragment extends Fragment implements View.OnClickListener {
 

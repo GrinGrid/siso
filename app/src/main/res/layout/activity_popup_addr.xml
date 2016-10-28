@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="@color/color666666"
-    tools:context="net.gringrid.siso.Popup">
+    tools:context="net.gringrid.siso.PopupAddr">
     <!-- start of BODY -->
     <FrameLayout
         android:layout_width="match_parent"
@@ -35,30 +34,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="검색"/>
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            >
             <EditText
                 android:id="@+id/id_et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/color333333"
+                android:hint="예)논현로 102"
                 />
-            <Button
-                android:id="@+id/id_bt_search"
+            <TextView
+                android:id="@+id/id_tv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:background="@drawable/round_btn_green"
+                android:textColor="@android:color/white"
                 android:text="검색"/>
-
         </LinearLayout>
+
         <ListView
             android:id="@+id/id_lv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
         </ListView>
 
     </LinearLayout>

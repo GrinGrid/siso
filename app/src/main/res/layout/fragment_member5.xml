@@ -74,19 +74,17 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             >
-
             <TextView
                 android:id="@+id/id_tv_post_search_btn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/btn_white_normal"
+                android:background="@drawable/round_btn_green"
                 android:gravity="center"
-                android:textColor="@color/colorTextPink"
-                android:text="우편번호 검색"
+                android:textColor="@android:color/white"
+                android:text="거주지 우편번호 검색"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 />
-
             <net.gringrid.siso.views.SisoEditText
                 android:id="@+id/id_et_post_no"
                 android:layout_width="match_parent"
@@ -137,11 +135,8 @@
                 android:id="@+id/id_tv_next_btn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/btn_pink_normal"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:text="다음"
-                android:layout_marginBottom="5dp"
+                style="@style/SisoNextButton"
+                android:text="@string/btn_confirm"
                 />
         </LinearLayout>
     </LinearLayout>

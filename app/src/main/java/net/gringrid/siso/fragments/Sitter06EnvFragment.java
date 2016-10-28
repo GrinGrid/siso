@@ -46,7 +46,7 @@ public class Sitter06EnvFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sitter6, container, false);
+        return inflater.inflate(R.layout.fragment_sitter06_env, container, false);
     }
 
     @Override

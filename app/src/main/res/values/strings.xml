@@ -65,13 +65,17 @@
     <string name="fri">금</string>
     <string name="sat">토</string>
     <string name="sun">일</string>
-    <string name="time1">6~9AM</string>
-    <string name="time2">9~12AM</string>
-    <string name="time3">12~3PM</string>
-    <string name="time4">3~6PM</string>
-    <string name="time5">6~9PM</string>
-    <string name="time6">9~12AM</string>
-    <string name="time7">12~6AM</string>
+    <string name="morning">오전</string>
+    <string name="afternoon">오후</string>
+    <string name="evening">저녁</string>
+    <string name="night">심야</string>
+    <string name="time1">6~9시</string>
+    <string name="time2">9~12시</string>
+    <string name="time3">12~3시</string>
+    <string name="time4">3~6시</string>
+    <string name="time5">6~9시</string>
+    <string name="time6">9~12시</string>
+    <string name="time7">12~6시</string>
 
     <!-- Calulator -->
     <string name="salary_day">평균일당 : </string>
@@ -103,7 +107,6 @@
     <string name="member04_job_tg_write">직접입력</string>
 
 
-
     <!-- 시터 구직정보 입력 -->
     <string name="sitter1_stage1_title">시터 기본 정보</string>
     <string name="sitter1_stage2_title">희망 근무조건</string>
@@ -127,9 +130,11 @@
     <string name="sitter3_term_comment">시터 및 아이돌봄 경력이 있으면 입력해주세요</string>
     <string name="sitter3_tg_term_now">즉시 가능합니다</string>
     <string name="sitter3_tg_term_day">특정기간에만\n근무할 수 있어요</string>
-    <string name="sitter3_sub1_calendar">근무 가능 시작일과 종료일을 선택해주세요</string>
-    <string name="sitter3_sub1_from">시작일</string>
-    <string name="sitter3_sub1_to">종료일</string>
+    <string name="sitter3_sub1_calendar_start">시작일을 선택해주세요</string>
+    <string name="sitter3_sub1_calendar_end">종료일을 선택해주세요</string>
+    <string name="sitter3_sub1_no_matter">상관 없음</string>
+    <string name="sitter3_sub1_start">시작일 지정</string>
+    <string name="sitter3_sub1_end">종료일 지정</string>
     <string name="sitter3_sub1_from_noproblem">시작일 상관없음</string>
     <string name="sitter3_sub1_to_noproblem">종료일 상관없음</string>
     <string name="sitter4_skill">아이돌봄 특기</string>
@@ -214,7 +219,7 @@
     <string name="sitter11_radio2">내 폰 갤러리에서 가져오기</string>
     <string name="sitter11_radio3">다음에 등록할게요</string>
 
-
+    <string name="sitterDetail_name_comment">시터를 소개합니다</string>
 
     <!-- 구인정보 입력 -->
     <string name="parent01_chdrn">돌봄 아이 정보 입력</string>
@@ -238,10 +243,22 @@
     <string name="parent02_newborn_boy">남아 예정</string>
     <string name="parent02_newborn_girl">여아 예정</string>
     <string name="parent02_newborn_not_yet">아직 몰라요</string>
+    <string name="parent04_reason">시터를 구하는 이유가 무엇인가요?</string>
+    <string name="parent04_reason_comment">시터를 구한 경험은 아이에게 큰 경험이 됩니다.</string>
+    <string name="parent04_tg_reason_0">직장근무</string>
+    <string name="parent04_tg_reason_1">육아부담</string>
+    <string name="parent04_tg_reason_2">병원치료</string>
+    <string name="parent04_tg_reason_3">산후 후유증</string>
+    <string name="parent04_tg_reason_4">집안행사</string>
+    <string name="parent04_tg_reason_5">교육참여</string>
+    <string name="parent04_tg_reason_6">여가활동</string>
+    <string name="parent04_tg_reason_7">기타</string>
+    <string name="parent04_et_reason_write">기타</string>
+
     <string name="title_activity_popup_addr">PopupAddr</string>
 
     <!-- 시터 상세정보 -->
-    <string name="sitter_detail_sub_title_basic">기본 정보</string>
+    <string name="sitter_detail_sub_title_basic">시터 정보</string>
     <string name="sitter_detail_sub_title_skill">돌봄 특기</string>
     <string name="sitter_detail_sub_title_baby_gender">돌봄 선호 아동 성별</string>
     <string name="sitter_detail_sub_title_baby_age">돌봄 선호 아동 연령</string>
@@ -249,6 +266,13 @@
     <string name="sitter_detail_sub_title_env">희망 근무 환경</string>
     <string name="sitter_detail_sub_title_testimonial">엄마들의 이용후기(2건)</string>
     <string name="sitter_detail_name_comment">시터를 소개합니다</string>
+    <string name="sitter_detail_basic_nationality">국적</string>
+    <string name="sitter_detail_basic_religion">종교</string>
+    <string name="sitter_detail_basic_license">자격증</string>
+    <string name="sitter_detail_basic_education">학력</string>
+    <string name="sitter_detail_msg">톡 보내기</string>
+    <string name="sitter_detail_request">연락처 요청</string>
+    <string name="sitter_detail_bookmark">관심시터 등록</string>
 
 
 </resources>
