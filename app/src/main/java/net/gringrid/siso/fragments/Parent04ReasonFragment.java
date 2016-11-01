@@ -89,7 +89,7 @@ public class Parent04ReasonFragment extends Fragment implements View.OnClickList
             case R.id.id_tv_next_btn:
                 //TODO 데이타 체크
                 saveData();
-                Parent04ReasonFragment fragment = new Parent04ReasonFragment();
+                Parent05PeriodFragment fragment = new Parent05PeriodFragment();
                 ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_wish_title);
                 break;
 

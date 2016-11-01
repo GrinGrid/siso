@@ -82,44 +82,6 @@
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@drawable/line_30"
-                style="@style/SisoJobLine30"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sitter5_distance"
-                style="@style/SisoJobTitle"
-                android:layout_marginTop="30dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sitter5_distance_comment"
-                style="@style/SisoJobTitleComment"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_car"
-                android:layout_marginTop="20dp"
-                android:layout_gravity="center"/>
-
-            <net.gringrid.siso.views.SisoPicker
-                android:id="@+id/id_pk_commute_distance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                app:data_list="@array/picker_commute_distance"
-                app:default_idx="0"
-                >
-            </net.gringrid.siso.views.SisoPicker>
         </LinearLayout>
     </ScrollView>
     <TextView

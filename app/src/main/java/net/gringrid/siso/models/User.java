@@ -10,6 +10,7 @@ public class User {
 
     public static final int NULL = Integer.MAX_VALUE;
     // 사용자 구분 0:부모, 1:시터
+    public static final String USER_TYPE = "USER_TYPE";
     public static final String USER_TYPE_PARENT = "0";
     public static final String USER_TYPE_SITTER = "1";
 

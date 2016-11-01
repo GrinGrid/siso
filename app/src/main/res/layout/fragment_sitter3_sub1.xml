@@ -54,7 +54,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:background="?selectableItemBackgroundBorderless"
+                        >
                         <ToggleButton
                             android:id="@+id/id_tg_start_0"
                             android:layout_width="0dp"

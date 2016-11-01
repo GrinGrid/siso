@@ -27,7 +27,9 @@ public class RootActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
+        Log.d(TAG, "================================");
+        Log.d(TAG, "RootActivity onCreate");
+        Log.d(TAG, "================================");
         // TODO FCM TEST
 
         Log.d(TAG, "RootActivity onCreate: FireBase");
@@ -39,7 +41,9 @@ public class RootActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        Log.d(TAG, "onResume: rootActivity");
+        Log.d(TAG, "================================");
+        Log.d(TAG, "RootActivity onResume");
+        Log.d(TAG, "================================");
         super.onResume();
     }
 

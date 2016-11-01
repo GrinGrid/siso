@@ -20,7 +20,7 @@ import net.gringrid.siso.views.SisoToggleButton;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Parent05CommuteFragment extends Fragment implements View.OnClickListener {
+public class Parent06CommuteFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "jiho";
     User mUser;
@@ -28,7 +28,7 @@ public class Parent05CommuteFragment extends Fragment implements View.OnClickLis
     private SisoPicker id_pk_commute_distance;
     private int[] mRadioCommute = new int[]{R.id.id_tg_btn_commute, R.id.id_tg_btn_myhome, R.id.id_tg_btn_regident};
 
-    public Parent05CommuteFragment() {
+    public Parent06CommuteFragment() {
         // Required empty public constructor
     }
 
@@ -42,7 +42,7 @@ public class Parent05CommuteFragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_parent05_commute, container, false);
+        return inflater.inflate(R.layout.fragment_parent06_commute, container, false);
     }
 
     @Override
@@ -55,12 +55,13 @@ public class Parent05CommuteFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+        int viewId = v.getId();
         switch (v.getId()) {
             case R.id.id_tv_next_btn:
                 // TODO 입력항목 체크
                 saveData();
                 // 출퇴근형, 재택형, 입주형에 따라 이동
-                int commuteMethodValue = getRadioValue(mRadioCommute);
+                int commuteMethodValue = getRadioValue(mRadioCommute, getView());
                 if(commuteMethodValue <= 1){
                     Sitter05ScheduleSub1Fragment fragment = new Sitter05ScheduleSub1Fragment();
                     ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
@@ -69,11 +70,34 @@ public class Parent05CommuteFragment extends Fragment implements View.OnClickLis
                     ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
                 }
                 break;
+            case R.id.id_tg_btn_commute:
+            case R.id.id_tg_btn_myhome:
+            case R.id.id_tg_btn_regident:
+                selectRadio(mRadioCommute, viewId, getView());
+                break;
+        }
+    }
+    private void selectRadio(int[] radioArray, int selectItem, View view) {
+        for(int src:radioArray){
+            if(src == selectItem){
+                ((SisoToggleButton)view.findViewById(src)).setChecked(true);
+            }else{
+                ((SisoToggleButton)view.findViewById(src)).setChecked(false);
+            }
         }
     }
 
+    private int getRadioValue(int[] radioArray, View view){
+        for(int i=0; i<radioArray.length; i++){
+            if (((SisoToggleButton)view.findViewById(radioArray[i])).isChecked()) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     private void saveData() {
-        int commuteMethodValue = getRadioValue(mRadioCommute);
+        int commuteMethodValue = getRadioValue(mRadioCommute, getView());
         String[] arrCommuteDistanceValues = getResources().getStringArray(R.array.picker_commute_distance_value);
         String selectedValue = arrCommuteDistanceValues[id_pk_commute_distance.getCurrentIndex()];
 
@@ -83,14 +107,6 @@ public class Parent05CommuteFragment extends Fragment implements View.OnClickLis
         SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
     }
 
-    private int getRadioValue(int[] radioList){
-        for(int i=0; i<radioList.length; i++){
-            if (((SisoToggleButton) getView().findViewById(radioList[i])).isChecked()) {
-                return i;
-            }
-        }
-        return 0;
-    }
 
 
 }

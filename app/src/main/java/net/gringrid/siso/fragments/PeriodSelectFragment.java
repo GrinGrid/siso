@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Sitter;
 import net.gringrid.siso.models.User;
@@ -25,11 +26,12 @@ import net.gringrid.siso.util.SharedData;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Sitter3Sub1Fragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener {
+public class PeriodSelectFragment extends Fragment implements View.OnClickListener, CalendarView.OnDateChangeListener {
 
 
     private static final String TAG = "jiho";
     User mUser;
+    private String mUserType;
 
     private TextView id_tv_next_btn;
     private CalendarView id_cv;
@@ -52,13 +54,17 @@ public class Sitter3Sub1Fragment extends Fragment implements View.OnClickListene
 
     int mLastClickedBtn;
 
-    public Sitter3Sub1Fragment() {
+    public PeriodSelectFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mUser = SharedData.getInstance(getContext()).getUserData();
+        if(getArguments()!=null) {
+            mUserType = getArguments().getString(User.USER_TYPE);
+            Log.d(TAG, "PeriodSelectFragment.onCreateView: userType = "+mUserType);
+        }
         super.onCreate(savedInstanceState);
     }
 
@@ -112,7 +118,23 @@ public class Sitter3Sub1Fragment extends Fragment implements View.OnClickListene
                 setEndText(viewId, "");
                 mLastClickedBtn=viewId;
                 break;
+
+            case R.id.id_tv_next_btn:
+                saveData();
+                if(mUserType.equals(User.USER_TYPE_PARENT)){
+                    Parent06CommuteFragment fragment = new Parent06CommuteFragment();
+                    ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
+
+                }else if(mUserType.equals(User.USER_TYPE_SITTER)){
+                    Sitter04SkillFragment fragment = new Sitter04SkillFragment();
+                    ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
+
+                }
+                break;
         }
+    }
+
+    private void saveData() {
     }
 
     private void setEndText(int viewId, String date) {

@@ -133,8 +133,8 @@ public class Parent02CldrnFragment extends Fragment implements SisoToggleButton.
                 // TODO 입력항목 체크
 //                saveData();
 //                executeSave();
-                Parent03AgeFragment fragment = new Parent03AgeFragment();
-                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_basic_title);
+//                Parent03AgeFragment fragment = new Parent03AgeFragment();
+//                ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_basic_title);
                 break;
 
         }

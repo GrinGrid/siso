@@ -4,7 +4,6 @@ package net.gringrid.siso.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +14,13 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
-import net.gringrid.siso.views.SisoPicker;
 import net.gringrid.siso.views.SisoToggleButton;
 
 
 /**
- * 구직정보입력 > 기본정보 > 시터경력, 근무기간 설정
+ * 구인정보 입력 > 근무기간 설정
  */
-public class Sitter03WorkYearFragment extends Fragment implements View.OnClickListener {
+public class Parent05PeriodFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "jiho";
     User mUser;
@@ -31,16 +29,14 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
     int mRadioTerm[] = new int[]{R.id.id_tg_btn_now, R.id.id_tg_btn_day};
     private SisoToggleButton id_tg_btn_now;
     private SisoToggleButton id_tg_btn_day;
-    private SisoPicker id_pk_experience;
 
-    public Sitter03WorkYearFragment() {
+    public Parent05PeriodFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         mUser = SharedData.getInstance(getContext()).getUserData();
-        Log.d(TAG, "onCreate: SITTER3 : "+mUser.toString());
         super.onCreate(savedInstanceState);
     }
 
@@ -48,21 +44,18 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sitter3, container, false);
+        return inflater.inflate(R.layout.fragment_parent05_period, container, false);
     }
 
     @Override
-    public void onResume() {
-        id_tv_next_btn = (TextView) getView().findViewById(R.id.id_tv_next_btn);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        id_tv_next_btn = (TextView)view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
-        id_tg_btn_now = (SisoToggleButton)getView().findViewById(R.id.id_tg_btn_now);
-        id_tg_btn_day = (SisoToggleButton)getView().findViewById(R.id.id_tg_btn_day);
+        id_tg_btn_now = (SisoToggleButton)view.findViewById(R.id.id_tg_btn_now);
+        id_tg_btn_day = (SisoToggleButton)view.findViewById(R.id.id_tg_btn_day);
         id_tg_btn_now.setOnClickListener(this);
         id_tg_btn_day.setOnClickListener(this);
-        id_pk_experience = (SisoPicker)getView().findViewById(R.id.id_pk_experience);
-
-        loadData();
-        super.onResume();
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -77,11 +70,14 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
                 int schedule = getRadioValue(mRadioTerm);
                 // 즉시가능일경우
                 if ( schedule == 0 ){
-                    Sitter04SkillFragment fragment = new Sitter04SkillFragment();
+                    Parent06CommuteFragment fragment = new Parent06CommuteFragment();
                     ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
                 // 특정기간일경우
                 }else if (schedule == 1 ){
+                    Bundle bundle = new Bundle();
+                    bundle.putString(User.USER_TYPE, User.USER_TYPE_PARENT);
                     PeriodSelectFragment fragment = new PeriodSelectFragment();
+                    fragment.setArguments(bundle);
                     ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
                 }
                 break;
@@ -92,6 +88,7 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
                 selectRadio(R.id.id_tg_btn_day);
                 break;
         }
+
     }
 
     private int getRadioValue(int[] radioList){
@@ -113,18 +110,7 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    private void loadData() {
-        if(mUser.sitterInfo==null) return;
-        if(!TextUtils.isEmpty(mUser.sitterInfo.work_year)){
-            id_pk_experience.setIndex(Integer.parseInt(mUser.sitterInfo.work_year));
-        }
-
-        // TODO 근무기간 선택
-    }
-
     private void saveData() {
-        int work_year = id_pk_experience.getCurrentIndex();
-        mUser.sitterInfo.work_year = String.valueOf(work_year);
         int schedule = getRadioValue(mRadioTerm);
         if ( schedule == 0 ){
             mUser.sitterInfo.term_from = "17000101";
@@ -133,5 +119,4 @@ public class Sitter03WorkYearFragment extends Fragment implements View.OnClickLi
         Log.d(TAG, "onClick: mUser.sitterInfo : "+mUser.sitterInfo.toString());
         SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
     }
-
 }
