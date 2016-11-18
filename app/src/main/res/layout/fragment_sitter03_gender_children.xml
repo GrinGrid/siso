@@ -1,0 +1,152 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.Sitter03GenderChildrenFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Sitter03GenderChildrenFragment">
+
+            <net.gringrid.siso.views.SisoInputProgress
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:total_stage="4"
+                app:current_stage="0">
+            </net.gringrid.siso.views.SisoInputProgress>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter03_gender"
+                android:layout_marginTop="5dp"
+                style="@style/SisoJobTitle"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <net.gringrid.siso.views.SisoToggleButton
+                    android:id="@+id/id_tg_btn_woman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:toggle_normal="@drawable/toggle_icon_woman_normal"
+                    app:toggle_selected="@drawable/toggle_icon_woman_selected"
+                    app:toggleLabel="@string/sitter03_tg_gender_woman"
+                    app:isAddClickListener="false"
+                    >
+                </net.gringrid.siso.views.SisoToggleButton>
+
+                <net.gringrid.siso.views.SisoToggleButton
+                    android:id="@+id/id_tg_btn_man"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:toggle_normal="@drawable/toggle_icon_man_normal"
+                    app:toggle_selected="@drawable/toggle_icon_man_selected"
+                    app:toggleLabel="@string/sitter03_tg_gender_man"
+                    app:isAddClickListener="false"
+                    android:layout_marginLeft="50dp"
+                    >
+                </net.gringrid.siso.views.SisoToggleButton>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/line_30"
+                style="@style/SisoJobLine30"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter03_children"
+                style="@style/SisoJobTitle"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SisoJobTitleComment"
+                android:text="@string/sitter03_children_comment"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_girl"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter03_children_daughter"
+                android:textColor="@color/color333333"
+                android:layout_gravity="center"
+                />
+
+            <net.gringrid.siso.views.SisoPicker
+                android:id="@+id/id_pk_daughter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:data_list="@array/picker_children_num"
+                app:default_idx="0"
+                >
+            </net.gringrid.siso.views.SisoPicker>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_boy"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter03_children_son"
+                android:textColor="@color/color333333"
+                android:layout_gravity="center"
+                />
+
+            <net.gringrid.siso.views.SisoPicker
+                android:id="@+id/id_pk_son"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:data_list="@array/picker_children_num"
+                app:default_idx="0"
+                >
+            </net.gringrid.siso.views.SisoPicker>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>
+

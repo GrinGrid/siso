@@ -1,0 +1,116 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Member01UserTypeFragment">
+
+            <!-- TODO: Update blank fragment layout -->
+            <net.gringrid.siso.views.SisoInputProgress
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:total_stage="5"
+                app:current_stage="1">
+            </net.gringrid.siso.views.SisoInputProgress>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/fragment_vertical_left_margin"
+                android:paddingTop="@dimen/fragment_vertical_top_margin"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6.5"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        style="@style/MemberGuideTitle"
+                        android:text="@string/member02_title"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:gravity="center"
+                        style="@style/MemberGuideText"
+                        android:text="@string/member02_guide"
+                        />
+                </LinearLayout>
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"
+                    android:src="@drawable/woman2"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="@dimen/fragment_vertical_top_margin"
+                android:background="@drawable/shadow_line"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                >
+
+                <net.gringrid.siso.views.SisoEditText
+                    android:id="@+id/id_et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:label="@string/member02_et_name_label"
+                    app:input="@string/member02_et_name_hint"
+                    >
+                </net.gringrid.siso.views.SisoEditText>
+
+                <net.gringrid.siso.views.SisoEditText
+                    android:id="@+id/id_et_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    app:label="@string/member02_et_birth_label"
+                    app:input="@string/member02_et_name_hint"
+                    app:input_type="@string/input_type_number"
+                    >
+                </net.gringrid.siso.views.SisoEditText>
+
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>

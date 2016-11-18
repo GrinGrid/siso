@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.Child;
+import net.gringrid.siso.util.SisoUtil;
 
 
 /**
@@ -50,6 +51,15 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
         super(context);
         initView();
     }
+
+    public SisoAddChild(Context context, Child data){
+        super(context);
+        initView();
+        if(data != null){
+            setData(data);
+        }
+    }
+
 
     public SisoAddChild(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -130,33 +140,25 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
         id_iv_child_icon.setImageResource(id);
     }
 
-    private  int getRadioValue(){
-        for(int i=0; i<mRadioGender.length; i++){
-            if (((SisoToggleButton)findViewById(mRadioGender[i])).isChecked()) {
-                return i;
-            }
-        }
-        return 0;
-    }
-
-    public Child getValue(){
+    public Child getData(){
         Child child = new Child();
         child.name = id_et_name.getText().toString();
-        child.birth = Integer.parseInt(id_et_birth.getText().toString());
-        child.isCare = mIsChecked?1:0;
-        child.gender = getRadioValue();
-        child.isExpect = mIsExpect?1:0;
+        child.birth = id_et_birth.getText().toString();
+        child.is_care = mIsChecked?"1":"0";
+        child.gender = String.valueOf(SisoUtil.getRadioValue(mRadioGender, this));
+        child.is_expect = mIsExpect?"1":"0";
         return child;
     }
 
-    private void selectRadio(int selectItem) {
-        for(int src:mRadioGender){
-            if(src == selectItem){
-                ((SisoToggleButton)findViewById(src)).setChecked(true);
-            }else{
-                ((SisoToggleButton)findViewById(src)).setChecked(false);
-            }
+    private void setData(Child data) {
+        id_et_name.setText(data.name);
+        id_et_birth.setText(data.birth);
+        mIsChecked = data.is_care.equals("1")?true:false;
+        if(mIsChecked){
+            id_iv_checkbox.setImageResource(R.drawable.icon_checkbox_on);
         }
+        SisoUtil.selectRadio(mRadioGender, mRadioGender[Integer.parseInt(data.gender)], this);
+        mIsExpect = data.is_expect.equals("1")?true:false;
     }
 
     @Override
@@ -166,7 +168,7 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
             case R.id.id_tg_btn_boy:
             case R.id.id_tg_btn_girl:
             case R.id.id_tg_btn_newborn:
-                selectRadio(v.getId());
+                SisoUtil.selectRadio(mRadioGender, v.getId(), this);
                 break;
             case R.id.id_iv_checkbox:
                 toggleCheck();

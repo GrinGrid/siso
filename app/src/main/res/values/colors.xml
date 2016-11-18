@@ -28,4 +28,16 @@
     <color name="colorToolbarTitle">#FFF66175</color>
     <color name="colorContentTextPink">#FFE5577F</color>
 
+
+    <color name="sisoPrimaryText">#FF404040</color>
+    <color name="sisoSecondaryText">#FF636363</color>
+    <color name="sisoDisableText">#FFA4A4A4</color>
+    <color name="sisoTitleText">#FFD7557F</color>
+    <color name="sisoAccentText">#FF51898D</color>
+    <color name="sisoPrimaryColor">#FFF66175</color>
+    <color name="sisoAccentColor">#FF5BB5BD</color>
+
 </resources>
+
+
+

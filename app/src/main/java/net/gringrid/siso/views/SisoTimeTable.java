@@ -3,6 +3,7 @@ package net.gringrid.siso.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -11,10 +12,11 @@ import net.gringrid.siso.R;
 
 
 /**
- * Created by choijiho on 16. 7. 13..
+ * 요일, 시간별 스케줄을 선택할 수 있는 view
  */
 public class SisoTimeTable extends LinearLayout implements View.OnClickListener {
 
+    private static final String TAG = "jiho";
     public static final int MON = 0;
     public static final int TUE = 1;
     public static final int WED = 2;
@@ -28,22 +30,25 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
     private static final int GROUP_COL = 1;
     private static final int GROUP_ROW_LEN = 7;
     private static final int GROUP_COL_LEN = 7;
+    private final boolean IS_TIME_GROUP_NOT_SELECT_WEEKEND = true;
 
-    private LinearLayout id_ll_mon;
-    private LinearLayout id_ll_tue;
-    private LinearLayout id_ll_wed;
-    private LinearLayout id_ll_thu;
-    private LinearLayout id_ll_fri;
-    private LinearLayout id_ll_sat;
-    private LinearLayout id_ll_sun;
-
-    private LinearLayout id_ll_time1;
-    private LinearLayout id_ll_time2;
-    private LinearLayout id_ll_time3;
-    private LinearLayout id_ll_time4;
-    private LinearLayout id_ll_time5;
-    private LinearLayout id_ll_time6;
-    private LinearLayout id_ll_time7;
+    int mViewItems[] = {
+            R.id.id_ll_mon,
+            R.id.id_ll_mon,
+            R.id.id_ll_tue,
+            R.id.id_ll_wed,
+            R.id.id_ll_thu,
+            R.id.id_ll_fri,
+            R.id.id_ll_sat,
+            R.id.id_ll_sun,
+            R.id.id_ll_time1,
+            R.id.id_ll_time2,
+            R.id.id_ll_time3,
+            R.id.id_ll_time4,
+            R.id.id_ll_time5,
+            R.id.id_ll_time6,
+            R.id.id_ll_time7
+    };
 
     OnTimeChangedListener mlistener;
 
@@ -82,40 +87,6 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         View v = li.inflate(R.layout.custom_timetable, this, false);
 
         addView(v);
-
-        id_ll_mon = (LinearLayout)findViewById(R.id.id_ll_mon);
-        id_ll_tue = (LinearLayout)findViewById(R.id.id_ll_tue);
-        id_ll_wed = (LinearLayout)findViewById(R.id.id_ll_wed);
-        id_ll_thu = (LinearLayout)findViewById(R.id.id_ll_thu);
-        id_ll_fri = (LinearLayout)findViewById(R.id.id_ll_fri);
-        id_ll_sat = (LinearLayout)findViewById(R.id.id_ll_sat);
-        id_ll_sun = (LinearLayout)findViewById(R.id.id_ll_sun);
-
-        id_ll_time1 = (LinearLayout)findViewById(R.id.id_ll_time1);
-        id_ll_time2 = (LinearLayout)findViewById(R.id.id_ll_time2);
-        id_ll_time3 = (LinearLayout)findViewById(R.id.id_ll_time3);
-        id_ll_time4 = (LinearLayout)findViewById(R.id.id_ll_time4);
-        id_ll_time5 = (LinearLayout)findViewById(R.id.id_ll_time5);
-        id_ll_time6 = (LinearLayout)findViewById(R.id.id_ll_time6);
-        id_ll_time7 = (LinearLayout)findViewById(R.id.id_ll_time7);
-
-        id_ll_mon.setOnClickListener(this);
-        id_ll_tue.setOnClickListener(this);
-        id_ll_wed.setOnClickListener(this);
-        id_ll_thu.setOnClickListener(this);
-        id_ll_fri.setOnClickListener(this);
-        id_ll_sat.setOnClickListener(this);
-        id_ll_sun.setOnClickListener(this);
-
-        id_ll_time1.setOnClickListener(this);
-        id_ll_time2.setOnClickListener(this);
-        id_ll_time3.setOnClickListener(this);
-        id_ll_time4.setOnClickListener(this);
-        id_ll_time5.setOnClickListener(this);
-        id_ll_time6.setOnClickListener(this);
-        id_ll_time7.setOnClickListener(this);
-
-        setTimeChangedListener();
     }
 
     private void getAttrs(AttributeSet attrs) {
@@ -129,6 +100,11 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
     }
 
     private void setTypeArray(TypedArray typedArray) {
+        boolean readonly = typedArray.getBoolean(R.styleable.SisoTimeTable_readonly, false);
+        if(!readonly){
+            setViewItemsClickListener();
+            setTimeChangedListener();
+        }
         typedArray.recycle();
     }
 
@@ -181,6 +157,12 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         }
     }
 
+    private void setViewItemsClickListener(){
+        for(int viewId:mViewItems){
+            findViewById(viewId).setOnClickListener(this);
+        }
+    }
+
     /**
      * 각 셀에 대한 선택이 변경될때마다 알려준다
      */
@@ -192,12 +174,14 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
             for(int row=0; row<GROUP_ROW_LEN; row++) {
                 tg_id = "id_tg_"+col+row;
                 tmpTgBtn = getToggleButtonByStr(tg_id);
-                tmpTgBtn.setOnToggleChangedListener(new SisoToggleButton.OnToggleChangedListener() {
-                    @Override
-                    public void onChanged(View view) {
-                        mlistener.onTimeChanged();
-                    }
-                });
+                if(tmpTgBtn!=null) {
+                    tmpTgBtn.setOnToggleChangedListener(new SisoToggleButton.OnToggleChangedListener() {
+                        @Override
+                        public void onChanged(View view) {
+                            mlistener.onTimeChanged();
+                        }
+                    });
+                }
             }
         }
     }
@@ -211,7 +195,14 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         String tg_id="";
         SisoToggleButton tmpTgBtn;
         boolean isAllCheckedGroup = isAllCheckedGroup(groupType, groupNum);
-        for(int i=0; i<7; i++){
+
+        int loopLen = 7;
+        // 시간 선택시 주말(토요일,일요일)은 선택되지 않도록
+        if(groupType == GROUP_ROW && IS_TIME_GROUP_NOT_SELECT_WEEKEND){
+            loopLen = 5;
+        }
+
+        for(int i=0; i<loopLen; i++){
             if(groupType == GROUP_COL){
                 tg_id = "id_tg_"+i+groupNum;
             }else if(groupType == GROUP_ROW){
@@ -222,12 +213,23 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         }
     }
 
+    /**
+     * Row, Col 그룹이 전부 체크 되었는지 확인
+     * @param groupType
+     * @param groupNum
+     * @return
+     */
     private boolean isAllCheckedGroup(int groupType, int groupNum){
         String tg_id="";
         SisoToggleButton tmpTgBtn;
         boolean isAllChecked=true;
 
-        for(int i=0; i<7; i++){
+        int loopLen = 7;
+        if(groupType == GROUP_ROW && IS_TIME_GROUP_NOT_SELECT_WEEKEND){
+            loopLen = 5;
+        }
+
+        for(int i=0; i<loopLen; i++){
             if(groupType == GROUP_COL){
                 tg_id = "id_tg_"+i+groupNum;
             }else if(groupType == GROUP_ROW){
@@ -245,6 +247,10 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         return (SisoToggleButton)findViewById(viewId);
     }
 
+    /**
+     * 선택된 전체 시간의 합을 얻는다
+     * @return 선택된 전체 시간의 합
+     */
     public int getSelectedHour(){
         String tg_id;
         SisoToggleButton tmpTgBtn;
@@ -279,7 +285,21 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
         return result;
     }
 
-    // TODO readonly 구현
+    public void setBitString(int week, String bitString) {
+        String tg_id;
+        SisoToggleButton tmpTgBtn;
+        byte b = Byte.parseByte(bitString, 2);
+
+        for(int i=0; i<GROUP_ROW_LEN; i++){
+            tg_id = "id_tg_"+i+week;
+            tmpTgBtn = getToggleButtonByStr(tg_id);
+            if((b & 1<<i) > 0){
+                tmpTgBtn.setChecked(true);
+            }else{
+                tmpTgBtn.setChecked(false);
+            }
+        }
+    }
     // TODO 세팅
 
 }

@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
 import net.gringrid.siso.network.restapi.SmsAPI;
 import net.gringrid.siso.util.SharedData;
+import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
 import retrofit2.Call;
@@ -31,19 +33,16 @@ import retrofit2.Response;
 /**
  * 회원가입 > 전화번호
  */
-public class Member04PhoneFragment extends Fragment implements View.OnClickListener {
+public class Member04PhoneFragment extends InputBaseFragment{
 
-    private static final String TAG = "jiho";
     SmsAPI mSmsAPI;
 
     SisoEditText id_et_phone;
     SisoEditText id_et_auth_num;
     TextView id_tv_next_btn;
     TextView id_tv_request_auth_sms;
-    TextView id_tv_confirm_auth_num;
 
     SmsAPI.SMS sms = new SmsAPI.SMS();
-    private User mUser;
 
     public Member04PhoneFragment() {
         // Required empty public constructor
@@ -51,7 +50,6 @@ public class Member04PhoneFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        mUser = SharedData.getInstance(getContext()).getUserData();
         super.onCreate(savedInstanceState);
     }
 
@@ -59,20 +57,22 @@ public class Member04PhoneFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_member4, container, false);
+        return inflater.inflate(R.layout.fragment_member04_phone, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
 
         id_tv_request_auth_sms = (TextView) view.findViewById(R.id.id_tv_request_auth_sms);
         id_tv_request_auth_sms.setOnClickListener(this);
 
-        id_tv_confirm_auth_num = (TextView) view.findViewById(R.id.id_tv_confirm_auth_num);;
-        id_tv_confirm_auth_num.setOnClickListener(this);
-
         id_et_phone = (SisoEditText) view.findViewById(R.id.id_et_phone);
         id_et_auth_num = (SisoEditText)view.findViewById(R.id.id_et_auth_num);
         setScrollControl(view);
-        return view;
+        loadData();
     }
 
     /**
@@ -106,29 +106,13 @@ public class Member04PhoneFragment extends Fragment implements View.OnClickListe
 
 
         switch (v.getId()){
-            case R.id.id_tv_confirm_auth_num:
-                // TODO 인증번호 입력여부 확인
-                String authNum = id_et_auth_num.getText().toString();
-                confirmAuthNum(authNum);
-                break;
 
             case  R.id.id_tv_next_btn:
-                if ( SharedData.DEBUG_MODE ) {
-                    id_et_phone.setInput("01012349090");
-                }
-                mUser.personalInfo.phone = id_et_phone.getText().toString();
+                // TODO 인증번호 확인
+//                String authNum = id_et_auth_num.getText().toString();
+//                confirmAuthNum(authNum);
+                saveData();
 
-                SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
-
-                if(mUser.personalInfo.user_type.equals(User.USER_TYPE_SITTER)) {
-                    Member05AddrFragment member05AddrFragment = new Member05AddrFragment();
-                    ((BaseActivity) getActivity()).setFragment(member05AddrFragment, R.string.member_title);
-
-                }else if(mUser.personalInfo.user_type.equals(User.USER_TYPE_PARENT)){
-                    Member04JobFragment member04JobFragment = new Member04JobFragment();
-                    ((BaseActivity) getActivity()).setFragment(member04JobFragment, R.string.member_title);
-
-                }
                 break;
 
             case  R.id.id_tv_request_auth_sms:
@@ -139,6 +123,40 @@ public class Member04PhoneFragment extends Fragment implements View.OnClickListe
 
         }
     }
+
+    @Override
+    protected void loadData() {
+        if ( SharedData.DEBUG_MODE ) {
+            id_et_phone.setInput("01012349090");
+        }
+
+        if(!TextUtils.isEmpty(mUser.personalInfo.phone)){
+            id_et_phone.setInput(mUser.personalInfo.phone);
+        }
+    }
+
+    @Override
+    protected boolean isValidInput() {
+        if (TextUtils.isEmpty(id_et_phone.getText())){
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_phone_write);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void saveData() {
+        mUser.personalInfo.phone = id_et_phone.getText().toString();
+        SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
+        moveNext();
+    }
+
+    @Override
+    protected void moveNext() {
+        Member05AddrFragment member05AddrFragment = new Member05AddrFragment();
+        ((BaseActivity) getActivity()).setFragment(member05AddrFragment, BaseActivity.TITLE_KEEP);
+    }
+
     private void requestAuthSms(String phone) {
         Log.d(TAG, "requestAuthSms: phone : "+phone);
         sms.phone = phone;

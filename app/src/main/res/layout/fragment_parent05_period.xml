@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".fragments.Sitter02GenderFragment">
+    tools:context=".fragments.Sitter03GenderChildrenFragment">
     <ScrollView
         android:id="@+id/id_sv"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@android:color/white"
-            tools:context=".fragments.Sitter02GenderFragment">
+            tools:context=".fragments.Sitter03GenderChildrenFragment">
 
             <net.gringrid.siso.views.SisoInputProgress
                 android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sitter3_term"
+                android:text="@string/sitter01_term"
                 android:layout_marginTop="10dp"
                 style="@style/SisoJobTitle"
                 />
@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/SisoJobTitleComment"
-                android:text="@string/sitter3_term_comment"
+                android:text="@string/sitter01_term_comment"
                 />
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     app:toggle_normal="@drawable/tg_ic_asap_normal"
                     app:toggle_selected="@drawable/tg_ic_asap_selected"
-                    app:toggleLabel="@string/sitter3_tg_term_now"
+                    app:toggleLabel="@string/sitter01_tg_term_now"
                     app:isAddClickListener="false"
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     app:toggle_normal="@drawable/tg_ic_calendar_normal"
                     app:toggle_selected="@drawable/tg_ic_calendar_selected"
-                    app:toggleLabel="@string/sitter3_tg_term_day"
+                    app:toggleLabel="@string/sitter01_tg_term_day"
                     app:isAddClickListener="false"
                     android:layout_marginLeft="50dp"
                     >

@@ -1,0 +1,197 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.CommonSkillFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Sitter03GenderChildrenFragment">
+
+            <net.gringrid.siso.views.SisoInputProgress
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:total_stage="4"
+                app:current_stage="2">
+            </net.gringrid.siso.views.SisoInputProgress>
+
+            <TextView
+                android:id="@+id/id_tv_skill"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/common_sitter_skill"
+                style="@style/SisoJobTitle"
+                />
+            <TextView
+                android:id="@+id/id_tv_skill_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SisoJobTitleComment"
+                android:text="@string/common_sitter_skill_comment"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_care"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_babycare_normal"
+                        app:toggle_selected="@drawable/tg_ic_babycare_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_care"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_baby"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_baby_normal"
+                        app:toggle_selected="@drawable/tg_ic_baby_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_baby"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_outdoor"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_outdoor_normal"
+                        app:toggle_selected="@drawable/tg_ic_outdoor_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_outdoor"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_house"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_housework_normal"
+                        app:toggle_selected="@drawable/tg_ic_housework_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_housekeeping"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_homework"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_study_normal"
+                        app:toggle_selected="@drawable/tg_ic_study_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_homework"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_commute"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_escort_normal"
+                        app:toggle_selected="@drawable/tg_ic_escort_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_commute"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_cook"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_cook_normal"
+                        app:toggle_selected="@drawable/tg_ic_cook_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_cook"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_foreign_language"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:toggle_normal="@drawable/tg_ic_english_normal"
+                        app:toggle_selected="@drawable/tg_ic_english_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_foreign_language"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+
+                    <net.gringrid.siso.views.SisoToggleButton
+                        android:id="@+id/id_tg_btn_music_physical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        app:toggle_normal="@drawable/tg_ic_music_normal"
+                        app:toggle_selected="@drawable/tg_ic_music_selected"
+                        app:toggleLabel="@string/common_sitter_tg_skill_music_physical"
+                        app:isAddClickListener="false"
+                        >
+                    </net.gringrid.siso.views.SisoToggleButton>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>
+

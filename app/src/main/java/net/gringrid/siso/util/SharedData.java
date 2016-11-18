@@ -22,8 +22,6 @@ public class SharedData {
     public static final String SESSION_KEY = "Session-Key";
     private static final String TAG = "jiho";
 
-    public static final String SELECTED_PHOTO_ID = "SELECTED_PHOTO_ID";
-
     private static SharedData instance;
     private static Context mContext;
 

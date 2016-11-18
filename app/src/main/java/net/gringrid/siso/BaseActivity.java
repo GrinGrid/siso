@@ -19,14 +19,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import net.gringrid.siso.fragments.LoginFragment;
 import net.gringrid.siso.fragments.Member01UserTypeFragment;
-import net.gringrid.siso.fragments.Parent01IndexFragment;
-import net.gringrid.siso.fragments.Sitter01IndexFragment;
-import net.gringrid.siso.fragments.Sitter11PhotoFragment;
+import net.gringrid.siso.fragments.MemberModifyFragment;
+import net.gringrid.siso.fragments.Parent00IndexFragment;
+import net.gringrid.siso.fragments.Sitter00IndexFragment;
+import net.gringrid.siso.fragments.CommonPhotoFragment;
 import net.gringrid.siso.fragments.SitterListFragment;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
@@ -58,6 +58,7 @@ public class BaseActivity extends RootActivity
 
     public static final int TITLE_NONE = Integer.MAX_VALUE;
     public static final int ACTIONBAR_HIDE = Integer.MIN_VALUE;
+    public static final int TITLE_KEEP = Integer.MAX_VALUE - 1;
 
     Toolbar mToolbar;
     DrawerLayout mDrawer;
@@ -180,9 +181,9 @@ public class BaseActivity extends RootActivity
         } else {
             if ( mFragmentManager.getBackStackEntryCount() > 1 ) {
                 mFragmentManager.popBackStack();
-                for(Fragment fragment : mFragmentManager.getFragments()){
-                    if(fragment!=null) fragment.onResume();
-                }
+//                for(Fragment fragment : mFragmentManager.getFragments()){
+//                    if(fragment!=null) fragment.onResume();
+//                }
                 String fragmentName = mFragmentManager.getBackStackEntryAt(mFragmentManager.getBackStackEntryCount()-2).getName();
                 setToolbarTitle(Integer.parseInt(fragmentName));
 
@@ -247,41 +248,48 @@ public class BaseActivity extends RootActivity
      * @param menuId
      */
     private void callMenu(int menuId){
+        Fragment fragment;
         switch (menuId){
             case MENU_SIGN_UP:
-                Member01UserTypeFragment member01UserTypeFragment = new Member01UserTypeFragment();
-                setCleanUpFragment(member01UserTypeFragment, R.string.member_title);
+                fragment = new Member01UserTypeFragment();
+                setCleanUpFragment(fragment, R.string.member_title);
                 break;
 
             case MENU_INPUT_SITTER:
-                Sitter01IndexFragment sitter01IndexFragment = new Sitter01IndexFragment();
-                setCleanUpFragment(sitter01IndexFragment, R.string.sitter_basic_title);
+                fragment = new Sitter00IndexFragment();
+                setCleanUpFragment(fragment, R.string.sitter_title);
                 break;
 
             case MENU_INPUT_PARENT:
-                Parent01IndexFragment parent01IndexFragment = new Parent01IndexFragment();
-                setCleanUpFragment(parent01IndexFragment, R.string.parent_title);
+                fragment = new Parent00IndexFragment();
+                setCleanUpFragment(fragment, R.string.parent_title);
+                break;
+
+            case MENU_MY_INFO:
+                Log.d(TAG, "callMenu: MENU_MY_INFO");
+                fragment = new MemberModifyFragment();
+                setCleanUpFragment(fragment, R.string.parent_title);
                 break;
 
             case MENU_SITTER_LIST:
-                SitterListFragment sitterListFragment  = new SitterListFragment();
-                setCleanUpFragment(sitterListFragment, TITLE_NONE);
+                fragment = new SitterListFragment();
+                setCleanUpFragment(fragment, TITLE_NONE);
                 break;
 
             case MENU_PARENT_LIST:
-                SitterListFragment sitterListFragment2  = new SitterListFragment();
-                setCleanUpFragment(sitterListFragment2, TITLE_NONE);
+                fragment = new SitterListFragment();
+                setCleanUpFragment(fragment, TITLE_NONE);
                 break;
 
             case MENU_LOG_IN:
-                LoginFragment loginFragment = new LoginFragment();
-                setCleanUpFragment(loginFragment, R.string.login_title);
+                fragment = new LoginFragment();
+                setCleanUpFragment(fragment, R.string.login_title);
                 break;
 
             case MENU_LOG_OUT:
                 SharedData.getInstance(this).insertGlobalData(SharedData.SESSION_KEY, "");
                 SharedData.getInstance(this).insertGlobalData(SharedData.USER, null);
-                LoginFragment fragment = new LoginFragment();
+                fragment = new LoginFragment();
                 setCleanUpFragment(fragment, R.string.login_title);
                 break;
         }
@@ -303,9 +311,10 @@ public class BaseActivity extends RootActivity
             id_toolbar_logo.setVisibility(View.VISIBLE);
             id_toolbar_memo.setVisibility(View.VISIBLE);
             // TODO memo count
-        }else if (id==Integer.MIN_VALUE){
+        }else if (id==ACTIONBAR_HIDE){
             mToolbar.setVisibility(View.GONE);
-
+        }else if (id==TITLE_KEEP){
+            return;
         }else{
             id_toolbar_title.setVisibility(View.VISIBLE);
             id_toolbar_title.setText(id);
@@ -331,16 +340,13 @@ public class BaseActivity extends RootActivity
      * @param fragment
      */
     public void setCleanUpFragment(Fragment fragment, int titleId){
-        Log.d(TAG, "after mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
         mFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        Log.d(TAG, "before mFragmentManager.getBackStackEntryCount() : "+mFragmentManager.getBackStackEntryCount());
 
         hideSoftKeyboard();
 
         // 모든 stack을 비운다
         mFragmentManager.beginTransaction().replace(R.id.id_rl_for_fragment, fragment)
                 .addToBackStack(String.valueOf(titleId))
-//                .addToBackStack(getString(titleId))
                 .commit();
         setToolbarTitle(titleId);
     }
@@ -364,8 +370,7 @@ public class BaseActivity extends RootActivity
     public void onBackStackChanged() {
         Log.d(TAG, "onBackStackChanged: size : "+mFragmentManager.getFragments().size());
         List<Fragment> fragmentList = mFragmentManager.getFragments();
-        if(fragmentList!=null && fragmentList.size()>0 && fragmentList.get(fragmentList.size()-1) instanceof Sitter11PhotoFragment ){
-            Log.d(TAG, "onBackStackChanged: Sitter11PhotoFragment ");
+        if(fragmentList!=null && fragmentList.size()>0 && fragmentList.get(fragmentList.size()-1) instanceof CommonPhotoFragment){
         }
         if ( mFragmentManager.getBackStackEntryCount() == 1 ){
             mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);

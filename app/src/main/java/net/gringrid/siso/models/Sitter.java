@@ -15,7 +15,7 @@ public class Sitter {
     // 딸 수
     public String daughters;
     // 경력
-    public String work_year;
+    public String work_exp;
     // 희망활동기간 시작
     public String term_from;
     // 희망활동기간 끝

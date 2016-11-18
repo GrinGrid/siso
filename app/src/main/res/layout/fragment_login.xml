@@ -49,11 +49,9 @@
                 android:id="@+id/id_tv_login_btn"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/btn_pink_normal"
-                android:gravity="center"
-                android:textColor="@color/colorWhite"
-                android:text="로그인"
-                android:layout_marginTop="15dp"
+                style="@style/SisoNextButton"
+                android:text="@string/btn_login"
+                android:layout_marginTop="20dp"
                 />
 
             <LinearLayout

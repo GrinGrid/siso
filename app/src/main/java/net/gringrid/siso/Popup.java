@@ -7,10 +7,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.JavascriptInterface;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,6 +26,7 @@ import com.google.gson.JsonParseException;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.MemberAPI;
+import net.gringrid.siso.util.SharedData;
 
 import java.lang.reflect.Type;
 
@@ -33,16 +37,27 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-
-public class Popup extends Activity implements Callback<Personal> {
+/**
+ * Setting : content, button
+ *      Content : layout inflate
+ *      Button : color, Text, listener, tag, order
+ */
+public class Popup extends Activity {
 
     private static final String TAG = "jiho";
-    private static final String DAUM_API_KEY = "20e6ba46a8a6e8c276c479edb01e473c";
-    public static final String DAUM_ADDR_URL = "http://www.siso4u.net/addr.html";
-    private String mPostNo;
-    private String mAddr;
-    private String mLng;
-    private String mLat;
+
+    protected static final String BTN_STYLE_WHITE = "WHITE";
+    protected static final String BTN_STYLE_GREEN = "GREEN";
+    protected static final String BTN_ORDER_FIRST = "FIRST";
+    protected static final String BTN_ORDER_SECOND = "SECOND";
+
+    private LinearLayout id_ll_content;
+    protected TextView id_tv_title;
+    private TextView id_tv_btn_first;
+    private TextView id_tv_btn_second;
+
+    protected User mUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,40 +66,19 @@ public class Popup extends Activity implements Callback<Personal> {
         setContentView(R.layout.activity_popup);
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        initializeData();
         initializeView();
     }
 
-
-    @JavascriptInterface
-    public void setAddr(String post_no, String addr){
-        Log.d(TAG, "setAddr: post_no : "+post_no);
-        Log.d(TAG, "setAddr: addr1 : "+addr);
-
-        mPostNo = post_no;
-        mAddr = addr;
-
-        Gson gson = new GsonBuilder()
-                .registerTypeAdapter(Personal.class, new MyDeserializer())
-                .create();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MemberAPI.DAUM_API_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-        MemberAPI memberAPI = retrofit.create(MemberAPI.class);
-        Call<Personal> call = memberAPI.getGPS(DAUM_API_KEY, "json", addr);
-        Log.d(TAG, "setAddr: "+call.toString());
-        call.enqueue(this);
+    protected void initializeData() {
+        mUser = SharedData.getInstance(this).getUserData();
     }
 
-    @JavascriptInterface
-    private void initializeView() {
-        WebView id_wv = (WebView)findViewById(R.id.id_wv);
-
-        if ( id_wv!= null ){
-            id_wv.getSettings().setJavaScriptEnabled(true);
-            id_wv.addJavascriptInterface(this, "AndroidFunction");
-            id_wv.loadUrl(DAUM_ADDR_URL);
-        }
+    protected void initializeView() {
+        id_tv_title = (TextView) findViewById(R.id.id_tv_title);
+        id_ll_content = (LinearLayout)findViewById(R.id.id_ll_content);
+        id_tv_btn_first = (TextView) findViewById(R.id.id_tv_btn_first);
+        id_tv_btn_second = (TextView) findViewById(R.id.id_tv_btn_second);
     }
 
     @Override
@@ -92,38 +86,29 @@ public class Popup extends Activity implements Callback<Personal> {
         super.onResume();
     }
 
-
-    @Override
-    public void onResponse(Call<Personal> call, Response<Personal> response) {
-        mLat = response.body().lat;
-        mLng = response.body().lng;
-        Log.d(TAG, "onResponse body : "+response.body().toString());
-        Log.d(TAG, "onResponse body : "+response.body().lat);
-        Log.d(TAG, "onResponse body : "+response.body().lng);
-        Log.d(TAG, "onResponse message : "+response.message());
-        Intent intent = getIntent();
-        intent.putExtra(User.DATA_POST_NO, mPostNo);
-        intent.putExtra(User.DATA_ADDR, mAddr);
-        intent.putExtra(User.DATA_LATITUDE, mLat);
-        intent.putExtra(User.DATA_LONGITUDE, mLng);
-        setResult(RESULT_OK, intent);
-        finish();
+    protected void setPopupContent(View view){
+       id_ll_content.addView(view);
     }
 
-    @Override
-    public void onFailure(Call<Personal> call, Throwable t) {
-        Log.d(TAG, "onFailure: "+t.getMessage());
-    }
-
-    class MyDeserializer implements JsonDeserializer<Personal>{
-
-        @Override
-        public Personal deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonElement channel = json.getAsJsonObject().get("channel");
-            JsonElement item = channel.getAsJsonObject().get("item");
-            JsonArray itemArry = item.getAsJsonArray();
-            Log.d(TAG, "deserialize: itemArry length : "+itemArry.size());
-            return new Gson().fromJson(itemArry.get(0), Personal.class);
+    protected void setButton(String order, String style, int strId, View.OnClickListener listener){
+        TextView tmpBtn = null;
+        if(order.equals(BTN_ORDER_FIRST)){
+            tmpBtn = id_tv_btn_first;
+        }else if(order.equals(BTN_ORDER_SECOND)){
+            tmpBtn = id_tv_btn_second;
         }
+        tmpBtn.setVisibility(View.VISIBLE);
+
+        if(style.equals(BTN_STYLE_WHITE)){
+        }else if(style.equals(BTN_STYLE_GREEN)){
+        }
+
+        tmpBtn.setText(strId);
+        tmpBtn.setOnClickListener(listener);
     }
+
+
+//    *      Button : color, Text, listener, tag, order
+
+
 }

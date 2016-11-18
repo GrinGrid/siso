@@ -12,6 +12,7 @@
         <attr name="guide" format="reference|string"></attr>
         <attr name="labelColor" format="reference"></attr>
         <attr name="input_type" format="string"></attr>
+        <attr name="isHiddenLabel" format="boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="SisoCheckBox">
@@ -20,6 +21,12 @@
         <attr name="isChecked" format="boolean"></attr>
         <attr name="isDisabled" format="boolean"></attr>
         <attr name="isSetClickListener" format="boolean"></attr>
+    </declare-styleable>
+
+    <declare-styleable name="SisoModifyItemRow">
+        <attr name="modifyItemTitle" format="reference|string"></attr>
+        <attr name="modifyItemContent" format="reference|string"></attr>
+        <attr name="isVisibleArrow" format="boolean"></attr>
     </declare-styleable>
 
     <declare-styleable name="SisoRadioMaxWidth">

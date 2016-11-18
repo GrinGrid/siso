@@ -57,7 +57,7 @@ public interface AddrAPI {
 
     public class AddrOutput{
         @Element(name="common")
-        Common common;
+        public Common common;
 
         @ElementList(required = false, inline = true)
         public List<Juso> juso;
@@ -81,19 +81,19 @@ public interface AddrAPI {
     @Root(name="common")
     public class Common{
         @Element(name="totalCount")
-        String totalCount;
+        public String totalCount;
 
         @Element(name="currentPage")
-        int currentPage;
+        public int currentPage;
 
         @Element(name="countPerPage")
-        int countPerPage;
+        public int countPerPage;
 
         @Element(name="errorCode")
-        String errorCode;
+        public String errorCode;
 
         @Element(name="errorMessage")
-        String errorMessage;
+        public String errorMessage;
 
         @Override
         public String toString() {

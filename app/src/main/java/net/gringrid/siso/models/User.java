@@ -14,6 +14,11 @@ public class User {
     public static final String USER_TYPE_PARENT = "0";
     public static final String USER_TYPE_SITTER = "1";
 
+    public static final String COMMUTE_TYPE = "COMMUTE_TYPE";
+    public static final String COMMUTE_TYPE_COMMUTE  = "0";
+    public static final String COMMUTE_TYPE_HOME = "1";
+    public static final String COMMUTE_TYPE_REGIDENT = "2";
+
     // 사용자 성별 0:여성, 1:남성
     public static final String GENDER_WOMAN = "0";
     public static final String GENDER_MAN = "1";
@@ -22,6 +27,9 @@ public class User {
     public static final String DATA_ADDR = "ADDR";
     public static final String DATA_LATITUDE = "LATITUDE";
     public static final String DATA_LONGITUDE = "LONGITUDE";
+
+    public static final String TERM_MIN = "17000101";
+    public static final String TERM_MAX = "30000101";
 
     public User(){
         personalInfo = new Personal();

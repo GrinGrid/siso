@@ -40,6 +40,15 @@
         <item>10+</item>
     </string-array>
 
+    <!-- 시터연령 -->
+    <string-array name="picker_sitter_age">
+        <item>20대</item>
+        <item>30대~40대</item>
+        <item>40대~50대</item>
+        <item>50대~60대</item>
+        <item>60대 이상</item>
+    </string-array>
+
     <!-- 출퇴근 가능 거리-->
     <string-array name="picker_commute_distance">
         <item >상관없음</item>
@@ -159,4 +168,17 @@
         <item>MUSIC_PHYSICAL</item>
     </string-array>
 
+    <string-array name="sitter_nat">
+        <item>대한민국</item>
+        <item>중국동포</item>
+        <item></item>
+    </string-array>
+
+    <string-array name="sitter_rlg">
+        <item>종교없음</item>
+        <item>기독교</item>
+        <item>불교</item>
+        <item>천주교</item>
+        <item></item>
+    </string-array>
 </resources>

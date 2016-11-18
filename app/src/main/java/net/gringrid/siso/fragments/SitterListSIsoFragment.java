@@ -16,6 +16,7 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.adapter.SitterListSisoAdapter;
 import net.gringrid.siso.models.SitterList;
+import net.gringrid.siso.models.SitterListItem;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.APIError;
 import net.gringrid.siso.network.restapi.ErrorUtils;
@@ -38,7 +39,7 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
 
     private static final String TAG = "jiho";
     private SitterListSisoAdapter mAdapter;
-    private List<SitterList> mList;
+    private List<SitterListItem> mList;
     private ListView id_lv;
     private User mUser;
 
@@ -72,10 +73,10 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onResume() {
         for(int i=0;i<100;i++){
-            SitterList item = new SitterList();
+            SitterListItem item = new SitterListItem();
             item.name = "이순자 시터(23세)";
             item.brief = "전직 유치원 교사!  아이들과 잘 놀아요!아이들과 잘 놀아요!";
-            item.addr1 = "경기도 > 읜왕시 > 내손도옹  0.4km";
+            item.addr = "경기도 > 읜왕시 > 내손도옹  0.4km";
             mList.add(item);
         }
         mAdapter = new SitterListSisoAdapter(getContext(), mList);
@@ -93,6 +94,7 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
     }
 
     private void loadList() {
+        Log.d(TAG, "loadSitterList: "+mUser.personalInfo.email);
         SitterAPI client = ServiceGenerator.getInstance(getActivity()).createService(SitterAPI.class);
         Call<SitterList> call = client.getListSiso(mUser.personalInfo.email);
         call.enqueue(new Callback<SitterList>() {
@@ -102,6 +104,10 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
                     if(response.isSuccessful()){
                         Log.d(TAG, "onResponse: success body : "+response.body().toString());
                     }
+                    mAdapter = new SitterListSisoAdapter(getContext(), response.body().group_first);
+                    id_lv = (ListView)getView().findViewById(R.id.id_lv);
+                    id_lv.setAdapter(mAdapter);
+                    id_lv.setOnItemClickListener(SitterListSIsoFragment.this);
 
                 }else{
                     APIError error = ErrorUtils.parseError(response);

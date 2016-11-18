@@ -51,13 +51,23 @@ public class Parent {
     public String edu;
     // 종교
     public String religion;
+    // 자기소개 한줄
+    public String brief;
     // 자기소개(200자이내)
     public String introduction;
     // 시터희망연령
     public String sitter_age;
+    // 시터희망경력
+    public String work_exp;
+    // 시터고용사유
+    public String reason;
+    // 직업
+    public String job;
+    // 직업상세
+    public String job_detail;
     // 아이정보 List
     @SerializedName("children_info")
-    public List<Child> children;
+    public List<Child> children_info;
 
 
     @Override

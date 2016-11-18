@@ -60,7 +60,6 @@ public class SisoToggleButton extends LinearLayout{
     }
 
     private void registEvent() {
-        Log.d(TAG, "registEvent: "+mIsAddClickListener);
         if(mIsAddClickListener){
             id_ll_toggle.setOnClickListener(new OnClickListener() {
                 @Override
@@ -72,7 +71,6 @@ public class SisoToggleButton extends LinearLayout{
     }
 
     private void initView() {
-        Log.d(TAG, "initView: ");
         String infService = Context.LAYOUT_INFLATER_SERVICE;
         LayoutInflater li = (LayoutInflater) getContext().getSystemService(infService);
         View v = li.inflate(R.layout.custom_toggle_button, this, false);
@@ -114,6 +112,13 @@ public class SisoToggleButton extends LinearLayout{
         typedArray.recycle();
     }
 
+    @Override
+    public void setSelected(boolean selected) {
+        super.setSelected(selected);
+        mIsChecked = isSelected();
+        toggleCheck();
+    }
+
     public void setChecked(boolean isChecked) {
         mIsChecked = isChecked;
         toggleCheck();
@@ -122,10 +127,10 @@ public class SisoToggleButton extends LinearLayout{
     private void toggleCheck(){
         if (mIsChecked){
             id_iv_toggle_img.setImageDrawable(mSelectedImgRes);
-            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.colorContentTextPink));
+            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoAccentText));
         }else{
             id_iv_toggle_img.setImageDrawable(mNormalImgRes);
-            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.color7A7A7A));
+            id_tv_label.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoSecondaryText));
         }
 
         mIsChecked = !mIsChecked;
@@ -138,7 +143,10 @@ public class SisoToggleButton extends LinearLayout{
         return !mIsChecked;
     }
 
-    void setLabel(String str){
+    public void setLabel(String str){
         id_tv_label.setText(str);
+    }
+    public void setLabel(int strId){
+        id_tv_label.setText(strId);
     }
 }

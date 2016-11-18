@@ -1,0 +1,299 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.Sitter02EnvBabygenderFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="net.gringrid.siso.fragments.MemberModifyFragment"
+            android:orientation="vertical"
+            >
+            <!-- 회원기본정보 시작 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_30"
+                android:text="@string/word_basic_info"
+                android:paddingLeft="@dimen/content_padding_left"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/content_padding_left"
+                android:paddingRight="@dimen/content_padding_right"
+                >
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_name"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_user_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_user_type"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_email"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_birth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_birth"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_phone"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_passwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_password"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_addr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_addr"
+                    app:isVisibleArrow="true"
+                    />
+            </LinearLayout>
+            <!-- 회원기본정보 끝 -->
+
+            <!-- 돌봄기본정보 시작 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_30"
+                android:text="@string/sitter00_stage1"
+                android:paddingLeft="@dimen/content_padding_left"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/content_padding_left"
+                android:paddingRight="@dimen/content_padding_right"
+                >
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_work_exp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_work_exp"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_work_period"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_work_period"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_commute_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_commute_type"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_commute_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_commute_distance"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_schedule"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_salary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_salary"
+                    app:isVisibleArrow="true"
+                    />
+            </LinearLayout>
+            <!-- 돌봄기본정보 끝 -->
+
+            <!-- 희망근무조건 시작 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_30"
+                android:text="@string/sitter00_stage2"
+                android:paddingLeft="@dimen/content_padding_left"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/content_padding_left"
+                android:paddingRight="@dimen/content_padding_right"
+                >
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_work_env"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_work_env"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_baby_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_baby_gender"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_baby_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_baby_age"
+                    app:isVisibleArrow="true"
+                    />
+            </LinearLayout>
+            <!-- 희망근무조건 끝 -->
+
+            <!-- 시터기본정보 시작 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/line_30"
+                android:text="@string/sitter00_stage3"
+                android:paddingLeft="@dimen/content_padding_left"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/content_padding_left"
+                android:paddingRight="@dimen/content_padding_right"
+                >
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_gender"
+                    app:isVisibleArrow="false"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_children_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_children_num"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_skill"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_skill"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_nationality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_nationality"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_religion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_religion"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_education"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_education"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_license"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_license"
+                    app:isVisibleArrow="true"
+                    />
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_brief"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_brief"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_introduction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_introduction"
+                    app:isVisibleArrow="true"
+                    />
+
+                <net.gringrid.siso.views.SisoModifyItemRow
+                    android:id="@+id/id_smir_profile_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:modifyItemTitle="@string/word_profile_photo"
+                    app:isVisibleArrow="true"
+                    />
+            </LinearLayout>
+            <!-- 시터기본정보 끝 -->
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

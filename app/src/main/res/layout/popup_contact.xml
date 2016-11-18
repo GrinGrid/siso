@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="net.gringrid.siso.PopupContact"
+    android:orientation="vertical"
+    >
+    <ImageView
+        android:id="@+id/id_iv_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/detail_profile_sample"
+        />
+    <TextView
+        android:id="@+id/id_tv_brief"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="전직 유치원 교사!  아이들과 잘 놀아요!아이들과 잘 놀아요!"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_list_pay"/>
+        <TextView
+            android:id="@+id/id_tv_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시급8천원"
+            style="@style/ListEtc"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_list_review"/>
+        <TextView
+            android:id="@+id/id_tv_testimonial_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="리뷰1건"
+            style="@style/ListEtc"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:src="@drawable/ic_list_workstyle"/>
+        <TextView
+            android:id="@+id/id_tv_commute"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출퇴근형"
+            style="@style/ListEtc"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/line_30"
+        style="@style/SisoJobLine30"
+        />
+    <TextView
+        android:id="@+id/id_tv_main_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이현자 시터의 연락처 공개요청을 거절하시겠습니까?"
+        style="@style/ListName"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/line_30"
+        style="@style/SisoJobLine30"
+        />
+
+</LinearLayout>

@@ -6,21 +6,21 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -50,8 +50,16 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class PopupAddr extends Activity implements Callback<Personal>, View.OnClickListener, AdapterView.OnItemClickListener {
 
     private static final String TAG = "jiho";
+    // 한 페이지에 보여질 항목 수
+    private static final int COUNT_PER_PAGE = 10;
+    // 버튼으로 표시할 페이지 수
+    private static final int COUNT_DRAW_PAGE = 5;
+
+    private static final String JUSO_CONFIRM_KEY = "U01TX0FVVEgyMDE2MTAxMDE0MjI1MTE1NjQx";
+    private static final String JUSO_URL = "http://www.juso.go.kr/";
     private static final String DAUM_API_KEY = "20e6ba46a8a6e8c276c479edb01e473c";
-    public static final String DAUM_ADDR_URL = "http://www.siso4u.net/addr.html";
+    private static final String DAUM_API_URL = "https://apis.daum.net/local/geo/";
+//    public static final String DAUM_ADDR_URL = "http://www.siso4u.net/addr.html";
 
     private EditText id_et_search;
     private TextView id_tv_search;
@@ -62,6 +70,9 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
     private String mAddr;
     private String mLng;
     private String mLat;
+    private LinearLayout id_ll_page;
+
+    private int mCurrentPage = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,32 +88,32 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
 
         id_tv_search.setOnClickListener(this);
         id_lv.setOnItemClickListener(this);
+
+        id_ll_page = (LinearLayout)findViewById(R.id.id_ll_page);
     }
 
     private void searchJuso() {
         AddrAPI.AddrInput input = new AddrAPI.AddrInput();
-        input.confmKey = "U01TX0FVVEgyMDE2MTAxMDE0MjI1MTE1NjQx";
+        input.confmKey = JUSO_CONFIRM_KEY;
         input.keyword = id_et_search.getText().toString();
-        input.currentPage = 1;
-        input.countPerPage = 100;
-        String url = "http://www.juso.go.kr/";
+        input.currentPage = mCurrentPage;
+        input.countPerPage = COUNT_PER_PAGE;
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(JUSO_URL)
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .build();
 
         AddrAPI api = retrofit.create(AddrAPI.class);
         Call<AddrAPI.AddrOutput> call = api.getAddr(input.currentPage, input.countPerPage, input.keyword, input.confmKey);
-//        Call<AddrAPI.AddrOutput> call = api.getAddr(input);
         call.enqueue(new Callback<AddrAPI.AddrOutput>() {
             @Override
             public void onResponse(Call<AddrAPI.AddrOutput> call, Response<AddrAPI.AddrOutput> response) {
+                drawPage(response.body().common);
                 Log.d(TAG, "onResponse: ADDR onResponse : "+response.body().toString());
                 AddrAPI.AddrOutput output = response.body();
                 mAdapter = new AddrAdapter(PopupAddr.this, output);
                 id_lv.setAdapter(mAdapter);
-//                Log.d(TAG, "onResponse: size : "+output.juso.size());
             }
 
             @Override
@@ -116,6 +127,7 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.id_tv_search:
+                mCurrentPage = 1;
                 searchJuso();
                 hideSoftKeyboard();
                 break;
@@ -133,7 +145,7 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
                 .registerTypeAdapter(Personal.class, new MyDeserializer())
                 .create();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(MemberAPI.DAUM_API_URL)
+                .baseUrl(DAUM_API_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         MemberAPI memberAPI = retrofit.create(MemberAPI.class);
@@ -181,6 +193,73 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
         if ( view != null ){
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    private void drawPage(AddrAPI.Common common){
+        int totalCount = Integer.parseInt(common.totalCount);
+        // 총 페이지 구하기
+        int totalPage = (int)Math.ceil(totalCount / (float)COUNT_PER_PAGE);
+        int currentPageGroup = (mCurrentPage-1) / COUNT_DRAW_PAGE;
+        int toPageNum = (currentPageGroup*COUNT_DRAW_PAGE)+COUNT_DRAW_PAGE < totalPage ? (currentPageGroup*COUNT_DRAW_PAGE)+COUNT_DRAW_PAGE : totalPage;
+        id_ll_page.removeAllViews();
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(20,0,20,0);
+
+        Log.d(TAG, "totalPage : "+totalPage);
+        Log.d(TAG, "currentPageGroup : "+currentPageGroup);
+        Log.d(TAG, "toPageNum : "+toPageNum);
+        Log.d(TAG, "currentPageGroup : "+currentPageGroup*COUNT_DRAW_PAGE);
+
+        if(mCurrentPage > 1) {
+            ImageView previousIv = new ImageView(this);
+            previousIv.setLayoutParams(lp);
+            previousIv.setImageResource(R.drawable.ic_zipcode_previous);
+            id_ll_page.addView(previousIv);
+            previousIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentPage--;
+                    searchJuso();
+                }
+            });
+        }
+
+        for(int i=currentPageGroup*COUNT_DRAW_PAGE; i<toPageNum; i++){
+            final int fi = i+1;
+            TextView pageItem = new TextView(this);
+            pageItem.setLayoutParams(lp);
+            pageItem.setGravity(Gravity.CENTER);
+            pageItem.setText(String.valueOf(fi));
+            if(fi==mCurrentPage){
+                pageItem.setBackgroundResource(R.drawable.ic_zipcode_green);
+            }else{
+                pageItem.setBackgroundResource(R.drawable.ic_zipcode);
+            }
+            id_ll_page.addView(pageItem);
+            pageItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentPage = fi;
+                    searchJuso();
+                }
+            });
+        }
+
+        if(mCurrentPage < totalPage){
+            ImageView nextIv = new ImageView(this);
+            nextIv.setLayoutParams(lp);
+            nextIv.setImageResource(R.drawable.ic_zipcode_next);
+            id_ll_page.addView(nextIv);
+            nextIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCurrentPage++;
+                    searchJuso();
+                }
+            });
+
         }
     }
 }

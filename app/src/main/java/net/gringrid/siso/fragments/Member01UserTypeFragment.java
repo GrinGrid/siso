@@ -22,13 +22,11 @@ import net.gringrid.siso.util.SharedData;
 /**
  * 회원가입 > 시터/부모 선택
  */
-public class Member01UserTypeFragment extends Fragment implements View.OnClickListener {
+public class Member01UserTypeFragment extends InputBaseFragment{
 
     private static final String TAG = "jiho";
     LinearLayout ll_parent;
     LinearLayout ll_sitter;
-
-    User mUser;
 
     public Member01UserTypeFragment() {
         // Required empty public constructor
@@ -36,7 +34,6 @@ public class Member01UserTypeFragment extends Fragment implements View.OnClickLi
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        mUser = SharedData.getInstance(getContext()).getUserData();
         super.onCreate(savedInstanceState);
     }
 
@@ -44,32 +41,57 @@ public class Member01UserTypeFragment extends Fragment implements View.OnClickLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_member1, container, false);
+        return inflater.inflate(R.layout.fragment_member01_user_type, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
         ll_parent = (LinearLayout)view.findViewById(R.id.ll_parent);
         ll_sitter = (LinearLayout)view.findViewById(R.id.ll_sitter);
 
         ll_parent.setOnClickListener(this);
         ll_sitter.setOnClickListener(this);
-        return view;
+        super.onViewCreated(view, savedInstanceState);
     }
+
+
 
     @Override
     public void onClick(View v) {
 
-        Member02NameBirthFragment fragment = new Member02NameBirthFragment();
-
         switch (v.getId()){
             case  R.id.ll_parent:
-                ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
                 mUser.personalInfo.user_type = User.USER_TYPE_PARENT;
                 break;
             case  R.id.ll_sitter:
-                ((BaseActivity)getActivity()).setFragment(fragment, R.string.member_title);
                 mUser.personalInfo.user_type = User.USER_TYPE_SITTER;
                 break;
         }
-        SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
 
+        saveData();
+    }
+
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected void saveData() {
+        SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
+        moveNext();
+    }
+
+    @Override
+    protected boolean isValidInput() {
+        return false;
+    }
+
+    @Override
+    protected void moveNext() {
+        Member02NameBirthFragment fragment = new Member02NameBirthFragment();
+        ((BaseActivity)getActivity()).setFragment(fragment, BaseActivity.TITLE_KEEP);
     }
 
     @Override

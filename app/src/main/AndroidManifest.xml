@@ -60,6 +60,11 @@
         <activity
             android:name=".PopupAddr"
             android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".SisoDialog" />
+        <activity android:name=".PopupContact"
+            android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity android:name=".PopupContactRequest"
+            android:theme="@style/Theme.AppCompat.Dialog" />
     </application>
 
 </manifest>

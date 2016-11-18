@@ -1,0 +1,67 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.Sitter03GenderChildrenFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            >
+
+            <net.gringrid.siso.views.SisoInputProgress
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:total_stage="3"
+                app:current_stage="2">
+            </net.gringrid.siso.views.SisoInputProgress>
+
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_brief"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:label="@string/common_sitter_brief"
+                app:input="@string/common_sitter_brief_hint"
+                >
+            </net.gringrid.siso.views.SisoEditText>
+            <net.gringrid.siso.views.SisoEditText
+                android:id="@+id/id_et_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:label="@string/common_sitter_introduce"
+                app:input="@string/common_sitter_introduce_hint"
+                >
+            </net.gringrid.siso.views.SisoEditText>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>
+

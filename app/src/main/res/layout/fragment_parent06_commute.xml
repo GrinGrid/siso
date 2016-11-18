@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".fragments.Sitter02GenderFragment">
+    tools:context=".fragments.Sitter03GenderChildrenFragment">
     <ScrollView
         android:id="@+id/id_sv"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@android:color/white"
-            tools:context=".fragments.Sitter02GenderFragment">
+            tools:context=".fragments.Sitter03GenderChildrenFragment">
 
             <net.gringrid.siso.views.SisoInputProgress
                 android:layout_width="match_parent"
@@ -35,13 +35,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sitter5_commute"
+                android:text="@string/common_parent_commute"
                 style="@style/SisoJobTitle"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/sitter5_commute_comment"
+                android:text="@string/common_parent_commute_comment"
                 style="@style/SisoJobTitleComment"
                 />
 
@@ -58,7 +58,7 @@
                     android:layout_weight="1"
                     app:toggle_normal="@drawable/tg_ic_walk_normal"
                     app:toggle_selected="@drawable/tg_ic_walk_selected"
-                    app:toggleLabel="@string/sitter5_tg_commute"
+                    app:toggleLabel="@string/common_tg_commute"
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
                 <net.gringrid.siso.views.SisoToggleButton
@@ -68,7 +68,7 @@
                     android:layout_weight="1"
                     app:toggle_normal="@drawable/tg_ic_stroller_normal"
                     app:toggle_selected="@drawable/tg_ic_stroller_selected"
-                    app:toggleLabel="@string/sitter5_tg_myhome"
+                    app:toggleLabel="@string/common_tg_myhome"
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
                 <net.gringrid.siso.views.SisoToggleButton
@@ -78,7 +78,7 @@
                     android:layout_weight="1"
                     app:toggle_normal="@drawable/tg_ic_nightcare_normal"
                     app:toggle_selected="@drawable/tg_ic_nightcare_selected"
-                    app:toggleLabel="@string/sitter5_tg_regident"
+                    app:toggleLabel="@string/common_tg_regident"
                     >
                 </net.gringrid.siso.views.SisoToggleButton>
             </LinearLayout>

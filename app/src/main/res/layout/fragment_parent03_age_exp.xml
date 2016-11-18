@@ -1,0 +1,112 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.Sitter03GenderChildrenFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Sitter03GenderChildrenFragment">
+
+            <net.gringrid.siso.views.SisoInputProgress
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:total_stage="4"
+                app:current_stage="1">
+            </net.gringrid.siso.views.SisoInputProgress>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SisoJobTitle"
+                android:text="@string/parent03_sitter_exp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SisoJobTitleComment"
+                android:text="@string/parent03_sitter_exp_comment"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sitter_work_experience"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+            <net.gringrid.siso.views.SisoPicker
+                android:id="@+id/id_pk_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                app:data_list="@array/picker_work_year"
+                app:default_idx="0"
+                >
+            </net.gringrid.siso.views.SisoPicker>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/line_30"
+                style="@style/SisoJobLine30"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parent03_sitter_age"
+                style="@style/SisoJobTitle"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SisoJobTitleComment"
+                android:text="@string/parent03_sitter_age_comment"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_sitter_work_experience"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"/>
+
+            <net.gringrid.siso.views.SisoPicker
+                android:id="@+id/id_pk_work_exp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                app:data_list="@array/picker_sitter_age"
+                app:default_idx="0"
+                >
+            </net.gringrid.siso.views.SisoPicker>
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>
+

@@ -7,9 +7,9 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -29,6 +29,7 @@ import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
 import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.util.SharedData;
+import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
 import retrofit2.Call;
@@ -40,7 +41,7 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 /**
  * 회원가입 > 주소
  */
-public class Member05AddrFragment extends Fragment implements View.OnClickListener{
+public class Member05AddrFragment extends InputBaseFragment{
 
     private static final String TAG = "jiho";
     private static final int ACTIVITY_ADDR_REQUEST_CODE = 0;
@@ -68,7 +69,12 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_member5, container, false);
+        return inflater.inflate(R.layout.fragment_member05_addr, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setScrollControl(view);
 
         id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
@@ -87,7 +93,50 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
 
         id_tv_post_search_btn = (TextView)view.findViewById(R.id.id_tv_post_search_btn);
         id_tv_post_search_btn.setOnClickListener(this);
-        return view;
+
+        loadData();
+    }
+
+    @Override
+    protected void loadData() {
+        if ( SharedData.DEBUG_MODE ) {
+            id_et_addr2.setInput("상세주소 4504호");
+            mUser.personalInfo.addr2 = id_et_addr2.getText().toString();
+        }
+
+        if(!TextUtils.isEmpty(mUser.personalInfo.post_no)){
+            id_et_post_no.setInput(mUser.personalInfo.post_no);
+        }
+        if(!TextUtils.isEmpty(mUser.personalInfo.addr1)){
+            id_et_addr1.setInput(mUser.personalInfo.addr1);
+        }
+        if(!TextUtils.isEmpty(mUser.personalInfo.post_no)){
+            id_et_addr2.setInput(mUser.personalInfo.addr2);
+        }
+
+    }
+
+    @Override
+    protected boolean isValidInput() {
+        if (TextUtils.isEmpty(id_et_post_no.getText()) ||
+                TextUtils.isEmpty(id_et_addr1.getText()) ||
+                TextUtils.isEmpty(id_et_addr2.getText())
+                ){
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_addr_write);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void saveData() {
+
+    }
+
+    @Override
+    protected void moveNext() {
+        Member06CompleteFragment fragment = new Member06CompleteFragment();
+        ((BaseActivity) getActivity()).setCleanUpFragment(fragment, BaseActivity.TITLE_KEEP);
     }
 
     /**
@@ -142,23 +191,18 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
     public void onClick(View v) {
 
         switch (v.getId()){
+            // 우편번호 검색 팝업
             case R.id.id_tv_post_search_btn:
-//                Intent intent = new Intent(getActivity(), Popup.class);
-//                startActivityForResult(intent, 0);
-//                searchJuso();
                 Intent intent = new Intent(getActivity(), PopupAddr.class);
                 startActivityForResult(intent, 0);
                 break;
 
             case  R.id.id_tv_next_btn:
-                if ( SharedData.DEBUG_MODE ) {
-                    id_et_addr2.setInput("상세주소 4504호");
-                    mUser.personalInfo.addr2 = id_et_addr2.getText().toString();
-                }
-                Log.d(TAG, "onClick: call Member : "+mUser.personalInfo.toString());
+
+                if(!isValidInput()) return;
 
                 mUser.personalInfo.push_id = FirebaseInstanceId.getInstance().getToken();
-                // TODO input 체크
+
                 executeSignUp();
                 break;
         }
@@ -197,6 +241,9 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
         });
     }
 
+    /**
+     * 회원가입 실행
+     */
     private void executeSignUp() {
         SisoClient client = ServiceGenerator.getInstance(getActivity()).createService(SisoClient.class);
         Call<User> call = client.signUp(mUser);
@@ -212,10 +259,10 @@ public class Member05AddrFragment extends Fragment implements View.OnClickListen
                     SharedData.getInstance(getContext()).insertGlobalData(SharedData.SESSION_KEY, response.headers().get(SharedData.SESSION_KEY));
                     SharedData.getInstance(getContext()).setObjectData(SharedData.USER, response.body());
 
+
                     Log.d(TAG, "onResponse message : "+response.code());
                     Log.d(TAG, "onResponse message : "+response.message());
-                    Member06CompleteFragment fragment = new Member06CompleteFragment();
-                    ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.member_title);
+                    moveNext();
 
                 }else{
                     APIError error = ErrorUtils.parseError(response);

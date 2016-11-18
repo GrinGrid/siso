@@ -31,21 +31,30 @@
         android:padding="0dp"
         android:background="@drawable/popup_bottom_back"
         >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/SisoJobTitle"
+            android:text="@string/popup_addr_title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             >
             <EditText
                 android:id="@+id/id_et_search"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/color333333"
-                android:hint="예)논현로 102"
+                android:textColor="@color/sisoSecondaryText"
+                android:hint="@string/popup_addr_hint"
+                android:textColorHint="@color/sisoDisableText"
                 />
             <TextView
                 android:id="@+id/id_tv_search"
@@ -65,8 +74,22 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="10dp"
+            >
         </ListView>
+
+        <LinearLayout
+            android:id="@+id/id_ll_page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            >
+        </LinearLayout>
 
     </LinearLayout>
 </LinearLayout>

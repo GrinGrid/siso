@@ -1,5 +1,8 @@
 package net.gringrid.siso.models;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
  * Created by choijiho on 16. 9. 13..
  */
@@ -8,20 +11,20 @@ public class Child {
     public String name;
 
     // 생년월일
-    public int birth;
+    public String birth;
 
     // 성별
-    public int gender;
+    public String gender;
 
     // 돌봄필요여부
-    public int isCare;
+    public String is_care;
 
     // 출산예정여부
-    public int isExpect;
+    public String is_expect;
 
     @Override
     public String toString() {
-        String str = "name : "+name+", birth : "+birth+", gender : "+gender+", isCare : "+isCare+", isExpect : "+isExpect;
-        return str;
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(this);
     }
 }

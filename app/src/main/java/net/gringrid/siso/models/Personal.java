@@ -39,10 +39,9 @@ public class Personal{
     public String last_login;
     // 푸시아이디
     public String push_id;
-    // 직업 (부모만 사용)
-    public String job;
-    // 회사명 (부모만 사용)
-    public String job_detail;
+    // 후기갯수
+    public String testimonial_count;
+
 
     @Override
     public String toString() {

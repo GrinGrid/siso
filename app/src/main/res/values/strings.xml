@@ -2,11 +2,38 @@
     <string name="app_name">SISO</string>
 
     <!-- Word -->
+    <string name="word_basic_info">회원기본정보</string>
     <string name="word_name">이름</string>
+    <string name="word_user_type">회원구분</string>
+    <string name="word_email">이메일</string>
     <string name="word_birth">생년월일</string>
+    <string name="word_phone">휴대폰번호</string>
+    <string name="word_password">비밀번호</string>
+    <string name="word_addr">주소</string>
     <string name="word_care_yn">돌봄희망</string>
     <string name="word_birth_name">태명</string>
     <string name="word_birth_exp_day">출산예정일</string>
+
+    <string name="word_work_exp">아이돌봄 경험</string>
+    <string name="word_skill">아이돌봄 특기</string>
+    <string name="word_baby_gender">돌봄 아동 성별</string>
+    <string name="word_baby_age">돌봄 아동 연령</string>
+    <string name="word_commute_type">출퇴근 유형</string>
+    <string name="word_commute_distance">출퇴근 거리</string>
+    <string name="word_salary">희망 시급(급여)</string>
+    <string name="word_schedule">근무스케줄</string>
+    <string name="word_work_period">근무가능기간</string>
+    <string name="word_work_env">희망 근무 조건</string>
+    <string name="word_gender">성별</string>
+    <string name="word_children_num">자녀수</string>
+    <string name="word_nationality">국적</string>
+    <string name="word_religion">종교</string>
+    <string name="word_education">학력</string>
+    <string name="word_license">자격증</string>
+    <string name="word_brief">자기소개 한줄</string>
+    <string name="word_introduction">자기소개</string>
+    <string name="word_profile_photo">프로필 사진</string>
+
 
     <!-- Sitter List Tab -->
     <string name="sitter_list_tab_siso">시소추천</string>
@@ -24,37 +51,30 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_base">BaseActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="member_1_guide_text">[가이드-1] 몇개의 단계를\n거쳐 3분안에 새 계정을\n만들 수 있습니다.\n 서비스별로 최적화된\n맞춤 정보를 알려드립니다</string>
-    <string name="member_1_select_type">이용하실 서비스를 선택해주세요.</string>
-    <string name="title_activity_member">MemberActivity</string>
-
-    <!-- Guide Text -->
-    <string name="member_2_passwd_info"> 비밀번호에는 최소 6자 이상의 문자, 숫자 및 기호가\n 포함되어야 합니다. </string>
-    <string name="member_5_terms_info">아래 가입완료 버튼을 누르면 시소 이용 약관에 동의하고\n 개인정보보호 정책을 읽고 이해하신 것으로 간주됩니다.\n 시소에서 구인/구직 현황관리를 하실 수 있으며\n 알림 메시지를 받을 수 있으며\n 언제든지 수신을 거부할 수 있습니다.</string>
-
     <!-- Fragment Title -->
     <string name="member_title">무료 회원가입</string>
     <string name="login_title">로그인</string>
     <string name="find_email_title">이메일 찾기</string>
     <string name="find_password_title">비밀번호 찾기</string>
-    <string name="sitter_title">시터정보 등록하기</string>
-    <string name="parent_title">부모님정보 등록하기</string>
-    <string name="sitter_basic_title">기본정보</string>
-    <string name="sitter_wish_title">희망 근무 조건</string>
-    <string name="sitter_introduce_title">자기소개하기</string>
-    <string name="sitter_photo_title">프로필 사진등록</string>
-    <string name="parent_index_title">구인정보 등록하기</string>
+    <string name="sitter_title">시터 정보 등록하기</string>
+    <string name="parent_title">부모 정보 등록하기</string>
+
+    <string name="sitter_basic_title">시터 정보 등록하기</string>
+    <string name="parent_index_title">구인 정보 등록하기</string>
     <string name="parent_chdrn_title">돌봄 아동 정보 입력</string>
 
     <!-- Siso Editbox -->
     <string name="required">필수</string>
 
-    <!-- Siso Button -->
-    <string name="btn_next">다음</string>
-    <string name="btn_confirm">확인</string>
+    <!-- Siso common button -->
+    <string name="btn_next">다 음</string>
+    <string name="btn_confirm">확 인</string>
+    <string name="btn_cancel">취 소</string>
+    <string name="btn_login">로그인</string>
+    <string name="btn_request">요 청</string>
+    <string name="btn_reject">거 절</string>
+    <string name="btn_delete">삭 제</string>
+    <string name="btn_accept">수 락</string>
 
     <!-- Timetable -->
     <string name="section">구분</string>
@@ -81,7 +101,7 @@
     <string name="salary_day">평균일당 : </string>
     <string name="salary_month">월급 : </string>
     <string name="salary_week">주급 : </string>
-    <string name="salary_week_divide">/ 7</string>
+    <string name="salary_week_divide">/ 5</string>
     <string name="salary_hour">시간 * </string>
     <string name="salary_21_day">* 21일(월평균일수)</string>
     <string name="equal">=</string>
@@ -92,12 +112,54 @@
     <string name="input_type_email">email</string>
     <string name="input_type_phone">phone</string>
 
+    <!-- 로그인 화면 -->
     <string name="login_find_email">이메일 찾기</string>
     <string name="login_find_password">비밀번호 찾기</string>
     <string name="title_activity_root">RootActivity</string>
 
+    <!-- 주소 팝업창 -->
+    <string name="popup_addr_hint">예) 논현로 102</string>
+    <string name="popup_addr_title">도로명 주소나 동이름을 입력해주세요</string>
+
 
     <!-- 회원가입 정보 입력 -->
+    <string name="member01_guide">다섯 단계의 간단한\n 절차만으로 ‘시소’의 모든\n 서비스를 무료로\n 이용하실 수 있습니다.</string>
+    <string name="member01_select_user_type">이용하실 서비스를 선택해주세요.</string>
+    <string name="member01_select_user_type_comment">서비스별 맞춤 구인/구직 정보를 소개해드립니다</string>
+    <string name="member01_user_typer_parent">부모회원</string>
+    <string name="member01_user_typer_sitter">시터회원</string>
+    <string name="member02_title">당신은 누구신가요?</string>
+    <string name="member02_guide">상대방에게 신뢰감을 주기 위해\n반드시 실명과 실제 생일을 사용하세요</string>
+    <string name="member02_et_name_label">이름이 무엇인가요?</string>
+    <string name="member02_et_name_hint">홍길순</string>
+    <string name="member02_et_birth_label">생년월일은 언제인가요?</string>
+    <string name="member02_et_birth_hint">19801022</string>
+    <string name="member03_title">로그인에 필요한\n정보를 입력해주세요</string>
+    <string name="member03_guide">이메일과 비밀번호는 다른사람이\n 회원님의 계정을 사용하지 못하도록\n 도와줍니다. 신중하게 입력해주세요</string>
+    <string name="member03_et_email_label">이메일 주소를 입력해주세요</string>
+    <string name="member03_et_email_hint">siso@gringrid.net</string>
+    <string name="member03_et_password_label">사용하실 비밀번호를 입력해주세요</string>
+    <string name="member03_et_password_hint">******</string>
+    <string name="member03_passwd_guide"> 비밀번호에는 최소 6자 이상의 문자, 숫자 및 기호가\n 포함되어야 합니다. </string>
+    <string name="member04_title">휴대폰 번호를\n입력해주세요</string>
+    <string name="member04_guide">본인 확인을 위해 필요하며\n 본인 동의 없이 상대방에게\n 공개되지 않으니 안심하세요</string>
+    <string name="member04_btn_receive_auth_num">인증번호 받기</string>
+    <string name="member04_et_phone_label">휴대폰 번호를 입력해주세요</string>
+    <string name="member04_et_phone_hint">01012345678</string>
+    <string name="member04_et_auth_num_hint">인증번호를 입력해주세요</string>
+    <string name="member05_title">주소를 입력해주세요</string>
+    <string name="member05_guide">가까운 거리에 시터와 일자리를\n 우선으로 찾아드립니다\n 개인정보 보호를 위해\n 상세주소는 노출되지 않으니 안심하세요</string>
+    <string name="member05_btn_post_no_search">거주지 우편번호 검색</string>
+    <string name="member05_et_post_no_hint">우편번호</string>
+    <string name="member05_et_addr1_hint">서울특별시 강남구 논현로 102길 27</string>
+    <string name="member05_et_addr2_hint">상세주소 입력</string>
+    <string name="member05_terms_info">아래 가입완료 버튼을 누르면 시소 이용 약관에 동의하고\n 개인정보보호 정책을 읽고 이해하신 것으로 간주됩니다.\n 시소에서 구인/구직 현황관리를 하실 수 있으며\n 알림 메시지를 받을 수 있으며\n 언제든지 수신을 거부할 수 있습니다.</string>
+    <string name="member06_title">축하합니다요</string>
+    <string name="member06_guide">웰컴투 시소월드 ~ </string>
+    <string name="postno_search_guide">도로명 주소나 동이름을 입력해주세요</string>
+    <string name="postno_search_hint">논현로 102길 27</string>
+
+    <string name="title_activity_member">MemberActivity</string>
     <string name="member04_job_title">직업을\n입력해주세요</string>
     <string name="member04_job_title_comment">직업을 입력해야 시소가 먹고 살아요. 부탁드립니다. 제발 입력해주세요.</string>
     <string name="member04_job_tg_officer">직장인</string>
@@ -106,30 +168,74 @@
     <string name="member04_job_tg_student">학생</string>
     <string name="member04_job_tg_write">직접입력</string>
 
+    <!-- 공통 화면 -->
+    <string name="common_sitter_skill">시터로서의 매력을 뽐내보세요</string>
+    <string name="common_sitter_skill_comment">아이를 돌볼 때 자신있는 분야를 선택해주세요</string>
+    <string name="common_sitter_tg_skill_care">아이돌봄을\n잘해요</string>
+    <string name="common_sitter_tg_skill_baby">베이비시터\n(아기전문 돌봄)</string>
+    <string name="common_sitter_tg_skill_outdoor">야외놀이를\n잘해요</string>
+    <string name="common_sitter_tg_skill_housekeeping">살림을\n잘해요</string>
+    <string name="common_sitter_tg_skill_homework">숙제를\n잘 도와줘요</string>
+    <string name="common_sitter_tg_skill_commute">등하원돌봄을\n잘해요</string>
+    <string name="common_sitter_tg_skill_cook">요리를\n잘해요</string>
+    <string name="common_sitter_tg_skill_foreign_language">외국어를\n잘해요</string>
+    <string name="common_sitter_tg_skill_music_physical">예체능을\n잘해요</string>
+    <string name="common_parent_skill">시터로서의 매력을 뽐내보세요</string>
+    <string name="common_parent_skill_comment">아이를 돌볼 때 자신있는 분야를 선택해주세요</string>
+    <string name="common_parent_tg_skill_care">아이돌봄을\n잘해요</string>
+    <string name="common_parent_tg_skill_baby">베이비시터\n(아기전문 돌봄)</string>
+    <string name="common_parent_tg_skill_outdoor">야외놀이를\n잘해요</string>
+    <string name="common_parent_tg_skill_housekeeping">살림을\n잘해요</string>
+    <string name="common_parent_tg_skill_homework">숙제를\n잘 도와줘요</string>
+    <string name="common_parent_tg_skill_commute">등하원돌봄을\n잘해요</string>
+    <string name="common_parent_tg_skill_cook">요리를\n잘해요</string>
+    <string name="common_parent_tg_skill_foreign_language">외국어를\n잘해요</string>
+    <string name="common_parent_tg_skill_music_physical">예체능을\n잘해요</string>
+    <string name="common_sitter_commute">출퇴근 형태를 선택해주세요</string>
+    <string name="common_sitter_commute_comment">선호하는 출퇴근 형태를 선택해주세요</string>
+    <string name="common_sitter_distance">출퇴근 가능 거리를 선택해주세요</string>
+    <string name="common_sitter_distance_comment">출퇴근 가능 거리의 일자리를 우선적으로 소개해드립니다</string>
+    <string name="common_parent_commute">선호하는 시터 출퇴근 형태를 선택해주세요</string>
+    <string name="common_parent_commute_comment">선호하는 출퇴근 형태를 우선적으로 소개해드립니다</string>
+    <string name="common_parent_distance">출퇴근 가능 거리를 선택해주세요</string>
+    <string name="common_parent_distance_comment">출퇴근 가능 거리의 시터를 우선적으로 소개해드립니다</string>
+    <string name="common_tg_commute">출퇴근형\n(아이집에서 돌봄)</string>
+    <string name="common_tg_regident">입주형</string>
+    <string name="common_tg_myhome">재택형\n(시터집에서 돌봄)</string>
+    <string name="common_sitter_brief">나를 한줄로 표현해보세요!(20자 이내)</string>
+    <string name="common_sitter_brief_hint">예)유치원교사 10년 출신시터예요 ~</string>
+    <string name="common_sitter_introduce">시터로서의 매력을 어필해보세요(100자 이내)</string>
+    <string name="common_sitter_introduce_hint">자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다 자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다</string>
+    <string name="common_parent_brief">구인 정보를 한줄로 정리하자면?</string>
+    <string name="common_parent_brief_hint">예)유치원교사 10년 출신시터예요 ~</string>
+    <string name="common_parent_introduce">기타 구인 조건을 입력하세요</string>
+    <string name="common_parent_introduce_hint">자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다 자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다</string>
 
     <!-- 시터 구직정보 입력 -->
-    <string name="sitter1_stage1_title">시터 기본 정보</string>
-    <string name="sitter1_stage2_title">희망 근무조건</string>
-    <string name="sitter1_stage3_title">자기소개하기</string>
-    <string name="sitter1_stage4_title">프로필 사진 등록</string>
-    <string name="sitter1_stage1_title_comment">시터가 되기 위한 기본정보를 입력해주세요</string>
-    <string name="sitter1_stage2_title_comment">희망근무조건 서브타이틀</string>
-    <string name="sitter1_stage3_title_comment">시터로서의 매력을 어필해보세요</string>
-    <string name="sitter1_stage4_title_comment">시터가 되기 위한 기본정보를 입력해주세요</string>
-    <string name="sitter2_gender">성별을 입력해주세요</string>
-    <string name="sitter2_tg_gender_woman">여성입니다</string>
-    <string name="sitter2_tg_gender_man">남성입니다</string>
-    <string name="sitter2_gender_man">성별을 입력해주세요</string>
-    <string name="sitter2_children">자녀 정보를 입력해주세요</string>
-    <string name="sitter2_children_comment">아이를 키운 경험은 시터가 되기에 충분한 조건입니다</string>
-    <string name="sitter2_children_daughter">딸은 몇명인가요?</string>
-    <string name="sitter2_children_son">아들은 몇명인가요?</string>
-    <string name="sitter3_sitter_work">시터 경력</string>
-    <string name="sitter3_sitter_work_comment">시터 및 아이돌봄 경력이 있으면 입력해주세요</string>
-    <string name="sitter3_term">근무기간 설정</string>
-    <string name="sitter3_term_comment">시터 및 아이돌봄 경력이 있으면 입력해주세요</string>
-    <string name="sitter3_tg_term_now">즉시 가능합니다</string>
-    <string name="sitter3_tg_term_day">특정기간에만\n근무할 수 있어요</string>
+    <string name="sitter00_title">시터가 되어 보세요!</string>
+    <string name="sitter00_guide">아이들을 좋아하고\n육아 경험이 있는 분이라면\n시터가 될 수 있습니다\n구직정보를 성실히 입력하시면\n자신에게 맞는 일자리를\n무료로 소개받을 수 있습니다</string>
+    <string name="sitter00_stage1">돌봄 기본 정보 등록</string>
+    <string name="sitter00_stage2">희망 근무 조건 등록</string>
+    <string name="sitter00_stage3">시터 정보 등록</string>
+    <string name="sitter00_stage4">프로필 사진 등록</string>
+    <string name="sitter00_stage1_comment">거리, 시급 등 구직에 필요한 정보를 등록하세요</string>
+    <string name="sitter00_stage2_comment">근무환경, 희망 돌봄 아동을 선택해보세요</string>
+    <string name="sitter00_stage3_comment">특기, 전공 등 시터로서의 매력을 어필해보세요</string>
+    <string name="sitter00_stage4_comment">사진을 등록하여 호감도를 높여보세요</string>
+    <string name="sitter03_gender">시터님 성별을 입력해주세요</string>
+    <string name="sitter03_tg_gender_woman">여성입니다</string>
+    <string name="sitter03_tg_gender_man">남성입니다</string>
+    <string name="sitter03_children">시터의 정보를 입력해주세요</string>
+    <string name="sitter03_children_comment">아이를 키운 경험은 시터가 되기에 유리한 조건입니다</string>
+    <!-- TODO 자녀가 없는 사람들의 소외감 -->
+    <string name="sitter03_children_daughter">딸은 몇명인가요?</string>
+    <string name="sitter03_children_son">아들은 몇명인가요?</string>
+    <string name="sitter01_exp">아이 돌봄 경력이 있나요?</string>
+    <string name="sitter01_exp_comment">시터, 유치원교사 등 자녀 양육 이외에\n아이돌봄 경력을 선택해주세요</string>
+    <string name="sitter01_term">근무 가능 기간은 언제인가요?</string>
+    <string name="sitter01_term_comment">기간, 시간대등을 구체적으로 등록하시면\n원하는 시간대의 일자리를 우선적으로 소개해드립니다</string>
+    <string name="sitter01_tg_term_now">상관없음</string>
+    <string name="sitter01_tg_term_day">특정기간에만\n근무할 수 있어요</string>
     <string name="sitter3_sub1_calendar_start">시작일을 선택해주세요</string>
     <string name="sitter3_sub1_calendar_end">종료일을 선택해주세요</string>
     <string name="sitter3_sub1_no_matter">상관 없음</string>
@@ -137,25 +243,7 @@
     <string name="sitter3_sub1_end">종료일 지정</string>
     <string name="sitter3_sub1_from_noproblem">시작일 상관없음</string>
     <string name="sitter3_sub1_to_noproblem">종료일 상관없음</string>
-    <string name="sitter4_skill">아이돌봄 특기</string>
-    <string name="sitter4_skill_comment">아이돌봄 특기 블라블라</string>
-    <string name="sitter4_tg_skill_care">아이돌봄을\n잘해요</string>
-    <string name="sitter4_tg_skill_baby">베이비시터\n(아기전문 돌봄)</string>
-    <string name="sitter4_tg_skill_outdoor">야외놀이를\n잘해요</string>
-    <string name="sitter4_tg_skill_housekeeping">살림을\n잘해요</string>
-    <string name="sitter4_tg_skill_homework">숙제를\n잘 도와줘요</string>
-    <string name="sitter4_tg_skill_commute">등하원돌봄을\n잘해요</string>
-    <string name="sitter4_tg_skill_cook">요리를\n잘해요</string>
-    <string name="sitter4_tg_skill_foreign_language">외국어를\n잘해요</string>
-    <string name="sitter4_tg_skill_music_physical">예체능을\n잘해요</string>
-    <string name="sitter5_commute">출퇴근 방법을 정해주세요</string>
-    <string name="sitter5_commute_comment">출퇴근방법 블라블라</string>
-    <string name="sitter5_tg_commute">출퇴근형\n(아이집에서 돌봄)</string>
-    <string name="sitter5_tg_regident">입주형</string>
-    <string name="sitter5_tg_myhome">재택형\n(시터집에서 돌봄)</string>
-    <string name="sitter5_distance">출퇴근 가능 거리를 선택하세요</string>
-    <string name="sitter5_distance_comment">출퇴근 가능 거리 블라블라</string>
-    <string name="sitter5_sub1_schedule">근무 가능한 시간을 터치해주세요</string>
+    <string name="sitter5_sub1_schedule">희망 근무 시간대를 터치해주세요</string>
     <string name="sitter5_sub1_salary">희망 시급을 설정해주세요</string>
     <string name="sitter5_sub1_salary_comment">수익을 미리 알아볼 수 있습니다/면접후 결정/면접비요청</string>
     <string name="sitter5_sub1_calculator">예상 수익 자동 계산기</string>
@@ -167,52 +255,55 @@
     <string name="sitter5_sub2_tg_weekend">주말도 가능해요</string>
     <string name="sitter5_sub2_salary">희망 월급여를 설정해주세요</string>
     <string name="sitter5_sub2_salary_comment">수익을 미리 알아볼 수 있습니다/면접후 결정/면접비요청</string>
-    <string name="sitter6_env">출퇴근 방법을 정해주세요</string>
-    <string name="sitter6_env_comment">출퇴근 방법 블라블라</string>
-    <string name="sitter6_tg_env_pet">애완동물이\n있어도 괜찮아요</string>
-    <string name="sitter6_tg_env_cctv">CCTV가\n있어도 괜찮아요</string>
-    <string name="sitter6_tg_env_adult">다른 어른이\n있어도 괜찮아요</string>
-    <string name="sitter6_baby_gender">희망 돌봄 아동 성별을 선택해주세요</string>
-    <string name="sitter6_baby_gender_comment">복수선택 가능</string>
-    <string name="sitter6_tg_baby_gender_boy">남자 아이 선호</string>
-    <string name="sitter6_tg_baby_gender_girl">여자 아이 선호</string>
-    <string name="sitter7_baby_age">희망 돌봄아동 연령대를 선택해주세요</string>
-    <string name="sitter7_baby_age_comment">희망 돌봄아동 연령대 블라블라</string>
+    <string name="sitter02_env">희망 근무환경을 모두 선택해주세요</string>
+    <string name="sitter02_env_comment">면접전 미리 희망 근무환경을 알려\n근무 만족도를 높이세요</string>
+    <string name="sitter02_tg_env_pet">애완동물이\n있어도 괜찮아요</string>
+    <string name="sitter02_tg_env_cctv">CCTV가\n있어도 괜찮아요</string>
+    <string name="sitter02_tg_env_adult">다른 어른이\n있어도 괜찮아요</string>
+    <string name="sitter02_baby_gender">희망 돌봄 아동의 성별을 모두 선택해주세요</string>
+    <string name="sitter02_baby_gender_comment">좀 더 잘 돌볼수 있는 아이의 성별은 무엇인가요?</string>
+    <string name="sitter02_tg_baby_gender_boy">남자 아이 선호</string>
+    <string name="sitter02_tg_baby_gender_girl">여자 아이 선호</string>
+    <string name="sitter02_baby_age">희망 돌봄 아동의 연령대를 모두 선택해주세요</string>
+    <string name="sitter02_baby_age_comment">좀 더 잘 돌볼수 있는 아이의 연령대는 무엇인가요?</string>
+    <string name="sitter03_nat">시터 국적을 선택해주세요</string>
+    <string name="sitter03_nat_comment">면접전 국적, 비자기간등을 알려 신뢰감을 얻으세요</string>
+    <string name="sitter03_rlg">시터 종교를 선택해주세요</string>
+    <string name="sitter03_rlg_comment">돌봄 가정과 종교가 일치할 경우 구직시 도움이 됩니다</string>
+    <string name="sitter03_tg_write">직접입력</string>
+    <string name="sitter03_tg_nat_kor">대한민국</string>
+    <string name="sitter03_tg_nat_chi_kor">중국동포</string>
+    <string name="sitter03_et_nat">국적을 입력하세요</string>
+    <string name="sitter03_et_nat_visa">비자만료일을 입력하세요</string>
+    <string name="sitter03_tg_rlg_none">종교없음</string>
+    <string name="sitter03_tg_rlg_gi">기독교</string>
+    <string name="sitter03_tg_rlg_bul">불교</string>
+    <string name="sitter03_tg_rlg_choen">천주교</string>
+    <string name="sitter03_et_rlg_write">종교를 입력하세요</string>
+    <!-- 학력, 자격증 -->
+    <string name="sitter03_edu_title">시터 학력을 선택해주세요</string>
+    <string name="sitter03_edu_title_comment">아이돌봄과 관련된 정공을 이수하면 구직시 도움이 됩니다</string>
+    <string name="sitter03_et_university_name">학교명을 입력해주세요</string>
+    <string name="sitter03_et_university_dipartment">전공을 입력해주세요</string>
+    <string name="sitter03_license_title">시터 자격증을 입력해 주세요</string>
+    <string name="sitter03_license_title_comment">아이돌봄과 관련된 자격이 있다면 구직시 도움이 됩니다</string>
+    <string name="sitter03_et_license">자격증을 입력해주세요</string>
+    <string name="sitter03_tg_edu_none">비공개</string>
+    <string name="sitter03_tg_edu_elementary">초등학교 졸업</string>
+    <string name="sitter03_tg_edu_middle">중학교 졸업</string>
+    <string name="sitter03_tg_edu_high">고등학교 졸업</string>
+    <string name="sitter03_tg_edu_university_in_school">대학교 재학</string>
+    <string name="sitter03_tg_edu_university">대학교 졸업</string>
+
     <string name="sitter7_tg_baby_age_0">신생아 돌봄\n(0~6개월)</string>
     <string name="sitter7_tg_baby_age_1">영아 돌봄\n(6개월~3세)</string>
     <string name="sitter7_tg_baby_age_2">유아 돌봄\n(3~5세)</string>
-    <string name="sitter7_tg_baby_age_3">유치부 돌봄\n(5~7세)</string>
+    <string name="sitter7_tg_baby_age_3">유치부 아동 돌봄\n(5~7세)</string>
     <string name="sitter7_tg_baby_age_4">초등학생 돌봄\n(8세 이상)</string>
     <string name="sitter8_religion">종교를 선택해주세요</string>
     <string name="sitter8_religion_comment">종교를 선택해주세요 블라</string>
     <string name="sitter8_nationality">국적을 입력해주세요</string>
     <string name="sitter8_nationality_comment">국적을 입력해주세요 블라블라</string>
-    <string name="sitter8_tg_write">직접입력</string>
-    <string name="sitter8_tg_nat_kor">대한민국</string>
-    <string name="sitter8_tg_nat_chi_kor">중국동포</string>
-    <string name="sitter8_et_nat_visa">비자만료일을 입력하세요</string>
-    <string name="sitter8_tg_rlg_none">종교없음</string>
-    <string name="sitter8_tg_rlg_gi">기독교</string>
-    <string name="sitter8_tg_rlg_bul">불교</string>
-    <string name="sitter8_tg_rlg_choen">천주교</string>
-    <string name="sitter8_et_rlg_write">종교를 입력하세요</string>
-    <string name="sitter9_brief">나를 한줄로 표현해보세요!(20자 이내)</string>
-    <string name="sitter9_brief_sample">예)유치원교사 10년 출신시터예요 ~</string>
-    <string name="sitter9_introduce">시터로서의 매력을 어필해보세요(100자 이내)</string>
-    <string name="sitter9_introduce_sample">자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다 자기소개를 입력하는 영역입니다 총 200까지 입력이 가능합니다</string>
-    <string name="sitter10_edu_title">학력을 입력해주세요</string>
-    <string name="sitter10_edu_title_comment">학력 블라블라</string>
-    <string name="sitter10_et_university_name">학교명을 입력해주세요</string>
-    <string name="sitter10_et_university_dipartment">학과을 입력해주세요</string>
-    <string name="sitter10_license_title">자격증을 입력해주세요</string>
-    <string name="sitter10_license_title_comment">자격증 블라블라</string>
-    <string name="sitter10_et_license">자격증을 입력해주세요</string>
-    <string name="sitter10_tg_edu_none">비공개</string>
-    <string name="sitter10_tg_edu_elementary">초등학교 졸업</string>
-    <string name="sitter10_tg_edu_middle">중학교 졸업</string>
-    <string name="sitter10_tg_edu_high">고등학교 졸업</string>
-    <string name="sitter10_tg_edu_university_in_school">대학교 재학</string>
-    <string name="sitter10_tg_edu_university">대학교 졸업</string>
     <string name="sitter11_photo_title">좋은 인상을 심어주세요</string>
     <string name="sitter11_photo_title_comment">좋은 인상은 심어줘야 제맛입니다</string>
     <string name="sitter11_radio1">사진 찍기</string>
@@ -222,14 +313,17 @@
     <string name="sitterDetail_name_comment">시터를 소개합니다</string>
 
     <!-- 구인정보 입력 -->
-    <string name="parent01_chdrn">돌봄 아이 정보 입력</string>
-    <string name="parent01_chdrn_comment">시터가 되기 위한 기본정보를 입력해주세요</string>
-    <string name="parent01_basic">구인 기본 조건 입력</string>
-    <string name="parent01_basic_comment">희망근무조건 서브타이틀</string>
-    <string name="parent01_sitter">희망 시터 조건</string>
-    <string name="parent01_sitter_comment">희망근무조건 서브타이틀</string>
-    <string name="parent01_etc">돌봄 요청 내용 추가</string>
-    <string name="parent01_etc_comment">시터로서의 매력 어필하긴 난 엄마다</string>
+    <string name="parent00_title">유능한 시터를\n찾으시나요?</string>
+    <string name="parent00_guide">구인 정보를 구체적으로\n입력하시면 우리 가정에 적합한\n시터를 무료로\n소개받을 수 있습니다</string>
+    <string name="parent00_stage1">구인 정보 등록</string>
+    <string name="parent00_stage2">우리 가족 정보 등록</string>
+    <string name="parent00_stage3">희망 시터 조건 등록</string>
+    <string name="parent00_stage4">프로필 사진 등록</string>
+    <string name="parent00_basic_comment">거리, 급여 등 구인에 필요한 정보를 등록하세요</string>
+    <string name="parent00_env_comment">돌봄 아이정보, 근무환경등을 등록하세요</string>
+    <string name="parent00_sitter_comment">경력, 연령 등 시터에게 원하는 조건을 등록하세요</string>
+    <string name="parent00_photo_comment">사진을 등록하여 호감도를 높여보세요</string>
+
     <string name="parent02_chdrn">아이 정보를 입력해주세요</string>
     <string name="parent02_chdrn_comment">아이를 키우신...거 말고 엄마가 볼 내용</string>
     <string name="parent02_add_boy">남아 추가</string>
@@ -243,6 +337,17 @@
     <string name="parent02_newborn_boy">남아 예정</string>
     <string name="parent02_newborn_girl">여아 예정</string>
     <string name="parent02_newborn_not_yet">아직 몰라요</string>
+    <string name="parent03_sitter_age">희망 시터의 연령을 선택해주세요</string>
+    <string name="parent03_sitter_age_comment">돌봄 성격에 따라 적합한 시터 연령대가 있습니다</string>
+    <string name="parent03_sitter_exp">희망 시터 경력을 선택해주세요</string>
+    <string name="parent03_sitter_exp_comment">시터 경험이 없어도 본인 자녀를 양육했거나\n유아관련 직업에 종사했다면 아이를 돌볼 수 있습니다</string>
+
+    <string name="parent03_tg_edu_0">초등학교 졸업 이상</string>
+    <string name="parent03_tg_edu_1">중학교 졸업 이상</string>
+    <string name="parent03_tg_edu_2">고등학교 졸업 이상</string>
+    <string name="parent03_tg_edu_3">대학교 재학중</string>
+    <string name="parent03_tg_edu_4">대학교 졸업 이상</string>
+
     <string name="parent04_reason">시터를 구하는 이유가 무엇인가요?</string>
     <string name="parent04_reason_comment">시터를 구한 경험은 아이에게 큰 경험이 됩니다.</string>
     <string name="parent04_tg_reason_0">직장근무</string>
@@ -254,8 +359,34 @@
     <string name="parent04_tg_reason_6">여가활동</string>
     <string name="parent04_tg_reason_7">기타</string>
     <string name="parent04_et_reason_write">기타</string>
+    <string name="parent06_schedule">스케줄 입력해 보아요</string>
+    <string name="parent06_salary">급여를 계산해 보아요</string>
+    <string name="parent06_salary_comment">급여를 잘 계산해 보아요</string>
+    <string name="parent07_distance">희망하는 시터 출퇴근 희망거리를 입력하세요</string>
+    <string name="parent07_distance_comment">희망하는 시터 출퇴근 희망거리</string>
+    <string name="parent08_skill">어떤 시터를 원하나요?</string>
+    <string name="parent08_skill_comment">어떤 시터를 원하냐고요..</string>
+    <string name="parent08_tg_skill_clean">아이돌봄을\n잘해요</string>
+    <string name="parent08_tg_skill_baby">베이비시터\n(아기전문 돌봄)</string>
+    <string name="parent08_tg_skill_outdoor">야외놀이를\n잘해요</string>
+    <string name="parent08_tg_skill_housekeeping">살림을\n잘해요</string>
+    <string name="parent08_tg_skill_homework">숙제를\n잘 도와줘요</string>
+    <string name="parent08_tg_skill_commute">등하원돌봄을\n잘해요</string>
+    <string name="parent08_tg_skill_cook">요리를\n잘해요</string>
+    <string name="parent08_tg_skill_foreign_language">외국어를\n잘해요</string>
+    <string name="parent08_tg_skill_music_physical">예체능을\n잘해요</string>
+    <string name="parent09_nat">선호하는 시터의 국적을 입력해주세요</string>
+    <string name="parent09_nat_comment">선호하는 시터의 국적을 입력해주세요</string>
+    <string name="parent09_edu">선호하는 시터의 학력을 입력해주세요</string>
+    <string name="parent09_edu_comment">선호하는 학력의 국적을 입력해주세요</string>
+    <string name="parent09_rlg">선호하는 시터의 종교를 입력해주세요</string>
+    <string name="parent09_rlg_comment">선호하는 시터의 국적을 입력해주세요</string>
+    <string name="parent09_tg_edu_elementary">초등학교 졸업 이상</string>
+    <string name="parent09_tg_edu_middle">중학교 졸업 이상</string>
+    <string name="parent09_tg_edu_high">고등학교 졸업 이상</string>
+    <string name="parent09_tg_edu_university_in_school">대학교 재학중</string>
+    <string name="parent09_tg_edu_university">대학교 졸업 이상</string>
 
-    <string name="title_activity_popup_addr">PopupAddr</string>
 
     <!-- 시터 상세정보 -->
     <string name="sitter_detail_sub_title_basic">시터 정보</string>
@@ -274,5 +405,56 @@
     <string name="sitter_detail_request">연락처 요청</string>
     <string name="sitter_detail_bookmark">관심시터 등록</string>
 
+    <!-- 연락처 요청/수락/거절/취소/삭제 팝업 -->
+    <string name="contact_request_title">연락처 교환 요청</string>
+    <string name="contact_request_question">에게\n전화면접을 요청하시겠습니까?</string>
+    <string name="contact_cancel_question">시터의\n연락처 공개요청을 취소하시겠습니까?</string>
+    <string name="contact_delete_question">시터에게 했던\n연락처 요청 내역을 삭제하시겠습니까?</string>
+    <string name="contact_accept_question">에게\n연락처 공개를 수락하시겠습니까?</string>
+    <string name="contact_accept_title">연락처 교환 수락</string>
+    <string name="contact_reject_question">시터의\n연락처 공개요청을 거절하시겠습니까?</string>
+    <string name="contact_reject_reason">거절 사유는 무엇인가요?</string>
+    <string name="contact_reject_cb_0">시급이 높아요</string>
+    <string name="contact_reject_cb_1">스케줄이 안맞아요</string>
+    <string name="contact_reject_cb_2">거리가 멀어요</string>
+    <string name="contact_reject_cb_3">기타</string>
+    <string name="contact_request_complete">연락처 요청이 완료 되었습니다.</string>
 
+    <!-- Invalid Input Message -->
+    <string name="invalid_name_write">이름을 입력해주시기 바랍니다</string>
+    <string name="invalid_birth_write">생년월일을 정확히 입력해주시기 바랍니다</string>
+    <string name="invalid_email_write">이름을 입력해주시기 바랍니다</string>
+    <string name="invalid_passwd_write">비밀번호를 입력해주시기 바랍니다</string>
+    <string name="invalid_phone_write">전화번호를 입력해주시기 바랍니다</string>
+    <string name="invalid_addr_write">주소를 입력해주시기 바랍니다</string>
+    <string name="invalid_reason_select">시터를 구하는 이유를 선택해 주세요</string>
+    <string name="invalid_reason_write">시터를 구하는 이유를 입력해 주세요</string>
+    <string name="invalid_religion_select">종교를 선택해 주세요</string>
+    <string name="invalid_religion_write">종교를 입력해 주세요</string>
+    <string name="invalid_nationality_select">국적을 선택해 주세요</string>
+    <string name="invalid_nationality_write">국적을 입력해 주세요</string>
+    <string name="invalid_nationality_visa_write">비자 만료일을 입력해 주세요</string>
+    <string name="invalid_children_age">돌봄 가능한 아이의 성별을 모두 선택해 주세요</string>
+    <string name="invalid_gender_select">성별을 선택해 주세요</string>
+    <string name="invalid_baby_age_select">아이 돌봄이 가능한 아이의 연령대를 모두 선택해 주세요</string>
+    <string name="invalid_edu_select">학력을 선택해 주세요</string>
+    <string name="invalid_commute_type_select">출퇴근 유형을 선택해 주세요</string>
+    <string name="invalid_brief_write">한줄 소개를 입력해 주세요</string>
+    <string name="invalid_photo_select">적어도 하나의 항목을 선택하세요</string>
+    <string name="invalid_introduce_write">자기소개 내용을 입력해 주세요</string>
+    <string name="invalid_schedule_write">스케줄을 입력하시기 바랍니다</string>
+    <string name="invalid_schedule_weekend_select">주중/주말 여부를 선택해 주세요</string>
+    <string name="invalid_skill_max_select">5개 이상 선택할 수 없습니다</string>
+    <string name="invalid_skill_min_select">최소 1개 이상 선택해야 합니다</string>
+    <string name="invalid_period_start_select">시작일을 선택해주세요</string>
+    <string name="invalid_period_start_write">시작일을 입력해주세요</string>
+    <string name="invalid_period_end_select">종료을 선택해주세요</string>
+    <string name="invalid_period_end_write">종료을 입력해주세요</string>
+    <string name="invalid_children_write">돌봄이 필요한 아이정보를 입력해 주세요</string>
+    <string name="invalid_job_select">직업을 선택해 주세요</string>
+    <string name="invalid_job_write">직업을 입력해 주세요</string>
+
+    <!-- ERROR Message -->
+    <string name="skill_max_over">최대 5개까지만 선택 할 수 있습니다</string>
+    <string name="err_contact_rcv_email">받는사람 정보가 없습니다.</string>
 </resources>

@@ -2,12 +2,10 @@ package net.gringrid.siso.views;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v4.content.res.ResourcesCompat;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +16,7 @@ import android.widget.TextView;
 import net.gringrid.siso.R;
 
 /**
- * Created by choijiho on 16. 7. 13..
+ * SISO Custom Edit Box
  */
 public class SisoEditText extends LinearLayout{
 
@@ -76,7 +74,7 @@ public class SisoEditText extends LinearLayout{
         String inputStr = typedArray.getString(R.styleable.SisoEditText_input);
         String guideStr = typedArray.getString(R.styleable.SisoEditText_guide);
         String inputType = typedArray.getString(R.styleable.SisoEditText_input_type);
-        //int labelColor = typedArray.getColor(R.styleable.SisoEditText_labelColor, R.color.color666666);
+        boolean isHiddenLabel = typedArray.getBoolean(R.styleable.SisoEditText_isHiddenLabel, false);
 
         id_tv_label.setText(labelStr);
         id_et_input.setHint(inputStr);
@@ -90,7 +88,10 @@ public class SisoEditText extends LinearLayout{
             }else if ( inputType.equals("email") ){
                 id_et_input.setInputType(InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
             }
+        }
 
+        if(isHiddenLabel){
+            id_tv_label.setVisibility(GONE);
         }
 
         id_et_input.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -115,12 +116,12 @@ public class SisoEditText extends LinearLayout{
     public Editable getText(){
         return id_et_input.getText();
     }
-    void setLabel(String str){
-        id_tv_label.setText(str);
-    }
-    public void setInput(String str){
-        id_et_input.setText(str);
-    }
+    public void setLabel(String str){ id_tv_label.setText(str); }
+    public void setLabel(int strId){ id_tv_label.setText(strId); }
+    public void setInput(String str){ id_et_input.setText(str); }
+    public void setInput(int strId){ id_et_input.setText(strId); }
+    public void setHint(int strId){ id_et_input.setHint(strId); }
+
     void setGuide(String str){
         id_tv_guide.setText(str);
     }

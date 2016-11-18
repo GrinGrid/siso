@@ -2,6 +2,7 @@ package net.gringrid.siso.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,11 +10,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import net.gringrid.siso.R;
 import net.gringrid.siso.adapter.TestimonialAdapter;
@@ -25,6 +29,7 @@ import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoDetailItem;
 import net.gringrid.siso.views.SisoDetailItem.DetailItem;
+import net.gringrid.siso.views.SisoTimeTable;
 
 import org.joda.time.LocalDate;
 
@@ -48,6 +53,8 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
     private TextView id_tv_name;
     private TextView id_tv_name_gender;
 
+    private ImageView id_iv_profile;
+
     private TextView id_tv_age;
     private TextView id_tv_salary;
     private TextView id_tv_exp;
@@ -70,6 +77,7 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
 
     private User mUser;
     private User mUserDisplay;
+    private SisoTimeTable id_stt;
 
     public SitterDetailFragment() {
         // Required empty public constructor
@@ -80,8 +88,6 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sitter_detail, container, false);
-
         if(getArguments()!=null) {
             String userData = getArguments().getString(SharedData.USER);
             Gson gson = new Gson();
@@ -90,6 +96,11 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
             Log.d(TAG, "onCreateView: receive mUser : "+mUser.toString());
         }
 
+        return inflater.inflate(R.layout.fragment_sitter_detail, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         id_ll_skill = (LinearLayout)view.findViewById(R.id.id_ll_skill);
         id_ll_baby_gender = (LinearLayout)view.findViewById(R.id.id_ll_baby_gender);
         id_ll_baby_age = (LinearLayout)view.findViewById(R.id.id_ll_baby_age);
@@ -99,6 +110,8 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
 
         id_tv_name = (TextView)view.findViewById(R.id.id_tv_name);
         id_tv_name_gender = (TextView)view.findViewById(R.id.id_tv_name_gender);
+
+        id_iv_profile = (ImageView)view.findViewById(R.id.id_iv_profile);
 
         id_tv_age = (TextView)view.findViewById(R.id.id_tv_age);
         id_tv_salary = (TextView)view.findViewById(R.id.id_tv_salary);
@@ -113,6 +126,7 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
         id_tv_commute_limit = (TextView)view.findViewById(R.id.id_tv_commute_limit);
         id_tv_addr = (TextView)view.findViewById(R.id.id_tv_addr);
         id_tv_period = (TextView)view.findViewById(R.id.id_tv_period);
+        id_stt = (SisoTimeTable)view.findViewById(R.id.id_stt);
 
         id_tv_cdrn_num = (TextView)view.findViewById(R.id.id_tv_cdrn_num);
         id_tv_nat = (TextView)view.findViewById(R.id.id_tv_nat);
@@ -120,38 +134,53 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
         id_tv_license = (TextView)view.findViewById(R.id.id_tv_license);
         id_tv_edu = (TextView)view.findViewById(R.id.id_tv_edu);
 
+        id_ll_title.setOnClickListener(this);
+
+        loadData();
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    private  void loadData() {
         if(mUserDisplay!=null){
             setProfile();
             setSummary();
             setIntroduce();
             setBasic();
-
-//            setSkill();
-//            setBabyGender();
-//            setBabyAge();
             setExtra();
-//            setEnv();
-//            setTestimonial();
         }
-
         setSkill();
         setBabyGender();
         setBabyAge();
         setEnv();
         setTestimonial();
-
-        id_ll_title.setOnClickListener(this);
-
-        return view;
+        setSchedule();
     }
 
-
-
-    @Override
-    public void onResume() {
-
-        super.onResume();
+    private void setSchedule() {
+        if(!TextUtils.isEmpty(mUser.sitterInfo.mon)){
+            id_stt.setBitString(SisoTimeTable.MON, mUser.sitterInfo.mon);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.tue)){
+            id_stt.setBitString(SisoTimeTable.TUE, mUser.sitterInfo.tue);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.wed)){
+            id_stt.setBitString(SisoTimeTable.WED, mUser.sitterInfo.wed);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.thu)){
+            id_stt.setBitString(SisoTimeTable.THU, mUser.sitterInfo.thu);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.fri)){
+            id_stt.setBitString(SisoTimeTable.FRI, mUser.sitterInfo.fri);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.sat)){
+            id_stt.setBitString(SisoTimeTable.SAT, mUser.sitterInfo.sat);
+        }
+        if(!TextUtils.isEmpty(mUser.sitterInfo.sun)){
+            id_stt.setBitString(SisoTimeTable.SUN, mUser.sitterInfo.sun);
+        }
     }
+
 
     private void setTestimonial() {
         ArrayList<Testimonial> list = new ArrayList<>();
@@ -187,6 +216,12 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
      */
     private void setProfile() {
 //        String gender = mUser.sitterInfo.gender.equals(User.GENDER_WOMAN)?"여":"남";
+        int halfWidth = SisoUtil.getScreenWidth(getContext()) / 2;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(halfWidth, halfWidth);
+        ImageLoader imageLoader = ImageLoader.getInstance();
+        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+        imageLoader.displayImage(mUser.imageInfo.prf_img_url, id_iv_profile);
+        id_iv_profile.setLayoutParams(lp);
         id_tv_name.setText(mUserDisplay.personalInfo.name);
         id_tv_name_gender.setText(mUserDisplay.personalInfo.name+" 시터"+"("+mUserDisplay.sitterInfo.gender+")");
     }
@@ -200,9 +235,9 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
         // TODO 급여 다시 계산
         id_tv_salary.setText(mUserDisplay.sitterInfo.salary);
 //        id_tv_salary.setText(String.format("%,d",12000));
-//        id_tv_exp.setText(String.valueOf(mUser.sitterInfo.work_year));
+//        id_tv_exp.setText(String.valueOf(mUser.sitterInfo.work_exp));
 //        id_tv_exp.setText("10+");
-        id_tv_exp.setText(mUserDisplay.sitterInfo.work_year);
+        id_tv_exp.setText(mUserDisplay.sitterInfo.work_exp);
         // TODO 나와의 거리로 세팅
         id_tv_distance.setText("0.8");
         // TODO 후기갯수 세팅
@@ -234,15 +269,15 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
     private void setSkill() {
 
         ArrayList<DetailItem> items = new ArrayList<>();
-        items.add(new DetailItem(R.drawable.tg_ic_babycare_selected,    R.string.sitter4_tg_skill_care));
-        items.add(new DetailItem(R.drawable.tg_ic_baby_selected,        R.string.sitter4_tg_skill_baby));
-        items.add(new DetailItem(R.drawable.tg_ic_outdoor_selected,     R.string.sitter4_tg_skill_outdoor));
-        items.add(new DetailItem(R.drawable.tg_ic_housework_selected,   R.string.sitter4_tg_skill_housekeeping));
-        items.add(new DetailItem(R.drawable.tg_ic_study_selected,       R.string.sitter4_tg_skill_homework));
-        items.add(new DetailItem(R.drawable.tg_ic_escort_selected,      R.string.sitter4_tg_skill_commute));
-        items.add(new DetailItem(R.drawable.tg_ic_cook_selected,        R.string.sitter4_tg_skill_cook));
-        items.add(new DetailItem(R.drawable.tg_ic_english_selected,     R.string.sitter4_tg_skill_foreign_language));
-        items.add(new DetailItem(R.drawable.tg_ic_music_selected,       R.string.sitter4_tg_skill_music_physical));
+        items.add(new DetailItem(R.drawable.tg_ic_babycare_selected,    R.string.common_sitter_tg_skill_care));
+        items.add(new DetailItem(R.drawable.tg_ic_baby_selected,        R.string.common_sitter_tg_skill_baby));
+        items.add(new DetailItem(R.drawable.tg_ic_outdoor_selected,     R.string.common_sitter_tg_skill_outdoor));
+        items.add(new DetailItem(R.drawable.tg_ic_housework_selected,   R.string.common_sitter_tg_skill_housekeeping));
+        items.add(new DetailItem(R.drawable.tg_ic_study_selected,       R.string.common_sitter_tg_skill_homework));
+        items.add(new DetailItem(R.drawable.tg_ic_escort_selected,      R.string.common_sitter_tg_skill_commute));
+        items.add(new DetailItem(R.drawable.tg_ic_cook_selected,        R.string.common_sitter_tg_skill_cook));
+        items.add(new DetailItem(R.drawable.tg_ic_english_selected,     R.string.common_sitter_tg_skill_foreign_language));
+        items.add(new DetailItem(R.drawable.tg_ic_music_selected,       R.string.common_sitter_tg_skill_music_physical));
 
 
         // index가 , 로 구분되어 String으로 되어 있다
@@ -260,8 +295,8 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
      */
     private void setBabyGender() {
         ArrayList<DetailItem> items = new ArrayList<>();
-        items.add(new DetailItem(R.drawable.tg_ic_boy_selected,         R.string.sitter6_tg_baby_gender_boy));
-        items.add(new DetailItem(R.drawable.tg_ic_girl_selected,        R.string.sitter6_tg_baby_gender_girl));
+        items.add(new DetailItem(R.drawable.tg_ic_boy_selected,         R.string.sitter02_tg_baby_gender_boy));
+        items.add(new DetailItem(R.drawable.tg_ic_girl_selected,        R.string.sitter02_tg_baby_gender_girl));
 
         ArrayList<DetailItem> displayList = new ArrayList<>();
         if(mUserDisplay.sitterInfo.baby_boy.equals("1")){
@@ -313,9 +348,9 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
      */
     private void setEnv() {
         ArrayList<DetailItem> items = new ArrayList<>();
-        items.add(new DetailItem(R.drawable.tg_ic_pet_selected,     R.string.sitter6_tg_env_pet));
-        items.add(new DetailItem(R.drawable.tg_ic_cctv_selected,    R.string.sitter6_tg_env_cctv));
-        items.add(new DetailItem(R.drawable.tg_ic_adult_selected,   R.string.sitter6_tg_env_adult));
+        items.add(new DetailItem(R.drawable.tg_ic_pet_selected,     R.string.sitter02_tg_env_pet));
+        items.add(new DetailItem(R.drawable.tg_ic_cctv_selected,    R.string.sitter02_tg_env_cctv));
+        items.add(new DetailItem(R.drawable.tg_ic_adult_selected,   R.string.sitter02_tg_env_adult));
 
         ArrayList<DetailItem> displayList = new ArrayList<>();
         if(mUserDisplay.sitterInfo.env_pet.equals("1")){

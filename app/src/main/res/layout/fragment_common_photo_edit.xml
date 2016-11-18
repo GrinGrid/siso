@@ -1,0 +1,64 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    tools:context=".fragments.CommonPhotoFragment">
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Member01UserTypeFragment">
+
+            <!-- 사진영역 start -->
+            <LinearLayout
+                android:id="@+id/id_ll_photo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorDEDEDE"
+                android:layout_marginTop="10dp"
+                >
+                <com.theartofdev.edmodo.cropper.CropImageView
+                    android:id="@+id/id_civ"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cropInitialCropWindowPaddingRatio="0"
+                    >
+                </com.theartofdev.edmodo.cropper.CropImageView>
+            </LinearLayout>
+            <!-- 사진영역 end -->
+
+            <TextView
+                android:id="@+id/id_tv_crop"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn_green"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/btn_confirm"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/id_tv_next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/btn_next"
+        />
+</LinearLayout>

@@ -19,13 +19,14 @@ import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
+import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
 
 /**
  * 회원가입 > 성명, 생년월일
  */
-public class Member02NameBirthFragment extends Fragment implements View.OnClickListener {
+public class Member02NameBirthFragment extends InputBaseFragment{
 
     private static final String TAG = "jiho";
 
@@ -45,18 +46,24 @@ public class Member02NameBirthFragment extends Fragment implements View.OnClickL
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_member2, container, false);
+        return inflater.inflate(R.layout.fragment_member02_name_birth, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
 
         id_et_name = (SisoEditText) view.findViewById(R.id.id_et_name);
         id_et_birth = (SisoEditText) view.findViewById(R.id.id_et_birth);
         setScrollControl(view);
-        return view;
+        loadData();
     }
 
     /**
@@ -81,7 +88,6 @@ public class Member02NameBirthFragment extends Fragment implements View.OnClickL
                 }
             }
         });
-
     }
 
 
@@ -91,48 +97,64 @@ public class Member02NameBirthFragment extends Fragment implements View.OnClickL
         super.onResume();
     }
 
-    private void setInputMode() {
-//        final ScrollView id_sv = (ScrollView)getView().findViewById(R.id.id_sv);
-//        id_sv.scrollTo(0, 500);
-//        id_sv.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                id_sv.scrollTo(0, -1000);
-//            }
-//        });
-    }
-
     @Override
     public void onClick(View v) {
 
-        Member03EmailFragment fragment = new Member03EmailFragment();
 
         switch (v.getId()) {
             case R.id.id_tv_next_btn:
-                if ( SharedData.DEBUG_MODE ) {
-                    id_et_name.setInput("최지호");
-                    id_et_birth.setInput("19801022");
-                }
-                String errorMsg = getInvalidInputMessage();
-                if (errorMsg != null) {
-                    Toast.makeText(getContext(), errorMsg, Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                mUser.personalInfo.name = id_et_name.getText().toString();
-                mUser.personalInfo.birth_date = id_et_birth.getText().toString();
-                SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
-                ((BaseActivity) getActivity()).setFragment(fragment, R.string.member_title);
+
+                if(!isValidInput()) return;
+
+                saveData();
+
+                moveNext();
+
                 break;
         }
     }
 
-    public String getInvalidInputMessage() {
+    @Override
+    protected void loadData() {
+        if ( SharedData.DEBUG_MODE ) {
+            id_et_name.setInput("최지호");
+            id_et_birth.setInput("19801022");
+        }
+
+        if(!TextUtils.isEmpty(mUser.personalInfo.name)){
+            id_et_name.setInput(mUser.personalInfo.name);
+        }
+        if(!TextUtils.isEmpty(mUser.personalInfo.birth_date)){
+            id_et_birth.setInput(mUser.personalInfo.birth_date);
+        }
+    }
+
+    @Override
+    protected boolean isValidInput() {
 
         if (TextUtils.isEmpty(id_et_name.getText())){
-            return "이름을 입력해주시기 바랍니다.";
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_name_write);
+            return false;
         }else if(TextUtils.isEmpty(id_et_birth.getText())){
-            return "생년월일을 정확히 입력해주시기 바랍니다.";
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_birth_write);
+            return false;
         }
-        return null;
+
+        return true;
+    }
+
+    @Override
+    protected void saveData() {
+        mUser.personalInfo.name = id_et_name.getText().toString();
+        mUser.personalInfo.birth_date = id_et_birth.getText().toString();
+        SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
+    }
+
+
+    @Override
+    protected void moveNext() {
+        Member03EmailFragment fragment = new Member03EmailFragment();
+        ((BaseActivity) getActivity()).setFragment(fragment, BaseActivity.TITLE_KEEP);
+
     }
 }

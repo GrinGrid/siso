@@ -18,7 +18,6 @@ import retrofit2.http.Query;
  */
 public interface MemberAPI {
     String SISO_AUTH_URL = "http://siso4u.net/";
-    String DAUM_API_URL = "https://apis.daum.net/local/geo/";
 
     @GET("api/users/{email}")
     Call<Personal> getMember(

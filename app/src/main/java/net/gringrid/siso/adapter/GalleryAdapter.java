@@ -2,13 +2,10 @@ package net.gringrid.siso.adapter;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,8 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import net.gringrid.siso.R;
-import net.gringrid.siso.fragments.Sitter11SelectPhotoFragment;
-import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.fragments.CommonSelectPhotoFragment;
 import net.gringrid.siso.util.SisoUtil;
 
 import java.util.ArrayList;
@@ -35,18 +31,18 @@ public class GalleryAdapter extends BaseAdapter implements View.OnClickListener 
     private int mImageWidth;
     LinearLayout.LayoutParams mLp;
     Context mContext;
-    Sitter11SelectPhotoFragment mFragment;
+    CommonSelectPhotoFragment mFragment;
 
-    ArrayList<Sitter11SelectPhotoFragment.PhotoData> mPhotoList;
+    ArrayList<CommonSelectPhotoFragment.PhotoData> mPhotoList;
     int mTotalSize;
 
     ImageLoader mImageLoader;
 
-    public GalleryAdapter(Context mContext, ArrayList<Sitter11SelectPhotoFragment.PhotoData> list, Fragment fragment) {
+    public GalleryAdapter(Context mContext, ArrayList<CommonSelectPhotoFragment.PhotoData> list, Fragment fragment) {
         this.mContext = mContext;
         this.mPhotoList = list;
         this.mTotalSize = mPhotoList.size();
-        this.mFragment = (Sitter11SelectPhotoFragment)fragment;
+        this.mFragment = (CommonSelectPhotoFragment)fragment;
 
         mInflater = LayoutInflater.from(mContext);
 
@@ -137,9 +133,7 @@ public class GalleryAdapter extends BaseAdapter implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-
         mFragment.selectPhoto(mPhotoList.get((int)v.getTag()).imageId);
-//        Log.d(TAG, "onClick: tag "+mPhotoList.get((int)v.getTag()).imageId);
     }
 
     class ViewHolder{
