@@ -28,6 +28,7 @@ public class Parent03NatEduFragment extends InputBaseFragment{
     int mRadioNat[] = new int[]{
             R.id.id_tg_nat_kor,
             R.id.id_tg_nat_chi_kor,
+            R.id.id_tg_nat_everybody,
             R.id.id_tg_nat_write
     };
 
@@ -83,6 +84,7 @@ public class Parent03NatEduFragment extends InputBaseFragment{
             // 국적 Radio 선택
             case R.id.id_tg_nat_kor:
             case R.id.id_tg_nat_chi_kor:
+            case R.id.id_tg_nat_everybody:
                 SisoUtil.selectRadio(mRadioNat, viewId, getView());
                 id_et_nat.setVisibility(View.GONE);
                 break;
@@ -129,7 +131,11 @@ public class Parent03NatEduFragment extends InputBaseFragment{
     protected void saveData() {
         int natRadio = SisoUtil.getRadioValue(mRadioNat, getView());
         int eduRadio = SisoUtil.getRadioValue(mRadioEdu, getView());
-        mUser.parentInfo.nat = String.valueOf(natRadio);
+        if(natRadio == 3){
+            mUser.sitterInfo.nat = id_et_nat.getText().toString();
+        }else{
+            mUser.parentInfo.nat = String.valueOf(natRadio);
+        }
         mUser.parentInfo.edu = String.valueOf(eduRadio);
 
         Log.d(TAG, "onClick: mUser: "+mUser.toString());

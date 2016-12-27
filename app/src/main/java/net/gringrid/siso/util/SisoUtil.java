@@ -65,16 +65,56 @@ public class SisoUtil {
         displayUser = user;
         displayUser.sitterInfo.gender = getRadioValue(context, R.array.radio_gender, user.sitterInfo.gender);
         displayUser.sitterInfo.commute_type = getRadioValue(context, R.array.radio_commute, user.sitterInfo.commute_type);
-        displayUser.sitterInfo.distance_limit = getRadioValue(context, R.array.picker_commute_distance, user.sitterInfo.distance_limit);
+        int distance_limit_idx = getIndexFromArray(context, R.array.picker_commute_distance_value, user.sitterInfo.distance_limit);
+        displayUser.sitterInfo.distance_limit = getRadioValue(context, R.array.picker_commute_distance, String.valueOf(distance_limit_idx));
         displayUser.sitterInfo.work_exp = getRadioValue(context, R.array.picker_work_year_display, user.sitterInfo.work_exp);
         displayUser.sitterInfo.term_from = getDateString(user.sitterInfo.term_from, "-");
         displayUser.sitterInfo.term_to = getDateString(user.sitterInfo.term_to, "-");
         displayUser.sitterInfo.nat = getRadioValue(context, R.array.sitter_nat, user.sitterInfo.nat);
         displayUser.sitterInfo.religion = getRadioValue(context, R.array.sitter_rlg, user.sitterInfo.religion);
         displayUser.sitterInfo.skill = getMultiValue(context, R.array.multi_skill, user.sitterInfo.skill, ",");
+        displayUser.sitterInfo.edu = getRadioValue(context, R.array.sitter_edu, user.sitterInfo.edu);
+        if(!TextUtils.isEmpty(user.sitterInfo.edu)) {
+            if (user.sitterInfo.edu.equals("4") || user.sitterInfo.edu.equals("5")) {
+                if (!TextUtils.isEmpty(user.sitterInfo.school)) {
+                    displayUser.sitterInfo.edu += " " + user.sitterInfo.school;
+                }
+                if (!TextUtils.isEmpty(user.sitterInfo.department)) {
+                    displayUser.sitterInfo.edu += " " + user.sitterInfo.department;
+                }
+            }
+        }
 
-        int salary = Integer.parseInt(user.sitterInfo.salary);
-        displayUser.sitterInfo.salary = salary==0?"협의":String.format("%,d", salary);
+        if(!TextUtils.isEmpty(user.sitterInfo.salary)) {
+            int salary = Integer.parseInt(user.sitterInfo.salary);
+            displayUser.sitterInfo.salary = salary == 0 ? "협의" : String.format("%,d", salary);
+        }
+
+        return displayUser;
+    }
+
+    /**
+     * User 객체를 상세화면에 보여질 Data 형태로변환한다.
+     * @param context
+     * @param user
+     * @return
+     */
+    public static User convertParentDisplayValue(Context context, User user){
+        User displayUser = null;
+
+        displayUser = user;
+        displayUser.parentInfo.commute_type = getRadioValue(context, R.array.radio_commute, user.parentInfo.commute_type);
+        int distance_limit_idx = getIndexFromArray(context, R.array.picker_commute_distance_value, user.sitterInfo.distance_limit);
+        displayUser.parentInfo.distance_limit = getRadioValue(context, R.array.picker_commute_distance, String.valueOf(distance_limit_idx));
+        displayUser.parentInfo.term_from = getDateString(user.parentInfo.term_from, "-");
+        displayUser.parentInfo.term_to = getDateString(user.parentInfo.term_to, "-");
+
+//        displayUser.parentInfo.sitter_age = getRadioValue(context, R.array.picker_sitter_age, user.parentInfo.sitter_age);
+        displayUser.parentInfo.work_exp = getRadioValue(context, R.array.picker_work_year, user.parentInfo.work_exp);
+        displayUser.parentInfo.nat = getRadioValue(context, R.array.sitter_nat, user.parentInfo.nat);
+        displayUser.parentInfo.religion = getRadioValue(context, R.array.sitter_rlg, user.parentInfo.religion);
+        displayUser.parentInfo.edu = getRadioValue(context, R.array.sitter_edu, user.parentInfo.edu);
+        displayUser.parentInfo.skill = getMultiValue(context, R.array.multi_skill, user.parentInfo.skill, ",");
 
         return displayUser;
     }
@@ -87,9 +127,11 @@ public class SisoUtil {
      * @return 화면에 표시 될 값
      */
     public static String getRadioValue(Context context, int ary, String idx){
+        // TODO idx의 숫자여부를 판단하여 숫자가 아니면 return
         if(TextUtils.isEmpty(idx)) return idx;
         String[] valueAry = context.getResources().getStringArray(ary);
         String value = valueAry[Integer.parseInt(idx)];
+        value = value.replace("\n", "");
         return value;
     }
 
@@ -102,7 +144,7 @@ public class SisoUtil {
     public static String getDateString(String orgDateStr, String sep){
         String newDateStr;
 
-        if(orgDateStr.trim().length() != 8){
+        if(TextUtils.isEmpty(orgDateStr) || orgDateStr.trim().length() != 8){
            return orgDateStr;
         }
 
@@ -121,6 +163,8 @@ public class SisoUtil {
     }
 
     private static String getMultiValue(Context context, int ary, String strValue, String dlmt){
+        if(TextUtils.isEmpty(strValue)) return strValue;
+
         String[] totalList = context.getResources().getStringArray(ary);
         String[] checkedList = strValue.split(dlmt);
         String result = "";
@@ -217,6 +261,40 @@ public class SisoUtil {
             }
         }
         return 0;
+    }
+
+    /**
+     * Array resource로 부터 해당하는 값의 index 를 얻는다
+     * @param aryId
+     * @param value
+     * @return
+     */
+    public static int getIndexFromArray(Context context, int aryId, String value){
+        String[] totalList = context.getResources().getStringArray(aryId);
+
+        for(int i=0; i<totalList.length; i++){
+            if(totalList[i].equals(value)) {
+                return i;
+            }
+        }
+        // TODO 해당하는 index가 없을경우?
+        return 0;
+    }
+    /**
+     * Array resource로 부터 해당하는 값의 index 를 얻는다
+     * @param aryId
+     * @param value
+     * @return
+     */
+    public static String getValueFromArray(Context context, int aryId, String value){
+        String[] totalList = context.getResources().getStringArray(aryId);
+
+        for(int i=0; i<totalList.length; i++){
+            if(totalList[i].equals(value)) {
+                return totalList[i];
+            }
+        }
+        return value;
     }
 
     /**

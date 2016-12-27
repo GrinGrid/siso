@@ -49,6 +49,7 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
         args.putInt("someInt", page);
         args.putInt("someTitle", titleRscId);
         sitterListSIsoFragment.setArguments(args);
+
         return sitterListSIsoFragment;
     }
 
@@ -90,6 +91,11 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SitterDetailFragment fragment = new SitterDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(fragment.MODE, fragment.MODE_FROM_SITTER_LIST);
+        Log.d(TAG, "onItemClick: trg_email : "+mList.get(position).email);
+        bundle.putString(SharedData.EMAIL, mList.get(position).email);
+        fragment.setArguments(bundle);
         ((BaseActivity) getActivity()).setFragment(fragment, Integer.MIN_VALUE);
     }
 
@@ -104,7 +110,8 @@ public class SitterListSIsoFragment extends Fragment implements AdapterView.OnIt
                     if(response.isSuccessful()){
                         Log.d(TAG, "onResponse: success body : "+response.body().toString());
                     }
-                    mAdapter = new SitterListSisoAdapter(getContext(), response.body().group_first);
+                    mList = response.body().group_first;
+                    mAdapter = new SitterListSisoAdapter(getContext(), mList);
                     id_lv = (ListView)getView().findViewById(R.id.id_lv);
                     id_lv.setAdapter(mAdapter);
                     id_lv.setOnItemClickListener(SitterListSIsoFragment.this);

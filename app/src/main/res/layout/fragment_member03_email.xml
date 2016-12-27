@@ -67,7 +67,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:src="@drawable/woman2"/>
+                    android:src="@drawable/ic_join_password"/>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

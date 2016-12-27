@@ -201,6 +201,7 @@ public class Member05AddrFragment extends InputBaseFragment{
 
                 if(!isValidInput()) return;
 
+                // FCM token id
                 mUser.personalInfo.push_id = FirebaseInstanceId.getInstance().getToken();
 
                 executeSignUp();

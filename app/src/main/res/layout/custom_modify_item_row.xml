@@ -5,38 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="?selectableItemBackground"
-    android:gravity="center_vertical"
+    android:background="@drawable/bottom_line"
     >
-    <TextView
-        android:id="@+id/id_tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        style="@style/SisoJobTitle"
-        android:text="이름"
-        />
-    <TextView
-        android:id="@+id/id_tv_content"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/SisoJobTitleComment"
-        android:gravity="right"
-        android:text="박순영"
-        />
     <LinearLayout
-        android:id="@+id/id_ll_arrow"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:gravity="center"
+        android:background="?selectableItemBackground"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/content_padding_left"
+        android:paddingRight="@dimen/content_padding_right"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:gravity="center_horizontal"
         >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_checkbox_off"
-            />
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/id_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/SisoJobTitle"
+            android:text="이름"
+            android:gravity="center_vertical"
+            />
+        <TextView
+            android:id="@+id/id_tv_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/SisoJobTitleComment"
+            android:gravity="right|center_vertical"
+            android:text="박순영"
+            />
+        <LinearLayout
+            android:id="@+id/id_ll_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_rightarrow"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

@@ -101,6 +101,7 @@ public class Parent00IndexFragment extends InputBaseFragment{
                 CommonPhotoFragment commonPhotoFragment = new CommonPhotoFragment();
                 ((BaseActivity) getActivity()).setFragment(commonPhotoFragment, R.string.sitter00_stage4);
                 break;
+
         }
     }
 
@@ -210,6 +211,11 @@ public class Parent00IndexFragment extends InputBaseFragment{
 
     @Override
     protected void moveNext() {
+        Bundle bundle = new Bundle();
+        bundle.putString(ParentDetailFragment.MODE, ParentDetailFragment.MODE_FROM_PARENT_INPUT);
+        Fragment fragment = new ParentDetailFragment();
+        fragment.setArguments(bundle);
+        ((BaseActivity) getActivity()).setFragment(fragment, BaseActivity.ACTIONBAR_HIDE);
 
     }
 }

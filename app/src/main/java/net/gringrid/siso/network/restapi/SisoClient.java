@@ -3,7 +3,6 @@ package net.gringrid.siso.network.restapi;
 import net.gringrid.siso.models.Image;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
-import net.gringrid.siso.util.SharedData;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -13,13 +12,11 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * Created by choijiho on 16. 9. 1..
@@ -41,6 +38,9 @@ public interface SisoClient {
 
     @POST("user/login")
     Call<User> login(@Body Personal personal);
+
+    @POST("user/relogin")
+    Call<User> relogin(@Body Personal personal);
 
     @POST("user/findEmail")
     Call<Personal> findEmail(@Body Personal personal);

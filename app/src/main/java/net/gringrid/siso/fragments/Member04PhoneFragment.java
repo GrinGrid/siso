@@ -1,10 +1,15 @@
 package net.gringrid.siso.fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.telephony.SmsMessage;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +31,11 @@ import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
+import org.simpleframework.xml.util.Match;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,12 +54,46 @@ public class Member04PhoneFragment extends InputBaseFragment{
 
     SmsAPI.SMS sms = new SmsAPI.SMS();
 
+    private final String SMS_RECEIVE_ACTION = "android.provider.Telephony.SMS_RECEIVED";
+
+    private BroadcastReceiver mSmsReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "onReceive: SMS");
+            Bundle bundle = intent.getExtras();
+            if ( bundle == null )
+                return;
+
+            Object[] pdusObj = (Object[]) bundle.get("pdus");
+            if ( pdusObj == null )	return;
+
+            //message 처리
+            for (int i = 0; i < pdusObj.length; i++) {
+                SmsMessage smsMsg = SmsMessage.createFromPdu((byte[])pdusObj[i]);
+                String stringMsg = smsMsg.getMessageBody();
+                stringMsg = stringMsg.replace("\n", "");
+
+                // 메시지가 유안타증권 본인확인 메시지 인지 확인한다.
+                if ( isAuthSMS(stringMsg) ) {
+                    // 인증번호란에 세팅한다.
+                    setSmsAuthNum( getAuthNum(stringMsg) );
+                }else{
+                    Log.d(TAG, "onReceive: is Not SMS");
+                }
+            }
+        }
+    };
+
+
     public Member04PhoneFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        IntentFilter filter = new IntentFilter(SMS_RECEIVE_ACTION);
+        getContext().registerReceiver(mSmsReceiver, filter);
         super.onCreate(savedInstanceState);
     }
 
@@ -108,15 +152,18 @@ public class Member04PhoneFragment extends InputBaseFragment{
         switch (v.getId()){
 
             case  R.id.id_tv_next_btn:
+                if (SharedData.DEBUG_MODE) {
+                    saveData();
+                }
                 // TODO 인증번호 확인
-//                String authNum = id_et_auth_num.getText().toString();
-//                confirmAuthNum(authNum);
-                saveData();
+                if(!isValidInput()) return;
+                confirmAuthNum();
 
                 break;
 
             case  R.id.id_tv_request_auth_sms:
                 // TODO 휴대폰번호 입력여부 확인
+                if(!isValidPhoneInput()) return;
                 String phone = id_et_phone.getText().toString();
                 requestAuthSms(phone);
                 break;
@@ -126,19 +173,35 @@ public class Member04PhoneFragment extends InputBaseFragment{
 
     @Override
     protected void loadData() {
+
+        /*
         if ( SharedData.DEBUG_MODE ) {
-            id_et_phone.setInput("01012349090");
+            id_et_phone.setInput("01045097914");
         }
+        */
+
+
 
         if(!TextUtils.isEmpty(mUser.personalInfo.phone)){
             id_et_phone.setInput(mUser.personalInfo.phone);
         }
     }
 
-    @Override
-    protected boolean isValidInput() {
+    private boolean isValidPhoneInput(){
         if (TextUtils.isEmpty(id_et_phone.getText())){
             SisoUtil.showErrorMsg(getContext(), R.string.invalid_phone_write);
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    protected boolean isValidInput() {
+        if(!isValidPhoneInput()) return false;
+
+        if (TextUtils.isEmpty(id_et_auth_num.getText())){
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_auth_num_write);
             return false;
         }
         return true;
@@ -160,7 +223,6 @@ public class Member04PhoneFragment extends InputBaseFragment{
     private void requestAuthSms(String phone) {
         Log.d(TAG, "requestAuthSms: phone : "+phone);
         sms.phone = phone;
-        sms.phone = "01012349090";
 
         if(mSmsAPI == null){
             mSmsAPI = ServiceGenerator.getInstance(getActivity()).createService(SmsAPI.class);
@@ -190,8 +252,9 @@ public class Member04PhoneFragment extends InputBaseFragment{
 
     }
 
-    private void confirmAuthNum(String authNum) {
-        sms.authNum = authNum;
+    private void confirmAuthNum() {
+        sms.authNum = id_et_auth_num.getText().toString();
+        // TODO 6자리 숫자 확인
         if(mSmsAPI == null){
             mSmsAPI = ServiceGenerator.getInstance(getActivity()).createService(SmsAPI.class);
         }
@@ -202,6 +265,7 @@ public class Member04PhoneFragment extends InputBaseFragment{
             public void onResponse(Call<SmsAPI.SMS> call, Response<SmsAPI.SMS> response) {
                 if(response.isSuccessful()){
                     Log.d(TAG, "onResponse: success body : "+response.body());
+                    saveData();
                 }else{
                     Log.d(TAG, "onResponse: EROOR");
                     APIError error = ErrorUtils.parseError(response);
@@ -219,4 +283,35 @@ public class Member04PhoneFragment extends InputBaseFragment{
 
     }
 
+    private boolean isAuthSMS(String stringMsg) {
+        Log.d(TAG, "isAuthSMS: msg : "+stringMsg);
+        Pattern pattern = Pattern.compile("^.*시소.*인증번호.*[\\d].*");
+        Matcher matcher = pattern.matcher(stringMsg);
+        return (matcher.matches());
+    }
+
+    private void setSmsAuthNum(String stringMsg) {
+        id_et_auth_num.setInput(stringMsg);
+    }
+
+    /**
+     * SMS 문자로부터 인증번호를 추출한다.
+     * @param msg
+     * @return
+     */
+    private String getAuthNum(String msg){
+        String result = null;
+        Pattern pattern = Pattern.compile("(\\d+)");
+        Matcher matcher = pattern.matcher(msg);
+        if ( matcher.find() ){
+            result = matcher.group(0);
+        }
+        return result;
+    }
+
+    @Override
+    public void onDestroy() {
+        getContext().unregisterReceiver(mSmsReceiver);
+        super.onDestroy();
+    }
 }

@@ -25,56 +25,38 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/fragment_vertical_left_margin"
-                android:paddingTop="@dimen/fragment_vertical_top_margin"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6"
-                        android:textSize="20sp"
-                        style="@style/MemberGuideTitle"
-                        android:text="@string/member06_title"
-                        />
-                    <TextView
-                        android:id="@+id/id_tv_guide"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:layout_weight="6"
-                        style="@style/MemberGuideText"
-                        android:text="@string/member06_guide"
-                        />
-
-                </LinearLayout>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4"
-                    android:src="@drawable/woman2"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="@dimen/fragment_vertical_top_margin"
-                android:background="@drawable/shadow_line"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:gravity="center"
                 >
+                <ImageView
+                    android:id="@+id/id_iv_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_offer_complete"
+                    />
+                <TextView
+                    android:id="@+id/id_tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="반갑습니다.박순영님.\n시소의 부모 회원 이 되셨습니다!"
+                    style="@style/SisoJobTitle"
+                    android:textColor="@color/sisoPrimaryText"
+                    android:layout_marginTop="20dp"
+                    />
+                <TextView
+                    android:id="@+id/id_tv_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="박순영님 가까운 곳에 00명의 시터들이 있습니다.\n구인 등록을 통해 원하는 조건을 등록해주시면\n조건에 맞는 시터를 무료로 소개해드립니다"
+                    style="@style/SisoJobTitleComment"
+                    android:textSize="17sp"
+                    android:layout_marginTop="30dp"
+                    />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

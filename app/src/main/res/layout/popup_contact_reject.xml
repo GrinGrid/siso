@@ -2,10 +2,13 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="net.gringrid.siso.PopupContact"
     android:orientation="vertical"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     >
     <ImageView
         android:id="@+id/id_iv_profile"
@@ -22,7 +25,6 @@
         style="@style/ListName"
         android:gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
         />
 
     <View
@@ -32,33 +34,66 @@
         style="@style/SisoJobLine30"
         />
 
+    <TextView
+        android:id="@+id/id_tv_sub_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="취소 사유는 무엇인가요?"
+        style="@style/ListName"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <TextView
-            android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <net.gringrid.siso.views.SisoCheckBox
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            
-            />
-
+            android:layout_weight="5"
+            app:checkboxTitle="@string/contact_reject_cb_0"
+            android:layout_marginLeft="5dp"
+            >
+        </net.gringrid.siso.views.SisoCheckBox>
+        <net.gringrid.siso.views.SisoCheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            app:checkboxTitle="@string/contact_reject_cb_1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            >
+        </net.gringrid.siso.views.SisoCheckBox>
     </LinearLayout>
-    <TextView
-        android:id="@+id/id_tv_main_question"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="이현자 시터의 연락처 공개요청을 거절하시겠습니까?"
-        style="@style/ListName"
-        android:gravity="center"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        />
+        android:orientation="horizontal">
+        <net.gringrid.siso.views.SisoCheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            app:checkboxTitle="@string/contact_reject_cb_2"
+            android:layout_marginLeft="5dp"
+            >
+        </net.gringrid.siso.views.SisoCheckBox>
+        <net.gringrid.siso.views.SisoCheckBox
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            app:checkboxTitle="@string/contact_reject_cb_3"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            >
+        </net.gringrid.siso.views.SisoCheckBox>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="@drawable/line_30"
         style="@style/SisoJobLine30"
         />
+
 
 </LinearLayout>

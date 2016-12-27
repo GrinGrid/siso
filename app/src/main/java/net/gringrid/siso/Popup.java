@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.WebView;
 import android.webkit.JavascriptInterface;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,18 +24,11 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
+import net.gringrid.siso.models.Image;
 import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.MemberAPI;
 import net.gringrid.siso.util.SharedData;
-
-import java.lang.reflect.Type;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -42,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *      Content : layout inflate
  *      Button : color, Text, listener, tag, order
  */
-public class Popup extends Activity {
+public class Popup extends Activity{
 
     private static final String TAG = "jiho";
 
@@ -53,14 +47,16 @@ public class Popup extends Activity {
 
     private LinearLayout id_ll_content;
     protected TextView id_tv_title;
-    private TextView id_tv_btn_first;
-    private TextView id_tv_btn_second;
+    protected TextView id_tv_btn_first;
+    protected TextView id_tv_btn_second;
+    protected ImageView id_iv_btn_close;
 
     protected User mUser;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: POPUP");
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
@@ -72,13 +68,23 @@ public class Popup extends Activity {
 
     protected void initializeData() {
         mUser = SharedData.getInstance(this).getUserData();
+        Log.d(TAG, "initializeData : POPUP");
     }
 
     protected void initializeView() {
+        Log.d(TAG, "initializeView : POPUP");
         id_tv_title = (TextView) findViewById(R.id.id_tv_title);
         id_ll_content = (LinearLayout)findViewById(R.id.id_ll_content);
         id_tv_btn_first = (TextView) findViewById(R.id.id_tv_btn_first);
         id_tv_btn_second = (TextView) findViewById(R.id.id_tv_btn_second);
+        id_iv_btn_close = (ImageView) findViewById(R.id.id_iv_btn_close);
+        id_iv_btn_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 
     @Override

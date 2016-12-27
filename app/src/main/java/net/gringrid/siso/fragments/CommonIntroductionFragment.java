@@ -141,10 +141,10 @@ public class CommonIntroductionFragment extends InputBaseFragment implements
     protected void moveNext() {
         if(mUserType.equals(User.USER_TYPE_SITTER)){
             Sitter00IndexFragment fragment = new Sitter00IndexFragment();
-            ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter00_stage3);
+            ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter00_stage3);
         }else if(mUserType.equals(User.USER_TYPE_PARENT)){
             Parent00IndexFragment fragment = new Parent00IndexFragment();
-            ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter00_stage3);
+            ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter00_stage3);
         }
     }
 

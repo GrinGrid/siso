@@ -56,7 +56,28 @@
         <attr name="child_icon" format="reference"></attr>
     </declare-styleable>
 
+    <declare-styleable name="SisoDetailRow">
+        <attr name="item_name" format="reference"></attr>
+        <attr name="item_value" format="reference"></attr>
+    </declare-styleable>
+
     <declare-styleable name="SisoTimeTable">
         <attr name="readonly" format="boolean"></attr>
     </declare-styleable>
+
+
+    <!-- 사용하지 않음 -->
+    <declare-styleable name="SisoSitterListCommon">
+        <attr name="sitter_list_name" format="string"></attr>
+        <attr name="sitter_list_brief" format="string"></attr>
+        <attr name="sitter_list_addr1" format="string"></attr>
+        <attr name="sitter_list_distance" format="string"></attr>
+        <attr name="sitter_list_salary" format="string"></attr>
+        <attr name="sitter_list_testimonial_cnt" format="string"></attr>
+        <attr name="sitter_list_commute" format="string"></attr>
+        <attr name="sitter_list_profile" format="string"></attr>
+        <attr name="sitter_list_favorite" format="string"></attr>
+    </declare-styleable>
+
+
 </resources>

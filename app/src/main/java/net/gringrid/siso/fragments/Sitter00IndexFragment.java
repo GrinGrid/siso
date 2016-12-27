@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
+import net.gringrid.siso.models.SitterDetail;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoCheckBox;
@@ -119,7 +120,7 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
     @Override
     protected void moveNext() {
         Bundle bundle = new Bundle();
-        bundle.putString(SharedData.USER, SharedData.getInstance(getContext()).getGlobalDataString(SharedData.USER));
+        bundle.putString(SitterDetailFragment.MODE, SitterDetailFragment.MODE_FROM_SITTER_INPUT);
         Fragment fragment = new SitterDetailFragment();
         fragment.setArguments(bundle);
         ((BaseActivity) getActivity()).setFragment(fragment, BaseActivity.ACTIONBAR_HIDE);

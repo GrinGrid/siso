@@ -155,7 +155,13 @@ public class Parent02ChildrenFragment extends InputBaseFragment implements SisoT
     protected void loadData() {
         if(mUser.parentInfo.children_info != null && mUser.parentInfo.children_info.size() > 0){
             for(Child child : mUser.parentInfo.children_info){
-                addChildWithData(Integer.parseInt(child.gender), child);
+                int type = 0;
+                if(child.is_expect.equals("1")){
+                   type = 2;
+                }else{
+                    type = Integer.parseInt(child.gender);
+                }
+                addChildWithData(type, child);
             }
         }
     }

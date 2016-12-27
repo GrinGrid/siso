@@ -16,38 +16,14 @@
         app:current_stage="0">
     </net.gringrid.siso.views.SisoInputProgress>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/fragment_vertical_left_margin"
-        android:paddingTop="@dimen/fragment_vertical_top_margin"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            style="@style/MemberGuideText"
-            android:text="@string/member01_guide"
-            />
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:src="@drawable/woman2"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginTop="@dimen/fragment_vertical_top_margin"
-        android:background="@drawable/shadow_line"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/member01_select_user_type"
         style="@style/SisoJobTitle"
-        android:layout_marginTop="60dp"
+        android:textColor="@color/sisoPrimaryText"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"/>
 
     <TextView
@@ -60,8 +36,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         >
         <LinearLayout
             android:id="@+id/ll_parent"
@@ -72,15 +51,22 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/id_iv_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/woman2"/>
+                android:src="@drawable/tg_ic_offer_normal"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn_green"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/member01_user_typer_parent"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/sisoAccentText"
-                android:text="@string/member01_user_typer_parent"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
         </LinearLayout>
         <LinearLayout
             android:id="@+id/ll_sitter"
@@ -91,15 +77,37 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/id_iv_sitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/woman2"/>
+                android:src="@drawable/tg_ic_seeker_normal"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn_green"
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:text="@string/member01_user_typer_sitter"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/sisoAccentText"
-                android:text="@string/member01_user_typer_sitter"/>
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_join_background"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/member01_term"
+            android:paddingTop="40dp"
+            style="@style/SisoToolbarTitleTextWhite"
+            android:gravity="center"
+            />
     </LinearLayout>
 </LinearLayout>

@@ -150,6 +150,7 @@ public class Parent02EnvRlgFragment extends InputBaseFragment{
         }else{
             mUser.parentInfo.religion= id_et_rlg.getText().toString();
         }
+        Log.d(TAG, "saveData: muser : "+mUser.toString());
         SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
     }
 

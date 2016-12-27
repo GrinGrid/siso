@@ -32,13 +32,16 @@ public class SitterListItem {
     public String commute;
 
     // 리뷰숫자
-    public String testimonialCnt;
+    public String testimonial_cnt;
 
     // 관심 여부
     public String favorite;
 
     // 거리
     public String distance;
+
+    // 연락처요청 상태
+    public String contact_status;
 
     @Override
     public String toString() {

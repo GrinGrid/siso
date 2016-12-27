@@ -32,7 +32,10 @@ import retrofit2.Response;
 public class Member06CompleteFragment extends InputBaseFragment{
 
     private TextView id_tv_next_btn;
+    private TextView id_tv_welcome;
+    private TextView id_tv_guide;
     private String mUserType;
+
 
     public Member06CompleteFragment() {
         // Required empty public constructor
@@ -54,10 +57,36 @@ public class Member06CompleteFragment extends InputBaseFragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        id_tv_welcome = (TextView)view.findViewById(R.id.id_tv_welcome);
+        id_tv_guide = (TextView)view.findViewById(R.id.id_tv_guide);
         id_tv_next_btn = (TextView)view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
-
+        setText("00");
         loadData();
+    }
+
+    private void setText(String boundaryNum) {
+        String welcomeStr = "";
+        String guideStr = "";
+        String nextStr = "";
+        if (mUserType.equals(User.USER_TYPE_SITTER)) {
+            welcomeStr = "반값습니다 "+mUser.personalInfo.name+"님.\n"+
+                    "시소의<시터 회원>이 되셨습니다!";
+            guideStr = mUser.personalInfo.name+"님 가까운 곳에 "+boundaryNum+"명의 시터들이 있습니다.\n" +
+                    "구인 등록을 통해 원하는 조건을 등록해주시면\n" +
+                    "조건에 맞는 시터를 무료로 소개해드립니다";
+            nextStr = "구직 정보 등록하기";
+        }else if(mUserType.equals(User.USER_TYPE_PARENT)){
+            welcomeStr = "반값습니다 "+mUser.personalInfo.name+"님.\n"+
+                    "시소의<부모 회원>이 되셨습니다!";
+            guideStr = mUser.personalInfo.name+"님 가까운 곳에 "+boundaryNum+"개의 일자리가 있습니다.\n" +
+                    "구직 등록을 통해 원하는 조건을 등록해주시면\n" +
+                    "조건에 맞는 일자리를 무료로 소개해드립니다";
+            nextStr = "구인 정보 등록하기";
+        }
+        id_tv_welcome.setText(welcomeStr);
+        id_tv_guide.setText(guideStr);
+        id_tv_next_btn.setText(nextStr);
     }
 
     @Override
@@ -116,8 +145,7 @@ public class Member06CompleteFragment extends InputBaseFragment{
                 if(response.isSuccessful()){
                     Log.d(TAG, "onResponse: success body : "+response.body().toString() );
                     Log.d(TAG, "onResponse: count : "+response.body().count );
-                    TextView id_tv_guide = (TextView)getView().findViewById(R.id.id_tv_guide);
-                    id_tv_guide.setText("축하합니다 주위에 시터"+response.body().count+"명 있어유 ~ ");
+                    setText(""+response.body().count);
 
                 }else{
                     APIError error = ErrorUtils.parseError(response);
@@ -146,9 +174,9 @@ public class Member06CompleteFragment extends InputBaseFragment{
                 if(response.isSuccessful()){
                     Log.d(TAG, "onResponse: success body : "+response.body().toString() );
                     Log.d(TAG, "onResponse: count : "+response.body().count );
-                    TextView id_tv_guide = (TextView)getView().findViewById(R.id.id_tv_guide);
-                    id_tv_guide.setText("축하합니다 주위에  구인자가 "+response.body().count+"명 있어유 ~ ");
+                    setText(""+response.body().count);
 
+                    // TODO 응답받기 전에 next button 눌렀을경우 죽는다
                 }else{
                     APIError error = ErrorUtils.parseError(response);
                     String msgCode = error.msgCode();

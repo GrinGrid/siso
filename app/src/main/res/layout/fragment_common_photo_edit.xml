@@ -39,26 +39,28 @@
                 </com.theartofdev.edmodo.cropper.CropImageView>
             </LinearLayout>
             <!-- 사진영역 end -->
-
-            <TextView
-                android:id="@+id/id_tv_crop"
+            <!-- 하단 버튼 영역 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@drawable/round_btn_green"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:text="@string/btn_confirm"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
 
+                <ImageView
+                    android:id="@+id/id_iv_crop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_cut_normal"
+                    />
+                <ImageView
+                    android:id="@+id/id_iv_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/btn_save_normal"
+                    android:layout_marginLeft="30dp"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
-    <TextView
-        android:id="@+id/id_tv_next_btn"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        style="@style/SisoNextButton"
-        android:text="@string/btn_next"
-        />
 </LinearLayout>

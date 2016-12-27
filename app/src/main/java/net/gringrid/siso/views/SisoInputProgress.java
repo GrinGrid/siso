@@ -63,8 +63,14 @@ public class SisoInputProgress extends LinearLayout{
 
         int total_stage = typedArray.getInt(R.styleable.SisoInputProgress_total_stage, 1);
         int current_stage = typedArray.getInt(R.styleable.SisoInputProgress_current_stage, 1);
+        setStage(total_stage, current_stage);
+        typedArray.recycle();
+    }
+
+    public void setStage(int total_stage, int current_stage) {
         float scale = getResources().getDisplayMetrics().density;
         int padding_in_px = (int) (mImageRightPadding * scale + 0.5f);
+        ll_container.removeAllViews();
 
         for ( int i=0; i<total_stage; i++ ){
             ImageView imageView = new ImageView(getContext());
@@ -79,7 +85,5 @@ public class SisoInputProgress extends LinearLayout{
             }
             ll_container.addView(imageView);
         }
-
-        typedArray.recycle();
     }
 }

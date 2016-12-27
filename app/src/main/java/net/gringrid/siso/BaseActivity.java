@@ -25,6 +25,8 @@ import net.gringrid.siso.fragments.LoginFragment;
 import net.gringrid.siso.fragments.Member01UserTypeFragment;
 import net.gringrid.siso.fragments.MemberModifyFragment;
 import net.gringrid.siso.fragments.Parent00IndexFragment;
+import net.gringrid.siso.fragments.ParentListFragment;
+import net.gringrid.siso.fragments.PushListFragment;
 import net.gringrid.siso.fragments.Sitter00IndexFragment;
 import net.gringrid.siso.fragments.CommonPhotoFragment;
 import net.gringrid.siso.fragments.SitterListFragment;
@@ -39,19 +41,20 @@ public class BaseActivity extends RootActivity
 
     final String TAG = "jiho";
 
-    final static String MENU                = "MENU";
-    final static int MENU_MY_INFO           = R.id.nav_my_info;
-    final static int MENU_MESSAGE           = R.id.nav_message;
-    final static int MENU_INPUT_SITTER      = R.id.nav_input_sitter;
-    final static int MENU_INPUT_PARENT      = R.id.nav_input_parent;
-    final static int MENU_SITTER_LIST       = R.id.nav_sitter_list;
-    final static int MENU_PARENT_LIST       = R.id.nav_parent_list;
-    final static int MENU_SUGGESTION        = R.id.nav_suggestion;
-    final static int MENU_GUIDE             = R.id.nav_guide;
-    final static int MENU_SIGN_UP           = R.id.nav_sign_up;
-    final static int MENU_LOG_IN            = R.id.nav_log_in;
-    final static int MENU_LOG_OUT           = R.id.nav_log_out;
-    final static int MENU_SHARE             = R.id.nav_share;
+    public final static String MENU                = "MENU";
+    public final static int MENU_MY_INFO           = R.id.nav_my_info;
+    public final static int MENU_MESSAGE           = R.id.nav_message;
+    public final static int MENU_INPUT_SITTER      = R.id.nav_input_sitter;
+    public final static int MENU_INPUT_PARENT      = R.id.nav_input_parent;
+    public final static int MENU_SITTER_LIST       = R.id.nav_sitter_list;
+    public final static int MENU_PARENT_LIST       = R.id.nav_parent_list;
+    public final static int MENU_SUGGESTION        = R.id.nav_suggestion;
+    public final static int MENU_GUIDE             = R.id.nav_guide;
+    public final static int MENU_SIGN_UP           = R.id.nav_sign_up;
+    public final static int MENU_LOG_IN            = R.id.nav_log_in;
+    public final static int MENU_LOG_OUT           = R.id.nav_log_out;
+    public final static int MENU_SHARE             = R.id.nav_share;
+    public final static int MENU_PUSH_LIST         = R.id.nav_push_list;
 
     final int DRAWER_MODE_HAMBURGER = 0;
     final int DRAWER_MODE_BACK = 1;
@@ -108,10 +111,7 @@ public class BaseActivity extends RootActivity
                 if ( fragmentCount > 1 ){
                     onBackPressed();
                 }else{
-
                     mNavigationView.getMenu().clear();
-//                    mNavigationView.inflateMenu(R.menu.menu_parent);
-//                    mNavigationView.inflateMenu(R.menu.menu_sitter);
                     mNavigationView.inflateMenu(getMenuId());
 
                     int drawerLockMode = mDrawer.getDrawerLockMode(GravityCompat.START);
@@ -132,6 +132,8 @@ public class BaseActivity extends RootActivity
     @Override
     protected void onResume() {
         Log.d(TAG, "BaseActivity onResume: ");
+        // TODO: 16. 12. 8.
+        // 넘어온 값 체크해서 화면 이동
         super.onResume();
     }
 
@@ -277,7 +279,7 @@ public class BaseActivity extends RootActivity
                 break;
 
             case MENU_PARENT_LIST:
-                fragment = new SitterListFragment();
+                fragment = new ParentListFragment();
                 setCleanUpFragment(fragment, TITLE_NONE);
                 break;
 
@@ -291,6 +293,11 @@ public class BaseActivity extends RootActivity
                 SharedData.getInstance(this).insertGlobalData(SharedData.USER, null);
                 fragment = new LoginFragment();
                 setCleanUpFragment(fragment, R.string.login_title);
+                break;
+
+            case MENU_PUSH_LIST:
+                fragment = new PushListFragment();
+                setCleanUpFragment(fragment, R.string.push_title);
                 break;
         }
     }
@@ -314,7 +321,7 @@ public class BaseActivity extends RootActivity
         }else if (id==ACTIONBAR_HIDE){
             mToolbar.setVisibility(View.GONE);
         }else if (id==TITLE_KEEP){
-            return;
+            id_toolbar_title.setVisibility(View.VISIBLE);
         }else{
             id_toolbar_title.setVisibility(View.VISIBLE);
             id_toolbar_title.setText(id);

@@ -286,6 +286,7 @@ public class SisoTimeTable extends LinearLayout implements View.OnClickListener 
     }
 
     public void setBitString(int week, String bitString) {
+        Log.d(TAG, "setBitString: week : "+week+", bitstring : "+bitString);
         String tg_id;
         SisoToggleButton tmpTgBtn;
         byte b = Byte.parseByte(bitString, 2);

@@ -81,8 +81,6 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         />
-
-
                 </LinearLayout>
             </FrameLayout>
 
@@ -95,35 +93,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/id_tv_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/DetailSummary"
-                        android:text="46"
-                        />
-                    <TextView
-                        android:id="@+id/id_tv_age_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/DetailSummaryUnit"
-                        android:text="나이(세)"
-                        />
-                </LinearLayout>
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorCFCFCF"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="3dp"
-                    />
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -145,35 +114,6 @@
                         android:layout_height="wrap_content"
                         style="@style/DetailSummaryUnit"
                         android:text="시급(천원)"
-                        />
-                </LinearLayout>
-                <View
-                    android:layout_width="1px"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorCFCFCF"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="3dp"
-                    />
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-                    <TextView
-                        android:id="@+id/id_tv_exp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/DetailSummary"
-                        android:text="10+"
-                        />
-                    <TextView
-                        android:id="@+id/id_tv_exp_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        style="@style/DetailSummaryUnit"
-                        android:text="경력(년)"
                         />
                 </LinearLayout>
                 <View
@@ -218,23 +158,51 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
                     <TextView
-                        android:id="@+id/id_tv_testimonial"
+                        android:id="@+id/id_tv_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/DetailSummary"
-                        android:text="2"
+                        android:text="46"
                         />
                     <TextView
-                        android:id="@+id/id_tv_testimonial_unit"
+                        android:id="@+id/id_tv_age_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         style="@style/DetailSummaryUnit"
-                        android:text="후기"
+                        android:text="희망시터연령"
                         />
                 </LinearLayout>
-
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorCFCFCF"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="3dp"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/id_tv_exp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/DetailSummary"
+                        android:text="10+"
+                        />
+                    <TextView
+                        android:id="@+id/id_tv_exp_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/DetailSummaryUnit"
+                        android:text="희망시터경력"
+                        />
+                </LinearLayout>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -265,6 +233,15 @@
                 />
             <!-- Introduce end -->
 
+            <!-- 돌봄 요청 아이 정보-->
+            <LinearLayout
+                android:id="@+id/id_ll_children"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+            <!-- 돌봄 요청 아이 정보 끝 -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
@@ -282,140 +259,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/sitter_detail_sub_title_basic"
+                    android:text="@string/parent_detail_sub_title_work_info"
                     style="@style/DetailIntroduceBrief"
                     android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     />
                 <LinearLayout
+                    android:id="@+id/id_ll_detail_row1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="출퇴근 방법"/>
-                    <TextView
-                        android:id="@+id/id_tv_commute"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="출퇴근형"/>
+                    android:orientation="vertical">
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="출퇴근 희망거리"/>
-                    <TextView
-                        android:id="@+id/id_tv_commute_limit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="걸어서 10분거리(1km 이내)"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="거주지"/>
-                    <TextView
-                        android:id="@+id/id_tv_addr"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="경기도 > 의왕시 > 내손동"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="자녀수"/>
-                    <TextView
-                        android:id="@+id/id_tv_cdrn_num"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="1남 1녀"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="근무기간"/>
-                    <TextView
-                        android:id="@+id/id_tv_period"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="16/10/22 ~ 종료일 없음"/>
-                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -448,6 +303,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:orientation="vertical"
                     >
                     <net.gringrid.siso.views.SisoTimeTable
                         android:id="@+id/id_stt"
@@ -455,119 +311,52 @@
                         android:layout_height="wrap_content"
                         app:readonly="true"
                         >
-
                     </net.gringrid.siso.views.SisoTimeTable>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical"
+                        android:layout_marginTop="5dp">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="3dp"
+                            android:src="@drawable/icon_pink_small_alert"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/parent_detail_schedule_nego"/>
+                    </LinearLayout>
                 </LinearLayout>
                 <!-- 스케줄 끝 -->
 
-                <!-- 국적, 종교, 보유자격증, 학력 -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_nationality"/>
-                    <TextView
-                        android:id="@+id/id_tv_nat"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="대한민국"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_religion"/>
-                    <TextView
-                        android:id="@+id/id_tv_rlg"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="기독교"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_license"/>
-                    <TextView
-                        android:id="@+id/id_tv_license"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="보육교사 자격증"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_education"/>
-                    <TextView
-                        android:id="@+id/id_tv_edu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="이화여대 유아교육과"/>
-                </LinearLayout>
             </LinearLayout>
             <!-- Basic Information (기본정보) 끝 -->
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@drawable/line_30"
+                style="@style/SisoJobLine30"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/parent_detail_sub_title_sitter"
+                style="@style/DetailIntroduceBrief"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                />
+            <!-- 부가정보 -->
+            <LinearLayout
+                android:id="@+id/id_ll_detail_row2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="40dp"
+                >
+            </LinearLayout>
 
             <!-- 돌봄 특기 -->
             <LinearLayout
@@ -613,7 +402,7 @@
                 style="@style/SisoJobLine30"
                 />
 
-            <!-- 후기 -->
+            <!-- 후기
             <LinearLayout
                 android:id="@+id/id_ll_testimonial"
                 android:layout_width="match_parent"
@@ -627,7 +416,7 @@
                     android:layout_marginTop="10dp"
                     />
             </LinearLayout>
-            <!-- 후기 end -->
+            후기 end -->
 
             <ListView
                 android:id="@+id/id_lv_testimonial"
@@ -654,13 +443,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_talk"/>
+                android:src="@drawable/ic_nv_message_normal"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_msg"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_ll_contact1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -668,16 +458,19 @@
             android:gravity="center"
             >
             <ImageView
+                android:id="@+id/id_iv_contact1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_request_phonenumber"/>
+                android:src="@drawable/ic_nv_request_normal"/>
             <TextView
+                android:id="@+id/id_tv_contact1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_request"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_ll_contact2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -685,11 +478,33 @@
             android:gravity="center"
             >
             <ImageView
+                android:id="@+id/id_iv_contact2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_sitterbookmark"/>
+                android:src="@drawable/ic_nv_request_normal"/>
             <TextView
+                android:id="@+id/id_tv_contact2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter_detail_request"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/id_ll_favorite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/id_iv_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_nv_favorites_normal"/>
+            <TextView
+                android:id="@+id/id_tv_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_bookmark"/>

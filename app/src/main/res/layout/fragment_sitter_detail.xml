@@ -68,7 +68,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/detail_profile_sample"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        android:background="@drawable/img_photoframe"
                         />
+
                     <TextView
                         android:id="@+id/id_tv_name_gender"
                         android:layout_width="wrap_content"
@@ -81,8 +85,6 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         />
-
-
                 </LinearLayout>
             </FrameLayout>
 
@@ -287,30 +289,11 @@
                     android:layout_marginTop="10dp"
                     />
                 <LinearLayout
+                    android:id="@+id/id_ll_detail_row1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="출퇴근 방법"/>
-                    <TextView
-                        android:id="@+id/id_tv_commute"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="출퇴근형"/>
+                    android:orientation="vertical">
+
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -329,111 +312,7 @@
                         android:layout_weight="3.5"
                         style="@style/DetailIntroduceFull"
                         android:layout_marginLeft="5dp"
-                        android:text="출퇴근 희망거리"/>
-                    <TextView
-                        android:id="@+id/id_tv_commute_limit"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="걸어서 10분거리(1km 이내)"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="거주지"/>
-                    <TextView
-                        android:id="@+id/id_tv_addr"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="경기도 > 의왕시 > 내손동"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="자녀수"/>
-                    <TextView
-                        android:id="@+id/id_tv_cdrn_num"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="1남 1녀"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="근무기간"/>
-                    <TextView
-                        android:id="@+id/id_tv_period"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="16/10/22 ~ 종료일 없음"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="근무 가능 시간"/>
+                        android:text="돌봄 가능 시간"/>
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -460,114 +339,15 @@
                 </LinearLayout>
                 <!-- 스케줄 끝 -->
 
-                <!-- 국적, 종교, 보유자격증, 학력 -->
+                <!-- 부가정보 -->
                 <LinearLayout
+                    android:id="@+id/id_ll_detail_row2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_nationality"/>
-                    <TextView
-                        android:id="@+id/id_tv_nat"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="대한민국"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_religion"/>
-                    <TextView
-                        android:id="@+id/id_tv_rlg"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="기독교"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_license"/>
-                    <TextView
-                        android:id="@+id/id_tv_license"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="보육교사 자격증"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
-                    >
-                    <!-- bullet 기호 : Alt + 8 -->
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="•"/>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="3.5"
-                        style="@style/DetailIntroduceFull"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/sitter_detail_basic_education"/>
-                    <TextView
-                        android:id="@+id/id_tv_edu"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="6.5"
-                        style="@style/DetailIntroduceFull"
-                        android:text="이화여대 유아교육과"/>
+                    android:orientation="vertical">
                 </LinearLayout>
             </LinearLayout>
             <!-- Basic Information (기본정보) 끝 -->
-
 
             <!-- 돌봄 특기 -->
             <LinearLayout
@@ -606,14 +386,15 @@
             </LinearLayout>
             <!-- 희망 근무 환경 end -->
 
+            <!--
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@drawable/line_30"
                 style="@style/SisoJobLine30"
                 />
-
-            <!-- 후기 -->
+            -->
+            <!-- 후기
             <LinearLayout
                 android:id="@+id/id_ll_testimonial"
                 android:layout_width="match_parent"
@@ -627,7 +408,7 @@
                     android:layout_marginTop="10dp"
                     />
             </LinearLayout>
-            <!-- 후기 end -->
+            후기 end -->
 
             <ListView
                 android:id="@+id/id_lv_testimonial"
@@ -654,13 +435,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_talk"/>
+                android:src="@drawable/ic_nv_message_normal"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_msg"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_ll_contact1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -668,16 +450,19 @@
             android:gravity="center"
             >
             <ImageView
+                android:id="@+id/id_iv_contact1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_request_phonenumber"/>
+                android:src="@drawable/ic_nv_request_normal"/>
             <TextView
+                android:id="@+id/id_tv_contact1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_request"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/id_ll_contact2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -685,11 +470,33 @@
             android:gravity="center"
             >
             <ImageView
+                android:id="@+id/id_iv_contact2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_sitterbookmark"/>
+                android:src="@drawable/ic_nv_request_normal"/>
             <TextView
+                android:id="@+id/id_tv_contact2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sitter_detail_request"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/id_ll_favorite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/id_iv_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/ic_nv_favorites_normal"/>
+            <TextView
+                android:id="@+id/id_tv_favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sitter_detail_bookmark"/>

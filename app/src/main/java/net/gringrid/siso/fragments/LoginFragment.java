@@ -96,7 +96,9 @@ public class LoginFragment extends InputBaseFragment {
         switch (v.getId()){
             case  R.id.id_tv_login_btn:
                 if ( SharedData.DEBUG_MODE ){
-                    id_et_email.setInput("nisclan1479110148955@hotmail.com");
+                    Log.d(TAG, "onClick: email : "+mUser.personalInfo.email);
+                    id_et_email.setInput(mUser.personalInfo.email);
+//                    id_et_email.setInput("nisclan1479110148955@hotmail.com");
                     id_et_passwd.setInput("tjswndqkqh");
                 }
                 executeLogin();

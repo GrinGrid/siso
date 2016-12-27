@@ -4,11 +4,13 @@
     android:layout_height="match_parent"
     tools:context="net.gringrid.siso.fragments.SitterListReceiveFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ListView
+        android:id="@+id/id_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/sitter_list_tab_receive"
-        android:gravity="center"/>
+        android:dividerHeight="10dp"
+        android:divider="@drawable/line_30"
+        >
+    </ListView>
 
 </FrameLayout>

@@ -27,7 +27,8 @@ public class ServiceGenerator {
     private static ServiceGenerator instance;
     private static Activity mActivity;
 
-    public static final String API_BASE_URL = "http://siso4u.net/";
+    public static final String API_BASE_URL = "https://siso4u.net/";
+    public static final String API_BASE_URL_DEV = "https://siso4u.net/dev";
     private static final String TAG = "jiho";
 
     private static OkHttpClient.Builder httpClient = new OkHttpClient.Builder();

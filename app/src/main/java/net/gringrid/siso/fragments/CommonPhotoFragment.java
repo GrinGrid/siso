@@ -197,14 +197,14 @@ public class CommonPhotoFragment extends InputBaseFragment implements CommonPhot
 
     @Override
     protected void moveNext() {
+        Log.d(TAG, "moveNext: userType : "+mUserType);
         if(mUserType.equals(User.USER_TYPE_SITTER)){
             Sitter00IndexFragment fragment = new Sitter00IndexFragment();
             ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter00_stage3);
-        }else if(mUserType.equals(User.USER_TYPE_SITTER)) {
+        }else if(mUserType.equals(User.USER_TYPE_PARENT)) {
             Parent00IndexFragment fragment = new Parent00IndexFragment();
             ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_basic_title);
         }
-
     }
 
     /**
@@ -297,28 +297,31 @@ public class CommonPhotoFragment extends InputBaseFragment implements CommonPhot
             Cursor thumbnailCursor = null;
             String[] thumbnailProjection = { MediaStore.Images.Thumbnails.DATA };
 
-            if(imageCursor.moveToFirst()){
-                do {
-                    imageId = imageCursor.getString(idColumnIndex);
-                    thumbnailCursor = resolver.query(
-                            MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
-                            projection,
-                            MediaStore.Images.Thumbnails.IMAGE_ID + "=?",
-                            new String[]{imageId},
-                            null //MediaStore.Images.Thumbnails.MICRO_KIND
-                    );
-                    if(thumbnailCursor==null){
-                        Log.d(TAG, "getThumnailPhoto: thumbnailCursor NULLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-                    }else if(thumbnailCursor.moveToFirst()){
-                        Log.d(TAG, "createThumbnail: Thumbnail EXISTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
-                    }else{
-                        MediaStore.Images.Thumbnails.getThumbnail(resolver, Long.parseLong(imageId), MediaStore.Images.Thumbnails.MINI_KIND, null);
-                        Log.d(TAG, "getThumnailPhoto: thumbnail EMPTYYYYYYYYYYYYYYYYYYYYYYYYYYYY ");
-                    }
-                }while (imageCursor.moveToNext());
+            if(imageCursor != null && resolver != null) {
+
+                if (imageCursor.moveToFirst()) {
+                    do {
+                        imageId = imageCursor.getString(idColumnIndex);
+                        thumbnailCursor = resolver.query(
+                                MediaStore.Images.Thumbnails.EXTERNAL_CONTENT_URI,
+                                projection,
+                                MediaStore.Images.Thumbnails.IMAGE_ID + "=?",
+                                new String[]{imageId},
+                                null //MediaStore.Images.Thumbnails.MICRO_KIND
+                        );
+                        if (thumbnailCursor == null) {
+                            Log.d(TAG, "getThumnailPhoto: thumbnailCursor NULLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
+                        } else if (thumbnailCursor.moveToFirst()) {
+                            Log.d(TAG, "createThumbnail: Thumbnail EXISTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+                        } else {
+                            MediaStore.Images.Thumbnails.getThumbnail(resolver, Long.parseLong(imageId), MediaStore.Images.Thumbnails.MINI_KIND, null);
+                            Log.d(TAG, "getThumnailPhoto: thumbnail EMPTYYYYYYYYYYYYYYYYYYYYYYYYYYYY ");
+                        }
+                    } while (imageCursor.moveToNext());
+                }
+                imageCursor.close();
+                thumbnailCursor.close();
             }
-            imageCursor.close();
-            thumbnailCursor.close();
             return "";
         }
     }

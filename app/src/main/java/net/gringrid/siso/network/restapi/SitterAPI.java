@@ -1,6 +1,8 @@
 package net.gringrid.siso.network.restapi;
 
+import net.gringrid.siso.models.SitterDetail;
 import net.gringrid.siso.models.SitterList;
+import net.gringrid.siso.models.User;
 
 import java.util.List;
 
@@ -22,4 +24,17 @@ public interface  SitterAPI {
 
     @GET("sitter/list/{email}")
     Call<SitterList> getListSiso(@Path("email") String email);
+
+    @GET("sitter/favList/{email}")
+    Call<SitterList> getFavListSiso(@Path("email") String email);
+
+    @GET("sitter/reqList/{email}")
+    Call<SitterList> getReqListSiso(@Path("email") String email);
+
+    @GET("sitter/rcvList/{email}")
+    Call<SitterList> getRcvListSiso(@Path("email") String email);
+
+    @GET("sitter/detail/{email}/{trg_email}")
+    Call<SitterDetail> getDetail(@Path("email") String email,
+                                 @Path("trg_email") String trg_email);
 }

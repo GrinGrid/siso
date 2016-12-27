@@ -28,7 +28,7 @@ import net.gringrid.siso.R;
 import net.gringrid.siso.network.restapi.AddrAPI;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 시터리스트 관리
  */
 public class SitterListFragment extends Fragment implements TabLayout.OnTabSelectedListener {
 
@@ -39,6 +39,8 @@ public class SitterListFragment extends Fragment implements TabLayout.OnTabSelec
     private static final int TAB_2_SEND = 2;
     private static final int TAB_3_RECEIVE = 3;
 
+    SitterListSIsoFragment sitterListSIsoFragment;
+    SitterListFavoriteFragment sitterListFavoriteFragment;
 
     private ViewPager id_vp;
     private FragmentPagerAdapter mFragmentPagerAdapter;
@@ -115,6 +117,7 @@ public class SitterListFragment extends Fragment implements TabLayout.OnTabSelec
         tab.setIcon(tabIconSelectedList[position]);
         setIconTextColor(position, R.color.colorContentTextPink);
         id_vp.setCurrentItem(position, true);
+        //mFragmentPagerAdapter.getItem(position).onResume();
     }
 
     @Override
@@ -126,7 +129,6 @@ public class SitterListFragment extends Fragment implements TabLayout.OnTabSelec
 
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
-
     }
 
     public static class SitterListPagerAdapter extends FragmentPagerAdapter{
@@ -139,8 +141,10 @@ public class SitterListFragment extends Fragment implements TabLayout.OnTabSelec
         public Fragment getItem(int position) {
             switch (position){
                 case TAB_O_SISO:
+                    Log.d(TAG, "getItem: SISO");
                     return new SitterListSIsoFragment();
                 case TAB_1_FAVOTITE:
+                    Log.d(TAG, "getItem: FAVORITE");
 //                    return SitterListFavoriteFragment.newInstance(1, R.string.sitter_list_tab_favorite);
                     return new SitterListFavoriteFragment();
                 case TAB_2_SEND:

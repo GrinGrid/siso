@@ -19,7 +19,16 @@ public class SharedData {
     public static final boolean DEBUG_MODE = true;
     public static final String USER = "user";
 
+    public static final String IS_READ_GUIDE = "IS_READ_GUIDE";
     public static final String SESSION_KEY = "Session-Key";
+    // LOCAL SESSION 유효시간 : 1시간
+    // LOCAL CONFIG 유효시간 : 24시간
+    public static final int LOCAL_SESSION_EXPIRE_LENGTH = 3600000;//1000*60*60
+    public static final int LOCAL_CONFIG_EXPIRE_LENGTH = 3600000; // 86400000; //1000*60*60*24
+    public static final String SESSION_LAST_CHECK_TIME = "SESSION_LAST_CHECK_TIME";
+    public static final String CONFIG_LAST_CHECK_TIME = "CONFIG_LAST_CHECK_TIME";
+    public static final String EMAIL = "EMAIL";
+
     private static final String TAG = "jiho";
 
     private static SharedData instance;
@@ -128,6 +137,10 @@ public class SharedData {
 
     public int getGlobalDataInt(String _key){
         return m_preference.getInt(_key, 0);
+    }
+
+    public long getGlobalDataLong(String _key){
+        return m_preference.getLong(_key, 0);
     }
 
     public int getGlobalDataInt(String _key, int _default){

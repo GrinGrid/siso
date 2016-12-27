@@ -34,8 +34,10 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
 
     private int[] mRadioGender = new int[]{R.id.id_tg_btn_boy, R.id.id_tg_btn_girl, R.id.id_tg_btn_newborn};
 
+    String      mGender;
     boolean     mIsChecked;
     boolean     mIsExpect;
+
 
     OnChildFormRemoveListener mlistener;
 
@@ -130,13 +132,22 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
     }
 
     public void setIconResource(int id){
-        if(id == R.drawable.ic_newborn_small){
-            id_ll_newborn_gender.setVisibility(View.VISIBLE);
-            mIsExpect = true;
-        }else{
-            id_ll_newborn_gender.setVisibility(View.GONE);
-            mIsExpect = false;
+        id_ll_newborn_gender.setVisibility(View.GONE);
+        mIsExpect = false;
+
+        switch (id){
+            case R.drawable.ic_boy_small:
+                mGender = "0";
+                break;
+            case R.drawable.ic_girl_small:
+                mGender = "1";
+                break;
+            case R.drawable.ic_newborn_small:
+                id_ll_newborn_gender.setVisibility(View.VISIBLE);
+                mIsExpect = true;
+                break;
         }
+
         id_iv_child_icon.setImageResource(id);
     }
 
@@ -145,8 +156,15 @@ public class SisoAddChild extends LinearLayout implements View.OnClickListener {
         child.name = id_et_name.getText().toString();
         child.birth = id_et_birth.getText().toString();
         child.is_care = mIsChecked?"1":"0";
-        child.gender = String.valueOf(SisoUtil.getRadioValue(mRadioGender, this));
         child.is_expect = mIsExpect?"1":"0";
+
+        // 출산예정일경우
+        if(mIsExpect) {
+            child.gender = String.valueOf(SisoUtil.getRadioValue(mRadioGender, this));
+        }else{
+            child.gender = mGender;
+        }
+
         return child;
     }
 

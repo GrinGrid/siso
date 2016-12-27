@@ -3,6 +3,7 @@ package net.gringrid.siso.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -105,7 +106,12 @@ public class SisoDetailItem extends LinearLayout {
 
 
             item_image.setImageResource(item.itemImgRsc);
-            item_text.setText(item.itemTxtRsc);
+
+            if(!TextUtils.isEmpty(item.itemTxt)){
+                item_text.setText(item.itemTxt);
+            }else{
+                item_text.setText(item.itemTxtRsc);
+            }
 
             item_layout.addView(item_image);
             item_layout.addView(item_text);
@@ -117,10 +123,15 @@ public class SisoDetailItem extends LinearLayout {
     public static class DetailItem{
         public int itemImgRsc;
         public int itemTxtRsc;
+        public String itemTxt;
 
         public DetailItem(int imgRsc, int txtRsc){
             this.itemImgRsc = imgRsc;
             this.itemTxtRsc = txtRsc;
+        }
+        public DetailItem(int imgRsc, String txt){
+            this.itemImgRsc = imgRsc;
+            this.itemTxt = txt;
         }
     }
 

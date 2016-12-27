@@ -3,6 +3,7 @@ package net.gringrid.siso.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +93,11 @@ public class SisoCheckBox extends LinearLayout{
         }
 
         id_tv_title.setText(title);
-        id_tv_title_comment.setText(titleComment);
+        if(TextUtils.isEmpty(titleComment)){
+            id_tv_title_comment.setVisibility(GONE);
+        }else{
+            id_tv_title_comment.setText(titleComment);
+        }
 //        id_tv_label.setTextColor(labelColor);
 
         typedArray.recycle();

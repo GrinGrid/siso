@@ -15,4 +15,8 @@
     <dimen name="fragment_vertical_top_margin">10dp</dimen>
     <dimen name="fragment_vertical_bottom_margin">10dp</dimen>
     <dimen name="fragment_vertical_left_margin">30dp</dimen>
+
+    <dimen name="fragment_user_modify_title_top_margin">7dp</dimen>
+    <dimen name="fragment_user_modify_title_bottom_margin">7dp</dimen>
+
 </resources>

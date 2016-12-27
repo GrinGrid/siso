@@ -181,4 +181,50 @@
         <item>천주교</item>
         <item></item>
     </string-array>
+
+    <string-array name="sitter_edu">
+        <item>비공개</item>
+        <item>초등학교 졸업</item>
+        <item>중학교 졸업</item>
+        <item>고등학교 졸업</item>
+        <item>대학교 재학</item>
+        <item>대학교 졸업</item>
+    </string-array>
+
+    <string-array name="parent_nat">
+        <item>대한민국</item>
+        <item>중국동포</item>
+        <item>상관없음</item>
+        <item></item>
+    </string-array>
+
+    <!-- 가이드 메인 문구 -->
+    <string-array name="guide_main">
+        <item>시소에 오신 것을 환영합니다</item>
+        <item>모바일로 만나는\n스마트한 시터 구인구직!</item>
+        <item>우리 가족에게 딱 맞는 조건의\n시터를 스마트하게 추천!</item>
+        <item>소중한 내 개인정보!\n한번 더 지켜드립니다</item>
+        <item>심.지.어\n이 모든 서비스가 무료!</item>
+        <item>일과 가정의 균형과 양립!</item>
+    </string-array>
+
+    <!-- 가이드 서브 문구 -->
+    <string-array name="guide_sub">
+        <item>우리 아이 돌봐줄 분 구할때 시소~!\n시소는 시터의 도움으로 아이를 키우고 있는\n엄마가 직접 만든 시터 구인구직 서비스입니다.</item>
+        <item>아직도 아파트 벽보로 시터를 구하시나요?\n모바일을 만나 더 빠르고 편리해진\n구인구직 서비스를 경험해보세요!</item>
+        <item>일분 일초가 바쁜 당신을 위해~!\n시소가 근무시간, 거리, 시급 등 원하는 조건을\n고려해 시터와 일자리를 추천해드립니다</item>
+        <item>여성들을 위한 시소의 세심한 배려!\n연락처 공개 수락/거절 기능으로\n원하는 사람에게만 내 연락처를 공개할 수 있습니다.</item>
+        <item>오직 행복한 육아만 고민하실 수 있도록~!\n시소는 소개 수수료, 정보 열람수수료등\n급여 이외에 어떤 경제적 부담도 드리지 않습니다</item>
+        <item>아이를 잘 키우고 싶은 선후배엄마들이\n시소에서 만납니다.\n일과 가정의 균형과 양립을 통해\n행복한 육아를 할수 있도록 시소가 응원합니다.</item>
+    </string-array>
+
+    <!-- 가이드 메인 이미지 -->
+    <integer-array name="guide_img">
+        <item>@drawable/ic_summary01</item>
+        <item>@drawable/ic_summary02</item>
+        <item>@drawable/ic_summary03</item>
+        <item>@drawable/ic_summary04</item>
+        <item>@drawable/ic_summary05</item>
+        <item>@drawable/ic_summary06</item>
+    </integer-array>
 </resources>

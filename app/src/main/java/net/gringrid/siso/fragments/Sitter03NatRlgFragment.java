@@ -234,7 +234,7 @@ public class Sitter03NatRlgFragment extends InputBaseFragment{
     @Override
     protected void moveNext() {
         Sitter03EduLicFragment fragment = new Sitter03EduLicFragment();
-        ((BaseActivity) getActivity()).setCleanUpFragment(fragment, R.string.sitter_title);
+        ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_title);
 
     }
 }

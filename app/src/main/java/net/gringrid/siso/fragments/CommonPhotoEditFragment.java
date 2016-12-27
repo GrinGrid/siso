@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,8 +39,11 @@ public class CommonPhotoEditFragment extends Fragment implements CommonSelectPho
 
     private LinearLayout id_ll_photo;
     private CropImageView id_civ;
-    private TextView id_tv_next_btn;
-    private TextView id_tv_crop;
+
+    private ImageView id_iv_crop;
+    private ImageView id_iv_save;
+
+
     private Bitmap mBitmap;
 
 
@@ -81,10 +85,10 @@ public class CommonPhotoEditFragment extends Fragment implements CommonSelectPho
         id_civ.setAspectRatio(1,1);
         id_civ.setFixedAspectRatio(true);
         id_civ.setScaleType(CropImageView.ScaleType.FIT_CENTER);
-        id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
-        id_tv_next_btn.setOnClickListener(this);
-        id_tv_crop = (TextView) view.findViewById(R.id.id_tv_crop);
-        id_tv_crop.setOnClickListener(this);
+        id_iv_crop = (ImageView)view.findViewById(R.id.id_iv_crop);
+        id_iv_crop.setOnClickListener(this);
+        id_iv_save = (ImageView)view.findViewById(R.id.id_iv_save);
+        id_iv_save.setOnClickListener(this);
         super.onViewCreated(view, savedInstanceState);
     }
 
@@ -159,11 +163,11 @@ public class CommonPhotoEditFragment extends Fragment implements CommonSelectPho
     public void onClick(View v) {
         switch (v.getId()){
 
-            case R.id.id_tv_crop:
+            case R.id.id_iv_crop:
                 performCrop();
                 break;
 
-            case R.id.id_tv_next_btn:
+            case R.id.id_iv_save:
                 mListener.onEditComplete(mBitmap);
                 getActivity().onBackPressed();
                 break;

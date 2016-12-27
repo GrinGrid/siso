@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import net.gringrid.siso.BaseActivity;
@@ -27,6 +28,8 @@ public class Member01UserTypeFragment extends InputBaseFragment{
     private static final String TAG = "jiho";
     LinearLayout ll_parent;
     LinearLayout ll_sitter;
+    ImageView id_iv_parent;
+    ImageView id_iv_sitter;
 
     public Member01UserTypeFragment() {
         // Required empty public constructor
@@ -49,6 +52,8 @@ public class Member01UserTypeFragment extends InputBaseFragment{
         // Inflate the layout for this fragment
         ll_parent = (LinearLayout)view.findViewById(R.id.ll_parent);
         ll_sitter = (LinearLayout)view.findViewById(R.id.ll_sitter);
+        id_iv_parent = (ImageView)view.findViewById(R.id.id_iv_parent);
+        id_iv_sitter = (ImageView)view.findViewById(R.id.id_iv_sitter);
 
         ll_parent.setOnClickListener(this);
         ll_sitter.setOnClickListener(this);
@@ -62,9 +67,11 @@ public class Member01UserTypeFragment extends InputBaseFragment{
 
         switch (v.getId()){
             case  R.id.ll_parent:
+                id_iv_parent.setImageResource(R.drawable.tg_ic_offer_over);
                 mUser.personalInfo.user_type = User.USER_TYPE_PARENT;
                 break;
             case  R.id.ll_sitter:
+                id_iv_sitter.setImageResource(R.drawable.tg_ic_seeker_over);
                 mUser.personalInfo.user_type = User.USER_TYPE_SITTER;
                 break;
         }

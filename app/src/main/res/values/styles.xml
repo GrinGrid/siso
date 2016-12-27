@@ -29,6 +29,20 @@
     </style>
 
 
+    <!-- 가이드 화면 -->
+    <style name="GuideTitle">
+        <item name="android:textColor">@color/sisoPrimaryColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="GuideComment">
+        <item name="color">@color/sisoDisableText</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
     <style name="MemberGuideTitle">
         <item name="color">@color/sisoPrimaryText</item>
         <item name="android:gravity">center</item>
@@ -118,7 +132,7 @@
     </style>
 
     <style name="TimeTableWeekLayoutCell">
-        <item name="android:background">@color/color5CCCD6</item>
+        <item name="android:background">@color/sisoAccentColor</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -224,5 +238,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ContactPopupName">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorContentTextPink</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>

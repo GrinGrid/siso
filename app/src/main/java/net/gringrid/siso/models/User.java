@@ -35,7 +35,7 @@ public class User {
         personalInfo = new Personal();
         sitterInfo = new Sitter();
         parentInfo = new Parent();
-        sysInfo = new System();
+        sysInfo = new Sys();
         imageInfo = new Image();
     }
 
@@ -49,7 +49,7 @@ public class User {
     public Parent parentInfo;
 
     @SerializedName("sys_info")
-    public System sysInfo;
+    public Sys sysInfo;
 
     @SerializedName("image_info")
     public Image imageInfo;

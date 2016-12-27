@@ -21,6 +21,9 @@ public interface ContactAPI {
     @POST("contact/accept")
     Call<Contact> accept(@Body Contact contact);
 
+    @POST("contact/cancel")
+    Call<Contact> cancel(@Body Contact contact);
+
     @POST("contact/reject")
     Call<Contact> reject(@Body Contact contact);
 

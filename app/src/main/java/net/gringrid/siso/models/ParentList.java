@@ -4,16 +4,17 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
  * Created by choijiho on 16. 9. 13..
  */
-public class System {
-    // 사용자 상태
-    public String sys_status;
-    // 마지막로그인
-    public String sys_last_login;
-    // 등록일
-    public String sys_reg_date;
+public class ParentList {
+    @SerializedName("group_first")
+    public List<ParentListItem> group_first;
+
+    @SerializedName("group_second")
+    public List<ParentListItem> group_second;
 
     @Override
     public String toString() {

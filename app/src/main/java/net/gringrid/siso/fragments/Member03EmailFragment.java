@@ -99,16 +99,17 @@ public class Member03EmailFragment extends InputBaseFragment{
 
     @Override
     protected void loadData() {
+
+        if(!TextUtils.isEmpty(mUser.personalInfo.email)){
+            id_et_email.setInput(mUser.personalInfo.email);
+        }
+
         if (SharedData.DEBUG_MODE) {
             Date now = new Date();
             now.getTime();
             Log.d(TAG, "loadData: now.getTime : "+now.getTime());
             id_et_email.setInput("nisclan"+now.getTime()+"@hotmail.com");
             id_et_passwd.setInput("tjswndqkqh");
-        }
-
-        if(!TextUtils.isEmpty(mUser.personalInfo.email)){
-            id_et_email.setInput(mUser.personalInfo.email);
         }
     }
 

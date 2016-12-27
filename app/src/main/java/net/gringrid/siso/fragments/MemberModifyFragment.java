@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.R;
@@ -17,11 +18,11 @@ import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoModifyItemRow;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 시터정보 수정
  */
 public class MemberModifyFragment extends InputBaseFragment{
 
-    private static final String NULL = "NULL";
+    private static final String NULL = "";
     private SisoModifyItemRow id_smir_name;
     private User mUser;
     private String mUserType;
@@ -53,35 +54,6 @@ public class MemberModifyFragment extends InputBaseFragment{
             R.id.id_smir_brief,
             R.id.id_smir_introduction,
             R.id.id_smir_profile_photo
-    };
-
-    private boolean[] mIsModifyEnable = {
-            false,
-            false,
-            false,
-            false,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            false,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true,
-            true
     };
 
     public MemberModifyFragment() {
@@ -167,6 +139,10 @@ public class MemberModifyFragment extends InputBaseFragment{
     public void onClick(View v) {
         Fragment fragment = null;
         switch (v.getId()){
+            case R.id.id_smir_email:
+            case R.id.id_smir_user_type:
+                Toast.makeText(getContext(),"수정할 수 없는 항목입니다",Toast.LENGTH_SHORT).show();
+                break;
             case R.id.id_smir_name:
             case R.id.id_smir_birth:
                 fragment = new Member02NameBirthFragment();
@@ -217,7 +193,10 @@ public class MemberModifyFragment extends InputBaseFragment{
                 fragment = new Sitter02BabyageFragment();
                 break;
         }
-        ((BaseActivity) getActivity()).setFragment(fragment, R.string.member_title);
+
+        if(fragment!=null) {
+            ((BaseActivity) getActivity()).setFragment(fragment, R.string.member_title);
+        }
 
     }
 }

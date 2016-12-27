@@ -56,15 +56,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:gravity="center">
 
                 <ToggleButton
                     android:id="@+id/id_tg_nat_kor"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:textOn="@string/sitter03_tg_nat_kor"
                     android:textOff="@string/sitter03_tg_nat_kor"
@@ -79,6 +79,25 @@
                     android:textOff="@string/sitter03_tg_nat_chi_kor"
                     style="@style/ToggleBtnStyle"
                     android:layout_marginLeft="5dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center">
+
+                <ToggleButton
+                    android:id="@+id/id_tg_nat_everybody"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:textOn="@string/sitter03_tg_nat_everybody"
+                    android:textOff="@string/sitter03_tg_nat_everybody"
+                    style="@style/ToggleBtnStyle"
                     />
                 <ToggleButton
                     android:id="@+id/id_tg_nat_write"

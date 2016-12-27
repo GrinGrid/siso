@@ -1,0 +1,79 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="net.gringrid.siso.fragments.SitterListFragment"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    >
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/id_vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        >
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/id_ll_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <ImageView
+            android:id="@+id/id_iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_intro_skip"/>
+
+        <!-- TODO: Update blank fragment layout -->
+        <net.gringrid.siso.views.SisoInputProgress
+            android:id="@+id/id_sip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            app:total_stage="6"
+            app:current_stage="0"
+            >
+        </net.gringrid.siso.views.SisoInputProgress>
+
+        <ImageView
+            android:id="@+id/id_iv_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_intro_next"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_ll_last"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/white"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/id_tv_start"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            style="@style/SisoNextButton"
+            android:text="@string/btn_next"
+            android:layout_marginTop="20dp"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>
