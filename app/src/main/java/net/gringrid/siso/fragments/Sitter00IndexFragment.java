@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.gringrid.siso.BaseActivity;
@@ -20,6 +21,8 @@ import net.gringrid.siso.models.User;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.views.SisoCheckBox;
 
+import org.w3c.dom.Text;
+
 
 /**
  * 구직정보 등록 > 인덱스
@@ -27,14 +30,19 @@ import net.gringrid.siso.views.SisoCheckBox;
 public class Sitter00IndexFragment extends InputBaseFragment implements View.OnClickListener {
 
     private static final String TAG = "jiho";
-    ImageView id_iv_percent;
     SisoCheckBox id_cb_basic;
     SisoCheckBox id_cb_work_env;
     SisoCheckBox id_cb_sitter_info;
     SisoCheckBox id_cb_photo;
+    SisoCheckBox id_cb_id;
 
     User mUser;
     TextView id_tv_next_btn;
+    TextView id_tv_percent;
+    TextView id_tv_remain;
+    LinearLayout id_ll_percent;
+    TextView id_tv_title;
+    TextView id_tv_content;
 
     public Sitter00IndexFragment() {
         // Required empty public constructor
@@ -52,22 +60,28 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
         return inflater.inflate(R.layout.fragment_sitter00_index, container, false);
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        id_iv_percent = (ImageView)view.findViewById(R.id.id_iv_percent);
         id_cb_basic = (SisoCheckBox)view.findViewById(R.id.id_cb_basic);
         id_cb_work_env = (SisoCheckBox)view.findViewById(R.id.id_cb_work_env);
         id_cb_sitter_info = (SisoCheckBox)view.findViewById(R.id.id_cb_introduce);
         id_cb_photo = (SisoCheckBox)view.findViewById(R.id.id_cb_photo);
+        id_cb_id = (SisoCheckBox)view.findViewById(R.id.id_cb_id);
 
         id_cb_basic.setOnClickListener(this);
         id_cb_work_env.setOnClickListener(this);
         id_cb_sitter_info.setOnClickListener(this);
         id_cb_photo.setOnClickListener(this);
+        id_cb_id.setOnClickListener(this);
 
         id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
+        id_tv_percent = (TextView) view.findViewById(R.id.id_tv_percent);
+        id_tv_remain = (TextView) view.findViewById(R.id.id_tv_remain);
+        id_ll_percent = (LinearLayout) view.findViewById(R.id.id_ll_percent);
+        id_tv_title = (TextView) view.findViewById(R.id.id_tv_title);
+        id_tv_content = (TextView) view.findViewById(R.id.id_tv_content);
+
         loadData();
         super.onViewCreated(view, savedInstanceState);
     }
@@ -79,11 +93,14 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
         id_cb_work_env.setCheck(isWishInfoInsert());
         id_cb_sitter_info.setCheck(isIntroduceInfoInsert());
         id_cb_photo.setCheck(isPhotoInfoInsert());
+        id_cb_id.setCheck(isPhotoInfoInsert());
 
         if(id_cb_basic.isChecked() &&
                 id_cb_work_env.isChecked() &&
                 id_cb_sitter_info.isChecked() &&
-                id_cb_photo.isChecked()){
+                id_cb_photo.isChecked() &&
+                id_cb_id.isChecked()
+                ){
             id_tv_next_btn.setVisibility(View.VISIBLE);
         }else{
             id_tv_next_btn.setVisibility(View.GONE);
@@ -102,11 +119,47 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
         if(id_cb_work_env.isChecked()) checkedCount++;
         if(id_cb_sitter_info.isChecked()) checkedCount++;
         if(id_cb_photo.isChecked()) checkedCount++;
+        if(id_cb_id.isChecked()) checkedCount++;
+        int percent = checkedCount * 20;
+        int remain = 100 - (checkedCount * 20);
 
-        String imgIdStr = "percent"+(checkedCount*25);
-        String packageName = getContext().getPackageName();
-        int imgDrawable= getResources().getIdentifier(imgIdStr, "drawable", packageName);
-        id_iv_percent.setImageResource(imgDrawable);
+        if(percent == 100){
+            id_tv_next_btn.setVisibility(View.VISIBLE);
+            id_ll_percent.setVisibility(View.GONE);
+        }else if(percent > 0){
+            String titleIdStr = "sitter00_title_percent"+percent;
+            String contentIdStr = "sitter00_title_percent"+percent;
+            Log.d(TAG, "setPercentImage: dtitleIdStr : "+titleIdStr);
+            Log.d(TAG, "setPercentImage: contentIdStr : "+contentIdStr);
+            String packageName = getContext().getPackageName();
+            int titleId = getResources().getIdentifier(titleIdStr, "string", packageName);
+            int contentId = getResources().getIdentifier(contentIdStr, "string", packageName);
+            id_tv_title.setText(titleId);
+            id_tv_content.setText(contentId);
+
+            id_tv_next_btn.setVisibility(View.GONE);
+            id_ll_percent.setVisibility(View.VISIBLE);
+
+            LinearLayout.LayoutParams percentLp = new LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    percent
+            );
+            LinearLayout.LayoutParams remainLp = new LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    remain
+            );
+            id_tv_percent.setLayoutParams(percentLp);
+            id_tv_remain.setLayoutParams(remainLp);
+            id_tv_percent.setText(percent+"% 완성");
+//            String imgIdStr = "percent"+(checkedCount*25);
+//            String packageName = getContext().getPackageName();
+//            int imgDrawable= getResources().getIdentifier(imgIdStr, "drawable", packageName);
+//            id_iv_percent.setImageResource(imgDrawable);
+
+        }
+
     }
 
     @Override
@@ -152,6 +205,12 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
 
             // 프로필사진등록
             case R.id.id_cb_photo:
+                fragment = new CommonPhotoFragment();
+                ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter00_stage4);
+                break;
+
+            // 신분증 촬영
+            case R.id.id_cb_id:
                 fragment = new CommonPhotoFragment();
                 ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter00_stage4);
                 break;
@@ -219,6 +278,12 @@ public class Sitter00IndexFragment extends InputBaseFragment implements View.OnC
     private boolean isPhotoInfoInsert(){
         // 사진
         if(TextUtils.isEmpty(mUser.imageInfo.prf_img_url)) return false;
+        return true;
+    }
+
+    private boolean isIdPhotoInfoInsert(){
+        // 신분증
+//        if(TextUtils.isEmpty(mUser.imageInfo.id_img_url)) return false;
         return true;
     }
 }

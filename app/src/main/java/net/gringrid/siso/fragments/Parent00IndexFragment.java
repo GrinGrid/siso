@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.gringrid.siso.BaseActivity;
@@ -31,6 +32,11 @@ public class Parent00IndexFragment extends InputBaseFragment{
     SisoCheckBox id_cb_photo;
 
     TextView id_tv_next_btn;
+    TextView id_tv_percent;
+    TextView id_tv_remain;
+    TextView id_tv_title;
+    TextView id_tv_content;
+    LinearLayout id_ll_percent;
 
     public Parent00IndexFragment() {
         // Required empty public constructor
@@ -63,8 +69,13 @@ public class Parent00IndexFragment extends InputBaseFragment{
         id_cb_sitter.setOnClickListener(this);
         id_cb_photo.setOnClickListener(this);
 
-        id_tv_next_btn = (TextView) getView().findViewById(R.id.id_tv_next_btn);
+        id_tv_next_btn = (TextView) view.findViewById(R.id.id_tv_next_btn);
         id_tv_next_btn.setOnClickListener(this);
+        id_tv_percent = (TextView) view.findViewById(R.id.id_tv_percent);
+        id_tv_remain = (TextView) view.findViewById(R.id.id_tv_remain);
+        id_ll_percent = (LinearLayout) view.findViewById(R.id.id_ll_percent);
+        id_tv_title = (TextView) view.findViewById(R.id.id_tv_title);
+        id_tv_content = (TextView) view.findViewById(R.id.id_tv_content);
 
         loadData();
         super.onViewCreated(view, savedInstanceState);
@@ -124,10 +135,41 @@ public class Parent00IndexFragment extends InputBaseFragment{
         if(id_cb_sitter.isChecked()) checkedCount++;
         if(id_cb_photo.isChecked()) checkedCount++;
 
-        String imgIdStr = "percent"+(checkedCount*25);
-        String packageName = getContext().getPackageName();
-        int imgDrawable= getResources().getIdentifier(imgIdStr, "drawable", packageName);
-        id_iv_percent.setImageResource(imgDrawable);
+        float percent = checkedCount * 25;
+        float remain = 100 - (checkedCount * 25);
+
+        if(percent == 100){
+            id_tv_next_btn.setVisibility(View.VISIBLE);
+            id_ll_percent.setVisibility(View.GONE);
+        }else if(percent > 0){
+            String titleIdStr = "parent00_title_percent"+(checkedCount*25);
+            String contentIdStr = "parent00_content_percent"+(checkedCount*25);
+            Log.d(TAG, "setPercentImage: titleIdStr : "+titleIdStr);
+            Log.d(TAG, "setPercentImage: contentIdStr : "+contentIdStr);
+            String packageName = getContext().getPackageName();
+            int titleId = getResources().getIdentifier(titleIdStr, "string", packageName);
+            int contentId = getResources().getIdentifier(contentIdStr, "string", packageName);
+            id_tv_title.setText(titleId);
+            id_tv_content.setText(contentId);
+            id_tv_next_btn.setVisibility(View.GONE);
+            id_ll_percent.setVisibility(View.VISIBLE);
+
+            LinearLayout.LayoutParams percentLp = new LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    percent
+            );
+            LinearLayout.LayoutParams remainLp = new LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    remain
+            );
+            Log.d(TAG, "setPercentImage: percent : "+percent);
+            Log.d(TAG, "setPercentImage: remain : "+remain);
+            id_tv_percent.setLayoutParams(percentLp);
+            id_tv_remain.setLayoutParams(remainLp);
+            id_tv_percent.setText(percent+"% 완성");
+        }
     }
 
     private boolean isBasicInfoInsert(){

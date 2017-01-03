@@ -88,6 +88,7 @@
                     android:layout_marginTop="15dp"
                     app:label="@string/member02_et_name_label"
                     app:input="@string/member02_et_name_hint"
+                    app:maxlength="10"
                     >
                 </net.gringrid.siso.views.SisoEditText>
 

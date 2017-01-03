@@ -31,17 +31,17 @@
                 android:paddingTop="20dp"
                 android:orientation="horizontal">
                 <ImageView
-                    android:id="@+id/id_iv_percent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:src="@drawable/percent0"/>
+                    android:src="@drawable/ic_index_seeker"/>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/id_tv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
@@ -50,6 +50,7 @@
                         style="@style/MemberGuideTitle"
                         android:text="@string/sitter00_title"/>
                     <TextView
+                        android:id="@+id/id_tv_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -112,16 +113,51 @@
                     >
                 </net.gringrid.siso.views.SisoCheckBox>
 
+                <net.gringrid.siso.views.SisoCheckBox
+                    android:id="@+id/id_cb_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:checkboxTitle="@string/sitter00_stage5"
+                    app:checkboxTitleComment="@string/sitter00_stage5_comment"
+                    app:isSetClickListener="false"
+                    android:layout_marginTop="20dp"
+                    >
+                </net.gringrid.siso.views.SisoCheckBox>
+
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/id_ll_percent"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        >
+        <TextView
+            android:id="@+id/id_tv_percent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="@color/sisoAccentColor"
+            />
+        <TextView
+            android:id="@+id/id_tv_remain"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="75"
+            android:background="#FFE2E2E2"
+            />
+
+    </LinearLayout>
     <TextView
         android:id="@+id/id_tv_next_btn"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         style="@style/SisoNextButton"
         android:text="@string/btn_next"
+        android:visibility="gone"
         />
 </LinearLayout>

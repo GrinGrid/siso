@@ -3,6 +3,7 @@ package net.gringrid.siso.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
 import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.util.SharedData;
+import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
 import retrofit2.Call;
@@ -26,7 +28,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FindEmailFragment extends Fragment implements View.OnClickListener{
+public class FindEmailFragment extends InputBaseFragment{
 
     private static final String TAG = "jiho";
     TextView id_tv_find_btn;
@@ -38,6 +40,33 @@ public class FindEmailFragment extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
+    @Override
+    protected void loadData() {
+
+    }
+
+    @Override
+    protected boolean isValidInput() {
+
+        if(TextUtils.isEmpty(id_et_name.getText().toString())){
+            SisoUtil.showErrorMsg(getContext(),R.string.invalid_name_write);
+            return false;
+        }else if(TextUtils.isEmpty(id_et_phone.getText().toString())){
+            SisoUtil.showErrorMsg(getContext(),R.string.invalid_phone_write);
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void saveData() {
+
+    }
+
+    @Override
+    protected void moveNext() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +74,6 @@ public class FindEmailFragment extends Fragment implements View.OnClickListener{
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_find_email, container, false);
     }
-
 
     @Override
     public void onResume() {
@@ -63,8 +91,10 @@ public class FindEmailFragment extends Fragment implements View.OnClickListener{
             case R.id.id_tv_find_btn:
                 String name = id_et_name.getText().toString();
                 String phone = id_et_phone.getText().toString();
+                if(isValidInput()){
+                    findEmail(name, phone);
+                }
                 // 성명, 전화번호 입력여부 체크
-                findEmail(name, phone);
                 break;
         }
 

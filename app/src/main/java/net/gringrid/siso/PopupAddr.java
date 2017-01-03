@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -35,6 +36,9 @@ import net.gringrid.siso.models.Personal;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.AddrAPI;
 import net.gringrid.siso.network.restapi.MemberAPI;
+import net.gringrid.siso.util.SisoUtil;
+
+import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -112,8 +116,12 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
                 drawPage(response.body().common);
                 Log.d(TAG, "onResponse: ADDR onResponse : "+response.body().toString());
                 AddrAPI.AddrOutput output = response.body();
-                mAdapter = new AddrAdapter(PopupAddr.this, output);
-                id_lv.setAdapter(mAdapter);
+                if(response.body().common.totalCount.equals("0")){
+                    SisoUtil.showErrorMsg(PopupAddr.this, R.string.popup_no_found);
+                }else{
+                    mAdapter = new AddrAdapter(PopupAddr.this, output);
+                    id_lv.setAdapter(mAdapter);
+                }
             }
 
             @Override
@@ -127,8 +135,13 @@ public class PopupAddr extends Activity implements Callback<Personal>, View.OnCl
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.id_tv_search:
+                if(TextUtils.isEmpty(id_et_search.getText().toString())){
+                    SisoUtil.showErrorMsg(this, R.string.popup_input_keyword);
+                    return;
+                }
                 mCurrentPage = 1;
                 searchJuso();
+
                 hideSoftKeyboard();
                 break;
         }

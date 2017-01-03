@@ -1,12 +1,16 @@
 package net.gringrid.siso;
 
 import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -20,6 +24,7 @@ import net.gringrid.siso.network.restapi.SessionAPI;
 import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
+import net.gringrid.siso.views.SisoIndicator;
 
 
 import retrofit2.Call;
@@ -29,15 +34,21 @@ import retrofit2.Response;
 public class RootActivity extends AppCompatActivity {
 
     private static final String TAG = "jiho";
-    Dialog loadingDialog = null;
-    Handler mHandler = null;
+    protected Dialog loadingDialog = null;
+    IndicatorDialog mIndicatorDialog;
+    protected Handler mHandler = null;
     User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: this : "+this.getClass().getSimpleName());
         mUser = SharedData.getInstance(this).getUserData();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+//        mHandler = new Handler(Looper.getMainLooper());
+//        loadingDialog = new Dialog(this);
+        mIndicatorDialog = new IndicatorDialog();
 
         // 앱이 완전히 종료 되었다 시작될때는 Config check time reset
         if(this instanceof SplashActivity){
@@ -264,26 +275,26 @@ public class RootActivity extends AppCompatActivity {
     }
 
     public void showProgress(){
-        Log.d(TAG, "showProgress: ");
-        if(this.isFinishing()) return;
-        if (mHandler==null){
-            mHandler = new Handler(Looper.getMainLooper());
+        mIndicatorDialog.show(getFragmentManager(), "");
+        /*
+        if(this.isFinishing()){
+            return;
         }
+
         mHandler.post(new Runnable() {
-//        new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "run: showProgreiss");
-                loadingDialog = new Dialog(RootActivity.this);
                 loadingDialog.setTitle("Loading data..");
                 loadingDialog.setContentView(R.layout.loading);
                 loadingDialog.show();
             }
         });
+        */
     }
 
-
     public void hideProgress(){
+        mIndicatorDialog.dismiss();
+        /*
         Log.d(TAG, "hideProgress: ");
         mHandler.post(new Runnable() {
         @Override
@@ -291,6 +302,22 @@ public class RootActivity extends AppCompatActivity {
                 loadingDialog.dismiss();
             }
         });
+        */
+    }
+
+    public static class IndicatorDialog extends DialogFragment{
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            SisoIndicator sisoIndicator;
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+            View view  = layoutInflater.inflate(R.layout.loading, null);
+            sisoIndicator = (SisoIndicator)view.findViewById(R.id.id_indicator);
+
+            builder.setView(layoutInflater.inflate(R.layout.loading, null));
+            sisoIndicator.show();
+            return builder.create();
+        }
     }
 
 }

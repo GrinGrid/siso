@@ -88,6 +88,8 @@
     <string name="btn_accept">수 락</string>
     <string name="btn_yes">예</string>
     <string name="btn_no">아니오</string>
+    <string name="btn_modify">수정하기</string>
+    <string name="btn_input_complete">등록완료</string>
 
     <!-- Timetable -->
     <string name="section">구분</string>
@@ -129,10 +131,14 @@
     <string name="login_find_email">이메일 찾기</string>
     <string name="login_find_password">비밀번호 찾기</string>
     <string name="title_activity_root">RootActivity</string>
+    <string name="login_find_password_success">해당 메일 주소로 비밀번호 재설정을 위한 메일이 발송 되었습니다</string>
 
     <!-- 주소 팝업창 -->
     <string name="popup_addr_hint">예) 논현로 102</string>
     <string name="popup_addr_title">도로명 주소나 동이름을 입력해주세요</string>
+    <string name="popup_input_keyword">검색어를 입력해 주시기 바랍니다</string>
+    <string name="popup_no_found">검색 결과가 없습니다.</string>
+
 
     <!-- 가이드 화면 -->
     <string name="guide_00_title">시터를 소개합니다 시소에\n오신 것을 환영합니다</string>
@@ -241,15 +247,27 @@
 
     <!-- 시터 구직정보 입력 -->
     <string name="sitter00_title">시터가 되어 보세요!</string>
-    <string name="sitter00_guide">아이들을 좋아하고\n육아 경험이 있는 분이라면\n시터가 될 수 있습니다\n구직정보를 성실히 입력하시면\n자신에게 맞는 일자리를\n무료로 소개받을 수 있습니다</string>
+    <string name="sitter00_guide">아이들을 좋아하고\n육아 경험이 있는 분이라면\n시터가 될 수 있습니다</string>
+    <string name="sitter00_title_percent00">원하는 일자리를 찾으세요!</string>
+    <string name="sitter00_content_percent00">원하는 일자리를 찾으세요!</string>
+    <string name="sitter00_title_percent20">미리미리 확인하세요</string>
+    <string name="sitter00_content_percent20">CCTV, 애완동물 유무 등 민감한 사항에\n대해 미리 의사를 밝힐 수 있어요</string>
+    <string name="sitter00_title_percent40">미리미리 확인하세요</string>
+    <string name="sitter00_content_percent40">CCTV, 애완동물 유무 등 민감한 사항에\n대해 미리 의사를 밝힐 수 있어요</string>
+    <string name="sitter00_title_percent60">자신의 특기를 뽐내보세요</string>
+    <string name="sitter00_content_percent60">구연동화, 종이접기 등 나만이 가지고 있는 특기를 활용해 보다 차별화된 시터 활동을 해보세요</string>
+    <string name="sitter00_title_percent80">자신의 특기를 뽐내보세요</string>
+    <string name="sitter00_content_percent80">구연동화, 종이접기 등 나만이 가지고 있는 특기를 활용해 보다 차별화된 시터 활동을 해보세요</string>
     <string name="sitter00_stage1">돌봄 기본 정보 등록</string>
     <string name="sitter00_stage2">희망 근무 조건 등록</string>
     <string name="sitter00_stage3">시터 정보 등록</string>
     <string name="sitter00_stage4">프로필 사진 등록</string>
+    <string name="sitter00_stage5">신분증 등록</string>
     <string name="sitter00_stage1_comment">거리, 시급 등 구직에 필요한 정보를 등록하세요</string>
     <string name="sitter00_stage2_comment">근무환경, 희망 돌봄 아동을 선택해보세요</string>
     <string name="sitter00_stage3_comment">특기, 전공 등 시터로서의 매력을 어필해보세요</string>
     <string name="sitter00_stage4_comment">사진을 등록하여 호감도를 높여보세요</string>
+    <string name="sitter00_stage5_comment">신뢰감을 주기 위해 신원 확인은 꼭 필요합니다</string>
     <string name="sitter03_gender">시터님 성별을 입력해주세요</string>
     <string name="sitter03_tg_gender_woman">여성입니다</string>
     <string name="sitter03_tg_gender_man">남성입니다</string>
@@ -342,8 +360,14 @@
     <string name="sitterDetail_name_comment">시터를 소개합니다</string>
 
     <!-- 구인정보 입력 -->
-    <string name="parent00_title">유능한 시터를\n찾으시나요?</string>
-    <string name="parent00_guide">구인 정보를 구체적으로\n입력하시면 우리 가정에 적합한\n시터를 무료로\n소개받을 수 있습니다</string>
+    <string name="parent00_title_percent00">유능한 시터를\n찾으시나요?</string>
+    <string name="parent00_content_percent00">원하는 시간대, 거리, 시급 등 구인 정보를 구체적으로 등록하시면\n시터를 무료로  추천 받을 수 있습니다.</string>
+    <string name="parent00_title_percent25">우리 가족에게 꼭 맞는 시터는?</string>
+    <string name="parent00_content_percent25">우리 가족 정보, CCTV, 애완동물 유무 등을 미리 등록하시면 우리 가족에 꼭 맞는 시터를 찾을 확률이 업!</string>
+    <string name="parent00_title_percent50">어떤 시터를 원하나요?</string>
+    <string name="parent00_content_percent50">어떤 시터가 우리 아이를 돌봐주길 원하시나요? 원하는 시터의 조건을 설정해보세요.</string>
+    <string name="parent00_title_percent75">시터를 배려해주세요</string>
+    <string name="parent00_content_percent75">시터도 누군가의 소중한 가족이자 여성입니다. 시터에게 안심하고 일할 수 있는 곳이라는 이미지를 사진으로 심어주세요.</string>
     <string name="parent00_stage1">구인 정보 등록</string>
     <string name="parent00_stage2">우리 가족 정보 등록</string>
     <string name="parent00_stage3">희망 시터 조건 등록</string>
@@ -416,6 +440,40 @@
     <string name="parent09_tg_edu_university_in_school">대학교 재학중</string>
     <string name="parent09_tg_edu_university">대학교 졸업 이상</string>
 
+    <string name="parent_complete_btn_sitter_list">시터 리스트 보기</string>
+    <string name="parent_complete_btn_guide">좋은 시터를 구하고 싶나요?</string>
+
+    <string name="parent_guide_txt1">
+        우리 아이의 특성을 이해하고 아이와 잘 지낼 수 있는 시터를 찾는 것이 가장 중요합니다.\n
+        급여, 시간, 거리 등의 조건도 중요하지만, 면접 시 육아경력이나 놀이방식 등의 질문을 통해 시터의 성향을 파악하세요.
+    </string>
+    <string name="parent_guide_txt2">아래 몇가지 사항들은 좋은 시터를 찾는데 도움이 될 것입니다.</string>
+
+    <string name="parent_guide_topic1_title">뚜렷한 직업관</string>
+    <string name="parent_guide_topic1_content">
+        베이비 시터는 부모의 역할을 대신하는 직업으로 아이를 사랑으로 돌볼 수 있어야 합니다. 부모가 없는 동안 내 아이의 부모라는 생각을 가지고 일 할 수 있는 분을 선택하세요.
+    </string>
+    <string name="parent_guide_topic2_title">육아경력</string>
+    <string name="parent_guide_topic2_content">
+        아이들을 키워 보셨거나, 돌보거나 교육했던 경험이 있는 분을 선택하세요. 아이들의 특성을 이해할 수 있고, 노하우가 있어 예기치 못한 상황에도 잘 대처 할 수 있습니다.
+    </string>
+    <string name="parent_guide_topic3_title">놀이•교육</string>
+    <string name="parent_guide_topic3_content">
+        아이들과 빠르게 친해지고, 더 즐거운 시간을 보낼 수 있도록 종이접기, 블록 쌓기, 인형놀이, 책 읽어 주기 등의 놀이가 가능한 분이라면 더욱 좋습니다.
+    </string>
+    <string name="parent_guide_topic4_title">건강함</string>
+    <string name="parent_guide_topic4_content">
+        아이 돌봄은 아이를 업거나 안고, 뛰는 등의 신체적 활동이 필요한 일입니다. 건강관리 방법에 대해 문의해 보세요. 꾸준히 운동을 하시는 분이라면 더 좋습니다. (*부모는 면접 시 건강관련 검진결과서를 요구할 수도 있습니다. 고액의 검사를 요구하실 경우 검사비를 제공해야 합니다.)
+    </string>
+    <string name="parent_guide_topic5_title">책임감•성실함</string>
+    <string name="parent_guide_topic5_content">
+        베이비 시터 경력이 있는 분이라면, 이전 돌봄 서비스를 받은 가정과 연락하여 평판 조회를 통해 시터의 책임감과 성실함을 확인해 보세요.
+    </string>
+    <string name="parent_guide_topic6_title">이해•소통</string>
+    <string name="parent_guide_topic6_content">
+        육아와 돌봄 경력이 많은 베이비 시터들은 때로는 부모들의 육아방식에 다른 의견을 낼 수도 있습니다. 시터들의 의견을 무시하지 말고 존중해 주세요. 소중한 아이를 돌보는 두번째 엄마로서, 아이에게 도움이 되지 않는 의견을 내지는 않습니다. 대화를 통해 아이의 육아방식을 상의하고 조율해 보세요. 더 나은 육아방식을 찾을 수 있습니다.
+    </string>
+
 
     <!-- 시터 상세정보 -->
     <string name="sitter_detail_sub_title_basic">시터 정보</string>
@@ -486,7 +544,8 @@
     <!-- Invalid Input Message -->
     <string name="invalid_name_write">이름을 입력해주시기 바랍니다</string>
     <string name="invalid_birth_write">생년월일을 정확히 입력해주시기 바랍니다</string>
-    <string name="invalid_email_write">이름을 입력해주시기 바랍니다</string>
+    <string name="invalid_email_write">이메일을 입력해주시기 바랍니다</string>
+    <string name="invalid_email">이메일 정확하게 입력해주시기 바랍니다</string>
     <string name="invalid_passwd_write">비밀번호를 입력해주시기 바랍니다</string>
     <string name="invalid_phone_write">전화번호를 입력해주시기 바랍니다</string>
     <string name="invalid_auth_num_write">인증번호를 입력해주시기 바랍니다</string>

@@ -27,7 +27,7 @@ public interface SisoClient {
     @GET("user/checkUser/{email}")
     Call<User> checkUser(@Path("email") String email);
 
-    @GET("user/{email}")
+    @GET("user/detail/{email}")
     Call<User> getUser(@Path("email") String email);
 
     @POST("user")

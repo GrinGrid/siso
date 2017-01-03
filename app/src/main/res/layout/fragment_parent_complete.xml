@@ -1,0 +1,79 @@
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    >
+    <ScrollView
+        android:id="@+id/id_sv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingBottom="10dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            tools:context=".fragments.Member01UserTypeFragment">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:gravity="center"
+                >
+                <ImageView
+                    android:id="@+id/id_iv_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_offer_complete"
+                    />
+                <TextView
+                    android:id="@+id/id_tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="반갑습니다.박순영님.\n시소의 부모 회원 이 되셨습니다!"
+                    style="@style/SisoJobTitle"
+                    android:textColor="@color/sisoPrimaryText"
+                    android:layout_marginTop="20dp"
+                    />
+                <TextView
+                    android:id="@+id/id_tv_guide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="박순영님 가까운 곳에 00명의 시터들이 있습니다.\n구인 등록을 통해 원하는 조건을 등록해주시면\n조건에 맞는 시터를 무료로 소개해드립니다"
+                    style="@style/SisoJobTitleComment"
+                    android:textSize="17sp"
+                    android:layout_marginTop="30dp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/id_tv_btn_sitter_list"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/parent_complete_btn_sitter_list"
+        />
+
+    <TextView
+        android:id="@+id/id_tv_btn_guide"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        style="@style/SisoNextButton"
+        android:text="@string/parent_complete_btn_guide"
+        />
+</LinearLayout>

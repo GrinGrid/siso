@@ -18,6 +18,7 @@ public class User {
     public static final String COMMUTE_TYPE_COMMUTE  = "0";
     public static final String COMMUTE_TYPE_HOME = "1";
     public static final String COMMUTE_TYPE_REGIDENT = "2";
+    public static final String PHOTO_PROFILE_NEXT = "PROFILE_NEXT";
 
     // 사용자 성별 0:여성, 1:남성
     public static final String GENDER_WOMAN = "0";

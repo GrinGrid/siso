@@ -75,6 +75,13 @@ public class BaseActivity extends RootActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
+
+
+
         setContentView(R.layout.activity_base);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -123,7 +130,9 @@ public class BaseActivity extends RootActivity
                     }
                 }
             }
+
         });
+
 
         // 요청 메뉴로 이동
         callMenu(getIntent().getIntExtra(MENU, MENU_SIGN_UP));

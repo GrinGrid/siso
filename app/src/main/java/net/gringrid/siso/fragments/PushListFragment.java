@@ -4,6 +4,7 @@ package net.gringrid.siso.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,6 +67,10 @@ public class PushListFragment extends Fragment implements AdapterView.OnItemClic
             item.sender = "이순자 시터(23세)";
             item.msg = "전직 유치원 교사!  아이들과 잘 놀아요!아이들과 잘 놀아요!";
             item.req_date= "경기도 > 읜왕시 > 내손도옹  0.4km";
+            item.type = Integer.toString(PushListItem.PUSH_TYPE_CONTACT_REQUEST);
+            if(i%5==0){
+                item.is_read = "Y";
+            }
             mList.add(item);
         }
         mAdapter = new PushListAdapter(getContext(), mList);
@@ -80,6 +85,9 @@ public class PushListFragment extends Fragment implements AdapterView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         // push type 에 따라 이동
         PushListItem item = (PushListItem)parent.getItemAtPosition(position);
+
+        if(item == null || TextUtils.isEmpty(item.type)) return;
+
         int pushType = Integer.parseInt(item.type);
 
         switch (pushType){

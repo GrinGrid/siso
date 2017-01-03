@@ -38,6 +38,7 @@
     <color name="sisoAccentColor">#FF5BB5BD</color>
 
     <color name="sisoPhotoCircleLine">#FFE3E3E3</color>
+    <color name="sisoPushNewRow">#FFFBFFDC</color>
 
 
 </resources>

@@ -26,6 +26,8 @@ import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoEditText;
 
+import org.w3c.dom.Text;
+
 import java.util.Date;
 
 import retrofit2.Call;
@@ -115,13 +117,18 @@ public class Member03EmailFragment extends InputBaseFragment{
 
     @Override
     protected boolean isValidInput() {
-        if (TextUtils.isEmpty(id_et_email.getText())){
+
+        if (TextUtils.isEmpty(id_et_email.getText())) {
             SisoUtil.showErrorMsg(getContext(), R.string.invalid_email_write);
+            return false;
+        }else if(!SisoUtil.isEmail(id_et_email.getText().toString())){
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_email);
             return false;
         }else if(TextUtils.isEmpty(id_et_passwd.getText())){
             SisoUtil.showErrorMsg(getContext(), R.string.invalid_passwd_write);
             return false;
         }
+        // TODO password 형식에 맞는지 확인
 
         return true;
     }
@@ -145,7 +152,9 @@ public class Member03EmailFragment extends InputBaseFragment{
 
         switch (v.getId()) {
             case R.id.id_tv_next_btn:
-                checkUserEmail();
+                if(isValidInput()){
+                    checkUserEmail();
+                }
                 break;
         }
     }

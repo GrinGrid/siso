@@ -23,6 +23,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.squareup.picasso.Picasso;
 
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.PopupContactReject;
 import net.gringrid.siso.PopupContactRequest;
 import net.gringrid.siso.R;
@@ -30,6 +31,7 @@ import net.gringrid.siso.adapter.TestimonialAdapter;
 import net.gringrid.siso.models.Contact;
 import net.gringrid.siso.models.Image;
 import net.gringrid.siso.models.Sitter;
+import net.gringrid.siso.models.Status;
 import net.gringrid.siso.models.Testimonial;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.models.SitterDetail;
@@ -39,6 +41,7 @@ import net.gringrid.siso.network.restapi.FavoriteAPI;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
 import net.gringrid.siso.network.restapi.SisoClient;
 import net.gringrid.siso.network.restapi.SitterAPI;
+import net.gringrid.siso.network.restapi.StatusAPI;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoDetailItem;
@@ -75,6 +78,12 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
     private LinearLayout id_ll_title;
     private LinearLayout id_ll_detail_row1;
     private LinearLayout id_ll_detail_row2;
+    private LinearLayout id_ll_bottom_btn;
+
+    // 미리보기 하단 버튼
+    private LinearLayout id_ll_preview_btn;
+    private TextView id_tv_modify;
+    private TextView id_tv_complete;
 
     private TextView id_tv_name;
     private TextView id_tv_name_gender;
@@ -172,6 +181,14 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
         id_tv_contact2 = (TextView) view.findViewById(R.id.id_tv_contact2);
         id_iv_favorite = (ImageView)view.findViewById(R.id.id_iv_favorite);
         id_tv_favorite = (TextView) view.findViewById(R.id.id_tv_favorite);
+        id_ll_bottom_btn = (LinearLayout) view.findViewById(R.id.id_ll_bottom_btn);
+
+        id_ll_preview_btn = (LinearLayout)view.findViewById(R.id.id_ll_preview_btn);
+        id_tv_modify = (TextView)view.findViewById(R.id.id_tv_modify);
+        id_tv_complete = (TextView)view.findViewById(R.id.id_tv_complete);
+
+        id_tv_modify.setOnClickListener(this);
+        id_tv_complete.setOnClickListener(this);
 
         setUserData();
 
@@ -563,6 +580,14 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
             case R.id.id_ll_title:
                 getActivity().onBackPressed();
                 break;
+
+            case R.id.id_tv_modify:
+                getActivity().onBackPressed();
+                break;
+
+            case R.id.id_tv_complete:
+                setStatus();
+                break;
         }
     }
 
@@ -652,5 +677,40 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
                 Log.d(TAG, "onFailure: "+t.getMessage());
             }
         });
+    }
+
+    private void setStatus() {
+
+        Status status = new Status();
+        status.email = mUser.personalInfo.email;
+        status.action_type = Status.ACTION_INPUT_COMPLETE;
+
+        StatusAPI api = ServiceGenerator.getInstance(getActivity()).createService(StatusAPI.class);
+        Call<Status> call = api.setStatus(status);
+
+        call.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if (response.isSuccessful()){
+                    Log.d(TAG, "onResponse: contact : "+response.body().toString());
+                    moveNext();
+                }else{
+                    APIError error = ErrorUtils.parseError(response);
+                    String msgCode = error.msgCode();
+                    String msgText = error.msgText();
+                    Toast.makeText(getContext(), msgText, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
+    private void moveNext() {
+        ParentListFragment fragment = new ParentListFragment();
+        ((BaseActivity) getActivity()).setCleanUpFragment(fragment, BaseActivity.TITLE_NONE);
     }
 }

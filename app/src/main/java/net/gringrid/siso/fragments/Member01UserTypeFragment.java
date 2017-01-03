@@ -60,17 +60,18 @@ public class Member01UserTypeFragment extends InputBaseFragment{
         super.onViewCreated(view, savedInstanceState);
     }
 
-
-
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
             case  R.id.ll_parent:
+                id_iv_sitter.setImageResource(R.drawable.tg_ic_seeker_normal);
                 id_iv_parent.setImageResource(R.drawable.tg_ic_offer_over);
                 mUser.personalInfo.user_type = User.USER_TYPE_PARENT;
                 break;
+
             case  R.id.ll_sitter:
+                id_iv_parent.setImageResource(R.drawable.tg_ic_offer_normal);
                 id_iv_sitter.setImageResource(R.drawable.tg_ic_seeker_over);
                 mUser.personalInfo.user_type = User.USER_TYPE_SITTER;
                 break;
@@ -100,16 +101,4 @@ public class Member01UserTypeFragment extends InputBaseFragment{
         Member02NameBirthFragment fragment = new Member02NameBirthFragment();
         ((BaseActivity)getActivity()).setFragment(fragment, BaseActivity.TITLE_KEEP);
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "fragments onOptionsItemSelected: ");
-        return super.onOptionsItemSelected(item);
-    }
-
 }

@@ -4,6 +4,7 @@ package net.gringrid.siso.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -36,25 +37,15 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
     private TextView id_tv_next_btn;
     private CalendarView id_cv;
     private FrameLayout id_fl_cv;
-    private ToggleButton id_tg_start_0;
-    private ToggleButton id_tg_start_1;
-    private ToggleButton id_tg_end_0;
-    private ToggleButton id_tg_end_1;
+    private TextView id_tv_start_0;
+    private TextView id_tv_start_1;
+    private TextView id_tv_end_0;
+    private TextView id_tv_end_1;
     private TextView id_tv_start;
     private TextView id_tv_end;
 
-    private String mStartDate;
-    private String mEndDate;
-
-
-    int mRadioStart[] = new int[]{
-            R.id.id_tg_start_0,
-            R.id.id_tg_start_1
-    };
-    int mRadioEnd[] = new int[]{
-            R.id.id_tg_end_0,
-            R.id.id_tg_end_1
-    };
+    private String mStartDate = User.TERM_MIN;
+    private String mEndDate = User.TERM_MAX;
 
     int mLastClickedBtn;
 
@@ -81,15 +72,15 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
         id_tv_next_btn.setOnClickListener(this);
         id_tv_start = (TextView) view.findViewById(R.id.id_tv_start);
         id_tv_end = (TextView) view.findViewById(R.id.id_tv_end);
-        id_tg_start_0 = (ToggleButton) view.findViewById(R.id.id_tg_start_0);
-        id_tg_start_1 = (ToggleButton) view.findViewById(R.id.id_tg_start_1);
-        id_tg_end_0 = (ToggleButton) view.findViewById(R.id.id_tg_end_0);
-        id_tg_end_1 = (ToggleButton) view.findViewById(R.id.id_tg_end_1);
+        id_tv_start_0 = (TextView) view.findViewById(R.id.id_tv_start_0);
+        id_tv_start_1 = (TextView) view.findViewById(R.id.id_tv_start_1);
+        id_tv_end_0 = (TextView) view.findViewById(R.id.id_tv_end_0);
+        id_tv_end_1 = (TextView) view.findViewById(R.id.id_tv_end_1);
 
-        id_tg_start_0.setOnClickListener(this);
-        id_tg_start_1.setOnClickListener(this);
-        id_tg_end_0.setOnClickListener(this);
-        id_tg_end_1.setOnClickListener(this);
+        id_tv_start_0.setOnClickListener(this);
+        id_tv_start_1.setOnClickListener(this);
+        id_tv_end_0.setOnClickListener(this);
+        id_tv_end_1.setOnClickListener(this);
         id_fl_cv = (FrameLayout)view.findViewById(R.id.id_fl_cv);
         id_cv = (CalendarView) view.findViewById(R.id.id_cv);
         id_cv.setOnDateChangeListener(this);
@@ -104,17 +95,18 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
         Log.d(TAG, "onClick: ");
         int viewId = v.getId();
         switch (v.getId()){
-            case R.id.id_tg_start_0:
-            case R.id.id_tg_start_1:
-                SisoUtil.selectRadio(mRadioStart, viewId, getView());
+            case R.id.id_tv_start_0:
+
+            case R.id.id_tv_start_1:
+                setStartBtn(v.getId());
                 setCalendarVisible(viewId);
                 setStartText(viewId, "");
                 mLastClickedBtn=viewId;
                 break;
 
-            case R.id.id_tg_end_0:
-            case R.id.id_tg_end_1:
-                SisoUtil.selectRadio(mRadioEnd, viewId, getView());
+            case R.id.id_tv_end_0:
+            case R.id.id_tv_end_1:
+                setEndBtn(v.getId());
                 setCalendarVisible(viewId);
                 setEndText(viewId, "");
                 mLastClickedBtn=viewId;
@@ -130,17 +122,63 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
         }
     }
 
+    private void setStartBtn(int id) {
+
+        if(id == R.id.id_tv_start_0){
+            id_tv_start_0.setBackgroundResource(R.drawable.ic_calendar_selected);
+            id_tv_start_0.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            id_tv_start_1.setBackgroundResource(R.drawable.ic_calendar_unselect);
+            id_tv_start_1.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoPrimaryText));
+
+        }else if(id == R.id.id_tv_start_1){
+            id_tv_start_0.setBackgroundResource(R.drawable.ic_calendar_unselect);
+            id_tv_start_0.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoPrimaryText));
+            id_tv_start_1.setBackgroundResource(R.drawable.ic_calendar_select);
+            id_tv_start_1.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            if(!mEndDate.equals(User.TERM_MAX)){
+                id_tv_end_1.setBackgroundResource(R.drawable.ic_calendar_selected);
+            }
+        }
+    }
+
+    private void setEndBtn(int id) {
+
+        if(id == R.id.id_tv_end_0){
+            id_tv_end_0.setBackgroundResource(R.drawable.ic_calendar_selected);
+            id_tv_end_0.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            id_tv_end_1.setBackgroundResource(R.drawable.ic_calendar_unselect);
+            id_tv_end_1.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoPrimaryText));
+
+        }else if(id == R.id.id_tv_end_1){
+            id_tv_end_0.setBackgroundResource(R.drawable.ic_calendar_unselect);
+            id_tv_end_0.setTextColor(ContextCompat.getColor(getContext(), R.color.sisoPrimaryText));
+            id_tv_end_1.setBackgroundResource(R.drawable.ic_calendar_select);
+            id_tv_end_1.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            if(!mStartDate.equals(User.TERM_MIN)){
+                id_tv_start_1.setBackgroundResource(R.drawable.ic_calendar_selected);
+            }
+        }
+    }
+
     @Override
     protected void moveNext() {
         // 구인/구직자 모두 출퇴근유형, 거리 입력 화면으로 이동
         CommonCommuteFragment fragment = new CommonCommuteFragment();
-        ((BaseActivity) getActivity()).setFragment(fragment, R.string.sitter_basic_title);
+        int titleId = 0;
+        if(mUserType.equals(User.USER_TYPE_SITTER)) {
+            titleId = R.string.sitter_basic_title;
+
+        }else if(mUserType.equals(User.USER_TYPE_PARENT)){
+            titleId = R.string.parent_index_title;
+        }
+        ((BaseActivity) getActivity()).setFragment(fragment, titleId);
     }
 
     @Override
     protected void loadData() {
         String term_from="";
         String term_to="";
+
         if(mUserType.equals(User.USER_TYPE_SITTER)) {
             term_from = mUser.sitterInfo.term_from;
             term_to = mUser.sitterInfo.term_to;
@@ -151,32 +189,35 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
 
         if(!TextUtils.isEmpty(term_from)){
             if(term_from.equals(User.TERM_MIN)){
-                SisoUtil.selectRadio(mRadioStart, R.id.id_tg_start_0, getView());
+                setStartBtn(R.id.id_tv_start_0);
+                setStartText(R.id.id_tv_start_0, "");
             }else{
-                SisoUtil.selectRadio(mRadioStart, R.id.id_tg_start_1, getView());
-                setStartText(R.id.id_tg_start_1, term_from);
+                setStartBtn(R.id.id_tv_start_1);
+                setStartText(R.id.id_tv_start_1, term_from);
             }
         }
+
         if(!TextUtils.isEmpty(term_to)){
             if(term_to.equals(User.TERM_MAX)){
-                SisoUtil.selectRadio(mRadioEnd, R.id.id_tg_end_0, getView());
+                setStartBtn(R.id.id_tv_end_0);
+                setStartText(R.id.id_tv_end_0, "");
             }else{
-                SisoUtil.selectRadio(mRadioEnd, R.id.id_tg_end_1, getView());
-                setEndText(R.id.id_tg_end_1, term_to);
+                setStartBtn(R.id.id_tv_end_1);
+                setEndText(R.id.id_tv_end_1, term_to);
             }
         }
     }
 
     @Override
     protected boolean isValidInput() {
-        if(!SisoUtil.isRadioGroupSelected(mRadioStart, getView())){
-            SisoUtil.showErrorMsg(getContext(), R.string.invalid_period_start_select);
-            return false;
-        }
-        if(!SisoUtil.isRadioGroupSelected(mRadioEnd, getView())){
-            SisoUtil.showErrorMsg(getContext(), R.string.invalid_period_end_select);
-            return false;
-        }
+//        if(!SisoUtil.isRadioGroupSelected(mRadioStart, getView())){
+//            SisoUtil.showErrorMsg(getContext(), R.string.invalid_period_start_select);
+//            return false;
+//        }
+//        if(!SisoUtil.isRadioGroupSelected(mRadioEnd, getView())){
+//            SisoUtil.showErrorMsg(getContext(), R.string.invalid_period_end_select);
+//            return false;
+//        }
         if(TextUtils.isEmpty(mStartDate)){
             SisoUtil.showErrorMsg(getContext(), R.string.invalid_period_start_write);
             return false;
@@ -201,9 +242,20 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
         SharedData.getInstance(getContext()).setObjectData(SharedData.USER, mUser);
     }
 
+    private void setStartText(int viewId, String date) {
+        id_tv_start.setGravity(Gravity.LEFT);
+        if(viewId==R.id.id_tv_start_0){
+            mStartDate = User.TERM_MIN;
+            id_tv_start.setText("시작일 : 상관없음");
+        }else if(viewId == R.id.id_tv_start_1){
+            mStartDate = date;
+            id_tv_start.setText("시작일 : "+SisoUtil.getDateString(date, "-"));
+        }
+    }
+
     private void setEndText(int viewId, String date) {
         id_tv_end.setGravity(Gravity.LEFT);
-        if(viewId==R.id.id_tg_end_0){
+        if(viewId==R.id.id_tv_end_0){
             mEndDate = User.TERM_MAX;
             id_tv_end.setText("종료일 : 상관없음");
         }else{
@@ -212,23 +264,13 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
         }
     }
 
-    private void setStartText(int viewId, String date) {
-        id_tv_start.setGravity(Gravity.LEFT);
-        if(viewId==R.id.id_tg_start_0){
-            mStartDate = User.TERM_MIN;
-            id_tv_start.setText("시작일 : 상관없음");
-        }else if(viewId == R.id.id_tg_start_1){
-            mStartDate = date;
-            id_tv_start.setText("시작일 : "+SisoUtil.getDateString(date, "-"));
-        }
-    }
 
     /**
      * 시작일이나 종료일 지정을 선택 한 경우 달력 보이도록 설정
      * @param viewId
      */
     private void setCalendarVisible(int viewId) {
-        if(viewId==R.id.id_tg_start_1 || viewId==R.id.id_tg_end_1){
+        if(viewId==R.id.id_tv_start_1 || viewId==R.id.id_tv_end_1){
             id_fl_cv.setVisibility(View.VISIBLE);
         }else{
             id_fl_cv.setVisibility(View.GONE);
@@ -237,15 +279,17 @@ public class CommonWorkPeriodFragment extends InputBaseFragment implements Calen
 
     @Override
     public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+
         String yearStr = String.format("%d",year);
         String monthStr = String.format("%02d",month+1);
         String dayStr = String.format("%02d",dayOfMonth);
         String dateStr = yearStr+monthStr+dayStr;
-        if(mLastClickedBtn == R.id.id_tg_start_1){
-            setStartText(R.id.id_tg_start_1, dateStr);
+
+        if(mLastClickedBtn == R.id.id_tv_start_1){
+            setStartText(R.id.id_tv_start_1, dateStr);
         }
-        if(mLastClickedBtn == R.id.id_tg_end_1){
-            setEndText(R.id.id_tg_end_1, dateStr);
+        if(mLastClickedBtn == R.id.id_tv_end_1){
+            setEndText(R.id.id_tv_end_1, dateStr);
         }
     }
 

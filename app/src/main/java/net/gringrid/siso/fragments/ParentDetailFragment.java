@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +20,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.squareup.picasso.Picasso;
 
+import net.gringrid.siso.BaseActivity;
 import net.gringrid.siso.PopupContactReject;
 import net.gringrid.siso.PopupContactRequest;
 import net.gringrid.siso.R;
@@ -26,6 +30,7 @@ import net.gringrid.siso.models.Child;
 import net.gringrid.siso.models.Contact;
 import net.gringrid.siso.models.ParentDetail;
 import net.gringrid.siso.models.SitterDetail;
+import net.gringrid.siso.models.Status;
 import net.gringrid.siso.models.Testimonial;
 import net.gringrid.siso.models.User;
 import net.gringrid.siso.network.restapi.APIError;
@@ -33,6 +38,7 @@ import net.gringrid.siso.network.restapi.ErrorUtils;
 import net.gringrid.siso.network.restapi.FavoriteAPI;
 import net.gringrid.siso.network.restapi.ParentAPI;
 import net.gringrid.siso.network.restapi.ServiceGenerator;
+import net.gringrid.siso.network.restapi.StatusAPI;
 import net.gringrid.siso.util.SharedData;
 import net.gringrid.siso.util.SisoUtil;
 import net.gringrid.siso.views.SisoDetailItem;
@@ -66,6 +72,12 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
     private LinearLayout id_ll_title;
     private LinearLayout id_ll_detail_row1;
     private LinearLayout id_ll_detail_row2;
+    private LinearLayout id_ll_bottom_btn;
+
+    // 미리보기 하단 버튼
+    private LinearLayout id_ll_preview_btn;
+    private TextView id_tv_modify;
+    private TextView id_tv_complete;
 
     private TextView id_tv_name;
     private TextView id_tv_name_gender;
@@ -159,11 +171,20 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
         id_ll_favorite = (LinearLayout)view.findViewById(R.id.id_ll_favorite);
         id_iv_favorite = (ImageView)view.findViewById(R.id.id_iv_favorite);
         id_tv_favorite = (TextView) view.findViewById(R.id.id_tv_favorite);
+        id_ll_bottom_btn = (LinearLayout) view.findViewById(R.id.id_ll_bottom_btn);
+
+        id_ll_preview_btn = (LinearLayout)view.findViewById(R.id.id_ll_preview_btn);
+        id_tv_modify = (TextView)view.findViewById(R.id.id_tv_modify);
+        id_tv_complete = (TextView)view.findViewById(R.id.id_tv_complete);
 
         id_ll_title.setOnClickListener(this);
         id_ll_contact1.setOnClickListener(this);
         id_ll_contact2.setOnClickListener(this);
         id_ll_favorite.setOnClickListener(this);
+
+        id_tv_modify.setOnClickListener(this);
+        id_tv_complete.setOnClickListener(this);
+
 
         setUserData();
 
@@ -180,12 +201,14 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
                 // Sitter입력완료에서 넘어온경우
                 if(mMode.equals(MODE_FROM_PARENT_INPUT)){
                     mUserDisplay = mUser;
+                    id_ll_preview_btn.setVisibility(View.VISIBLE);
                     loadData();
 
                     // Sitter 리스트에서 선택해서 넘어온경우
                 }else if(mMode.equals(MODE_FROM_PARENT_LIST)){
                     mTrgEmail = bundle.getString(SharedData.EMAIL);
                     Log.d(TAG, "setUserData: trgEmail : "+mTrgEmail);
+                    id_ll_bottom_btn.setVisibility(View.VISIBLE);
                     findUser();
                 }
             }
@@ -352,9 +375,14 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
 //        String gender = mUser.sitterInfo.gender.equals(User.GENDER_WOMAN)?"여":"남";
         int halfWidth = SisoUtil.getScreenWidth(getContext()) / 2;
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(halfWidth, halfWidth);
-        ImageLoader imageLoader = ImageLoader.getInstance();
-        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
-        imageLoader.displayImage(mUser.imageInfo.prf_img_url, id_iv_profile);
+//        ImageLoader imageLoader = ImageLoader.getInstance();
+//        imageLoader.init(ImageLoaderConfiguration.createDefault(getContext()));
+//        imageLoader.displayImage(mUser.imageInfo.prf_img_url, id_iv_profile);
+        if(mUser.imageInfo.prf_img_url.equals(User.PHOTO_PROFILE_NEXT)){
+            id_iv_profile.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_profile_seeker_blank));
+        }else{
+            Picasso.with(getContext()).load(mUser.imageInfo.prf_img_url).into(id_iv_profile);
+        }
         id_iv_profile.setLayoutParams(lp);
         id_tv_name.setText(mUserDisplay.personalInfo.name);
         id_tv_name_gender.setText(mUserDisplay.personalInfo.name);
@@ -558,6 +586,14 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
             case R.id.id_ll_title:
                 getActivity().onBackPressed();
                 break;
+
+            case R.id.id_tv_modify:
+                getActivity().onBackPressed();
+                break;
+
+            case R.id.id_tv_complete:
+                setStatus();
+                break;
         }
     }
 
@@ -645,4 +681,41 @@ public class ParentDetailFragment extends Fragment implements View.OnClickListen
             }
         });
     }
+
+    private void setStatus() {
+
+        Status status = new Status();
+        status.email = mUser.personalInfo.email;
+        status.action_type = Status.ACTION_INPUT_COMPLETE;
+
+        StatusAPI api = ServiceGenerator.getInstance(getActivity()).createService(StatusAPI.class);
+        Call<Status> call = api.setStatus(status);
+
+        call.enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                if (response.isSuccessful()){
+                    Log.d(TAG, "onResponse: contact : "+response.body().toString());
+                    moveNext();
+                }else{
+                    APIError error = ErrorUtils.parseError(response);
+                    String msgCode = error.msgCode();
+                    String msgText = error.msgText();
+                    Toast.makeText(getContext(), msgText, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                Log.d(TAG, "onFailure: "+t.getMessage());
+            }
+        });
+    }
+
+    private void moveNext() {
+        SitterListFragment fragment = new SitterListFragment();
+        ((BaseActivity) getActivity()).setCleanUpFragment(fragment, BaseActivity.TITLE_NONE);
+    }
+
+
 }

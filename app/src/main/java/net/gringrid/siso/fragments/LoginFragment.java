@@ -3,6 +3,7 @@ package net.gringrid.siso.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,7 +66,17 @@ public class LoginFragment extends InputBaseFragment {
 
     @Override
     protected boolean isValidInput() {
-        return false;
+        if(TextUtils.isEmpty(id_et_email.getText().toString())){
+            SisoUtil.showErrorMsg(getContext(),R.string.invalid_email_write);
+            return false;
+        }else if(TextUtils.isEmpty(id_et_passwd.getText().toString())){
+            SisoUtil.showErrorMsg(getContext(),R.string.invalid_email_write);
+            return false;
+        } else if(!SisoUtil.isEmail(id_et_email.getText().toString())) {
+            SisoUtil.showErrorMsg(getContext(), R.string.invalid_email);
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -101,7 +112,9 @@ public class LoginFragment extends InputBaseFragment {
 //                    id_et_email.setInput("nisclan1479110148955@hotmail.com");
                     id_et_passwd.setInput("tjswndqkqh");
                 }
-                executeLogin();
+                if(isValidInput()){
+                    executeLogin();
+                }
                 break;
 
             case R.id.id_tv_find_email:
@@ -115,6 +128,7 @@ public class LoginFragment extends InputBaseFragment {
                 break;
         }
     }
+
 
     @Override
     protected void moveNext() {

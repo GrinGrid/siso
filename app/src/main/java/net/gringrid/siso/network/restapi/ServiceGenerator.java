@@ -40,9 +40,9 @@ public class ServiceGenerator {
     private ServiceGenerator(){}
 
     public static ServiceGenerator getInstance(Activity activity){
+        mActivity = activity;
         if (instance == null){
             instance = new ServiceGenerator();
-            mActivity = activity;
             setRequestInterceptor();
             setResponseInterceptor();
         }
@@ -50,14 +50,13 @@ public class ServiceGenerator {
     }
 
     private static void setRequestInterceptor(){
-        final RootActivity rootActivity = (RootActivity)mActivity;
         httpClient.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request original = chain.request();
                 Request.Builder requestBuilder = original.newBuilder();
 
-                rootActivity.showProgress();
+                ((RootActivity)mActivity).showProgress();
 
                 Log.d(TAG, "intercept: request");
                 if (original!=null){
@@ -75,7 +74,6 @@ public class ServiceGenerator {
     }
 
     private static void setResponseInterceptor(){
-        final RootActivity rootActivity = (RootActivity)mActivity;
         httpClient.interceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -83,7 +81,7 @@ public class ServiceGenerator {
                 Log.d(TAG, "intercept: response");
                 Response response = chain.proceed(chain.request());
                 if (response!=null){
-                    rootActivity.hideProgress();
+                    ((RootActivity)mActivity).hideProgress();
                     Log.d(TAG, "intercept: response is not null");
                 }
                 return response;

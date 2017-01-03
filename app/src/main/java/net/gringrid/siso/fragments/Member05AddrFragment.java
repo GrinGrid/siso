@@ -183,8 +183,6 @@ public class Member05AddrFragment extends InputBaseFragment{
                 Log.d(TAG, "onFailure: "+t.getMessage());
             }
         });
-
-
     }
 
     @Override

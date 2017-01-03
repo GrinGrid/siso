@@ -203,6 +203,7 @@
     </style>
 
 
+
     <!-- Sitter Detail -->
     <style name="DetailSummary">
         <item name="android:textSize">25sp</item>
@@ -244,4 +245,23 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="ParentGuideTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/sisoPrimaryColor</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ParentGuideContent">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/sisoPrimaryText</item>
+    </style>
+
+    <style name="AVLoadingIndicatorView">
+        <item name="minWidth">48dip</item>
+        <item name="maxWidth">48dip</item>
+        <item name="minHeight">48dip</item>
+        <item name="maxHeight">48dip</item>
+        <item name="indicatorName">BallTriangleIndicator</item>
+    </style>
 </resources>

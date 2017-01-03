@@ -35,27 +35,29 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="4"
-                    android:src="@drawable/percent0"/>
+                    android:src="@drawable/ic_index_offer"/>
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:orientation="vertical">
                     <TextView
+                        android:id="@+id/id_tv_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="left"
                         android:textSize="20sp"
                         android:layout_marginTop="10dp"
                         style="@style/MemberGuideTitle"
-                        android:text="@string/parent00_title"/>
+                        android:text="@string/parent00_title_percent00"/>
                     <TextView
+                        android:id="@+id/id_tv_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="left"
                         style="@style/MemberGuideText"
-                        android:text="@string/parent00_guide"/>
+                        android:text="@string/parent00_content_percent00"/>
                 </LinearLayout>
             </LinearLayout>
             <View
@@ -117,11 +119,36 @@
 
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:id="@+id/id_ll_percent"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        >
+        <TextView
+            android:id="@+id/id_tv_percent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="25"
+            android:text="25% 완성"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:background="@color/sisoAccentColor"
+            />
+        <TextView
+            android:id="@+id/id_tv_remain"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="75"
+            android:background="#FFE2E2E2"
+            />
+
+    </LinearLayout>
     <TextView
         android:id="@+id/id_tv_next_btn"
         android:layout_width="match_parent"
         android:layout_height="35dp"
         style="@style/SisoNextButton"
         android:text="@string/btn_next"
+        android:visibility="gone"
         />
 </LinearLayout>

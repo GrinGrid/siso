@@ -54,7 +54,8 @@
                 android:id="@+id/id_iv_parent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/tg_ic_offer_normal"/>
+                android:src="@drawable/tg_ic_offer_normal"
+                />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="35dp"

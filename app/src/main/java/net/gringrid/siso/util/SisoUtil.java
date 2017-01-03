@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -350,6 +351,14 @@ public class SisoUtil {
     /**
      * 메시지를 보여준다
      * @param context
+     * @param msgId
+     */
+    public static void showMsg(Context context, int msgId) {
+        Toast.makeText(context, msgId, Toast.LENGTH_LONG).show();
+    }
+    /**
+     * 메시지를 보여준다
+     * @param context
      * @param msg
      */
     public static void showMsg(Context context, String msg) {
@@ -431,5 +440,15 @@ public class SisoUtil {
             }
         }
         return result;
+    }
+
+    /**
+     * 이메일 형식이 맞는지 체크
+     */
+    public static boolean isEmail(String str){
+        if(TextUtils.isEmpty(str)){
+            return false;
+        }
+        return Patterns.EMAIL_ADDRESS.matcher(str).matches();
     }
 }

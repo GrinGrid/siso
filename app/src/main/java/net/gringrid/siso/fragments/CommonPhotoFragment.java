@@ -187,7 +187,7 @@ public class CommonPhotoFragment extends InputBaseFragment implements CommonPhot
     @Override
     protected void saveData() {
         if(SisoUtil.getRadioValue(mRadio, getView()) == ACT_NEXT_TIME){
-            mUser.imageInfo.prf_img_url = "NEXT";
+            mUser.imageInfo.prf_img_url = User.PHOTO_PROFILE_NEXT;
         }
         if(!TextUtils.isEmpty(mRecievedPhotoUrl)){
             mUser.imageInfo.prf_img_url = mRecievedPhotoUrl;

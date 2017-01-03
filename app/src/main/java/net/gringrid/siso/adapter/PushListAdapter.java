@@ -1,6 +1,7 @@
 package net.gringrid.siso.adapter;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -65,23 +67,32 @@ public class PushListAdapter extends BaseAdapter{
             convertView = mInflater.inflate(R.layout.adapter_push_list_row, null);
             holder = new ViewHolder();
             holder.id_tv_req_date = (TextView)convertView.findViewById(R.id.id_tv_req_date);
-            holder.id_tv_sender = (TextView)convertView.findViewById(R.id.id_tv_sender);
+//            holder.id_tv_sender = (TextView)convertView.findViewById(R.id.id_tv_sender);
             holder.id_tv_msg = (TextView)convertView.findViewById(R.id.id_tv_msg);
+            holder.id_ll_container = (LinearLayout)convertView.findViewById(R.id.id_ll_container);
 
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder)convertView.getTag();
         }
         item = mList.get(position);
+
+        if(!TextUtils.isEmpty(item.is_read) && item.is_read.equals("Y")){
+            holder.id_ll_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.sisoPushNewRow));
+        }else{
+            holder.id_ll_container.setBackgroundColor(ContextCompat.getColor(mContext, R.color.colorWhite));
+        }
+
         holder.id_tv_req_date.setText(item.req_date);
-        holder.id_tv_sender.setText(item.sender);
+//        holder.id_iv_photo.setText(item.sender);
         holder.id_tv_msg.setText(item.msg);
 
         return convertView;
     }
 
     class ViewHolder{
-        TextView id_tv_sender;
+        LinearLayout id_ll_container;
+        ImageView id_iv_photo;
         TextView id_tv_req_date;
         TextView id_tv_msg;
 

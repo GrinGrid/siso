@@ -418,6 +418,35 @@
         </LinearLayout>
     </ScrollView>
     <LinearLayout
+        android:id="@+id/id_ll_preview_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:paddingTop="5dp"
+        >
+        <TextView
+            android:id="@+id/id_tv_modify"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            style="@style/SisoNextButton"
+            android:text="@string/btn_modify"
+            android:layout_marginTop="10dp"
+            />
+
+        <TextView
+            android:id="@+id/id_tv_complete"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            style="@style/SisoNextButton"
+            android:text="@string/btn_input_complete"
+            android:layout_marginTop="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/id_ll_bottom_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"

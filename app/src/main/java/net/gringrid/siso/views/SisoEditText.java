@@ -3,6 +3,7 @@ package net.gringrid.siso.views;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -14,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.gringrid.siso.R;
+
+import static net.gringrid.siso.R.styleable.SisoEditText_isReadOnly;
 
 /**
  * SISO Custom Edit Box
@@ -74,6 +77,19 @@ public class SisoEditText extends LinearLayout{
         String inputStr = typedArray.getString(R.styleable.SisoEditText_input);
         String guideStr = typedArray.getString(R.styleable.SisoEditText_guide);
         String inputType = typedArray.getString(R.styleable.SisoEditText_input_type);
+        boolean isReadOnly = typedArray.getBoolean(R.styleable.SisoEditText_isReadOnly, false);
+
+        if(isReadOnly){
+            id_et_input.setEnabled(false);
+            id_tv_clear.setVisibility(GONE);
+        }
+
+        int maxlength = typedArray.getInteger(R.styleable.SisoEditText_maxlength, 0);
+        if(maxlength != 0){
+            InputFilter[] inputFilters = new InputFilter[1];
+            inputFilters[0] = new InputFilter.LengthFilter(maxlength);
+            id_et_input.setFilters(inputFilters);
+        }
         boolean isHiddenLabel = typedArray.getBoolean(R.styleable.SisoEditText_isHiddenLabel, false);
 
         id_tv_label.setText(labelStr);

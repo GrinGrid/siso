@@ -48,7 +48,10 @@ public class PushListItem {
     public String is_read;
 
     // 요청일시
-   public String req_date;
+    public String req_date;
+
+    // 프로필 사진
+    public String prf_img_url;
 
     @Override
     public String toString() {

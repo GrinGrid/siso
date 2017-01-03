@@ -32,12 +32,18 @@ public class Contact {
     public String rcv_email;
     // 요청 메시지
     public String req_msg;
-    // 응답 메시지
-    public String rcv_msg;
     // 요청일시
     public String req_date;
+    // 응답 메시지
+    public String answ_msg;
     // 응답일시
-    public String rcv_date;
+    public String answ_date;
+    // 취소내용
+    public String cancel_msg;
+    // 취소일시
+    public String cancel_date;
+    // 최초 읽은 시간
+    public String read_date;
     // 상태
     //    0 : 요청중
     //    1 : 요청수락
@@ -48,9 +54,6 @@ public class Contact {
     public String req_list_yn;
     // 수신자 리스트출력여부
     public String rcv_list_yn;
-
-    // 마지막 수정일시
-    public String last_update;
 
     @Override
     public String toString() {

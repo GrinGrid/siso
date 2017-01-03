@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.IBinder;
@@ -93,6 +94,8 @@ public class SisoFCMListenerService extends FirebaseMessagingService{
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                 .setContentTitle("SISO PUSH")
                 .setSound(defaultSoundUri)
+                .setVibrate(new long[] {50, 100, 100, 200, 100, 300})
+                .setLights(Color.RED, 3000, 3000)
                 .setContentText(msg);
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notificationBuilder.build());
