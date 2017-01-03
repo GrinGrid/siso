@@ -36,7 +36,7 @@ import net.gringrid.siso.util.SharedData;
  *      Content : layout inflate
  *      Button : color, Text, listener, tag, order
  */
-public class Popup extends Activity{
+public class Popup extends Activity implements IndicatorDialog.UseIndicator{
 
     private static final String TAG = "jiho";
 
@@ -50,8 +50,10 @@ public class Popup extends Activity{
     protected TextView id_tv_btn_first;
     protected TextView id_tv_btn_second;
     protected ImageView id_iv_btn_close;
+    IndicatorDialog mIndicatorDialog;
 
     protected User mUser;
+    private boolean mIsShowIndicatorDialog;
 
 
     @Override
@@ -60,6 +62,9 @@ public class Popup extends Activity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_popup);
+
+        mIndicatorDialog = new IndicatorDialog();
+
         getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         initializeData();
@@ -113,8 +118,19 @@ public class Popup extends Activity{
         tmpBtn.setOnClickListener(listener);
     }
 
+    @Override
+    public void showIndicator() {
+        // Show 하는 순간 여러번 showProgress가 호출되면 isAdded가 제대로 output을 내지 못함
+        if(mIsShowIndicatorDialog == false){
+            mIndicatorDialog.show(getFragmentManager(), "");
+            mIsShowIndicatorDialog = true;
+        }
+    }
 
-//    *      Button : color, Text, listener, tag, order
-
+    @Override
+    public void hideIndicator() {
+        mIndicatorDialog.dismiss();
+        mIsShowIndicatorDialog = false;
+    }
 
 }

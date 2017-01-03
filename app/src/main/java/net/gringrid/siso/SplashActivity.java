@@ -32,6 +32,7 @@ public class SplashActivity extends RootActivity{
 
     @Override
     protected void moveNext() {
+
         Log.d(TAG, "splash moveNext: ");
         super.moveNext();
         boolean isReadGuide = SharedData.getInstance(this).getGlobalDataBoolean(SharedData.IS_READ_GUIDE);

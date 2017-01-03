@@ -2,8 +2,11 @@ package net.gringrid.siso.views;
 
 import android.animation.ValueAnimator;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.animation.LinearInterpolator;
+
+import net.gringrid.siso.R;
 
 import java.util.ArrayList;
 
@@ -17,9 +20,15 @@ public class BallTriangleIndicator extends Indicator {
 
     @Override
     public void draw(Canvas canvas, Paint paint) {
-        paint.setStrokeWidth(3);
-        paint.setStyle(Paint.Style.STROKE);
+//        paint.setStrokeWidth(3);
+        paint.setStyle(Paint.Style.FILL);
         for (int i = 0; i < 3; i++) {
+            if(i==0)
+                paint.setColor(Color.parseColor("#f66175"));
+            if(i==1)
+                paint.setColor(Color.parseColor("#5bb5bd"));
+            if(i==2)
+                paint.setColor(Color.parseColor("#c6d35b"));
             canvas.save();
             canvas.translate(translateX[i], translateY[i]);
             canvas.drawCircle(0, 0, getWidth() / 10, paint);

@@ -54,6 +54,7 @@ public class SisoIndicator extends View {
 
         @Override
         public void run() {
+            Log.d(TAG, "run: SisoIndicator");
             mPostedShow = false;
             if (!mDismissed) {
                 mStartTime = System.currentTimeMillis();
@@ -219,6 +220,7 @@ public class SisoIndicator extends View {
     }
 
     public void show() {
+        Log.d(TAG, "show: SisoIndicator");               
         // Reset the start time.
         mStartTime = -1;
         mDismissed = false;

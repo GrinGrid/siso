@@ -2,15 +2,19 @@ package net.gringrid.siso;
 
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -31,12 +35,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RootActivity extends AppCompatActivity {
+public class RootActivity extends AppCompatActivity implements IndicatorDialog.UseIndicator {
 
     private static final String TAG = "jiho";
     protected Dialog loadingDialog = null;
-    IndicatorDialog mIndicatorDialog;
+    private boolean mIsShowIndicatorDialog;
     protected Handler mHandler = null;
+    IndicatorDialog mIndicatorDialog;
     User mUser;
 
     @Override
@@ -46,8 +51,6 @@ public class RootActivity extends AppCompatActivity {
         mUser = SharedData.getInstance(this).getUserData();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//        mHandler = new Handler(Looper.getMainLooper());
-//        loadingDialog = new Dialog(this);
         mIndicatorDialog = new IndicatorDialog();
 
         // 앱이 완전히 종료 되었다 시작될때는 Config check time reset
@@ -274,50 +277,19 @@ public class RootActivity extends AppCompatActivity {
         });
     }
 
-    public void showProgress(){
-        mIndicatorDialog.show(getFragmentManager(), "");
-        /*
-        if(this.isFinishing()){
-            return;
+    @Override
+    public void showIndicator() {
+        // Show 하는 순간 여러번 showProgress가 호출되면 isAdded가 제대로 output을 내지 못함
+        if(mIsShowIndicatorDialog == false){
+            mIndicatorDialog.show(getFragmentManager(), "");
+            mIsShowIndicatorDialog = true;
         }
-
-        mHandler.post(new Runnable() {
-            @Override
-            public void run() {
-                loadingDialog.setTitle("Loading data..");
-                loadingDialog.setContentView(R.layout.loading);
-                loadingDialog.show();
-            }
-        });
-        */
     }
 
-    public void hideProgress(){
+    @Override
+    public void hideIndicator() {
         mIndicatorDialog.dismiss();
-        /*
-        Log.d(TAG, "hideProgress: ");
-        mHandler.post(new Runnable() {
-        @Override
-            public void run() {
-                loadingDialog.dismiss();
-            }
-        });
-        */
-    }
-
-    public static class IndicatorDialog extends DialogFragment{
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            SisoIndicator sisoIndicator;
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-            View view  = layoutInflater.inflate(R.layout.loading, null);
-            sisoIndicator = (SisoIndicator)view.findViewById(R.id.id_indicator);
-
-            builder.setView(layoutInflater.inflate(R.layout.loading, null));
-            sisoIndicator.show();
-            return builder.create();
-        }
+        mIsShowIndicatorDialog = false;
     }
 
 }

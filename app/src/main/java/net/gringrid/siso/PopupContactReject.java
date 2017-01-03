@@ -105,7 +105,8 @@ public class PopupContactReject extends Popup implements View.OnClickListener {
         }
     }
 
-    private void moveNext(){
+
+    protected void moveNext() {
         Toast.makeText(this, R.string.contact_request_complete, Toast.LENGTH_SHORT).show();
         finish();
     }

@@ -148,7 +148,7 @@ public class PopupContactRequest extends Popup implements View.OnClickListener {
         }
     }
 
-    private void moveNext(){
+    protected void moveNext() {
         if(mContactAction.equals(Contact.CONTACT_ACTION_ACCEPT)){
             Toast.makeText(this, R.string.contact_accept_complete, Toast.LENGTH_SHORT).show();
         }else if(mContactAction.equals(Contact.CONTACT_ACTION_REQUEST)){

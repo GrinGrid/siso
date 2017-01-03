@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.annotations.SerializedName;
 
 import net.gringrid.siso.BaseActivity;
+import net.gringrid.siso.IndicatorDialog;
 import net.gringrid.siso.RootActivity;
 import net.gringrid.siso.util.SharedData;
 
@@ -56,7 +57,7 @@ public class ServiceGenerator {
                 Request original = chain.request();
                 Request.Builder requestBuilder = original.newBuilder();
 
-                ((RootActivity)mActivity).showProgress();
+                ((IndicatorDialog.UseIndicator)mActivity).showIndicator();
 
                 Log.d(TAG, "intercept: request");
                 if (original!=null){
@@ -81,7 +82,7 @@ public class ServiceGenerator {
                 Log.d(TAG, "intercept: response");
                 Response response = chain.proceed(chain.request());
                 if (response!=null){
-                    ((RootActivity)mActivity).hideProgress();
+                    ((IndicatorDialog.UseIndicator)mActivity).hideIndicator();
                     Log.d(TAG, "intercept: response is not null");
                 }
                 return response;

@@ -451,6 +451,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:background="@drawable/bg_shadow_top"
+        android:visibility="gone"
         android:paddingTop="10dp">
         <LinearLayout
             android:layout_width="0dp"

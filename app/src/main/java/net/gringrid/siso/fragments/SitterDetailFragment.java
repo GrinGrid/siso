@@ -281,11 +281,13 @@ public class SitterDetailFragment extends Fragment implements View.OnClickListen
                 // Sitter입력완료에서 넘어온경우
                 if(mMode.equals(MODE_FROM_SITTER_INPUT)){
                     mUserDisplay = mUser;
+                    id_ll_preview_btn.setVisibility(View.VISIBLE);
                     loadData();
 
                 // Sitter 리스트에서 선택해서 넘어온경우
                 }else if(mMode.equals(MODE_FROM_SITTER_LIST)){
                     mTrgEmail = bundle.getString(SharedData.EMAIL);
+                    id_ll_bottom_btn.setVisibility(View.VISIBLE);
                     Log.d(TAG, "setUserData: trgEmail : "+mTrgEmail);
                     findUser();
                 }
